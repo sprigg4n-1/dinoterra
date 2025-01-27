@@ -3,7 +3,7 @@ import { Tektur } from "next/font/google";
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
 
-import "./globals.css";
+import "../globals.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 const tektur = Tektur({ subsets: ["latin"] });
