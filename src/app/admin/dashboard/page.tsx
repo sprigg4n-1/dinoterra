@@ -14,12 +14,12 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex flex-col lg:flex-row">
       <AsideDashboard
         activePage={activePage}
         setActivePage={toggleActivePage}
       />
-      <div className="flex-1 h-screen py-3 px-5">
+      <div className="flex-1 min-h-screen py-3 px-2 lg:px-5">
         {activePage === "dinos" ? (
           <DinosDashboard />
         ) : activePage === "users" ? (

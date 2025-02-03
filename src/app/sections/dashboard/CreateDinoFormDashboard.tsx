@@ -14,7 +14,10 @@ enum DinoPeriod {
 }
 
 const CreateDinoFormDashboard = () => {
+  const [step, setStep] = useState<number>(1);
+
   const [name, setName] = useState<string>("");
+  const [latinName, setLatinName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [diet, setDiet] = useState<string>(DinoDiet.Herbivores);
   const [dietDescription, setDietDescription] = useState<string>("");
@@ -27,6 +30,7 @@ const CreateDinoFormDashboard = () => {
     const addDino = async () => {
       await createDino(
         name,
+        latinName,
         description,
         diet,
         dietDescription,
@@ -49,9 +53,19 @@ const CreateDinoFormDashboard = () => {
   return (
     <div>
       <h2 className="text-[22px] font-semibold mb-2">Створення динозавра</h2>
-      <form onSubmit={(e) => onSubmitForm(e)} className="flex flex-col gap-5">
+      <form onSubmit={(e) => onSubmitForm(e)} className="flex flex-col gap-2">
         <label className="flex flex-col">
           <span>Ім'я</span>
+          <input
+            required
+            className="bg-darkGray text-white py-2 px-1"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        <label className="flex flex-col">
+          <span>Ім'я латиною</span>
           <input
             required
             className="bg-darkGray text-white py-2 px-1"
@@ -69,7 +83,7 @@ const CreateDinoFormDashboard = () => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
-        <label className="flex flex-col gap-3">
+        <label className="flex flex-col gap-1">
           <span>Опис харчування</span>
           <select
             value={diet}
@@ -87,7 +101,7 @@ const CreateDinoFormDashboard = () => {
           />
         </label>
 
-        <label className="flex flex-col gap-3">
+        <label className="flex flex-col gap-1">
           <span>Опис періоду</span>
           <select
             value={period}
@@ -107,16 +121,16 @@ const CreateDinoFormDashboard = () => {
             onChange={(e) => setPeriodDescription(e.target.value)}
           />
         </label>
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-2">
           <button
             type="submit"
-            className="w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300">
+            className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300">
             Створити
           </button>
           <button
             type="button"
             onClick={resetForm}
-            className="w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300">
+            className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300">
             Скидання
           </button>
         </div>

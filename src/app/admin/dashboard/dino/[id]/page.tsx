@@ -1,11 +1,13 @@
-import Link from "next/link";
+import DinoPageDashboard from "@/app/sections/dashboard/DinoPageDashboard";
+import { getDinoById } from "@/services/DinoService";
 import React from "react";
 
-const DinoDashboard = () => {
+const DinoDashboard = async ({ params }: { params: { id: string } }) => {
+  const dino = await getDinoById(+params.id);
   return (
-    <div>
-      <Link href={"/admin/dashboard"}>Назад</Link>
-    </div>
+    <>
+      <DinoPageDashboard dino={dino} />
+    </>
   );
 };
 
