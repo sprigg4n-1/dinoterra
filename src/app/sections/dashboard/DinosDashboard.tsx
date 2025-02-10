@@ -9,7 +9,7 @@ const DinosDashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("all");
 
   return (
-    <div className="flex flex-col gap-5 relative">
+    <div className="flex flex-col gap-2 relative">
       <div className="flex flex-col gap-1 w-full text-white sm:flex-row lg:sticky top-0 left-0 z-10 lg:bg-white lg:py-2 lg:px-1">
         <button
           onClick={(e) => {
@@ -42,7 +42,7 @@ const DinosDashboard = () => {
           Редагування динозавра
         </button>
       </div>
-      <div>
+      <div className="h-full">
         {activeTab === "all" ? (
           <DinosListDashboard />
         ) : activeTab === "create" ? (

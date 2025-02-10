@@ -25,9 +25,13 @@ export const createDino = async (
   name: string,
   latinName: string,
   description: string,
+  typeOfDino: string,
+  length: number,
+  weight: number,
   diet: string,
   dietDescription: string,
   period: string,
+  periodDate: string,
   periodDescription: string
 ) => {
   try {
@@ -35,9 +39,13 @@ export const createDino = async (
       name: name,
       latinName: latinName,
       description: description,
+      typeOfDino: typeOfDino,
+      length: length,
+      weight: weight,
       diet: diet,
       dietDescription: dietDescription,
       period: period,
+      periodDate: periodDate,
       periodDescription: periodDescription,
     });
 
@@ -53,9 +61,13 @@ export const changeDino = async (
   name: string,
   latinName: string,
   description: string,
+  typeOfDino: string,
+  length: number,
+  weight: number,
   diet: string,
   dietDescription: string,
   period: string,
+  periodDate: string,
   periodDescription: string
 ) => {
   try {
@@ -63,9 +75,13 @@ export const changeDino = async (
       name: name,
       latinName: latinName,
       description: description,
+      typeOfDino: typeOfDino,
+      length: length,
+      weight: weight,
       diet: diet,
       dietDescription: dietDescription,
       period: period,
+      periodDate: periodDate,
       periodDescription: periodDescription,
     });
 
