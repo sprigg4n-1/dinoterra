@@ -20,7 +20,9 @@ const DinosListDashboard = () => {
 
   return (
     <div>
-      <h2 className="text-[22px] font-semibold">Всі динозаври</h2>
+      <h2 className="text-[18px] sm:text-[22px] font-semibold mb-2">
+        Всі динозаври
+      </h2>
       <div className="flex flex-wrap items-center justify-around gap-5">
         {dinos.length > 0 ? (
           dinos.map((dino: any) => (

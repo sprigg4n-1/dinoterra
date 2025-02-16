@@ -188,7 +188,7 @@ const CreateDinoFormDashboard = () => {
 
   return (
     <>
-      <h2 className="text-[22px] font-semibold">
+      <h2 className="text-[18px] sm:text-[22px] font-semibold mb-2">
         {step === 1
           ? "Створення динозавра"
           : step === 2
@@ -329,11 +329,12 @@ const CreateDinoFormDashboard = () => {
             />
           </label>
 
+          {/* buttons */}
           <div className="flex justify-between gap-2">
             <button
               type="submit"
               className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300">
-              Далі
+              Створити
             </button>
             <button
               type="button"
@@ -345,28 +346,33 @@ const CreateDinoFormDashboard = () => {
         </form>
       ) : step === 2 ? (
         <div className="flex flex-col gap-5 text-[14px] sm:text-[16px]">
-          <div className="flex flex-col gap-4">
-            <div className="flex gap-2">
-              <label className="flex flex-col w-1/5">
-                <span>Ширина</span>
-                <input
-                  required
-                  className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange text-center"
-                  type="number"
-                  value={latitudeLoc}
-                  onChange={(e) => setLatitudeLoc(+e.target.value)}
-                />
-              </label>
-              <label className="flex flex-col w-1/5">
-                <span>Довжина</span>
-                <input
-                  required
-                  className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange text-center"
-                  type="number"
-                  value={longitudeLoc}
-                  onChange={(e) => setLongitudeLoc(+e.target.value)}
-                />
-              </label>
+          <div className="flex flex-col gap-2">
+            {/* place on map */}
+            <h3 className="text-[16px] font-medium sm:text-[20px]">Місця:</h3>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <div className="flex w-full sm:w-fit justify-between sm:gap-2">
+                <label className="flex flex-col w-2/5 sm:w-[100px]">
+                  <span>Широта</span>
+                  <input
+                    required
+                    className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange text-center"
+                    type="number"
+                    value={latitudeLoc}
+                    onChange={(e) => setLatitudeLoc(+e.target.value)}
+                  />
+                </label>
+                <label className="flex flex-col w-2/5 sm:w-[100px]">
+                  <span>Довгота</span>
+                  <input
+                    required
+                    className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange text-center"
+                    type="number"
+                    value={longitudeLoc}
+                    onChange={(e) => setLongitudeLoc(+e.target.value)}
+                  />
+                </label>
+              </div>
+
               <label className="flex flex-col flex-1">
                 <span>Місце</span>
                 <input
@@ -378,14 +384,15 @@ const CreateDinoFormDashboard = () => {
                 />
               </label>
             </div>
-            <div className="flex gap-2 items-center">
+
+            <div className="flex flex-col sm:flex-row gap-2 items-center sm:items-start">
               <button
-                className="bg-green-300 block hover:bg-green-500 px-10 h-10"
+                className="bg-green-300 block hover:bg-green-500 px-10 h-10 w-full sm:w-auto"
                 type="button"
                 onClick={(e) => onHandleAddLocation(e)}>
                 Додати
               </button>
-              <div className="flex-1 flex gap-4 flex-wrap">
+              <div className="flex-1 flex gap-4 flex-wrap bg-slateGray w-full p-2 text-white">
                 {foundLocations.length > 0
                   ? foundLocations.map((loc) => (
                       <div
@@ -410,13 +417,15 @@ const CreateDinoFormDashboard = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4">
-            <div className="flex gap-2">
-              <label className="flex flex-col w-1/5">
+          {/* photo  */}
+          <div className="flex flex-col gap-2">
+            <h3 className="text-[16px] font-medium sm:text-[20px]">Картики:</h3>
+            <div className="flex flex-col md:flex-row gap-2">
+              <label className="flex flex-col w-full md:w-1/5">
                 <span>Обрати картинку</span>
                 <label
                   htmlFor="fileUploadForDinoImage"
-                  className="bg-darkGray text-white h-full border-2 border-transparent cursor-pointer flex items-center justify-center hover:border-brightOrange duration-300">
+                  className="bg-darkGray text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center hover:border-brightOrange duration-300">
                   <span>
                     {imagePathDino === "" ? "Оберіть файл" : "Змінити файл"}
                   </span>
@@ -440,14 +449,14 @@ const CreateDinoFormDashboard = () => {
                 />
               </label>
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-col sm:flex-row gap-2 items-center sm:items-start">
               <button
-                className="bg-green-300 block hover:bg-green-500 px-10 h-10"
+                className="bg-green-300 block hover:bg-green-500 px-10 h-10 w-full sm:w-auto"
                 type="button"
                 onClick={(e) => onHandleAddImage(e)}>
                 Додати
               </button>
-              <div className="flex-1 flex gap-4 flex-wrap">
+              <div className="flex-1 flex gap-4 flex-wrap bg-slateGray p-2 text-white w-full">
                 {dinoImages.length > 0
                   ? dinoImages.map((image) => (
                       <div
@@ -473,15 +482,6 @@ const CreateDinoFormDashboard = () => {
           </div>
 
           <div className="flex justify-between gap-2">
-            {/* <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                setStep(1);
-              }}
-              className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300">
-              Назад
-            </button> */}
             <button
               type="button"
               onClick={(e) => onHandleCreateDino(e)}
