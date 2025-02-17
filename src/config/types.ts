@@ -6,11 +6,14 @@ export interface IDino {
   latinName: string;
   description: string;
   typeOfDino: string;
+  length: number;
+  weight: number;
+  period: string;
+  periodDate: string;
+  periodDescription: string;
   diet: string;
   dietDescription: string;
-  period: string;
-  periodDescription: string;
-  locations: IDinoFoundLocation[];
+  foundLocations: IDinoFoundLocation[];
   images: IDinoImages[];
 }
 
@@ -23,7 +26,7 @@ export interface IDinoFoundLocation {
 }
 export interface IDinoImages {
   id: number;
-  imagePath: string;
+  image: string;
   fileName: string;
   dino_id: number;
 }

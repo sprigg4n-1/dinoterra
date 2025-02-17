@@ -12,12 +12,13 @@ import {
   dinoPeriodLabels,
 } from "@/config/types";
 
-import { addLocation } from "@/services/FoundLocationService";
+import { addFoundLocation } from "@/services/FoundLocationService";
 import { addImage } from "@/services/ImageService";
 
 import close from "@/images/vectors/close.svg";
 import Image from "next/image";
 import { v4 } from "uuid";
+import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
 
 export type TDinoFoundLocation = {
   id: string;
@@ -25,6 +26,7 @@ export type TDinoFoundLocation = {
   longitude: string;
   place: string;
 };
+
 export type TDinoImages = {
   id: string;
   imagePath: string;
@@ -152,7 +154,7 @@ const CreateDinoFormDashboard = () => {
 
     const addLocationAndImage = () => {
       foundLocations.forEach(async (loc) => {
-        await addLocation(
+        await addFoundLocation(
           loc.place,
           loc.latitude,
           loc.longitude,
@@ -173,6 +175,7 @@ const CreateDinoFormDashboard = () => {
 
   const resetForm = () => {
     setName("");
+    setLatinName("");
     setDescription("");
     setTypeOfDino(EDinoType.Unknown);
     setDinoWeight(0);
@@ -184,17 +187,17 @@ const CreateDinoFormDashboard = () => {
     setPeriodDescription("");
   };
 
-  // use effects
-
   return (
     <>
-      <h2 className="text-[18px] sm:text-[22px] font-semibold mb-2">
-        {step === 1
-          ? "Створення динозавра"
-          : step === 2
-          ? "Додавання картинок і локацій"
-          : "Кінець"}
-      </h2>
+      <DashboardTitleComponent
+        text={
+          step === 1
+            ? "Створення динозавра"
+            : step === 2
+            ? "Додавання картинок і локацій"
+            : "Кінець"
+        }
+      />
       {step === 1 ? (
         <form
           onSubmit={(e) => onSubmitForm(e)}
@@ -346,12 +349,12 @@ const CreateDinoFormDashboard = () => {
         </form>
       ) : step === 2 ? (
         <div className="flex flex-col gap-5 text-[14px] sm:text-[16px]">
+          {/* place on map */}
           <div className="flex flex-col gap-2">
-            {/* place on map */}
             <h3 className="text-[16px] font-medium sm:text-[20px]">Місця:</h3>
             <div className="flex flex-col sm:flex-row gap-2">
               <div className="flex w-full sm:w-fit justify-between sm:gap-2">
-                <label className="flex flex-col w-2/5 sm:w-[100px]">
+                <label className="flex flex-col w-[49%] sm:w-[120px]">
                   <span>Широта</span>
                   <input
                     required
@@ -361,7 +364,7 @@ const CreateDinoFormDashboard = () => {
                     onChange={(e) => setLatitudeLoc(+e.target.value)}
                   />
                 </label>
-                <label className="flex flex-col w-2/5 sm:w-[100px]">
+                <label className="flex flex-col w-[49%] sm:w-[120px]">
                   <span>Довгота</span>
                   <input
                     required
@@ -421,7 +424,7 @@ const CreateDinoFormDashboard = () => {
           <div className="flex flex-col gap-2">
             <h3 className="text-[16px] font-medium sm:text-[20px]">Картики:</h3>
             <div className="flex flex-col md:flex-row gap-2">
-              <label className="flex flex-col w-full md:w-1/5">
+              <label className="flex flex-col w-full md:w-1/4">
                 <span>Обрати картинку</span>
                 <label
                   htmlFor="fileUploadForDinoImage"
@@ -481,14 +484,12 @@ const CreateDinoFormDashboard = () => {
             </div>
           </div>
 
-          <div className="flex justify-between gap-2">
-            <button
-              type="button"
-              onClick={(e) => onHandleCreateDino(e)}
-              className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300">
-              Закінчити
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={(e) => onHandleCreateDino(e)}
+            className="w-full sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300">
+            Закінчити
+          </button>
         </div>
       ) : (
         <span>Ви успішно додали динозавра</span>

@@ -19,3 +19,13 @@ export const addImage = async (
     console.error(`Error with add image: ${error}`);
   }
 };
+
+export const deleteImage = async (id: number) => {
+  try {
+    const response = await axios.delete(`${BASE_URL_DINO}/images/${id}`);
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with deleting image: ${error}`);
+  }
+};

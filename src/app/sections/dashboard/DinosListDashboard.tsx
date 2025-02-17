@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 
 import { getDinos } from "@/services/DinoService";
 import DinoCard from "@/components/dino/DinoCard";
+import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
+import { IDino } from "@/config/types";
 
 const DinosListDashboard = () => {
-  const [dinos, setDinos] = useState<any>([]);
+  const [dinos, setDinos] = useState<IDino[]>([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -20,12 +22,10 @@ const DinosListDashboard = () => {
 
   return (
     <div>
-      <h2 className="text-[18px] sm:text-[22px] font-semibold mb-2">
-        Всі динозаври
-      </h2>
+      <DashboardTitleComponent text="Всі динозаври" />
       <div className="flex flex-wrap items-center justify-around gap-5">
         {dinos.length > 0 ? (
-          dinos.map((dino: any) => (
+          dinos.map((dino: IDino) => (
             <DinoCard
               key={dino.id}
               link={`/admin/dashboard/dino/${dino.id}`}

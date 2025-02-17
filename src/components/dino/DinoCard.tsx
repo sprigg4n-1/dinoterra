@@ -3,8 +3,9 @@ import Link from "next/link";
 import React from "react";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
+import { IDino } from "@/config/types";
 
-const DinoCard = ({ link, dino }: { link: string; dino: any }) => {
+const DinoCard = ({ link, dino }: { link: string; dino: IDino }) => {
   return (
     <Link
       href={link}

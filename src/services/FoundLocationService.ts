@@ -1,7 +1,7 @@
 import { BASE_URL_DINO } from "@/config/config";
 import axios from "axios";
 
-export const addLocation = async (
+export const addFoundLocation = async (
   place: string,
   latitude: string,
   longitude: string,
@@ -19,5 +19,15 @@ export const addLocation = async (
     return response.data;
   } catch (error) {
     console.error(`Error with add location: ${error}`);
+  }
+};
+
+export const deleteFoundLocation = async (id: number) => {
+  try {
+    const response = await axios.delete(`${BASE_URL_DINO}/locations/${id}`);
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with deleting found location: ${error}`);
   }
 };
