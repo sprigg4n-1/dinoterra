@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.embla__viewport-dino-images-dashboard {
+  overflow: hidden;
+}
+.embla__container-dino-images-dashboard {
+  display: flex;
+}
+.embla__slide-dino-images-dashboard {
+  flex: 0 0 224px;
+  min-width: 0;
+}
+
+.embla__viewport-dino-found-location-dashboard {
+  overflow: hidden;
+}
+.embla__container-dino-found-location-dashboard {
+  display: flex;
+}
+.embla__slide-dino-found-location-dashboard {
+  flex: 0 0 auto;
+  min-width: 0;
+}

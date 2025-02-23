@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import DinosListDashboard from "./DinosListDashboard";
 import ChangeDinoFormDashboard from "./ChangeDinoFormDashboard";
 import CreateDinoFormDashboard from "./CreateDinoFormDashboard";
+import Link from "next/link";
 
 const DinosDashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("all");

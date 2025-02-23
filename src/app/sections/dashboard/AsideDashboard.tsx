@@ -7,14 +7,10 @@ import { motion } from "framer-motion";
 import close from "@/images/vectors/close.svg";
 import logo from "@/images/logo.svg";
 import Image from "next/image";
+import Link from "next/link";
 
-const AsideDashboard = ({
-  activePage,
-  setActivePage,
-}: {
-  activePage: string;
-  setActivePage: (value: string) => void;
-}) => {
+const AsideDashboard = () => {
+  const [activePage, setActivePage] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -68,34 +64,28 @@ const AsideDashboard = ({
         </div>
         <ul className="flex flex-col gap-2 w-full sm:w-1/2 mx-auto my-auto">
           <li>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setActivePage("dinos");
-                setIsOpen(false);
-              }}
-              className={`w-full p-2 text-[16px] ${
+            <Link
+              href={"/admin/dashboard/dinos"}
+              onClick={() => setActivePage("dinos")}
+              className={`block w-full p-2 text-[16px] ${
                 activePage === "dinos"
                   ? "bg-brightOrange font-semibold text-white"
                   : "text-black bg-softGray"
               }`}>
               Динозаври
-            </button>
+            </Link>
           </li>
           <li>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setActivePage("users");
-                setIsOpen(false);
-              }}
-              className={`w-full p-2 text-[16px] ${
+            <Link
+              href={"/admin/dashboard/users"}
+              onClick={() => setActivePage("users")}
+              className={`block w-full p-2 text-[16px] ${
                 activePage === "users"
                   ? " bg-brightOrange font-semibold text-white"
                   : "text-black bg-softGray "
               }`}>
               Користувачі
-            </button>
+            </Link>
           </li>
         </ul>
       </motion.div>
@@ -103,32 +93,28 @@ const AsideDashboard = ({
       {/* desktop menu */}
       <ul className="hidden lg:flex flex-col gap-5 lg:w-full">
         <li>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setActivePage("dinos");
-            }}
-            className={`w-full p-2 text-[18px] ${
+          <Link
+            href={"/admin/dashboard/dinos"}
+            onClick={() => setActivePage("dinos")}
+            className={`block w-full p-2 text-[18px] ${
               activePage === "dinos"
                 ? "text-right bg-brightOrange font-semibold text-white"
                 : "text-black bg-softGray text-left"
             }`}>
             Динозаври
-          </button>
+          </Link>
         </li>
         <li>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setActivePage("users");
-            }}
-            className={`w-full p-2 text-[18px] ${
+          <Link
+            href={"/admin/dashboard/users"}
+            onClick={() => setActivePage("users")}
+            className={`block w-full p-2 text-[18px] ${
               activePage === "users"
-                ? "text-right bg-brightOrange font-semibold text-white"
+                ? " text-right bg-brightOrange font-semibold text-white"
                 : "text-black bg-softGray text-left"
             }`}>
             Користувачі
-          </button>
+          </Link>
         </li>
       </ul>
     </div>

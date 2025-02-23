@@ -1,4 +1,4 @@
-import DinoPageDashboard from "@/app/sections/dashboard/DinoPageDashboard";
+import DinoPageDashboard from "@/app/sections/dashboard/dinos/DinoPageDashboard";
 import { getDinoById } from "@/services/DinoService";
 import React from "react";
 
