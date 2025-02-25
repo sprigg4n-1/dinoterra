@@ -32,9 +32,6 @@ import DashboardTitleComponent from "@/components/dashboard/DashboardTitleCompon
 import LoaderComponent from "@/components/LoaderComponent";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
-import arrl from "@/images/vectors/arrl.svg";
-import arrr from "@/images/vectors/arrr.svg";
-import { div } from "framer-motion/client";
 
 export type TDinoFoundLocation = {
   id: string;
@@ -308,7 +305,12 @@ const ChangeDinoFormDashboard = () => {
   return (
     <>
       {isLoading ? (
-        <LoaderComponent />
+        <div className="flex flex-col gap-4 items-center justify-center">
+          <LoaderComponent />
+          <span className="text-[14px] sm:text-[18px] text-brightOrange font-semibold">
+            Робимо зміни
+          </span>
+        </div>
       ) : (
         <>
           <div className="flex flex-col sm:flex-row sm:justify-between items-center mb-2 sm:mb-0">

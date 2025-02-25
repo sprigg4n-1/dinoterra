@@ -23,3 +23,26 @@
   flex: 0 0 auto;
   min-width: 0;
 }
+
+.embla-dino-page-images {
+  overflow: hidden;
+}
+.embla__container-dino-page-images {
+  display: flex;
+}
+.embla__slide-dino-page-images {
+  flex: 0 0 300px;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .embla__slide-dino-page-images {
+    flex: 0 0 420px;
+  }
+}
+
+@media (min-width: 1020px) {
+  .embla__slide-dino-page-images {
+    flex: 0 0 520px;
+  }
+}

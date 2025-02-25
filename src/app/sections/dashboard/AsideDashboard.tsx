@@ -66,7 +66,10 @@ const AsideDashboard = () => {
           <li>
             <Link
               href={"/admin/dashboard/dinos"}
-              onClick={() => setActivePage("dinos")}
+              onClick={() => {
+                setActivePage("dinos");
+                setIsOpen(false);
+              }}
               className={`block w-full p-2 text-[16px] ${
                 activePage === "dinos"
                   ? "bg-brightOrange font-semibold text-white"
@@ -78,7 +81,10 @@ const AsideDashboard = () => {
           <li>
             <Link
               href={"/admin/dashboard/users"}
-              onClick={() => setActivePage("users")}
+              onClick={() => {
+                setActivePage("users");
+                setIsOpen(false);
+              }}
               className={`block w-full p-2 text-[16px] ${
                 activePage === "users"
                   ? " bg-brightOrange font-semibold text-white"
