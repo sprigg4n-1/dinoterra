@@ -27,6 +27,9 @@ const DinosListDashboard = () => {
         {dinos.length > 0 ? (
           dinos.map((dino: IDino) => (
             <DinoCard
+              border
+              bgColor="black"
+              textColor="white"
               key={dino.id}
               link={`/admin/dashboard/dinos/${dino.id}`}
               dino={dino}

@@ -8,8 +8,12 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "intro-bg": "url(/intro-bg.png)",
+      },
       colors: {
         brightOrange: "#FF9800",
+        beige: "#F5F5DC",
         fieryRed: "#F44336",
         darkGray: "#333333",
         darkPurple: "#27203F",

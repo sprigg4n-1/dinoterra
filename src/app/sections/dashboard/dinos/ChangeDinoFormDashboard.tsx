@@ -496,7 +496,11 @@ const ChangeDinoFormDashboard = () => {
                     <span>Обрати картинку</span>
                     <label
                       htmlFor="fileUploadForDinoImage"
-                      className="bg-darkGray text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center hover:border-brightOrange duration-300">
+                      className={`${
+                        imagePathDino !== ""
+                          ? "bg-brightOrange hover:border-darkGray"
+                          : "bg-darkGray hover:border-brightOrange"
+                      } text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center  duration-300`}>
                       <span>
                         {imagePathDino === "" ? "Оберіть файл" : "Змінити файл"}
                       </span>

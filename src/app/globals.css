@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* admin dashboard */
 .embla__viewport-dino-images-dashboard {
   overflow: hidden;
 }
@@ -32,6 +33,19 @@
 }
 .embla__slide-dino-page-images {
   flex: 0 0 300px;
+  min-width: 0;
+}
+
+/* user */
+.embla__viewport-intro-rec-dino {
+  overflow: hidden;
+}
+.embla__container-intro-rec-dino {
+  display: flex;
+}
+.embla__slide-intro-rec-dino {
+  flex: 0 0 auto;
+  height: auto;
   min-width: 0;
 }
 

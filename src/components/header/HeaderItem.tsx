@@ -19,7 +19,7 @@ const HeaderItem = ({
   return (
     <Link
       href={item.link}
-      className={`text-[22px] border-b-2 p-1 hover:text-white duration-300 ${
+      className={`text-[20px] border-b-2 p-1 hover:text-white duration-300 ${
         activeItem === item.label
           ? "text-white border-brightOrange"
           : "text-softGray border-transparent"

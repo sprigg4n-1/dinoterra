@@ -8,10 +8,16 @@ import logo from "@/images/logo.svg";
 
 const Header = () => {
   return (
-    <div className="w-full bg-slateGray text-white py-4 px-10 text-center flex justify-between items-center">
-      <Image src={logo} width={200} height={56} alt="logo" className="" />
+    <header className="w-full bg-slateGray text-white py-4 px-2 lg:px-5 text-center flex justify-between items-center">
+      <Image
+        src={logo}
+        width={400}
+        height={112}
+        alt="logo"
+        className="w-32 lg:w-44 h-auto"
+      />
       <HeaderList />
-    </div>
+    </header>
   );
 };
 

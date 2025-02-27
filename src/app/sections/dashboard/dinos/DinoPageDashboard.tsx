@@ -123,6 +123,14 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
 
       <div className="w-full flex flex-col gap-1 text-center sm:text-left">
         <h3 className="text-[18px] sm:text-[20px] font-semibold">Опис</h3>
+        <div>
+          <span className="text-[14px] sm:text-[16px]">Довжина:</span>{" "}
+          <span className="text-[14px] sm:text-[16px]">{dino.length}</span>
+        </div>
+        <div>
+          <span className="text-[14px] sm:text-[16px]">Вага:</span>{" "}
+          <span className="text-[14px] sm:text-[16px]">{dino.weight}</span>
+        </div>
         <p className="text-[14px] sm:text-[16px]">{dino.description}</p>
       </div>
 
