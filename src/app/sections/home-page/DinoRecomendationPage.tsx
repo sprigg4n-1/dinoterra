@@ -1,6 +1,7 @@
 "use client";
 
 import DinoCard from "@/components/dino/DinoCard";
+import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import { IDino } from "@/config/types";
 import { getDinos } from "@/services/DinoService";
 import useEmblaCarousel from "embla-carousel-react";
@@ -26,16 +27,16 @@ const DinoRecomendationPage = () => {
 
   return (
     <div className="py-10 lg:py-20 px-2 lg:px-5">
-      <div className="lg:text-right text-center mb-8 lg:mb-12">
-        <h2 className="text-white font-bold text-[32px] lg:text-[48px]">
-          Рекомендовані динозаври
-        </h2>
-        <p className="block text-[18px] lg:text-[22px] text-white opacity-70 font-light">
-          Відкрийте для себе деякі з найбільш знакових і захоплюючих динозаврів
-          у нашій колекції.
-        </p>
-      </div>
-      <div className="embla">
+      <SectionMainTitleComponent
+        title="Рекомендовані динозаври"
+        subtitle="Відкрийте для себе деякі з найбільш знакових і захоплюючих динозаврів
+          у нашій колекції."
+        firstTextPosition="right"
+        titleColor="white"
+        subtitleColor="white"
+      />
+
+      <div className="embla mt-8">
         <div className="embla__viewport-intro-rec-dino" ref={emblaRef}>
           <div className="embla__container-intro-rec-dino gap-5">
             {dinos.map((dino) => (

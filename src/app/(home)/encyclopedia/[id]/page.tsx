@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const EncyclopediaInfoPage = () => {
-  return (
-    <div>EncyclopediaInfoPage</div>
-  )
-}
+const EncyclopediaInfo = () => {
+  return <div className="px-2 lg:px-5">EncyclopediaInfoPage</div>;
+};
 
-export default EncyclopediaInfoPage
+export default EncyclopediaInfo;

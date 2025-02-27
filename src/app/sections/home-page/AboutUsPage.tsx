@@ -1,4 +1,5 @@
 "use client";
+import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import React, { useState } from "react";
 
 const TABS_TEXT = [
@@ -34,19 +35,21 @@ const AboutUsPage = () => {
 
   return (
     <div className="bg-white px-2 lg:px-5 lg:py-20 py-10">
-      <h2 className="text-brightOrange font-bold text-[32px] lg:text-[48px] text-center">
-        Про Нас
-      </h2>
-      <p className="text-darkPurple text-[16px] lg:text-[22px] max-w-[1600px] mx-auto w-full text-center mb-[50px] lg:mb-[75px]">
-        DinoTerra — це ваш головний ресурс для вивчення динозаврів. Пориньте в
+      <SectionMainTitleComponent
+        title="Про Нас"
+        subtitle="DinoTerra — це ваш головний ресурс для вивчення динозаврів. Пориньте в
         нашу інтерактивну енциклопедію, досліджуйте стародавній світ за
         допомогою детальних карт і дізнайтесь про захоплюючу історію кожного
         виду. Незалежно від того, чи ви студент, викладач чи ентузіаст
-        динозаврів, наша платформа пропонує унікальний досвід занурення.
-      </p>
+        динозаврів, наша платформа пропонує унікальний досвід занурення."
+        firstTextPosition="center"
+        titleColor="orange"
+        subtitleColor="purple"
+        subtitleWidth={1600}
+      />
 
       {/* mobile */}
-      <div className="lg:hidden flex flex-col gap-5">
+      <div className="lg:hidden flex flex-col gap-5 mt-[50px] ">
         {TABS_TEXT.map((item) => (
           <div
             key={item.title}
@@ -62,7 +65,7 @@ const AboutUsPage = () => {
       </div>
 
       {/* pc */}
-      <div className="hidden lg:flex flex-col w-full bg-softGray">
+      <div className="hidden lg:flex flex-col w-full bg-softGray mt-[75px]">
         <div className="flex w-full bg-beige justify-between ">
           {TABS_TEXT.map((item, i) => (
             <button

@@ -1,18 +1,19 @@
+import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import Link from "next/link";
 import React from "react";
 
 const IntroPage = () => {
   return (
     <div className="lg:min-h-[calc(100vh-72px)] min-h-[calc(100vh-56px)] px-2 lg:px-5 bg-intro-bg bg-bottom bg-cover bg-no-repeat flex flex-col gap-14 lg:gap-20 items-center justify-center">
-      <div className="flex flex-col gap-4 items-center text-center">
-        <h1 className="text-brightOrange font-bold text-[32px] lg:text-[48px]">
-          Досліджуйте світ динозаврів
-        </h1>
-        <p className="text-white text-[16px] lg:text-[24px] max-w-[800px] w-full">
-          Відкрийте для себе стародавніх істот за допомогою інтерактивних карт,
-          3D-моделей і захоплюючих фактів.
-        </p>
-      </div>
+      <SectionMainTitleComponent
+        title="Досліджуйте світ динозаврів"
+        subtitle="Відкрийте для себе стародавніх істот за допомогою інтерактивних карт,
+          3D-моделей і захоплюючих фактів."
+        firstTextPosition="center"
+        titleColor="orange"
+        subtitleColor="white"
+        subtitleWidth={800}
+      />
 
       <Link
         href="/encyclopedia"

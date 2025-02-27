@@ -1,7 +1,12 @@
 import React from "react";
+import EncyclopediaInfoPage from "./[id]/page";
 
-const page = () => {
-  return <div>Enc</div>;
+const Encyclopedia = () => {
+  return (
+    <>
+      <EncyclopediaInfoPage />
+    </>
+  );
 };
 
-export default page;
+export default Encyclopedia;
