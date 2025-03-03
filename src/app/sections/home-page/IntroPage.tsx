@@ -4,7 +4,7 @@ import React from "react";
 
 const IntroPage = () => {
   return (
-    <div className="lg:min-h-[calc(100vh-72px)] min-h-[calc(100vh-56px)] px-2 lg:px-5 bg-intro-bg bg-bottom bg-cover bg-no-repeat flex flex-col gap-14 lg:gap-20 items-center justify-center">
+    <div className="lg:min-h-[calc(100vh-72px)] min-h-[calc(100vh-56px)] px-2 sm:px-5 lg:px-20 bg-intro-bg bg-bottom bg-cover bg-no-repeat flex flex-col gap-14 lg:gap-20 items-center justify-center">
       <SectionMainTitleComponent
         title="Досліджуйте світ динозаврів"
         subtitle="Відкрийте для себе стародавніх істот за допомогою інтерактивних карт,

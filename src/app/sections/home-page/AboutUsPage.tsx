@@ -34,7 +34,7 @@ const AboutUsPage = () => {
   };
 
   return (
-    <div className="bg-white px-2 lg:px-5 lg:py-20 py-10">
+    <div className="bg-white px-2 sm:px-5 lg:px-20 lg:py-20 py-10">
       <SectionMainTitleComponent
         title="Про Нас"
         subtitle="DinoTerra — це ваш головний ресурс для вивчення динозаврів. Пориньте в

@@ -8,7 +8,7 @@ import logo from "@/images/logo.svg";
 
 const Header = () => {
   return (
-    <header className="w-full bg-slateGray text-white py-4 px-2 lg:px-5 text-center flex justify-between items-center">
+    <header className="w-full bg-slateGray text-white py-4 px-2 sm:px-5 lg:px-20 text-center flex justify-between items-center">
       <Image
         src={logo}
         width={400}

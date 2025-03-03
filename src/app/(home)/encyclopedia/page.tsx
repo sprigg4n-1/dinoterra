@@ -1,10 +1,10 @@
+import EncyclopediaPage from "@/app/sections/catalog/EncyclopediaPage";
 import React from "react";
-import EncyclopediaInfoPage from "./[id]/page";
 
 const Encyclopedia = () => {
   return (
     <>
-      <EncyclopediaInfoPage />
+      <EncyclopediaPage />
     </>
   );
 };

@@ -19,9 +19,9 @@ const SectionMainTitleComponent = ({
     firstTextPosition === "center"
       ? "text-center"
       : firstTextPosition === "right"
-      ? "text-right"
+      ? "lg:text-right text-center"
       : firstTextPosition === "left"
-      ? "text-left"
+      ? "lg:text-left text-center"
       : "";
 
   const titleCol =
@@ -38,7 +38,7 @@ const SectionMainTitleComponent = ({
       ? "text-darkPurple"
       : "text-black";
   return (
-    <div className={`flex flex-col gap-2 w-full text-center lg:${textPostion}`}>
+    <div className={`flex flex-col gap-2 w-full ${textPostion}`}>
       <h2 className={`${titleCol} font-bold text-[32px] lg:text-[48px]`}>
         {title}
       </h2>

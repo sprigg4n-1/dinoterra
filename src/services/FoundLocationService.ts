@@ -1,6 +1,17 @@
 import { BASE_URL_DINO } from "@/config/config";
 import axios from "axios";
 
+export const getFoundLocations = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL_DINO}/locations`);
+
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(`Error with get locations: ${error}`);
+  }
+};
+
 export const addFoundLocation = async (
   place: string,
   latitude: string,

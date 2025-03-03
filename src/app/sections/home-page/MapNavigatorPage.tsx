@@ -8,7 +8,7 @@ import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 
 const MapNavigatorPage = () => {
   return (
-    <div className="py-10 lg:pt-20 px-2 lg:px-5">
+    <div className="py-10 lg:pt-20 px-2 sm:px-5 lg:px-20">
       <SectionMainTitleComponent
         title="Перегляд інтерактивної карти"
         subtitle="Клацніть будь-який регіон, щоб побачити динозаврів, знайдених у цьому

@@ -57,6 +57,9 @@ const ChangeDinoFormDashboard = () => {
   });
 
   const [dinos, setDinos] = useState<IDino[]>([]);
+  const [finalDinos, setFinalDinos] = useState<IDino[]>([]);
+  const [searchDino, setSearchDino] = useState<string>("");
+
   const [dinoToChange, setDinoToChange] = useState<IDino>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -253,10 +256,25 @@ const ChangeDinoFormDashboard = () => {
       const dinosData = await getDinos();
 
       setDinos(dinosData);
+      setFinalDinos(dinosData);
     };
 
     getData();
   }, []);
+
+  useEffect(() => {
+    let searchedDinos = dinos.filter((dino) =>
+      dino.latinName.toLowerCase().includes(searchDino.toLowerCase())
+    );
+
+    if (searchedDinos.length == 0) {
+      searchedDinos = dinos.filter((dino) =>
+        dino.name.toLowerCase().includes(searchDino.toLowerCase())
+      );
+    }
+
+    setFinalDinos(searchedDinos);
+  }, [searchDino]);
 
   useEffect(() => {
     if (step === 1) {
@@ -314,19 +332,35 @@ const ChangeDinoFormDashboard = () => {
       ) : (
         <>
           <div className="flex flex-col sm:flex-row sm:justify-between items-center mb-2 sm:mb-0">
-            <DashboardTitleComponent text="Редагування динозавра" />
+            {step === 1 ? (
+              <div className="flex flex-col sm:flex-row items-center justify-between mb-5 w-full">
+                <DashboardTitleComponent text="Редагування динозавра" />
+                <input
+                  className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange w-3/4 sm:w-1/2"
+                  placeholder="Напишіть ім'я динозавра"
+                  value={searchDino}
+                  onChange={(e) => setSearchDino(e.target.value)}
+                />
+              </div>
+            ) : (
+              <DashboardTitleComponent text="Редагування динозавра" />
+            )}
+
             {step === 2 && (
               <button
+                className="text-slateGray hover:text-slate-600 duration-300 font-bold"
                 type="button"
-                onClick={(e) => handleDeleteDino(e)}
-                className="text-fieryRed hover:text-red-700 duration-300 font-bold">
-                Видалити динозавра
+                onClick={(e) => {
+                  e.preventDefault();
+                  setStep(1);
+                }}>
+                Назад
               </button>
             )}
           </div>
           {step === 1 ? (
             <div className="flex flex-col gap-2">
-              {dinos.map((dino: IDino) => (
+              {finalDinos.map((dino: IDino) => (
                 <button
                   key={dino.id}
                   onClick={(e) => onHandleChooseDino(e, dino.id)}
@@ -681,13 +715,10 @@ const ChangeDinoFormDashboard = () => {
               </div>
 
               <button
-                className="py-2 px-5 bg-slateGray text-white hover:bg-brightOrange duration-300"
                 type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setStep(1);
-                }}>
-                Назад
+                onClick={(e) => handleDeleteDino(e)}
+                className="py-2 px-5 bg-red-400 text-white hover:bg-fieryRed duration-300">
+                Видалити динозавра
               </button>
             </div>
           )}

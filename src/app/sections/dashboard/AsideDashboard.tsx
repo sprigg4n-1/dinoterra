@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
 
@@ -8,10 +8,22 @@ import close from "@/images/vectors/close.svg";
 import logo from "@/images/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const AsideDashboard = () => {
   const [activePage, setActivePage] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const pathname = usePathname();
+
+  // use effects
+  useEffect(() => {
+    if (pathname === "/admin/dashboard/dinos") {
+      setActivePage("dinos");
+    } else if (pathname === "/admin/dashboard/users") {
+      setActivePage("users");
+    }
+  }, [pathname]);
 
   return (
     <div className="bg-darkPurple py-3 px-2 text-white flex justify-between items-center gap-10 lg:w-[350px] lg:h-screen lg:flex-col lg:justify-normal sticky top-0 left-0 z-30">
@@ -38,7 +50,7 @@ const AsideDashboard = () => {
           translateX: isOpen ? "0" : "-100%",
         }}
         transition={{ duration: 0.3 }}
-        className="absolute top-0 left-0 w-screen h-screen lg:hidden px-2 py-2 flex flex-col bg-darkPurple z-50">
+        className="absolute top-0 left-0 w-full h-screen lg:hidden px-2 py-2 flex flex-col bg-darkPurple z-50">
         <div className="relative flex justify-between items-center">
           <Image
             src={logo}
@@ -49,6 +61,7 @@ const AsideDashboard = () => {
           />
 
           <button
+            className="hover:rotate-180 duration-300"
             onClick={(e) => {
               e.preventDefault();
               setIsOpen(false);

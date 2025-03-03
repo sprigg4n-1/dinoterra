@@ -4,7 +4,6 @@ import React from "react";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
 import { IDino } from "@/config/types";
-import { text } from "stream/consumers";
 
 const DinoCard = ({
   link,
@@ -46,7 +45,7 @@ const DinoCard = ({
   return (
     <Link
       href={link}
-      className={`group w-fit ${finalBgColor} flex flex-col gap-2 ${
+      className={`group w-fit ${finalBgColor} flex flex-col ${
         slider ? sliderClassName : ""
       }`}>
       <div
@@ -65,12 +64,12 @@ const DinoCard = ({
           className={`group-hover:scale-105 ${
             slider
               ? "w-auto h-[200px] sm:h-[350px] object-fill"
-              : "w-56  h-60 object-fit"
+              : "w-56 h-60 object-fit"
           } duration-300`}
         />
       </div>
 
-      <p className={`text-center pb-2 text-[18px] font-semibold ${finalColor}`}>
+      <p className={`text-center pb-1 text-[18px] font-semibold ${finalColor}`}>
         {dino.latinName}
       </p>
     </Link>

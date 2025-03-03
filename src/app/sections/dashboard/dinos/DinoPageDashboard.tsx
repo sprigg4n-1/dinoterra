@@ -10,7 +10,7 @@ import imageNotFound from "@/images/not-found/image-not-found.webp";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
-import { Map, Marker, Popup } from "@vis.gl/react-maplibre";
+import { Map, Marker } from "@vis.gl/react-maplibre";
 
 import {
   EDinoPeriod,
@@ -20,8 +20,6 @@ import {
   dinoDietLabels,
   dinoPeriodLabels,
 } from "@/config/types";
-import { MotionConfig } from "framer-motion";
-import { div } from "framer-motion/client";
 
 const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -51,7 +49,7 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
         <div className="embla__container-dino-page-images gap-10">
           {dino.images.map((image) => (
             <Image
-              className="embla__slide-dino-page-images border-4 border-slateGray"
+              className="embla__slide-dino-page-images border-4 border-slateGray w-auto h-[250px] sm:h-[400px] object-fill"
               key={image.id}
               src={
                 dino.images.length > 0
@@ -125,11 +123,17 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
         <h3 className="text-[18px] sm:text-[20px] font-semibold">Опис</h3>
         <div>
           <span className="text-[14px] sm:text-[16px]">Довжина:</span>{" "}
-          <span className="text-[14px] sm:text-[16px]">{dino.length}</span>
+          <span className="text-[14px] sm:text-[16px]">{dino.length}м</span>
         </div>
         <div>
           <span className="text-[14px] sm:text-[16px]">Вага:</span>{" "}
-          <span className="text-[14px] sm:text-[16px]">{dino.weight}</span>
+          <span className="text-[14px] sm:text-[16px]">{dino.weight}кг</span>
+        </div>
+        <div>
+          <span className="text-[14px] sm:text-[16px]">Тип динозвара:</span>{" "}
+          <span className="text-[14px] sm:text-[16px]">
+            {dinoTypeLabels[dino.typeOfDino as EDinoType]}({dino.typeOfDino})
+          </span>
         </div>
         <p className="text-[14px] sm:text-[16px]">{dino.description}</p>
       </div>
@@ -169,9 +173,9 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
         <div className="h-[250px] sm:h-[500px] w-full">
           <Map
             initialViewState={{
-              longitude: -100,
-              latitude: 40,
-              zoom: 3.5,
+              longitude: +dino.foundLocations[0].longitude || 0,
+              latitude: +dino.foundLocations[0].latitude || 0,
+              zoom: 1.5,
             }}
             style={{ width: "100%", height: "100%" }}
             mapStyle="https://demotiles.maplibre.org/style.json">

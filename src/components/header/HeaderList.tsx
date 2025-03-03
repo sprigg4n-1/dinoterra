@@ -93,7 +93,7 @@ const HeaderList = () => {
           translateX: isOpen ? "0" : "-100%",
         }}
         transition={{ duration: 0.3 }}
-        className="absolute top-0 left-0 w-screen h-screen lg:hidden px-2 py-3 flex flex-col gap-10 bg-slateGray z-50">
+        className="absolute top-0 left-0 w-full h-screen lg:hidden px-2 py-3 flex flex-col gap-10 bg-slateGray z-50">
         <div className="relative flex justify-between items-center">
           <Image
             src={logo}
@@ -103,6 +103,7 @@ const HeaderList = () => {
             className="w-32 h-auto"
           />
           <button
+            className="hover:rotate-180 duration-300"
             onClick={(e) => {
               e.preventDefault();
               setIsOpen(false);
@@ -116,7 +117,7 @@ const HeaderList = () => {
             />
           </button>
         </div>
-        <nav className="flex flex-col items-center gap-5">
+        <nav className="flex flex-col items-center gap-5 my-auto">
           {HEADER_ITEMS.map((item) => (
             <HeaderItem
               key={item.label}
