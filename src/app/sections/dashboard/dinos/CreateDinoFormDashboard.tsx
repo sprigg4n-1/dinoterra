@@ -171,6 +171,7 @@ const CreateDinoFormDashboard = () => {
     addLocationAndImage();
 
     setStep(3);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const resetForm = () => {

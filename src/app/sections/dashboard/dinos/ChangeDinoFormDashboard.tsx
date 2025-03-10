@@ -253,10 +253,10 @@ const ChangeDinoFormDashboard = () => {
   // use effects
   useEffect(() => {
     const getData = async () => {
-      const dinosData = await getDinos();
+      const dinosData = await getDinos(1000, 0);
 
-      setDinos(dinosData);
-      setFinalDinos(dinosData);
+      setDinos(dinosData.content);
+      setFinalDinos(dinosData.content);
     };
 
     getData();
@@ -279,9 +279,9 @@ const ChangeDinoFormDashboard = () => {
   useEffect(() => {
     if (step === 1) {
       const getData = async () => {
-        const dinosData = await getDinos();
+        const dinosData = await getDinos(1000, 0);
 
-        setDinos(dinosData);
+        setDinos(dinosData.content);
       };
 
       getData();

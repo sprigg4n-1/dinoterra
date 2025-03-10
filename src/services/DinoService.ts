@@ -1,13 +1,43 @@
 import { BASE_URL_DINO } from "@/config/config";
 import axios from "axios";
 
-export const getDinos = async () => {
+export const getDinos = async (
+  limit: number = 12,
+  page: number = 0,
+  name?: string,
+  type?: string,
+  diet?: string,
+  period?: string,
+  placeLocation?: string
+) => {
   try {
-    const response = await axios.get(`${BASE_URL_DINO}/dinos`);
+    const params = new URLSearchParams();
+
+    params.append("page", page.toString());
+    params.append("size", limit.toString());
+
+    if (name?.trim()) params.append("name", name.trim());
+    if (type?.trim()) params.append("type", type.trim());
+    if (diet?.trim()) params.append("diet", diet.trim());
+    if (period?.trim()) params.append("period", period.trim());
+    if (placeLocation?.trim())
+      params.append("placeLocation", placeLocation.trim());
+
+    const response = await axios.get(`${BASE_URL_DINO}/dinos`, { params });
 
     return response.data;
   } catch (error) {
     console.error(`Error with getting dinos: ${error}`);
+  }
+};
+
+export const getFiveRandomDinos = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL_DINO}/fiveRandomDinos`);
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with getting five random dinos: ${error}`);
   }
 };
 

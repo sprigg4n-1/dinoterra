@@ -3,7 +3,7 @@
 import DinoCard from "@/components/dino/DinoCard";
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import { IDino } from "@/config/types";
-import { getDinos } from "@/services/DinoService";
+import { getFiveRandomDinos } from "@/services/DinoService";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ const DinoRecomendationPage = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const dinosData = await getDinos();
+      const dinosData = await getFiveRandomDinos();
 
       setDinos(dinosData);
     };
@@ -39,7 +39,7 @@ const DinoRecomendationPage = () => {
       <div className="embla mt-8">
         <div className="embla__viewport-intro-rec-dino" ref={emblaRef}>
           <div className="embla__container-intro-rec-dino gap-5">
-            {dinos.slice(0, 5).map((dino) => (
+            {dinos.map((dino) => (
               <DinoCard
                 key={dino.id}
                 dino={dino}

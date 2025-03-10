@@ -15,10 +15,10 @@ const DinosListDashboard = () => {
   // use effects
   useEffect(() => {
     const getData = async () => {
-      const dinosData = await getDinos();
+      const dinosData = await getDinos(1000, 0);
 
-      setDinos(dinosData);
-      setFinalDinos(dinosData);
+      setDinos(dinosData.content);
+      setFinalDinos(dinosData.content);
     };
 
     getData();

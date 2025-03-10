@@ -50,13 +50,11 @@ const HeaderList = () => {
   };
 
   useEffect(() => {
-    console.log(pathname);
+    const correctPathhname = pathname.split("/").slice(0, 2).join("/");
 
-    const item = HEADER_ITEMS.find((item) => item.link === pathname);
+    const item = HEADER_ITEMS.find((item) => item.link === correctPathhname);
 
     setActiveItem(item?.label || HEADER_ITEMS[0].label);
-
-    console.log(item);
   }, [pathname]);
 
   return (
