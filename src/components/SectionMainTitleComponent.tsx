@@ -7,6 +7,8 @@ const SectionMainTitleComponent = ({
   titleColor,
   subtitleColor,
   subtitleWidth,
+  titleSize,
+  subtitleSize,
 }: {
   title: string;
   subtitle?: string;
@@ -14,6 +16,8 @@ const SectionMainTitleComponent = ({
   titleColor?: "white" | "orange";
   subtitleWidth?: number;
   subtitleColor?: "white" | "purple";
+  titleSize?: "lg" | "md" | "sm";
+  subtitleSize?: "lg" | "sm";
 }) => {
   const textPostion =
     firstTextPosition === "center"
@@ -37,14 +41,29 @@ const SectionMainTitleComponent = ({
       : subtitleColor === "purple"
       ? "text-darkPurple"
       : "text-black";
+
+  const titleSizeFinal =
+    titleSize === "lg"
+      ? "text-[30px] lg:text-[44px]"
+      : titleSize === "md"
+      ? "text-[28px] lg:text-[40px]"
+      : titleSize === "sm"
+      ? "text-[24px] lg:text-[32px]"
+      : "text-[32px] lg:text-[48px]";
+
+  const subtitleSizeFinal =
+    subtitleSize === "lg"
+      ? "text-[14px] lg:text-[20px]"
+      : subtitleSize === "sm"
+      ? "text-[12px] lg:text-[18px]"
+      : "text-[16px] lg:text-[22px]";
+
   return (
-    <div className={`flex flex-col gap-2 w-full ${textPostion}`}>
-      <h2 className={`${titleCol} font-bold text-[32px] lg:text-[48px]`}>
-        {title}
-      </h2>
+    <div className={`flex flex-col w-full ${textPostion}`}>
+      <h2 className={`${titleCol} font-bold ${titleSizeFinal}`}>{title}</h2>
       {subtitle && (
         <p
-          className={`${subtitleCol} text-[16px] lg:text-[22px] ${
+          className={`${subtitleCol} ${subtitleSizeFinal} ${
             subtitleWidth ? `max-w-[${subtitleWidth}px] mx-auto` : ""
           }`}>
           {subtitle}

@@ -1,7 +1,12 @@
+import LegalPage from "@/app/sections/legal-page/LegalPage";
 import React from "react";
 
 const Legal = () => {
-  return <div>LegalPage</div>;
+  return (
+    <>
+      <LegalPage />
+    </>
+  );
 };
 
 export default Legal;

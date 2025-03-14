@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* admin dashboard */
 .embla__viewport-dino-images-dashboard {
   overflow: hidden;
