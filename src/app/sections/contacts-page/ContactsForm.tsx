@@ -94,7 +94,7 @@ const ContactsForm = () => {
 
       {isOpenModal && (
         <div className="fixed top-0 left-0 z-50 w-full h-screen bg-darkGray bg-opacity-80 flex justify-center items-center">
-          <div className="relative w-[90%] h-fit lg:w-2/3 lg:h-2/3 bg-slateGray rounded-md py-10 px-5">
+          <div className="relative w-[90%] h-fit lg:w-2/3 bg-slateGray rounded-md py-10 px-5">
             <button
               className="absolute top-3 right-3 w-7 h-7 hover:rotate-90 duration-300"
               onClick={onClickCloseModal}
