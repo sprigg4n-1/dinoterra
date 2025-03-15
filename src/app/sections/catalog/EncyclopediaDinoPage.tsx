@@ -70,10 +70,12 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
               {dinoTypeLabels[dino.typeOfDino as EDinoType]}
             </p>
             <p className="text-[16px] lg:text-[18px]">
-              <span className="font-medium">Вага:</span> {dino.weight}кг
+              <span className="font-medium">Вага:</span>{" "}
+              {dino.weight.toFixed(2)}кг
             </p>
             <p className="text-[16px] lg:text-[18px]">
-              <span className="font-medium">Розмір:</span> {dino.length}м
+              <span className="font-medium">Розмір:</span>{" "}
+              {dino.length.toFixed(2)}м
             </p>
             <p className="text-[16px] lg:text-[18px]">
               <span className="font-medium">Харчування:</span>{" "}

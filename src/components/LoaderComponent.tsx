@@ -1,8 +1,21 @@
 import React from "react";
 
-const LoaderComponent = () => {
+const LoaderComponent = ({
+  pathColor = "#607D8B",
+  loaderColor = "#FF9800",
+}: {
+  pathColor?: string;
+  loaderColor?: string;
+}) => {
   return (
-    <div className="w-10 h-10 rounded-full border-slateGray border-[6px] border-r-brightOrange border-t-brightOrange animate-spin"></div>
+    <div
+      className="w-10 h-10 rounded-full border-[6px] animate-spin"
+      style={{
+        borderColor: pathColor,
+        borderRightColor: loaderColor,
+        borderTopColor: loaderColor,
+      }}
+    ></div>
   );
 };
 
