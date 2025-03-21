@@ -66,7 +66,7 @@ const ContactsForm = () => {
           onChange={(e) => setName(e.target.value)}
           type="text"
           placeholder="Ім'я"
-          className="p-2 border-2 border-brightOrange text-[14px] md:text-[16px]"
+          className="p-2 border-2 border-brightOrange text-[14px] md:text-[16px] focus:outline-none focus:border-darkGray"
           required
         />
         <input
@@ -74,13 +74,13 @@ const ContactsForm = () => {
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           placeholder="Пошта"
-          className="p-2 border-2 border-brightOrange text-[14px] md:text-[16px]"
+          className="p-2 border-2 border-brightOrange text-[14px] md:text-[16px] focus:outline-none focus:border-darkGray"
           required
         />
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="resize-none h-[200px] p-2 border-2 rounded-md border-brightOrange text-[14px] md:text-[16px]"
+          className="resize-none h-[200px] p-2 border-2 border-brightOrange text-[14px] md:text-[16px] focus:outline-none focus:border-darkGray"
           placeholder="Текст що ви хочете відправити"
           required
         />

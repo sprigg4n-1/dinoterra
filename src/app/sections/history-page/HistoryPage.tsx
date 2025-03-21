@@ -51,7 +51,7 @@ const HistoryPage = () => {
         firstTextPosition="left"
         titleColor="orange"
       />
-      <div className="relative py-10 flex gap-10">
+      <div className="relative py-2 lg:py-5 flex gap-10">
         <nav className="hidden sticky h-fit -left-10 top-[10%] lg:flex flex-col w-[220px]">
           {sections.map(({ id, label }) => (
             <Link
@@ -61,12 +61,13 @@ const HistoryPage = () => {
                 activeSection === id
                   ? "text-brightOrange border-r-4 border-brightOrange font-semibold"
                   : "text-darkGray border-r-4 font-normal"
-              }`}>
+              }`}
+            >
               {label}
             </Link>
           ))}
         </nav>
-        <div>
+        <div className="flex-1 flex flex-col gap-5 text-[14px] md:text-[16px] lg:text-[18px]">
           <DinosaursOrigin tabId="origin" label={sections[0].label} />
           <EvolutionaryPeriods tabId="evolution" label={sections[1].label} />
           <DinosaurExtinction tabId="extinction" label={sections[2].label} />
