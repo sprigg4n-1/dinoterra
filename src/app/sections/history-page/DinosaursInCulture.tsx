@@ -43,22 +43,6 @@ const DinosaursInCulture = ({
         </div>
         <div>
           <TitleComponent
-            text="Динозаври в мистецтві"
-            size="sm"
-            textColor="fieryRed"
-            additionalClasses="text-center"
-          />
-        </div>
-        <div>
-          <TitleComponent
-            text="Популярна культура"
-            size="sm"
-            textColor="fieryRed"
-            additionalClasses="text-center"
-          />
-        </div>
-        <div>
-          <TitleComponent
             text="Вплив на масову свідомість"
             size="sm"
             textColor="fieryRed"

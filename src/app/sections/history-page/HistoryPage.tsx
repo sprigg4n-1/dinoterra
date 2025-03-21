@@ -15,7 +15,7 @@ const sections = [
   { id: "evolution", label: "Переломні періоди" },
   { id: "extinction", label: "Вимирання динозаврів" },
   { id: "discovery", label: "Відкриття динозаврів" },
-  { id: "culture", label: "Динозаври в культурі" },
+  // { id: "culture", label: "Динозаври в культурі" },
 ];
 
 const HistoryPage = () => {
@@ -25,13 +25,14 @@ const HistoryPage = () => {
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.6,
+      threshold: 0.1,
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id);
+          console.log(entry.target.id);
         }
       });
     }, observerOptions);
@@ -72,7 +73,7 @@ const HistoryPage = () => {
           <EvolutionaryPeriods tabId="evolution" label={sections[1].label} />
           <DinosaurExtinction tabId="extinction" label={sections[2].label} />
           <DinosaursDiscovery tabId="discovery" label={sections[3].label} />
-          <DinosaursInCulture tabId="culture" label={sections[4].label} />
+          {/* <DinosaursInCulture tabId="culture" label={sections[4].label} /> */}
         </div>
       </div>
     </div>
