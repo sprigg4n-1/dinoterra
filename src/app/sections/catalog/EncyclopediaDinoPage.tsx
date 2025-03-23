@@ -161,10 +161,16 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
             initialViewState={{
               longitude: +dino.foundLocations[0]?.longitude || 0,
               latitude: +dino.foundLocations[0]?.latitude || 0,
-              zoom: 2.5,
+              zoom: 3.5,
             }}
             style={{ width: "100%", height: "100%" }}
-            mapStyle="https://demotiles.maplibre.org/style.json">
+            dragPan={false}
+            scrollZoom={false}
+            doubleClickZoom={false}
+            touchZoomRotate={false}
+            dragRotate={false}
+            mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
+          >
             {dino.foundLocations.map((loc) => (
               <Marker
                 key={loc.id}

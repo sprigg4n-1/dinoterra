@@ -71,7 +71,8 @@ const EncyclopediaFilter = ({
             <select
               value={typeOfDino}
               onChange={(e) => setTypeOfDino(e.target.value)}
-              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+            >
               <option value="">Виберіть тип</option>
               {Object.entries(dinoTypeLabels).map(([key, value]) => (
                 <option key={key} value={key}>
@@ -86,7 +87,8 @@ const EncyclopediaFilter = ({
             <select
               value={diet}
               onChange={(e) => setDiet(e.target.value)}
-              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+            >
               <option value="">Виберіть харчування</option>
               {Object.entries(dinoDietLabels).map(([key, value]) => (
                 <option key={key} value={key}>
@@ -101,7 +103,8 @@ const EncyclopediaFilter = ({
             <select
               value={period}
               onChange={(e) => setPeriod(e.target.value)}
-              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+            >
               <option value="">Виберіть період</option>
               {Object.entries(dinoPeriodLabels).map(([key, value]) => (
                 <option key={key} value={key}>
@@ -116,13 +119,15 @@ const EncyclopediaFilter = ({
           <button
             type="button"
             onClick={onClickReset}
-            className="py-2 w-[200px] bg-darkPurple bg-opacity-50 text-white hover:bg-opacity-100 duration-300">
+            className="py-2 w-[200px] bg-darkPurple bg-opacity-50 text-white hover:bg-opacity-100 duration-300"
+          >
             Скинути
           </button>
           <button
             type="button"
             onClick={onClickFilterData}
-            className="py-2 w-[200px] bg-brightOrange bg-opacity-50 text-white hover:bg-opacity-100 duration-300">
+            className="py-2 w-[200px] bg-brightOrange bg-opacity-50 text-white hover:bg-opacity-100 duration-300"
+          >
             Знайти
           </button>
         </div>
@@ -135,7 +140,8 @@ const EncyclopediaFilter = ({
           onClick={(e) => {
             e.preventDefault();
             setIsOpen(true);
-          }}>
+          }}
+        >
           Фільтри
         </button>
       </div>
@@ -150,7 +156,8 @@ const EncyclopediaFilter = ({
           opacity: isOpen ? 100 : 0,
         }}
         transition={{ duration: 0.5 }}
-        className="fixed top-0 left-0 w-screen h-screen lg:hidden flex flex-col bg-slateGray bg-opacity-50 z-50 ">
+        className="fixed top-0 left-0 w-screen h-screen lg:hidden flex flex-col bg-slateGray bg-opacity-50 z-50 "
+      >
         <motion.div
           initial={{
             translateX: "-100%",
@@ -161,13 +168,15 @@ const EncyclopediaFilter = ({
             opacity: isOpen ? 100 : 0,
           }}
           transition={{ duration: 0.5 }}
-          className="relative flex flex-col gap-3 py-14 px-10 w-4/5 bg-darkPurple h-full text-white overflow-y-scroll">
+          className="relative flex flex-col gap-3 py-14 px-10 w-4/5 bg-darkPurple h-full text-white overflow-y-scroll"
+        >
           <button
             className="absolute top-2 right-2 hover:rotate-180 duration-300"
             onClick={(e) => {
               e.preventDefault();
               setIsOpen(false);
-            }}>
+            }}
+          >
             <Image
               src={close}
               width={100}
@@ -203,7 +212,8 @@ const EncyclopediaFilter = ({
             <select
               value={typeOfDino}
               onChange={(e) => setTypeOfDino(e.target.value)}
-              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+            >
               <option value="">Виберіть тип</option>
               {Object.entries(dinoTypeLabels).map(([key, value]) => (
                 <option key={key} value={key}>
@@ -218,7 +228,8 @@ const EncyclopediaFilter = ({
             <select
               value={diet}
               onChange={(e) => setDiet(e.target.value)}
-              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+            >
               <option value="">Виберіть харчування</option>
               {Object.entries(dinoDietLabels).map(([key, value]) => (
                 <option key={key} value={key}>
@@ -233,7 +244,8 @@ const EncyclopediaFilter = ({
             <select
               value={period}
               onChange={(e) => setPeriod(e.target.value)}
-              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+            >
               <option value="">Виберіть період</option>
               {Object.entries(dinoPeriodLabels).map(([key, value]) => (
                 <option key={key} value={key}>
@@ -247,13 +259,15 @@ const EncyclopediaFilter = ({
             <button
               type="button"
               onClick={onClickReset}
-              className="py-2 bg-fieryRed bg-opacity-50 text-white hover:bg-opacity-100 duration-300 w-full">
+              className="py-2 bg-fieryRed bg-opacity-50 text-white hover:bg-opacity-100 duration-300 w-full"
+            >
               Скинути
             </button>
             <button
               type="button"
               onClick={onClickFilterData}
-              className="py-2 bg-brightOrange bg-opacity-50 text-white hover:bg-opacity-100 duration-300 w-full">
+              className="py-2 bg-brightOrange bg-opacity-50 text-white hover:bg-opacity-100 duration-300 w-full"
+            >
               Знайти
             </button>
           </div>

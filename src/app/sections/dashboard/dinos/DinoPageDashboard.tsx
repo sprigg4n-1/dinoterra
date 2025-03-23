@@ -37,7 +37,8 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
       <div className="flex flex-col items-center gap-2 sm:flex-row">
         <Link
           className="bg-slateGray text-white w-full text-center py-1 font-semibold hover:opacity-90 sm:w-auto sm:px-10"
-          href={"/admin/dashboard/dinos"}>
+          href={"/admin/dashboard/dinos"}
+        >
           Назад
         </Link>
         <h2 className="flex-1 text-center text-[18px] font-bold sm:text-[20px]">
@@ -89,7 +90,8 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
               onClick={(e) => {
                 e.preventDefault();
                 setShowAllImages(false);
-              }}>
+              }}
+            >
               Приховати
             </button>
           </>
@@ -112,7 +114,8 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
               onClick={(e) => {
                 e.preventDefault();
                 setShowAllImages(true);
-              }}>
+              }}
+            >
               Показати всі фото
             </button>
           </>
@@ -178,7 +181,8 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
               zoom: 1.5,
             }}
             style={{ width: "100%", height: "100%" }}
-            mapStyle="https://demotiles.maplibre.org/style.json">
+            mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
+          >
             {dino.foundLocations.map((loc) => (
               <Marker
                 key={loc.id}

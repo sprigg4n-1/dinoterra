@@ -11,8 +11,6 @@ const MapNavigatorPage = () => {
     <div className="py-10 lg:pt-20 px-2 sm:px-5 lg:px-20">
       <SectionMainTitleComponent
         title="Перегляд інтерактивної карти"
-        subtitle="Клацніть будь-який регіон, щоб побачити динозаврів, знайдених у цьому
-          районі."
         firstTextPosition="left"
         titleColor="white"
         subtitleColor="white"
@@ -24,20 +22,28 @@ const MapNavigatorPage = () => {
             latitude: 40,
             zoom: 3.5,
           }}
+          dragPan={false}
+          scrollZoom={false}
+          doubleClickZoom={false}
+          touchZoomRotate={false}
+          dragRotate={false}
           style={{ width: "100%", height: "100%" }}
-          mapStyle="https://demotiles.maplibre.org/style.json"></Map>
+          mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
+        ></Map>
 
         {/* pc */}
         <Link
           href={"/interactive-map"}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden lg:group-hover:block w-[120px] py-1 text-center text-[18px] bg-black bg-opacity-50 text-brightOrange hover:bg-opacity-100">
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden lg:group-hover:block w-[120px] py-1 text-center text-[18px] bg-black bg-opacity-50 text-brightOrange hover:bg-opacity-100"
+        >
           до карти
         </Link>
 
         {/* mobile */}
         <Link
           href={"/interactive-map"}
-          className="block lg:hidden text-[18px] mx-auto w-[200px] text-center mt-5 text-slateGray border-b-2 border-b-slateGray hover:text-brightOrange hover:border-b-brightOrange">
+          className="block lg:hidden text-[18px] mx-auto w-[200px] text-center mt-5 text-slateGray border-b-2 border-b-slateGray hover:text-brightOrange hover:border-b-brightOrange"
+        >
           Перейти до карти
         </Link>
       </div>
