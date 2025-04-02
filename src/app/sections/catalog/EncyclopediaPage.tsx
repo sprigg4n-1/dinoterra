@@ -24,6 +24,8 @@ const EncyclopediaPage = () => {
   const [searchDino, setSearchDino] = useState<string>("");
   const [placeLocation, setPlaceLocation] = useState<string>("");
 
+  const [isResetedFilter, setIsResetedFilter] = useState<boolean>(false);
+
   const pagination = usePagination({
     total: totalPages,
     initialPage: 1,
@@ -67,6 +69,7 @@ const EncyclopediaPage = () => {
     setPeriod("");
     setSearchDino("");
     setPlaceLocation("");
+    setIsResetedFilter(true);
   };
 
   const getDataDinos = async () => {
@@ -94,6 +97,12 @@ const EncyclopediaPage = () => {
   useEffect(() => {
     getDataDinos();
   }, []);
+  useEffect(() => {
+    if (isResetedFilter) {
+      getDataDinos();
+    }
+    setIsResetedFilter(false);
+  }, [isResetedFilter]);
 
   return (
     <div className="px-2 sm:px-5 lg:px-20 flex flex-col items-center">
@@ -143,7 +152,8 @@ const EncyclopediaPage = () => {
                   ? "bg-brightOrange"
                   : "bg-darkPurple hover:bg-opacity-70 duration-200"
               } text-white h-8 w-8 р `}
-              onClick={() => onUpdatePage(+page)}>
+              onClick={() => onUpdatePage(+page)}
+            >
               {page}
             </button>
           )

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import DinosListDashboard from "./DinosListDashboard";
 import ChangeDinoFormDashboard from "./ChangeDinoFormDashboard";
 import CreateDinoFormDashboard from "./CreateDinoFormDashboard";
-import Link from "next/link";
 
 const DinosDashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("all");
@@ -19,7 +18,8 @@ const DinosDashboard = () => {
           }}
           className={`py-2 px-1 text-[16px] xl:text-[18px] sm:w-1/3 ${
             activeTab === "all" ? "bg-brightOrange" : "bg-darkPurple"
-          }`}>
+          }`}
+        >
           Список динозаврів
         </button>
         <button
@@ -29,7 +29,8 @@ const DinosDashboard = () => {
           }}
           className={`py-2 px-1 text-[16px] xl:text-[18px] sm:w-1/3 ${
             activeTab === "create" ? "bg-brightOrange" : "bg-darkPurple"
-          }`}>
+          }`}
+        >
           Додавання динозавра
         </button>
         <button
@@ -39,7 +40,8 @@ const DinosDashboard = () => {
           }}
           className={`py-2 px-1 text-[16px] xl:text-[18px] sm:w-1/3 ${
             activeTab === "change" ? "bg-brightOrange" : "bg-darkPurple"
-          }`}>
+          }`}
+        >
           Редагування динозавра
         </button>
       </div>

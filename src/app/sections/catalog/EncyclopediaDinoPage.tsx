@@ -23,6 +23,7 @@ import TopDinoPageComponent from "@/components/TopDinoPageComponent";
 import useEmblaCarousel from "embla-carousel-react";
 import { getFiveRandomDinos } from "@/services/DinoService";
 import DinoCard from "@/components/dino/DinoCard";
+import { useAuthStorage } from "@/hooks/useAuthStorage";
 
 const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -30,7 +31,14 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
     slidesToScroll: "auto",
   });
 
+  const { user } = useAuthStorage();
+
   const [dinos, setDinos] = useState<IDino[]>([]);
+
+  const onClickAddToFav = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log(dino.id);
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -47,7 +55,29 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
       <TopDinoPageComponent title={dino.latinName} />
 
       <div className="flex flex-col md:flex-row gap-3 md:gap-5 border-b-4 pb-3 mb-3 md:pb-5 md:mb-5">
-        <Image
+        <div className="h-fit flex flex-col border-2 border-brightOrange">
+          <Image
+            src={
+              dino.images.length > 0
+                ? `data:image/jpg;base64,${dino.images[0].image}`
+                : imageNotFound
+            }
+            alt="main image"
+            width={4000}
+            height={2000}
+            className="h-fit max-h-[400px] md:max-h-[600px] w-full"
+          />
+          {user && (
+            <button
+              type="button"
+              className="w-full py-2 bg-brightOrange text-white px-5 hover:font-semibold duration-300"
+              onClick={(e) => onClickAddToFav(e)}
+            >
+              Додати до улюблених
+            </button>
+          )}
+        </div>
+        {/* <Image
           src={
             dino.images.length > 0
               ? `data:image/jpg;base64,${dino.images[0].image}`
@@ -56,8 +86,8 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
           alt="main image"
           width={4000}
           height={2000}
-          className="w-full h-auto max-h-[400px] md:w-2/5 md:max-h-[600px]"
-        />
+          className="h-auto max-h-[400px] md:w-2/5 md:max-h-[600px]"
+        /> */}
 
         <div className="flex flex-col md:w-3/5 gap-2">
           <h1 className="text-[22px] md:text-[24px] flex flex-wrap items-center justify-center md:justify-start font-bold text-brightOrange">

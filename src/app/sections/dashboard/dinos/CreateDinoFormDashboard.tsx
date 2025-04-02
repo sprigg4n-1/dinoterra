@@ -202,7 +202,8 @@ const CreateDinoFormDashboard = () => {
       {step === 1 ? (
         <form
           onSubmit={(e) => onSubmitForm(e)}
-          className="flex flex-col gap-2 text-[14px] sm:text-[16px]">
+          className="flex flex-col gap-2 text-[14px] sm:text-[16px]"
+        >
           {/* name */}
           <label className="flex flex-col gap-2 sm:flex-row">
             <div className="flex flex-col sm:w-1/2">
@@ -272,7 +273,8 @@ const CreateDinoFormDashboard = () => {
             <select
               value={typeOfDino}
               onChange={(e) => setTypeOfDino(e.target.value as EDinoType)}
-              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+            >
               {Object.entries(dinoTypeLabels).map(([key, value]) => (
                 <option key={key} value={key}>
                   {value}
@@ -287,7 +289,8 @@ const CreateDinoFormDashboard = () => {
             <select
               value={diet}
               onChange={(e) => setDiet(e.target.value as EDinoDiet)}
-              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+            >
               {Object.entries(dinoDietLabels).map(([key, value]) => (
                 <option key={key} value={key}>
                   {value}
@@ -309,7 +312,8 @@ const CreateDinoFormDashboard = () => {
             <select
               value={period}
               onChange={(e) => setPeriod(e.target.value as EDinoPeriod)}
-              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+              className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+            >
               {Object.entries(dinoPeriodLabels).map(([key, value]) => (
                 <option key={key} value={key}>
                   {value}
@@ -337,13 +341,15 @@ const CreateDinoFormDashboard = () => {
           <div className="flex justify-between gap-2">
             <button
               type="submit"
-              className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300">
+              className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300"
+            >
               Створити
             </button>
             <button
               type="button"
               onClick={resetForm}
-              className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300">
+              className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300"
+            >
               Скидання
             </button>
           </div>
@@ -393,7 +399,8 @@ const CreateDinoFormDashboard = () => {
               <button
                 className="bg-green-300 block hover:bg-green-500 px-10 h-10 w-full sm:w-auto"
                 type="button"
-                onClick={(e) => onHandleAddLocation(e)}>
+                onClick={(e) => onHandleAddLocation(e)}
+              >
                 Додати
               </button>
               <div className="flex-1 flex gap-4 flex-wrap bg-slateGray w-full p-2 text-white">
@@ -401,11 +408,13 @@ const CreateDinoFormDashboard = () => {
                   ? foundLocations.map((loc) => (
                       <div
                         key={loc.id}
-                        className="bg-brightOrange text-white flex items-center gap-2 py-1 px-2 rounded-xl">
+                        className="bg-brightOrange text-white flex items-center gap-2 py-1 px-2 rounded-xl"
+                      >
                         <span>{loc.place}</span>
                         <button
                           className="hover:rotate-90 duration-300"
-                          onClick={(e) => onHandleDeleteLocation(e, loc.id)}>
+                          onClick={(e) => onHandleDeleteLocation(e, loc.id)}
+                        >
                           <Image
                             src={close}
                             alt="close"
@@ -433,7 +442,8 @@ const CreateDinoFormDashboard = () => {
                     imagePathDino !== ""
                       ? "bg-brightOrange hover:border-darkGray"
                       : "bg-darkGray hover:border-brightOrange"
-                  }  text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center duration-300`}>
+                  }  text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center duration-300`}
+                >
                   <span>
                     {imagePathDino === "" ? "Оберіть файл" : "Змінити файл"}
                   </span>
@@ -461,7 +471,8 @@ const CreateDinoFormDashboard = () => {
               <button
                 className="bg-green-300 block hover:bg-green-500 px-10 h-10 w-full sm:w-auto"
                 type="button"
-                onClick={(e) => onHandleAddImage(e)}>
+                onClick={(e) => onHandleAddImage(e)}
+              >
                 Додати
               </button>
               <div className="flex-1 flex gap-4 flex-wrap bg-slateGray p-2 text-white w-full">
@@ -469,11 +480,13 @@ const CreateDinoFormDashboard = () => {
                   ? dinoImages.map((image) => (
                       <div
                         key={image.id}
-                        className="bg-brightOrange text-white flex items-center gap-2 py-1 px-2 rounded-xl">
+                        className="bg-brightOrange text-white flex items-center gap-2 py-1 px-2 rounded-xl"
+                      >
                         <span>{image.fileName}</span>
                         <button
                           className="hover:rotate-90 duration-300"
-                          onClick={(e) => onHandleDeleteImage(e, image.id)}>
+                          onClick={(e) => onHandleDeleteImage(e, image.id)}
+                        >
                           <Image
                             src={close}
                             alt="close"
@@ -492,7 +505,8 @@ const CreateDinoFormDashboard = () => {
           <button
             type="button"
             onClick={(e) => onHandleCreateDino(e)}
-            className="w-full sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300">
+            className="w-full sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300"
+          >
             Закінчити
           </button>
         </div>
