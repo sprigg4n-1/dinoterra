@@ -1,5 +1,6 @@
-import { BASE_URL_DINO } from "@/config/config";
 import axios from "axios";
+
+import { BASE_URL_DINO } from "@/config/config";
 
 export const addImage = async (
   imagePath: string,

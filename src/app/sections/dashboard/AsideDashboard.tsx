@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+
+import Image from "next/image";
+import Link from "next/link";
 
 import close from "@/images/vectors/close.svg";
 import logo from "@/images/logo.svg";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const AsideDashboard = () => {
   const [activePage, setActivePage] = useState("");
@@ -35,7 +35,8 @@ const AsideDashboard = () => {
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(true);
-        }}>
+        }}
+      >
         <span className="w-10 h-1 bg-white"></span>
         <span className="w-10 h-1 bg-white"></span>
         <span className="w-10 h-1 bg-white"></span>
@@ -50,7 +51,8 @@ const AsideDashboard = () => {
           translateX: isOpen ? "0" : "-100%",
         }}
         transition={{ duration: 0.3 }}
-        className="absolute top-0 left-0 w-full h-screen lg:hidden px-2 py-2 flex flex-col bg-darkPurple z-50">
+        className="absolute top-0 left-0 w-full h-screen lg:hidden px-2 py-2 flex flex-col bg-darkPurple z-50"
+      >
         <div className="relative flex justify-between items-center">
           <Image
             src={logo}
@@ -65,7 +67,8 @@ const AsideDashboard = () => {
             onClick={(e) => {
               e.preventDefault();
               setIsOpen(false);
-            }}>
+            }}
+          >
             <Image
               src={close}
               width={100}
@@ -87,7 +90,8 @@ const AsideDashboard = () => {
                 activePage === "dinos"
                   ? "bg-brightOrange font-semibold text-white"
                   : "text-black bg-softGray"
-              }`}>
+              }`}
+            >
               Динозаври
             </Link>
           </li>
@@ -102,7 +106,8 @@ const AsideDashboard = () => {
                 activePage === "users"
                   ? " bg-brightOrange font-semibold text-white"
                   : "text-black bg-softGray "
-              }`}>
+              }`}
+            >
               Користувачі
             </Link>
           </li>
@@ -119,7 +124,8 @@ const AsideDashboard = () => {
               activePage === "dinos"
                 ? "text-right bg-brightOrange font-semibold text-white"
                 : "text-black bg-softGray text-left"
-            }`}>
+            }`}
+          >
             Динозаври
           </Link>
         </li>
@@ -131,7 +137,8 @@ const AsideDashboard = () => {
               activePage === "users"
                 ? " text-right bg-brightOrange font-semibold text-white"
                 : "text-black bg-softGray text-left"
-            }`}>
+            }`}
+          >
             Користувачі
           </Link>
         </li>

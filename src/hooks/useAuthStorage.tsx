@@ -9,13 +9,24 @@ import {
 } from "react";
 
 interface User {
+  id: number;
   username: string;
   password: string;
+  lastname: string;
+  name: string;
+  role: string;
 }
 
 interface AuthContextType {
   user: User | null;
-  saveUser: (username: string, password: string) => void;
+  saveUser: (
+    id: number,
+    username: string,
+    password: string,
+    lastname: string,
+    name: string,
+    role: string
+  ) => void;
   clearUser: () => void;
 }
 
@@ -43,8 +54,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, []);
 
-  const saveUser = (username: string, password: string) => {
-    const userData = { username, password };
+  const saveUser = (
+    id: number,
+    username: string,
+    password: string,
+    lastname: string,
+    name: string,
+    role: string
+  ) => {
+    const userData = { id, username, password, lastname, name, role };
+    console.log(userData);
     localStorage.setItem("user", JSON.stringify(userData));
     setUser(userData);
   };

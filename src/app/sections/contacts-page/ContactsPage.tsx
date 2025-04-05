@@ -1,5 +1,3 @@
-import React from "react";
-
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import ContactsForm from "./ContactsForm";
 

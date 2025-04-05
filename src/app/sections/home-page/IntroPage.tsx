@@ -1,6 +1,5 @@
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import Link from "next/link";
-import React from "react";
 
 const IntroPage = () => {
   return (
@@ -17,12 +16,14 @@ const IntroPage = () => {
 
       <Link
         href="/encyclopedia"
-        className="lg:hidden block text-[20px] py-1 w-[220px] text-center rounded-xl bg-brightOrange text-white hover:bg-fieryRed duration-300">
+        className="lg:hidden block text-[20px] py-1 w-[220px] text-center rounded-xl bg-brightOrange text-white hover:bg-fieryRed duration-300"
+      >
         Почати
       </Link>
       <Link
         href="/encyclopedia"
-        className="hidden lg:block uppercase py-1 w-[350px] text-[22px] font-semibold text-center rounded-xl bg-brightOrange text-white hover:bg-fieryRed duration-300">
+        className="hidden lg:block uppercase py-1 w-[350px] text-[22px] font-semibold text-center rounded-xl bg-brightOrange text-white hover:bg-fieryRed duration-300"
+      >
         Почніть дослідження
       </Link>
     </div>

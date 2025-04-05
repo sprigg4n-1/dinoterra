@@ -1,6 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useAuthStorage } from "@/hooks/useAuthStorage";
+import useEmblaCarousel from "embla-carousel-react";
+
+import { getFiveRandomDinos } from "@/services/DinoService";
+import { addFavoriteDino } from "@/services/SecurityService";
 
 import {
   dinoDietLabels,
@@ -11,7 +16,10 @@ import {
   EDinoType,
   IDino,
 } from "@/config/types";
+
 import Image from "next/image";
+import TopDinoPageComponent from "@/components/TopDinoPageComponent";
+import DinoCard from "@/components/dino/DinoCard";
 import { Map, Marker } from "@vis.gl/react-maplibre";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
@@ -19,14 +27,12 @@ import trsDino from "@/images/dino-page/triassic-period-popular-dino.webp";
 import jrsDino from "@/images/dino-page/jurassic-period-popular-dino.jpg";
 import crsDino from "@/images/dino-page/cretaceous-period-popular-dino.webp";
 
-import TopDinoPageComponent from "@/components/TopDinoPageComponent";
-import useEmblaCarousel from "embla-carousel-react";
-import { getFiveRandomDinos } from "@/services/DinoService";
-import DinoCard from "@/components/dino/DinoCard";
-import { useAuthStorage } from "@/hooks/useAuthStorage";
-
 const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    slidesToScroll: "auto",
+  });
+  const [emblaRef2, emblaApi2] = useEmblaCarousel({
     loop: false,
     slidesToScroll: "auto",
   });
@@ -35,11 +41,14 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
 
   const [dinos, setDinos] = useState<IDino[]>([]);
 
-  const onClickAddToFav = (e: React.MouseEvent<HTMLButtonElement>) => {
+  // functions
+  const onClickAddToFav = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(dino.id);
+    const response = await addFavoriteDino(user?.id || 0, dino.id);
+    console.log(response);
   };
 
+  // use effects
   useEffect(() => {
     const getData = async () => {
       const dinosData = await getFiveRandomDinos();
@@ -165,21 +174,33 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
       </div>
 
       <div className="flex flex-col gap-3 md:gap-5 border-b-4 pb-3 mb-3 md:pb-5 md:mb-5">
-        <h2 className="text-[20px] lg:text-[24px] font-semibold text-center">
-          Всі картинки
-        </h2>
-        <div className="flex flex-col gap-5 md:gap-10 items-center w-full px-2">
-          {dino.images.slice(1).map((item) => (
-            <Image
-              key={item.id}
-              src={`data:image/jpg;base64,${item.image}`}
-              alt="image"
-              width={4000}
-              height={2000}
-              className="w-auto h-auto max-h-[200px] lg:max-h-[350px]"
-            />
-          ))}
-        </div>
+        {dino.images.slice(1).length > 0 ? (
+          <>
+            <h2 className="text-[20px] lg:text-[24px] font-semibold text-center">
+              Всі картинки
+            </h2>
+            <div className="embla">
+              <div className="embla__viewport-intro-rec-dino" ref={emblaRef2}>
+                <div className="embla__container-intro-rec-dino gap-5">
+                  {dino.images.slice(1).map((item) => (
+                    <Image
+                      key={item.id}
+                      src={`data:image/jpg;base64,${item.image}`}
+                      alt="image"
+                      width={4000}
+                      height={2000}
+                      className="w-auto h-auto max-h-[200px] lg:max-h-[350px]"
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <h2 className="text-[20px] lg:text-[24px] font-semibold text-center">
+            Більше картинок немає
+          </h2>
+        )}
       </div>
 
       <div className="flex flex-col gap-3 md:gap-5 border-b-4 pb-3 mb-3 md:pb-5 md:mb-5">

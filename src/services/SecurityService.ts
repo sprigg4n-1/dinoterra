@@ -1,34 +1,8 @@
-import { BASE_URL_AUTH } from "@/config/config";
 import axios from "axios";
 
-export const getUsers = async () => {
-  const userData = JSON.parse(localStorage.getItem("user") || "{}");
+import { BASE_URL_AUTH } from "@/config/config";
 
-  try {
-    const response = await axios.get(`${BASE_URL_AUTH}/users`, {
-      auth: { username: userData.username, password: userData.password },
-    });
-
-    return response.data;
-  } catch (error) {
-    console.error(`Error with getting users: ${error}`);
-  }
-};
-
-export const getUserById = async (id: number) => {
-  const userData = JSON.parse(localStorage.getItem("user") || "{}");
-
-  try {
-    const response = await axios.get(`${BASE_URL_AUTH}/users/${id}`, {
-      auth: { username: userData.username, password: userData.password },
-    });
-
-    return response.data;
-  } catch (error) {
-    console.error(`Error with getting user with ${id} id: ${error}`);
-  }
-};
-
+// auth
 export const createUser = async (
   name: string,
   lastname: string,
@@ -67,11 +41,6 @@ export const loginUser = async (username: string, password: string) => {
       { withCredentials: true }
     );
 
-    const userData = { username };
-    localStorage.setItem("user", JSON.stringify(userData));
-
-    console.log("User logged in:", userData);
-
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -80,9 +49,10 @@ export const loginUser = async (username: string, password: string) => {
 };
 
 export const logoutUser = async () => {
+  const userData = JSON.parse(localStorage.getItem("user") || "{}");
+
   try {
-    const userData = JSON.parse(localStorage.getItem("user") || "{}");
-    const response = await axios.post(
+    await axios.post(
       `${BASE_URL_AUTH}/users-logout`,
       {},
       {
@@ -92,9 +62,37 @@ export const logoutUser = async () => {
     );
 
     localStorage.removeItem("user");
-    console.log(response.data);
   } catch (error) {
     console.error("Error logging out:", error);
+  }
+};
+
+// admin and user
+export const getUsers = async () => {
+  const userData = JSON.parse(localStorage.getItem("user") || "{}");
+
+  try {
+    const response = await axios.get(`${BASE_URL_AUTH}/users`, {
+      auth: { username: userData.username, password: userData.password },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with getting users: ${error}`);
+  }
+};
+
+export const getUserById = async (id: number) => {
+  const userData = JSON.parse(localStorage.getItem("user") || "{}");
+
+  try {
+    const response = await axios.get(`${BASE_URL_AUTH}/users/${id}`, {
+      auth: { username: userData.username, password: userData.password },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with getting user with ${id} id: ${error}`);
   }
 };
 
@@ -106,9 +104,8 @@ export const changeUser = async (
   password: string,
   role: string
 ) => {
+  const userData = JSON.parse(localStorage.getItem("user") || "{}");
   try {
-    const userData = JSON.parse(localStorage.getItem("user") || "{}");
-
     const response = await axios.put(
       `${BASE_URL_AUTH}/users/${id}`,
       {
@@ -130,9 +127,8 @@ export const changeUser = async (
 };
 
 export const deleteUser = async (id: number) => {
+  const userData = JSON.parse(localStorage.getItem("user") || "{}");
   try {
-    const userData = JSON.parse(localStorage.getItem("user") || "{}");
-
     const response = await axios.delete(`${BASE_URL_AUTH}/users/${id}`, {
       auth: { username: userData.username, password: userData.password },
     });
@@ -140,5 +136,39 @@ export const deleteUser = async (id: number) => {
     return response.data;
   } catch (error) {
     console.error(`Error with deleting user: ${error}`);
+  }
+};
+
+// favorite
+export const addFavoriteDino = async (userId: number, dinoId: number) => {
+  const userData = JSON.parse(localStorage.getItem("user") || "{}");
+  try {
+    const response = await axios.post(
+      `${BASE_URL_AUTH}/favorite?userId=${userId}&dinoId=${dinoId}`,
+      {},
+      {
+        auth: { username: userData.username, password: userData.password },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with getting dinos: ${error}`);
+  }
+};
+
+export const removeFavoriteDino = async (id: number) => {
+  const userData = JSON.parse(localStorage.getItem("user") || "{}");
+  try {
+    const response = await axios.delete(
+      `${BASE_URL_AUTH}/delete-favorite/${id}`,
+      {
+        auth: { username: userData.username, password: userData.password },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with deleting favorite dino: ${error}`);
   }
 };

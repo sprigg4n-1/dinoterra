@@ -1,17 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
-import { Map, Marker } from "@vis.gl/react-maplibre";
-
-import Image from "next/image";
-import Link from "next/link";
-
 import { motion } from "framer-motion";
 
-import { dinoPeriodLabels, IDino, IDinoFoundLocation } from "@/config/types";
 import { getFoundLocations } from "@/services/FoundLocationService";
 import { getDinoById } from "@/services/DinoService";
+
+import { dinoPeriodLabels, IDino, IDinoFoundLocation } from "@/config/types";
+
+import { Map, Marker } from "@vis.gl/react-maplibre";
+import Image from "next/image";
+import Link from "next/link";
 
 import close from "@/images/vectors/close.svg";
 import imageNotFound from "@/images/not-found/image-not-found.webp";

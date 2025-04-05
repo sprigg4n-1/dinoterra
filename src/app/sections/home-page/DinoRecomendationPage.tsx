@@ -1,11 +1,14 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+
+import { getFiveRandomDinos } from "@/services/DinoService";
+
+import { IDino } from "@/config/types";
+
 import DinoCard from "@/components/dino/DinoCard";
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
-import { IDino } from "@/config/types";
-import { getFiveRandomDinos } from "@/services/DinoService";
-import useEmblaCarousel from "embla-carousel-react";
-import React, { useEffect, useState } from "react";
 
 const DinoRecomendationPage = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -15,6 +18,7 @@ const DinoRecomendationPage = () => {
 
   const [dinos, setDinos] = useState<IDino[]>([]);
 
+  // use effects
   useEffect(() => {
     const getData = async () => {
       const dinosData = await getFiveRandomDinos();

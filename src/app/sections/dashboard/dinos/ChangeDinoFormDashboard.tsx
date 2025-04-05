@@ -4,7 +4,6 @@ import "@mantine/carousel/styles.css";
 
 import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import Image from "next/image";
 
 import {
   changeDino,
@@ -30,6 +29,7 @@ import {
 
 import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
 import LoaderComponent from "@/components/LoaderComponent";
+import Image from "next/image";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
 
@@ -353,7 +353,8 @@ const ChangeDinoFormDashboard = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   setStep(1);
-                }}>
+                }}
+              >
                 Назад
               </button>
             )}
@@ -364,7 +365,8 @@ const ChangeDinoFormDashboard = () => {
                 <button
                   key={dino.id}
                   onClick={(e) => onHandleChooseDino(e, dino.id)}
-                  className="text-white w-full bg-darkGray text-left py-2 px-5 hover:opacity-90 duration-300">
+                  className="text-white w-full bg-darkGray text-left py-2 px-5 hover:opacity-90 duration-300"
+                >
                   {dino.latinName} ({dino.name})
                 </button>
               ))}
@@ -373,7 +375,8 @@ const ChangeDinoFormDashboard = () => {
             <div className="flex flex-col gap-5">
               <form
                 onSubmit={(e) => onHandleSubmitForm(e)}
-                className="flex flex-col gap-2 text-[14px] sm:text-[16px]">
+                className="flex flex-col gap-2 text-[14px] sm:text-[16px]"
+              >
                 {/* name */}
                 <label className="flex flex-col gap-2 sm:flex-row">
                   <div className="flex flex-col sm:w-1/2">
@@ -443,7 +446,8 @@ const ChangeDinoFormDashboard = () => {
                   <select
                     value={typeOfDino}
                     onChange={(e) => setTypeOfDino(e.target.value as EDinoType)}
-                    className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+                    className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+                  >
                     {Object.entries(dinoTypeLabels).map(([key, value]) => (
                       <option key={key} value={key}>
                         {value}
@@ -458,7 +462,8 @@ const ChangeDinoFormDashboard = () => {
                   <select
                     value={diet}
                     onChange={(e) => setDiet(e.target.value as EDinoDiet)}
-                    className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+                    className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+                  >
                     {Object.entries(dinoDietLabels).map(([key, value]) => (
                       <option key={key} value={key}>
                         {value}
@@ -480,7 +485,8 @@ const ChangeDinoFormDashboard = () => {
                   <select
                     value={period}
                     onChange={(e) => setPeriod(e.target.value as EDinoPeriod)}
-                    className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange">
+                    className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
+                  >
                     {Object.entries(dinoPeriodLabels).map(([key, value]) => (
                       <option key={key} value={key}>
                         {value}
@@ -508,13 +514,15 @@ const ChangeDinoFormDashboard = () => {
                 <div className="flex justify-between gap-2">
                   <button
                     type="submit"
-                    className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300">
+                    className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300"
+                  >
                     Змінити
                   </button>
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300">
+                    className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300"
+                  >
                     Скидання
                   </button>
                 </div>
@@ -534,7 +542,8 @@ const ChangeDinoFormDashboard = () => {
                         imagePathDino !== ""
                           ? "bg-brightOrange hover:border-darkGray"
                           : "bg-darkGray hover:border-brightOrange"
-                      } text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center  duration-300`}>
+                      } text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center  duration-300`}
+                    >
                       <span>
                         {imagePathDino === "" ? "Оберіть файл" : "Змінити файл"}
                       </span>
@@ -561,7 +570,8 @@ const ChangeDinoFormDashboard = () => {
                   <button
                     className="bg-green-300 block hover:bg-green-500 px-10 h-11 w-full md:w-auto"
                     type="button"
-                    onClick={(e) => onHandleAddImage(e)}>
+                    onClick={(e) => onHandleAddImage(e)}
+                  >
                     Додати
                   </button>
                 </div>
@@ -572,12 +582,14 @@ const ChangeDinoFormDashboard = () => {
                   <div className="embla">
                     <div
                       className="embla__viewport-dino-images-dashboard"
-                      ref={emblaRef}>
+                      ref={emblaRef}
+                    >
                       <div className="embla__container-dino-images-dashboard gap-4">
                         {dinoToChange?.images.map((image) => (
                           <div
                             key={image.id}
-                            className="embla__slide-dino-images-dashboard group relative flex flex-col text-center">
+                            className="embla__slide-dino-images-dashboard group relative flex flex-col text-center"
+                          >
                             <Image
                               src={
                                 image.image
@@ -592,7 +604,8 @@ const ChangeDinoFormDashboard = () => {
                             <button
                               type="button"
                               className="absolute hidden group-hover:block cursor-pointer w-full h-full bg-fieryRed bg-opacity-80 text-white"
-                              onClick={(e) => onHandleDeleteImage(e, image.id)}>
+                              onClick={(e) => onHandleDeleteImage(e, image.id)}
+                            >
                               Видалити
                             </button>
                             <span className="bg-brightOrange text-white">
@@ -606,12 +619,14 @@ const ChangeDinoFormDashboard = () => {
                     <div className="flex justify-between mt-2">
                       <button
                         className="border-2 border-darkGray rounded-full px-5 hover:bg-darkGray hover:bg-opacity-20 text-[14px] sm:text-[16px]"
-                        onClick={scrollPrev}>
+                        onClick={scrollPrev}
+                      >
                         Попередній
                       </button>
                       <button
                         className="border-2 border-darkGray rounded-full px-5 hover:bg-darkGray hover:bg-opacity-20 text-[14px] sm:text-[16px]"
-                        onClick={scrollNext}>
+                        onClick={scrollNext}
+                      >
                         Наступний
                       </button>
                     </div>
@@ -662,7 +677,8 @@ const ChangeDinoFormDashboard = () => {
                   <button
                     className="bg-green-300 block hover:bg-green-500 px-10 h-11 w-full sm:w-auto"
                     type="button"
-                    onClick={(e) => onHandleAddFoundLocation(e)}>
+                    onClick={(e) => onHandleAddFoundLocation(e)}
+                  >
                     Додати
                   </button>
                 </div>
@@ -673,18 +689,21 @@ const ChangeDinoFormDashboard = () => {
                   <div className="embla">
                     <div
                       className="embla__viewport-dino-found-location-dashboard"
-                      ref={emblaRef2}>
+                      ref={emblaRef2}
+                    >
                       <div className="embla__container-dino-found-location-dashboard gap-4">
                         {dinoToChange?.foundLocations.map((loc) => (
                           <div
                             key={loc.id}
-                            className="embla__slide-dino-found-location-dashboard group relative flex flex-col gap-1 bg-slateGray text-white py-2 px-5">
+                            className="embla__slide-dino-found-location-dashboard group relative flex flex-col gap-1 bg-slateGray text-white py-2 px-5"
+                          >
                             <button
                               type="button"
                               className="absolute hidden group-hover:block cursor-pointer w-full h-full bg-fieryRed bg-opacity-80 text-white top-0 left-0"
                               onClick={(e) =>
                                 onHandleDeleteFoundLocation(e, loc.id)
-                              }>
+                              }
+                            >
                               Видалити
                             </button>
                             <span>
@@ -701,12 +720,14 @@ const ChangeDinoFormDashboard = () => {
                     <div className="flex justify-between mt-2">
                       <button
                         className="border-2 border-darkGray rounded-full px-5 hover:bg-darkGray hover:bg-opacity-20 text-[14px] sm:text-[16px]"
-                        onClick={scrollPrev2}>
+                        onClick={scrollPrev2}
+                      >
                         Попередній
                       </button>
                       <button
                         className="border-2 border-darkGray rounded-full px-5 hover:bg-darkGray hover:bg-opacity-20 text-[14px] sm:text-[16px]"
-                        onClick={scrollNext2}>
+                        onClick={scrollNext2}
+                      >
                         Наступний
                       </button>
                     </div>
@@ -717,7 +738,8 @@ const ChangeDinoFormDashboard = () => {
               <button
                 type="button"
                 onClick={(e) => handleDeleteDino(e)}
-                className="py-2 px-5 bg-red-400 text-white hover:bg-fieryRed duration-300">
+                className="py-2 px-5 bg-red-400 text-white hover:bg-fieryRed duration-300"
+              >
                 Видалити динозавра
               </button>
             </div>

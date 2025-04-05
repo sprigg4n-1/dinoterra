@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { usePagination } from "@mantine/hooks";
 
-import { IDino } from "@/config/types";
 import { getDinos } from "@/services/DinoService";
+
+import { IDino } from "@/config/types";
 
 import EncyclopediaFilter from "./EncyclopediaFilter";
 import DinoCard from "@/components/dino/DinoCard";

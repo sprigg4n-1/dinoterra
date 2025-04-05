@@ -1,6 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import { v4 } from "uuid";
+
+import { addFoundLocation } from "@/services/FoundLocationService";
+import { addImage } from "@/services/ImageService";
 import { createDino } from "@/services/DinoService";
 
 import {
@@ -12,13 +16,10 @@ import {
   dinoPeriodLabels,
 } from "@/config/types";
 
-import { addFoundLocation } from "@/services/FoundLocationService";
-import { addImage } from "@/services/ImageService";
+import Image from "next/image";
+import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
 
 import close from "@/images/vectors/close.svg";
-import Image from "next/image";
-import { v4 } from "uuid";
-import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
 
 export type TDinoFoundLocation = {
   id: string;

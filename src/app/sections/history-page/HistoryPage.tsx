@@ -21,6 +21,7 @@ const sections = [
 const HistoryPage = () => {
   const [activeSection, setActiveSection] = useState<string>(sections[0].id);
 
+  // use effects
   useEffect(() => {
     const observerOptions = {
       root: null,

@@ -1,5 +1,4 @@
 import TitleComponent from "@/components/TitleComponent";
-import React from "react";
 
 const DinosaursInCulture = ({
   tabId,

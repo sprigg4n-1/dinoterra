@@ -1,6 +1,8 @@
 "use client";
-import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
+
 import React, { useState } from "react";
+
+import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 
 const TABS_TEXT = [
   {
@@ -53,7 +55,8 @@ const AboutUsPage = () => {
         {TABS_TEXT.map((item) => (
           <div
             key={item.title}
-            className="flex flex-col items-center text-center gap-2">
+            className="flex flex-col items-center text-center gap-2"
+          >
             <h3 className="text-[18px] font-semibold text-brightOrange sm:text-[20px]">
               {item.title}
             </h3>
@@ -75,7 +78,8 @@ const AboutUsPage = () => {
                 i === activeTab
                   ? "bg-brightOrange text-white"
                   : "bg-transparent text-brightOrange"
-              } w-1/4 text-[24px] font-semibold py-1`}>
+              } w-1/4 text-[24px] font-semibold py-1`}
+            >
               {item.title}
             </button>
           ))}
@@ -85,7 +89,8 @@ const AboutUsPage = () => {
             key={item.title}
             className={`${
               i === activeTab ? "flex" : "hidden"
-            } flex-col items-center text-center gap-2 py-20 px-24 text-[20px]`}>
+            } flex-col items-center text-center gap-2 py-20 px-24 text-[20px]`}
+          >
             {item.text}
           </div>
         ))}

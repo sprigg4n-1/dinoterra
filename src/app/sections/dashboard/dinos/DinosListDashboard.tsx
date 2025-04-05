@@ -3,9 +3,11 @@
 import React, { useEffect, useState } from "react";
 
 import { getDinos } from "@/services/DinoService";
+
+import { IDino } from "@/config/types";
+
 import DinoCard from "@/components/dino/DinoCard";
 import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
-import { IDino } from "@/config/types";
 
 const DinosListDashboard = () => {
   const [dinos, setDinos] = useState<IDino[]>([]);

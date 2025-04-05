@@ -1,8 +1,10 @@
 "use client";
 
-import { getUsers } from "@/services/SecurityService";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
+
+import { getUsers } from "@/services/SecurityService";
+
+import Link from "next/link";
 
 const UsersListDashboard = () => {
   const [users, setUsers] = useState<any[]>([]);

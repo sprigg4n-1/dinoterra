@@ -1,16 +1,11 @@
 "use client";
 
-import Link from "next/link";
-
 import { useState } from "react";
-
-import { IDino } from "@/config/types";
-import Image from "next/image";
-import imageNotFound from "@/images/not-found/image-not-found.webp";
 import useEmblaCarousel from "embla-carousel-react";
+
 import Autoplay from "embla-carousel-autoplay";
 
-import { Map, Marker } from "@vis.gl/react-maplibre";
+import { IDino } from "@/config/types";
 
 import {
   EDinoPeriod,
@@ -20,6 +15,12 @@ import {
   dinoDietLabels,
   dinoPeriodLabels,
 } from "@/config/types";
+
+import { Map, Marker } from "@vis.gl/react-maplibre";
+import Image from "next/image";
+import Link from "next/link";
+
+import imageNotFound from "@/images/not-found/image-not-found.webp";
 
 const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(

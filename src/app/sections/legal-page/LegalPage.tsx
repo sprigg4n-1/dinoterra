@@ -1,5 +1,4 @@
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
-import React from "react";
 
 const LegalPage = () => {
   return (

@@ -1,9 +1,6 @@
-import LinkToDinoComponent from "@/components/history/LinkToDinoComponent";
 import LinkToSourceComponent from "@/components/history/LinkToSourceComponent";
 import ParaghraphsComponent from "@/components/history/ParaghraphsComponent";
 import TitleComponent from "@/components/TitleComponent";
-import Link from "next/link";
-import React from "react";
 
 const DinosaursOrigin = ({
   tabId,

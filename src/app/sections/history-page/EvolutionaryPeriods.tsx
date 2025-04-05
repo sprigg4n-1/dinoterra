@@ -1,7 +1,6 @@
 import LinkToSourceComponent from "@/components/history/LinkToSourceComponent";
 import ParaghraphsComponent from "@/components/history/ParaghraphsComponent";
 import TitleComponent from "@/components/TitleComponent";
-import React from "react";
 
 const EvolutionaryPeriods = ({
   tabId,

@@ -10,6 +10,7 @@ export default {
     extend: {
       backgroundImage: {
         "intro-bg": "url(/intro-bg.png)",
+        "auth-bg": "url(/auth-bg.jpg)",
       },
       colors: {
         brightOrange: "#FF9800",

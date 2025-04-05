@@ -4,10 +4,11 @@ import React, { useState } from "react";
 
 import { WEB3_FORM_API } from "@/config/config";
 
-import closeImage from "@/images/vectors/close.svg";
 import Image from "next/image";
 import LoaderComponent from "@/components/LoaderComponent";
 import Link from "next/link";
+
+import closeImage from "@/images/vectors/close.svg";
 
 const ContactsForm = () => {
   const [name, setName] = useState<string>("");
@@ -19,6 +20,7 @@ const ContactsForm = () => {
   );
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
+  // functions
   const onClickSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSending("sending");

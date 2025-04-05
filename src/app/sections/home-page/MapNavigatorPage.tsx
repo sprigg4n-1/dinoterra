@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { Map, Marker, Popup } from "@vis.gl/react-maplibre";
+import { Map } from "@vis.gl/react-maplibre";
 import Link from "next/link";
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 

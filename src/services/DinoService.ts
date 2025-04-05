@@ -1,5 +1,6 @@
-import { BASE_URL_DINO } from "@/config/config";
 import axios from "axios";
+
+import { BASE_URL_DINO } from "@/config/config";
 
 export const getDinos = async (
   limit: number = 12,
@@ -128,5 +129,18 @@ export const deleteDino = async (id: number) => {
     return response.data;
   } catch (error) {
     console.error(`Error with deleting dino: ${error}`);
+  }
+};
+
+// favorite
+export const getFavoriteDinos = async (id: number) => {
+  try {
+    const response = await axios.get(`${BASE_URL_DINO}/favoriteDinos/${id}`);
+
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with getting favorite dinos: ${error}`);
   }
 };

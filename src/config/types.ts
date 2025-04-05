@@ -1,3 +1,18 @@
+// user types
+export interface IUser {
+  id: number;
+  username: string;
+  password: string;
+  name: string;
+  lastname: string;
+  role: string;
+}
+
+export enum EUserRole {
+  ADMIN = "ADMIN",
+  USER = "USER",
+}
+
 // dino types
 export interface IDino {
   id: number;
@@ -14,6 +29,24 @@ export interface IDino {
   dietDescription: string;
   foundLocations: IDinoFoundLocation[];
   images: IDinoImages[];
+}
+
+export interface IDinoFav {
+  id: number;
+  name: string;
+  latinName: string;
+  description: string;
+  typeOfDino: string;
+  length: number;
+  weight: number;
+  period: string;
+  periodDate: string;
+  periodDescription: string;
+  diet: string;
+  dietDescription: string;
+  foundLocations: IDinoFoundLocation[];
+  images: IDinoImages[];
+  favId: number;
 }
 
 export interface IDinoFoundLocation {

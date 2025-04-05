@@ -1,16 +1,17 @@
 "use client";
 import React, { useState } from "react";
 
+import { motion } from "framer-motion";
+
 import {
   dinoDietLabels,
   dinoPeriodLabels,
   dinoTypeLabels,
 } from "@/config/types";
 
-import close from "@/images/vectors/close.svg";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
+
+import close from "@/images/vectors/close.svg";
 
 const EncyclopediaFilter = ({
   typeOfDino,
@@ -40,6 +41,7 @@ const EncyclopediaFilter = ({
   onClickFilterData: () => void;
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
     <>
       <div className="hidden lg:flex flex-col justify-between w-full p-5 gap-3 items-end bg-slateGray bg-opacity-50">

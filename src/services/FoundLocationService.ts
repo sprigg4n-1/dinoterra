@@ -1,5 +1,6 @@
-import { BASE_URL_DINO } from "@/config/config";
 import axios from "axios";
+
+import { BASE_URL_DINO } from "@/config/config";
 
 export const getFoundLocations = async (place?: string, period?: string) => {
   try {

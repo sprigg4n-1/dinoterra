@@ -1,7 +1,6 @@
-import React from "react";
+import { getDinoById } from "@/services/DinoService";
 
 import DinoPageDashboard from "@/app/sections/dashboard/dinos/DinoPageDashboard";
-import { getDinoById } from "@/services/DinoService";
 
 const DinoDashboard = async ({ params }: { params: any }) => {
   const { id } = await params;
