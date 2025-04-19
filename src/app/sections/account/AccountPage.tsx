@@ -2,37 +2,55 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuthStorage } from "@/hooks/useAuthStorage";
 
-import { logoutUser, removeFavoriteDino } from "@/services/SecurityService";
-import { getFavoriteDinos } from "@/services/DinoService";
+import {
+  getFavoriteDinos,
+  getUserByToken,
+  logoutUser,
+  removeFavoriteDino,
+} from "@/services/SecurityService";
 
-import { IDinoFav } from "@/config/types";
+import { IDinoFav, IUser } from "@/config/types";
+import { useAuth } from "@/hooks/useAuth";
 
 const AccountPage = () => {
+  const { updateAuthStatus } = useAuth();
+
   const router = useRouter();
 
-  const { user, clearUser } = useAuthStorage();
+  const [user, setUser] = useState<IUser>();
   const [dinos, setDinos] = useState<IDinoFav[]>([]);
 
   const onClickLogout = async () => {
     try {
-      await logoutUser();
-      clearUser();
+      const res = await logoutUser();
+      updateAuthStatus(false);
       router.replace("/");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const onClickFavDino = async (
+  const onClickDeleteFavDino = async (
     e: React.MouseEvent<HTMLButtonElement>,
     id: number
   ) => {
     e.preventDefault();
 
-    await removeFavoriteDino(id);
+    await removeFavoriteDino(user?.id || 0, id);
   };
+
+  // use effects
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userData = await getUserByToken();
+      const dinosData = await getFavoriteDinos(userData.id);
+      setDinos(dinosData);
+      setUser(userData);
+    };
+
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const fetchDinos = async () => {
@@ -41,7 +59,7 @@ const AccountPage = () => {
     };
 
     fetchDinos();
-  }, [user?.id, dinos]);
+  }, [dinos]);
 
   return (
     <div className="px-2 sm:px-5 lg:px-20">
@@ -60,11 +78,11 @@ const AccountPage = () => {
 
       <div className="flex flex-col gap-2">
         {dinos.map((dino) => (
-          <div className="flex gap-10" key={dino.id}>
+          <div key={dino.id} className="flex gap-10">
             {dino.name}
             <button
               type="button"
-              onClick={(e) => onClickFavDino(e, dino.favId)}
+              onClick={(e) => onClickDeleteFavDino(e, dino.id)}
               className="text-fieryRed"
             >
               Видалити

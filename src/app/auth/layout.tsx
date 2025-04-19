@@ -2,7 +2,7 @@ import { Tektur } from "next/font/google";
 
 import "../globals.css";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { AuthProvider } from "@/hooks/useAuthStorage";
+import { AuthProvider } from "@/hooks/useAuth";
 
 const tektur = Tektur({ subsets: ["latin"] });
 

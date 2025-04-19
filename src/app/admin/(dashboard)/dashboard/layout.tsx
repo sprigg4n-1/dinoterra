@@ -5,7 +5,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { Tektur } from "next/font/google";
 import AsideDashboard from "@/app/sections/dashboard/AsideDashboard";
 import { MantineProvider } from "@mantine/core";
-import { AuthProvider } from "@/hooks/useAuthStorage";
+import { AuthProvider } from "@/hooks/useAuth";
 
 const tektur = Tektur({ subsets: ["latin"] });
 

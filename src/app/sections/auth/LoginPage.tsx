@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuthStorage } from "@/hooks/useAuthStorage";
 
 import { loginUser } from "@/services/SecurityService";
 
@@ -14,8 +13,6 @@ import eyeShow from "@/images/vectors/eye-show.svg";
 
 const LoginPage = () => {
   const router = useRouter();
-
-  const { saveUser } = useAuthStorage();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -37,18 +34,10 @@ const LoginPage = () => {
       }
 
       if (response) {
-        saveUser(
-          response.id,
-          response.username,
-          password,
-          response.lastname,
-          response.name,
-          response.role
-        );
         router.replace("/");
       }
     } catch (error) {
-      console.error(`Error with register user: ${error}`);
+      console.error(`Error with login user: ${error}`);
     }
   };
 

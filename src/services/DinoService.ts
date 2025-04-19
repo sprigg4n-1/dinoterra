@@ -42,6 +42,16 @@ export const getFiveRandomDinos = async () => {
   }
 };
 
+export const getSimilarDinos = async (id: number) => {
+  try {
+    const response = await axios.get(`${BASE_URL_DINO}/similarDinos/${id}`);
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with getting similar dinos: ${error}`);
+  }
+};
+
 export const getDinoById = async (id: number) => {
   try {
     const response = await axios.get(`${BASE_URL_DINO}/dinos/${id}`);
@@ -129,18 +139,5 @@ export const deleteDino = async (id: number) => {
     return response.data;
   } catch (error) {
     console.error(`Error with deleting dino: ${error}`);
-  }
-};
-
-// favorite
-export const getFavoriteDinos = async (id: number) => {
-  try {
-    const response = await axios.get(`${BASE_URL_DINO}/favoriteDinos/${id}`);
-
-    console.log(response);
-
-    return response.data;
-  } catch (error) {
-    console.error(`Error with getting favorite dinos: ${error}`);
   }
 };

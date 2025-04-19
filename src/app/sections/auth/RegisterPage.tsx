@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { createUser } from "@/services/SecurityService";
+import { registerUser } from "@/services/SecurityService";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -17,6 +17,7 @@ const RegisterPage = () => {
   const [name, setName] = useState<string>("");
   const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("12@gmail.com");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -34,7 +35,16 @@ const RegisterPage = () => {
     }
 
     try {
-      await createUser(name, lastname, username, password, "USER");
+      const response = await registerUser(
+        name,
+        lastname,
+        username,
+        password,
+        email,
+        "USER"
+      );
+
+      console.log(response);
       router.replace("/auth/login");
     } catch (error) {
       console.error(`Error with register user: ${error}`);

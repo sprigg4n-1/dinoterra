@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useAuthStorage } from "@/hooks/useAuthStorage";
 import useEmblaCarousel from "embla-carousel-react";
 
-import { getFiveRandomDinos } from "@/services/DinoService";
-import { addFavoriteDino } from "@/services/SecurityService";
+import { getFiveRandomDinos, getSimilarDinos } from "@/services/DinoService";
+import { addFavoriteDino, getUserByToken } from "@/services/SecurityService";
 
 import {
   dinoDietLabels,
@@ -15,6 +14,7 @@ import {
   EDinoPeriod,
   EDinoType,
   IDino,
+  IUser,
 } from "@/config/types";
 
 import Image from "next/image";
@@ -37,13 +37,15 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
     slidesToScroll: "auto",
   });
 
-  const { user } = useAuthStorage();
-
+  const [user, setUser] = useState<IUser>();
   const [dinos, setDinos] = useState<IDino[]>([]);
 
   // functions
   const onClickAddToFav = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    console.log(user?.id, dino.id);
+
     const response = await addFavoriteDino(user?.id || 0, dino.id);
     console.log(response);
   };
@@ -51,9 +53,12 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
   // use effects
   useEffect(() => {
     const getData = async () => {
-      const dinosData = await getFiveRandomDinos();
+      // const dinosData = await getFiveRandomDinos();
+      const dinosData = await getSimilarDinos(dino.id);
+      const userData = await getUserByToken();
 
       setDinos(dinosData);
+      setUser(userData);
     };
 
     getData();

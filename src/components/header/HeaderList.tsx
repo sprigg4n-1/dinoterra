@@ -7,8 +7,8 @@ import close from "@/images/vectors/close.svg";
 import logo from "@/images/logo.svg";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useAuthStorage } from "@/hooks/useAuthStorage";
 import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
 
 type HeaderItem = {
   link: string;
@@ -40,7 +40,7 @@ const HEADER_ITEMS: HeaderItem[] = [
 ];
 
 const HeaderList = () => {
-  const { user } = useAuthStorage();
+  const { isAuthenticated } = useAuth();
   const [activeItem, setActiveItem] = useState<string>(HEADER_ITEMS[0].label);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const pathname = usePathname();
@@ -57,7 +57,7 @@ const HeaderList = () => {
 
     const item = HEADER_ITEMS.find((item) => item.link === correctPathhname);
 
-    setActiveItem(item?.label || HEADER_ITEMS[0].label);
+    setActiveItem(item?.label || "non-active");
   }, [pathname]);
 
   return (
@@ -72,7 +72,7 @@ const HeaderList = () => {
             toggleActiveItem={toggleActiveItem}
           />
         ))}
-        {user ? (
+        {isAuthenticated ? (
           <Link
             className="hidden lg:block w-8 h-8 rounded-full bg-white hover:bg-brightOrange duration-300"
             href={"/account"}
@@ -143,7 +143,7 @@ const HeaderList = () => {
               toggleActiveItem={toggleActiveItem}
             />
           ))}
-          {user ? (
+          {isAuthenticated ? (
             <Link
               className="w-8 h-8 rounded-full bg-white hover:bg-brightOrange duration-300"
               href={"/account"}
