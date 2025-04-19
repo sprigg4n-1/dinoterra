@@ -6,8 +6,13 @@ import Header from "@/components/header/Header";
 import "../globals.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { AuthProvider } from "@/hooks/useAuth";
+import { Metadata } from "next";
 
 const tektur = Tektur({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "DinoTerra",
+};
 
 export default function RootLayout({
   children,
