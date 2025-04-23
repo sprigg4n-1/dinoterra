@@ -1,6 +1,4 @@
-import { div } from "framer-motion/client";
 import Link from "next/link";
-import React from "react";
 
 const LinkToSourceComponent = ({
   link,

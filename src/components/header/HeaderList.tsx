@@ -1,14 +1,24 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import HeaderItem from "./HeaderItem";
+import { usePathname } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
+
+import {
+  getUserByToken,
+  getUserProfilePhoto,
+} from "@/services/SecurityService";
+
 import { motion } from "framer-motion";
+
+import Link from "next/link";
+import HeaderItem from "./HeaderItem";
+import Image from "next/image";
+
 import close from "@/images/vectors/close.svg";
 import logo from "@/images/logo.svg";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { useAuth } from "@/hooks/useAuth";
+
+import avatar from "@/images/avatar/avatar.jpg";
 
 type HeaderItem = {
   link: string;
@@ -41,9 +51,12 @@ const HEADER_ITEMS: HeaderItem[] = [
 
 const HeaderList = () => {
   const { isAuthenticated } = useAuth();
+  const pathname = usePathname();
+
   const [activeItem, setActiveItem] = useState<string>(HEADER_ITEMS[0].label);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const pathname = usePathname();
+
+  const [profilePhoto, setProfilePhoto] = useState<any>(null);
 
   const toggleActiveItem = (newAcitveItem: string) => {
     setActiveItem(newAcitveItem);
@@ -52,6 +65,14 @@ const HeaderList = () => {
     }
   };
 
+  const fetchData = async () => {
+    const userData = await getUserByToken();
+    const profilePhotoData = await getUserProfilePhoto(userData.id);
+
+    if (profilePhotoData) setProfilePhoto(profilePhotoData);
+  };
+
+  // use effects
   useEffect(() => {
     const correctPathhname = pathname.split("/").slice(0, 2).join("/");
 
@@ -59,6 +80,14 @@ const HeaderList = () => {
 
     setActiveItem(item?.label || "non-active");
   }, [pathname]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [profilePhoto]);
 
   return (
     <>
@@ -74,9 +103,25 @@ const HeaderList = () => {
         ))}
         {isAuthenticated ? (
           <Link
-            className="hidden lg:block w-8 h-8 rounded-full bg-white hover:bg-brightOrange duration-300"
+            className="hidden lg:block w-10 h-10 rounded-full bg-white hover:bg-brightOrange duration-300"
             href={"/account"}
-          ></Link>
+          >
+            {profilePhoto !== "" ? (
+              <Image
+                src={
+                  profilePhoto?.image
+                    ? `data:image/jpg;base64,${profilePhoto?.image}`
+                    : avatar
+                }
+                width={1600}
+                height={1600}
+                className="w-10 h-10 object-cover rounded-full hover:scale-105 duration-300 cursor-pointer"
+                alt="dino image"
+              />
+            ) : (
+              <div className="bg-white"></div>
+            )}
+          </Link>
         ) : (
           <Link
             className="hidden lg:block text-[20px] p-1 text-white hover:text-brightOrange duration-300"
@@ -145,9 +190,26 @@ const HeaderList = () => {
           ))}
           {isAuthenticated ? (
             <Link
-              className="w-8 h-8 rounded-full bg-white hover:bg-brightOrange duration-300"
+              className="w-10 h-10 rounded-full bg-white hover:bg-brightOrange duration-300"
               href={"/account"}
-            ></Link>
+              onClick={() => setIsOpen(false)}
+            >
+              {profilePhoto ? (
+                <Image
+                  src={
+                    profilePhoto.image
+                      ? `data:image/jpg;base64,${profilePhoto?.image}`
+                      : avatar
+                  }
+                  width={1600}
+                  height={1600}
+                  className="w-10 h-10 object-cover rounded-full hover:scale-105 duration-300 cursor-pointer"
+                  alt="dino image"
+                />
+              ) : (
+                ""
+              )}
+            </Link>
           ) : (
             <Link
               className="text-[20px] p-1 text-white hover:text-brightOrange duration-300"

@@ -52,3 +52,15 @@ html {
   height: auto;
   min-width: 0;
 }
+
+.embla__viewport-fav-dino {
+  overflow: hidden;
+}
+.embla__container-fav-dino {
+  display: flex;
+}
+.embla__slide-fav-dino {
+  flex: 0 0 auto;
+  height: auto;
+  min-width: 0;
+}

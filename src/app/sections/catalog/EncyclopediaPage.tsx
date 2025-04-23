@@ -61,7 +61,7 @@ const EncyclopediaPage = () => {
   };
 
   const onClickFilterData = () => {
-    getDataDinos();
+    getDataDinos(true);
   };
 
   const onClickReset = () => {
@@ -73,8 +73,9 @@ const EncyclopediaPage = () => {
     setIsResetedFilter(true);
   };
 
-  const getDataDinos = async () => {
+  const getDataDinos = async (isFiltered: boolean) => {
     setIsLoading(true);
+
     const dinosData = await getDinos(
       SHOW_LIMIT,
       pagination.active - 1,
@@ -85,6 +86,10 @@ const EncyclopediaPage = () => {
       placeLocation
     );
 
+    if (isFiltered) {
+      pagination.setPage(1);
+    }
+
     setDinos(dinosData.content);
     setTotalPages(dinosData.totalPages);
     setIsLoading(false);
@@ -92,15 +97,16 @@ const EncyclopediaPage = () => {
 
   // use effects
   useEffect(() => {
-    getDataDinos();
+    getDataDinos(false);
   }, [pagination.active]);
 
   useEffect(() => {
-    getDataDinos();
+    getDataDinos(false);
   }, []);
+
   useEffect(() => {
     if (isResetedFilter) {
-      getDataDinos();
+      getDataDinos(true);
     }
     setIsResetedFilter(false);
   }, [isResetedFilter]);

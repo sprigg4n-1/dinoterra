@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 type Item = {
   link: string;
@@ -26,7 +25,8 @@ const HeaderItem = ({
       }`}
       onClick={() => {
         toggleActiveItem(item.label);
-      }}>
+      }}
+    >
       {item.text}
     </Link>
   );

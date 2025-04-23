@@ -144,6 +144,55 @@ export const changeUser = async (
   }
 };
 
+export const updateUserProfilePhoto = async (
+  userId: number,
+  imagePath: string
+) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL_SECURITY}/users/update-profile-photo/${userId}`,
+      { imagePath },
+      {
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with adding profile photo: ${error}`);
+  }
+};
+
+export const getUserProfilePhoto = async (userId: number) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL_SECURITY}/users/profile-photo/${userId}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with getting profile photo: ${error}`);
+  }
+};
+
+export const deleteUserProfilePhoto = async (userId: number) => {
+  try {
+    const response = await axios.delete(
+      `${BASE_URL_SECURITY}/users/profile-photo/${userId}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error with deleting profile photo: ${error}`);
+  }
+};
+
 export const deleteUser = async (id: number) => {
   try {
     const response = await axios.delete(`${BASE_URL_SECURITY}/users/${id}`, {
@@ -199,6 +248,24 @@ export const getFavoriteDinos = async (userId: number) => {
         withCredentials: true,
       }
     );
+    return response.data;
+  } catch (error) {
+    console.error(`Error getting favorite dinos: ${error}`);
+    return null;
+  }
+};
+
+export const isFavoriteDino = async (userId: number, dinoId: number) => {
+  try {
+    const params = new URLSearchParams();
+
+    params.append("userId", userId.toString());
+    params.append("dinoId", dinoId.toString());
+
+    const response = await axios.get(`${BASE_URL_DINO}/isFavoriteDino`, {
+      params,
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.error(`Error getting favorite dinos: ${error}`);

@@ -4,7 +4,12 @@ import React, { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
 import { getFiveRandomDinos, getSimilarDinos } from "@/services/DinoService";
-import { addFavoriteDino, getUserByToken } from "@/services/SecurityService";
+import {
+  addFavoriteDino,
+  getUserByToken,
+  isFavoriteDino,
+  removeFavoriteDino,
+} from "@/services/SecurityService";
 
 import {
   dinoDietLabels,
@@ -32,6 +37,7 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
     loop: false,
     slidesToScroll: "auto",
   });
+
   const [emblaRef2, emblaApi2] = useEmblaCarousel({
     loop: false,
     slidesToScroll: "auto",
@@ -39,23 +45,38 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
 
   const [user, setUser] = useState<IUser>();
   const [dinos, setDinos] = useState<IDino[]>([]);
+  const [isDinoInFav, setIsDinoInFav] = useState<boolean>(false);
 
   // functions
   const onClickAddToFav = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    console.log(user?.id, dino.id);
+    await addFavoriteDino(user?.id || 0, dino.id);
+    await checkFav();
+  };
 
-    const response = await addFavoriteDino(user?.id || 0, dino.id);
-    console.log(response);
+  const onClickRemoveFromFav = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+
+    await removeFavoriteDino(user?.id || 0, dino.id);
+    await checkFav();
+  };
+
+  const checkFav = async () => {
+    const isFav = await isFavoriteDino(user?.id || 0, dino.id);
+    setIsDinoInFav(isFav);
   };
 
   // use effects
   useEffect(() => {
     const getData = async () => {
-      // const dinosData = await getFiveRandomDinos();
       const dinosData = await getSimilarDinos(dino.id);
       const userData = await getUserByToken();
+
+      const isFav = await isFavoriteDino(userData.id || 0, dino.id);
+      setIsDinoInFav(isFav);
 
       setDinos(dinosData);
       setUser(userData);
@@ -79,29 +100,27 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
             alt="main image"
             width={4000}
             height={2000}
-            className="h-fit max-h-[400px] md:max-h-[600px] w-full"
+            className="h-fit max-h-[400px] md:max-h-[600px] md: min-h-[350px] w-full"
           />
-          {user && (
-            <button
-              type="button"
-              className="w-full py-2 bg-brightOrange text-white px-5 hover:font-semibold duration-300"
-              onClick={(e) => onClickAddToFav(e)}
-            >
-              Додати до улюблених
-            </button>
-          )}
+          {user &&
+            (isDinoInFav ? (
+              <button
+                type="button"
+                className="w-full py-2 bg-fieryRed text-white px-5 hover:font-semibold duration-300"
+                onClick={(e) => onClickRemoveFromFav(e)}
+              >
+                Видалити з улюблених
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="w-full py-2 bg-brightOrange text-white px-5 hover:font-semibold duration-300"
+                onClick={(e) => onClickAddToFav(e)}
+              >
+                Додати до улюблених
+              </button>
+            ))}
         </div>
-        {/* <Image
-          src={
-            dino.images.length > 0
-              ? `data:image/jpg;base64,${dino.images[0].image}`
-              : imageNotFound
-          }
-          alt="main image"
-          width={4000}
-          height={2000}
-          className="h-auto max-h-[400px] md:w-2/5 md:max-h-[600px]"
-        /> */}
 
         <div className="flex flex-col md:w-3/5 gap-2">
           <h1 className="text-[22px] md:text-[24px] flex flex-wrap items-center justify-center md:justify-start font-bold text-brightOrange">

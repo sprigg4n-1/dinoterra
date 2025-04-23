@@ -1,5 +1,3 @@
-import React from "react";
-
 const LoaderComponent = ({
   pathColor = "#607D8B",
   loaderColor = "#FF9800",

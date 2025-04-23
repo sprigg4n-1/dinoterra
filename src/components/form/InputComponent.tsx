@@ -1,22 +1,34 @@
 import React from "react";
 
 const InputComponent = ({
-  type,
-  placeholder,
   value,
-  onChange,
+  onChangeValue,
+  placeholder,
+  inputType,
+  isRequired,
+  size,
 }: {
-  type: string;
-  placeholder: string;
   value: string;
-  onChange: (value: string) => void;
+  onChangeValue: (value: string) => void;
+  placeholder: string;
+  inputType: "text" | "password" | "email";
+  isRequired: boolean;
+  size?: "md" | "lg" | "sm";
 }) => {
+  const finalBgColor = "";
+  const finalTextColor = "";
+  const finalPlaceholderColor = "";
+  const finalTextSize = "";
+  const finalOutline = "";
+
   return (
     <input
-      type={type}
-      placeholder={placeholder}
+      required={isRequired}
+      type={inputType}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      className={`px-1 py-2 focus:outline-none ${finalBgColor} ${finalTextColor} ${finalPlaceholderColor} ${finalTextSize} ${finalOutline}`}
+      onChange={(e) => onChangeValue(e.target.value)}
+      placeholder={placeholder}
     />
   );
 };

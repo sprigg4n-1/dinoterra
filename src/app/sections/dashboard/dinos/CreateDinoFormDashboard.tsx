@@ -209,6 +209,13 @@ const CreateDinoFormDashboard = () => {
           <label className="flex flex-col gap-2 sm:flex-row">
             <div className="flex flex-col sm:w-1/2">
               <span>Ім'я</span>
+              {/* <InputComponent
+                value={name}
+                inputType="text"
+                onChangeValue={setName}
+                placeholder="Напишіть ім'я динозавра"
+                isRequired={true}
+              /> */}
               <input
                 required
                 className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"

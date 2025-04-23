@@ -1,5 +1,3 @@
-import React from "react";
-
 const ParaghraphsComponent = ({ values }: { values: string[] }) => {
   return (
     <div className="flex flex-col gap-1">

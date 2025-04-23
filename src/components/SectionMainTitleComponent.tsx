@@ -1,5 +1,3 @@
-import React from "react";
-
 const SectionMainTitleComponent = ({
   title,
   subtitle,
@@ -65,7 +63,8 @@ const SectionMainTitleComponent = ({
         <p
           className={`${subtitleCol} ${subtitleSizeFinal} ${
             subtitleWidth ? `max-w-[${subtitleWidth}px] mx-auto` : ""
-          }`}>
+          }`}
+        >
           {subtitle}
         </p>
       )}

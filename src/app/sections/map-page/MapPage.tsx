@@ -239,7 +239,7 @@ const MapPage = () => {
 
         {hoveredLocation && (
           <div className="absolute w-[90%] h-fit max-h-[90%] md:h-fit md:min-h-[100px] md:w-[350px] bg-darkGray top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="flex justify-between items-start py-3 px-2">
+            <div className="flex justify-between gap-1 items-start py-3 px-2">
               <p className="text-white text-[14px] md:text-[16px]">
                 📍 {hoveredLocation.place}
               </p>

@@ -56,7 +56,7 @@ const LoginPage = () => {
       >
         <Link
           href={"/auth"}
-          className="absolute top-2 -left-3 bg-fieryRed py-1 px-5 shadow-md hover:scale-110 duration-300 cursor-pointer"
+          className="absolute top-2 left-3 md:-left-3 bg-fieryRed py-1 px-5 shadow-md hover:scale-110 duration-300 cursor-pointer"
         >
           до початку
         </Link>

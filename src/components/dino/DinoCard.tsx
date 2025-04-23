@@ -1,9 +1,9 @@
+import { IDino } from "@/config/types";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
-import { IDino } from "@/config/types";
 
 const DinoCard = ({
   link,
@@ -47,11 +47,13 @@ const DinoCard = ({
       href={link}
       className={`group w-fit ${finalBgColor} flex flex-col ${
         slider ? sliderClassName : ""
-      }`}>
+      }`}
+    >
       <div
         className={`border-4 ${
           border ? finalBorderColor : "border-none"
-        } overflow-hidden`}>
+        } overflow-hidden`}
+      >
         <Image
           src={
             dino.images.length > 0

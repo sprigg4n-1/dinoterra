@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 const SOCIAL_LINKS = [
   { link: "https://t.me/dinoterra_off", title: "Telegram" },
@@ -21,7 +20,8 @@ const Footer = () => {
           <Link
             key={link.title}
             href={link.link}
-            className="hover:underline duration-300">
+            className="hover:underline duration-300"
+          >
             {link.title}
           </Link>
         ))}
@@ -32,7 +32,8 @@ const Footer = () => {
             key={link.title}
             href={link.link}
             target="_blank"
-            className="hover:underline duration-300">
+            className="hover:underline duration-300"
+          >
             {link.title}
           </Link>
         ))}

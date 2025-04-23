@@ -8,6 +8,10 @@ const LegalPage = () => {
         firstTextPosition="center"
         titleSize="md"
       />
+
+      <p className="text-center text-[16px] sm:text-[20px] font-semibold">
+        ...?
+      </p>
     </div>
   );
 };

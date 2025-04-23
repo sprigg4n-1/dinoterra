@@ -17,7 +17,7 @@ const RegisterPage = () => {
   const [name, setName] = useState<string>("");
   const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("12@gmail.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -59,7 +59,7 @@ const RegisterPage = () => {
       >
         <Link
           href={"/auth"}
-          className="absolute top-2 -left-3 bg-fieryRed py-1 px-5 shadow-md hover:scale-110 duration-300 cursor-pointer"
+          className="absolute top-2 left-3 md:-left-3 bg-fieryRed py-1 px-5 shadow-md hover:scale-110 duration-300 cursor-pointer"
         >
           до початку
         </Link>
@@ -103,6 +103,19 @@ const RegisterPage = () => {
             className="py-3 px-2 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+          />
+        </label>
+        <label className="flex flex-col">
+          <span className="text-[16px] md:text-[18px] font-semibold">
+            Пошта
+          </span>
+          <input
+            type="text"
+            required
+            placeholder="Уведіть пошту"
+            className="py-3 px-2 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </label>
         <label className="relative flex flex-col">
