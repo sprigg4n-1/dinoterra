@@ -13,6 +13,7 @@ import eyeShow from "@/images/vectors/eye-show.svg";
 
 const RegisterPage = () => {
   const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [name, setName] = useState<string>("");
   const [lastname, setLastname] = useState("");
@@ -44,10 +45,23 @@ const RegisterPage = () => {
         "USER"
       );
 
-      console.log(response);
-      router.replace("/auth/login");
+      if (response.token === "username_user_exist") {
+        setErrorMessage("Нікнейм уже існує");
+        setUsername("");
+        return "Username exist";
+      }
+
+      if (response.token === "email_user_exist") {
+        setErrorMessage("Пошта уже існує");
+        setEmail("");
+        return "Email exist";
+      }
+
+      if (response) {
+        router.replace("/auth/login");
+      }
     } catch (error) {
-      console.error(`Error with register user: ${error}`);
+      setErrorMessage("Сталася помилка. Спробуйте пізніше.");
     }
   };
 
@@ -63,6 +77,11 @@ const RegisterPage = () => {
         >
           до початку
         </Link>
+        {errorMessage && (
+          <p className="text-[14px] md:text-[16px] text-fieryRed font-bold text-center">
+            *{errorMessage}
+          </p>
+        )}
         <div className="flex flex-col md:flex-row justify-between gap-3 md:gap-0">
           <label className="flex flex-col md:w-[48%]">
             <span className="text-[16px] md:text-[18px] font-semibold">
@@ -79,12 +98,12 @@ const RegisterPage = () => {
           </label>
           <label className="flex flex-col md:w-[48%]">
             <span className="text-[16px] md:text-[18px] font-semibold">
-              Фамілія
+              Прізвище
             </span>
             <input
               type="text"
               required
-              placeholder="Уведіть фамілію"
+              placeholder="Уведіть прізвище"
               className="py-3 px-2 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}

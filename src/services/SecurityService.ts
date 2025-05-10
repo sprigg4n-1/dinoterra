@@ -25,10 +25,12 @@ export const registerUser = async (
       { withCredentials: true }
     );
 
-    console.log(response.data);
     return response.data;
-  } catch (error) {
-    console.error(`Error with register user: ${error}`);
+  } catch (error: any) {
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data);
+    }
+    throw new Error("Network error");
   }
 };
 

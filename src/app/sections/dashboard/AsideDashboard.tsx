@@ -111,6 +111,16 @@ const AsideDashboard = () => {
               Користувачі
             </Link>
           </li>
+
+          <li>
+            <Link
+              href={"/account"}
+              onClick={() => setActivePage("users")}
+              className={`block mt-auto w-full p-2 text-[18px] text-center bg-red-400 hover:bg-fieryRed duration-300`}
+            >
+              Вийти
+            </Link>
+          </li>
         </ul>
       </motion.div>
 
@@ -143,6 +153,13 @@ const AsideDashboard = () => {
           </Link>
         </li>
       </ul>
+      <Link
+        href={"/account"}
+        onClick={() => setActivePage("users")}
+        className={`hidden lg:block mt-auto w-full p-2 text-[18px] text-center bg-red-400 hover:bg-fieryRed duration-300`}
+      >
+        Вийти
+      </Link>
     </div>
   );
 };

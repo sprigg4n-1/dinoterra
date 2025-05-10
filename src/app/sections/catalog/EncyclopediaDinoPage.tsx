@@ -262,23 +262,29 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
         <h2 className="text-[20px] lg:text-[24px] font-semibold text-center">
           Схожі динозаври
         </h2>
-        <div className="embla">
-          <div className="embla__viewport-intro-rec-dino" ref={emblaRef}>
-            <div className="embla__container-intro-rec-dino gap-5">
-              {dinos.map((dino) => (
-                <DinoCard
-                  key={dino.id}
-                  dino={dino}
-                  link={`/encyclopedia/${dino.id}`}
-                  bgColor="orange"
-                  textColor="white"
-                  slider
-                  sliderClassName="embla__slide-intro-rec-dino"
-                />
-              ))}
+        {dinos.length > 1 ? (
+          <div className="embla">
+            <div className="embla__viewport-intro-rec-dino" ref={emblaRef}>
+              <div className="embla__container-intro-rec-dino gap-5">
+                {dinos.map((dino) => (
+                  <DinoCard
+                    key={dino.id}
+                    dino={dino}
+                    link={`/encyclopedia/${dino.id}`}
+                    bgColor="orange"
+                    textColor="white"
+                    slider
+                    sliderClassName="embla__slide-intro-rec-dino"
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <p className="text-[14px] md:text-[18px] text-fieryRed text-center">
+            Схожих динозаврів не найдено
+          </p>
+        )}
       </div>
     </div>
   );

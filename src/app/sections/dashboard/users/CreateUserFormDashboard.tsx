@@ -56,7 +56,7 @@ const CreateUserFormDashboard = () => {
         className="flex flex-col gap-2 text-[14px] sm:text-[16px]"
       >
         <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-0">
-          <label className="flex flex-col md:w-1/2">
+          <label className="flex flex-col md:w-[49%]">
             <span>Ім'я</span>
             <input
               type="text"
@@ -67,12 +67,12 @@ const CreateUserFormDashboard = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-          <label className="flex flex-col md:w-[48%]">
-            <span>Фамілія</span>
+          <label className="flex flex-col md:w-[49%]">
+            <span>Прізвище</span>
             <input
               type="text"
               required
-              placeholder="Уведіть фамілію"
+              placeholder="Уведіть прізвище"
               className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}

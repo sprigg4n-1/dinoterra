@@ -84,7 +84,8 @@ const AccountPage = () => {
   };
 
   const onClickResetPhoto = async () => {
-    await deleteUserProfilePhoto(user?.id || 0);
+    const res = await deleteUserProfilePhoto(user?.id || 0);
+    console.log(res);
     setProfilePhoto(null);
     setImagePath("");
   };
@@ -167,7 +168,7 @@ const AccountPage = () => {
               {user?.lastname}
             </p>
             <p>
-              <span className="hidden lg:inline-block">Фамілія:</span>{" "}
+              <span className="hidden lg:inline-block">Прізвище:</span>{" "}
               {user?.name}
             </p>
           </div>
@@ -180,7 +181,7 @@ const AccountPage = () => {
           {user?.role === "ADMIN" && (
             <Link
               href={`/admin`}
-              className="text-[14px] lg:text-[16px] bg-darkPurple py-1 px-5 text-white hover:bg-opacity-80 duration-300"
+              className="text-[14px] lg:text-[16px] bg-darkPurple py-1 px-5 text-white hover:bg-opacity-80 duration-300 text-center"
             >
               Адмін панель
             </Link>
