@@ -34,3 +34,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+<h3>Вказуємо тип комміту</h3>
+
+<ul>
+  <li>feature — використовується при додаванні нової функціональності рівня програми</li>
+ <li>fix — якщо виправили якусь серйозну багу</li>
+ <li>docs — все, що стосується документації</li>
+ <li>style - виправляємо друкарські помилки, виправляємо форматування</li>
+ <li>refactor - рефакторинг коду програми</li>
+ <li>test - все, що пов'язано з тестуванням</li>
+ <li>chore - звичайне обслуговування коду</li>
+</ul>
