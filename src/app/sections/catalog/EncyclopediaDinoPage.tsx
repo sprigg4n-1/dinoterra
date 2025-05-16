@@ -72,14 +72,21 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
   // use effects
   useEffect(() => {
     const getData = async () => {
-      const dinosData = await getSimilarDinos(dino.id);
       const userData = await getUserByToken();
-
       const isFav = await isFavoriteDino(userData.id || 0, dino.id);
+
       setIsDinoInFav(isFav);
+      setUser(userData);
+    };
+
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const dinosData = await getSimilarDinos(dino.id);
 
       setDinos(dinosData);
-      setUser(userData);
     };
 
     getData();
@@ -262,7 +269,7 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
         <h2 className="text-[20px] lg:text-[24px] font-semibold text-center">
           Схожі динозаври
         </h2>
-        {dinos.length > 1 ? (
+        {dinos.length > 0 ? (
           <div className="embla">
             <div className="embla__viewport-intro-rec-dino" ref={emblaRef}>
               <div className="embla__container-intro-rec-dino gap-5">
