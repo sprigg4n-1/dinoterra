@@ -35,7 +35,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-<h3>Вказуємо тип комміту</h3>
+## Вказуємо тип комміту
 
 <ul>
   <li>feature — використовується при додаванні нової функціональності рівня програми</li>
