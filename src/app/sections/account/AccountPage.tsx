@@ -164,12 +164,11 @@ const AccountPage = () => {
           </p>
           <div className="flex flex-row lg:flex-col gap-1">
             <p>
-              <span className="hidden lg:inline-block">Ім'я:</span>{" "}
-              {user?.lastname}
+              <span className="hidden lg:inline-block">Ім'я:</span> {user?.name}
             </p>
             <p>
               <span className="hidden lg:inline-block">Прізвище:</span>{" "}
-              {user?.name}
+              {user?.lastname}
             </p>
           </div>
           <p>
