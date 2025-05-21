@@ -78,7 +78,7 @@ const EncyclopediaPage = () => {
 
     const dinosData = await getDinos(
       SHOW_LIMIT,
-      pagination.active - 1,
+      pagination.active > 0 ? pagination.active - 1 : pagination.active,
       searchDino,
       typeOfDino,
       diet,
@@ -131,7 +131,7 @@ const EncyclopediaPage = () => {
       <div className="flex flex-wrap gap-5 items-center justify-center py-5 lg:py-10">
         {isLoading ? (
           <LoaderComponent />
-        ) : (
+        ) : dinos.length > 0 ? (
           dinos.map((dino) => (
             <DinoCard
               key={dino.id}
@@ -142,6 +142,10 @@ const EncyclopediaPage = () => {
               textColor="white"
             />
           ))
+        ) : (
+          <span className="text-center text-[14px] md:text-[16px]">
+            Не найдено динозаврів за параметрами...
+          </span>
         )}
       </div>
 

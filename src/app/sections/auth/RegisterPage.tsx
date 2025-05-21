@@ -82,8 +82,8 @@ const RegisterPage = () => {
             *{errorMessage}
           </p>
         )}
-        <div className="flex flex-col md:flex-row justify-between gap-3 md:gap-0">
-          <label className="flex flex-col md:w-[48%]">
+        <div className="flex flex-row justify-between gap-3 md:gap-0">
+          <label className="flex flex-col w-[48%]">
             <span className="text-[16px] md:text-[18px] font-semibold">
               Ім'я
             </span>
@@ -96,7 +96,7 @@ const RegisterPage = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-          <label className="flex flex-col md:w-[48%]">
+          <label className="flex flex-col w-[48%]">
             <span className="text-[16px] md:text-[18px] font-semibold">
               Прізвище
             </span>
