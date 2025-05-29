@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { useAuth } from "@/hooks/useAuth";
+
 import { loginUser } from "@/services/SecurityService";
 
 import Link from "next/link";
@@ -13,6 +15,8 @@ import eyeShow from "@/images/vectors/eye-show.svg";
 
 const LoginPage = () => {
   const router = useRouter();
+
+  const { updateAuthStatus, user } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,14 +32,9 @@ const LoginPage = () => {
     try {
       const response = await loginUser(username, password);
 
-      if (!response) {
-        setError("Невірний логін або пароль");
-        return;
-      }
+      console.log(response);
 
-      if (response) {
-        router.replace("/");
-      }
+      if (response) router.replace("/");
     } catch (error) {
       console.error(`Error with login user: ${error}`);
     }

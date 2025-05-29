@@ -1,6 +1,6 @@
 // user types
 export interface IUser {
-  id: number;
+  _id: string;
   username: string;
   password: string;
   name: string;
@@ -17,7 +17,7 @@ export enum EUserRole {
 
 // dino types
 export interface IDino {
-  id: number;
+  _id: string;
   name: string;
   latinName: string;
   description: string;

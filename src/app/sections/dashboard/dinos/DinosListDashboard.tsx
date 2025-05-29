@@ -19,8 +19,8 @@ const DinosListDashboard = () => {
     const getData = async () => {
       const dinosData = await getDinos(1000, 0);
 
-      setDinos(dinosData.content);
-      setFinalDinos(dinosData.content);
+      setDinos(dinosData);
+      setFinalDinos(dinosData);
     };
 
     getData();
@@ -52,7 +52,7 @@ const DinosListDashboard = () => {
         />
       </div>
       <div className="flex flex-wrap items-center justify-around gap-5">
-        {finalDinos.length > 0 ? (
+        {finalDinos && finalDinos.length > 0 ? (
           finalDinos
             .sort((a, b) =>
               a.latinName.toLowerCase() < b.latinName.toLowerCase() ? -1 : 1
@@ -62,8 +62,8 @@ const DinosListDashboard = () => {
                 border
                 bgColor="black"
                 textColor="white"
-                key={dino.id}
-                link={`/admin/dashboard/dinos/${dino.id}`}
+                key={dino._id}
+                link={`/admin/dashboard/dinos/${dino._id}`}
                 dino={dino}
               />
             ))

@@ -90,8 +90,8 @@ const EncyclopediaPage = () => {
       pagination.setPage(1);
     }
 
-    setDinos(dinosData.content);
-    setTotalPages(dinosData.totalPages);
+    setDinos(dinosData);
+    setTotalPages(Math.ceil(dinosData.length / SHOW_LIMIT));
     setIsLoading(false);
   };
 
@@ -131,12 +131,12 @@ const EncyclopediaPage = () => {
       <div className="flex flex-wrap gap-5 items-center justify-center py-5 lg:py-10">
         {isLoading ? (
           <LoaderComponent />
-        ) : dinos.length > 0 ? (
+        ) : dinos && dinos.length > 0 ? (
           dinos.map((dino) => (
             <DinoCard
-              key={dino.id}
+              key={dino._id}
               dino={dino}
-              link={`/encyclopedia/${dino.id}`}
+              link={`/encyclopedia/${dino._id}`}
               bgColor="orange"
               border
               textColor="white"

@@ -67,13 +67,13 @@ const MapPage = () => {
   }, [isReseted]);
 
   useEffect(() => {
-    const getLocationDino = async () => {
-      if (!hoveredLocation) return;
-      const dinoData = await getDinoById(hoveredLocation.dino_id);
-      console.log(dinoData);
-      setLocationDino(dinoData);
-    };
-    getLocationDino();
+    // const getLocationDino = async () => {
+    //   if (!hoveredLocation) return;
+    //   const dinoData = await getDinoById(hoveredLocation.dino_id);
+    //   console.log(dinoData);
+    //   setLocationDino(dinoData);
+    // };
+    // getLocationDino();
   }, [hoveredLocation]);
 
   return (
@@ -227,15 +227,16 @@ const MapPage = () => {
         style={{ width: "100%", height: "100%" }}
         mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
       >
-        {locations.map((loc) => (
-          <Marker
-            key={loc.id}
-            longitude={loc.longitude}
-            latitude={loc.latitude}
-            color={"red"}
-            onClick={() => setHoveredLocation(loc)}
-          />
-        ))}
+        {locations &&
+          locations.map((loc) => (
+            <Marker
+              key={loc.id}
+              longitude={loc.longitude}
+              latitude={loc.latitude}
+              color={"red"}
+              onClick={() => setHoveredLocation(loc)}
+            />
+          ))}
 
         {hoveredLocation && (
           <div className="absolute w-[90%] h-fit max-h-[90%] md:h-fit md:min-h-[100px] md:w-[350px] bg-darkGray top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

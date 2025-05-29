@@ -89,7 +89,7 @@ const ChangeDinoFormDashboard = () => {
   // functions
   const onHandleChooseDino = (
     e: React.MouseEvent<HTMLButtonElement>,
-    id: number
+    id: string
   ) => {
     e.preventDefault();
 
@@ -123,7 +123,7 @@ const ChangeDinoFormDashboard = () => {
 
     const changeDinoById = async () => {
       await changeDino(
-        dinoToChange?.id || 0,
+        dinoToChange?._id || "random",
         name,
         latinName,
         description,
@@ -151,16 +151,16 @@ const ChangeDinoFormDashboard = () => {
 
     setIsChangedSomething(true);
 
-    await addFoundLocation(
-      placeLoc,
-      latitudeLoc.toString(),
-      longitudeLoc.toString(),
-      dinoToChange?.id || 0
-    );
+    // await addFoundLocation(
+    //   placeLoc,
+    //   latitudeLoc.toString(),
+    //   longitudeLoc.toString(),
+    //   dinoToChange?._id || 0
+    // );
 
-    setLatitudeLoc(0);
-    setLongitudeLoc(0);
-    setPlaceLoc("");
+    // setLatitudeLoc(0);
+    // setLongitudeLoc(0);
+    // setPlaceLoc("");
 
     setIsChangedSomething(false);
   };
@@ -172,7 +172,7 @@ const ChangeDinoFormDashboard = () => {
     e.preventDefault();
 
     setIsChangedSomething(true);
-    await deleteFoundLocation(id);
+    // await deleteFoundLocation(_id);
     setIsChangedSomething(false);
   };
 
@@ -181,10 +181,10 @@ const ChangeDinoFormDashboard = () => {
 
     setIsChangedSomething(true);
 
-    await addImage(imagePathDino, fileNameDino, dinoToChange?.id || 0);
+    // await addImage(imagePathDino, fileNameDino, dinoToChange?._id || 0);
 
-    setImagePathDino("");
-    setFileNameDino("");
+    // setImagePathDino("");
+    // setFileNameDino("");
 
     setIsChangedSomething(false);
   };
@@ -202,7 +202,7 @@ const ChangeDinoFormDashboard = () => {
 
   const handleDeleteDino = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    await deleteDino(dinoToChange?.id || 0);
+    await deleteDino(dinoToChange?._id || "random");
     setStep(1);
   };
 
@@ -255,8 +255,8 @@ const ChangeDinoFormDashboard = () => {
     const getData = async () => {
       const dinosData = await getDinos(1000, 0);
 
-      setDinos(dinosData.content);
-      setFinalDinos(dinosData.content);
+      setDinos(dinosData);
+      setFinalDinos(dinosData);
     };
 
     getData();
@@ -292,7 +292,7 @@ const ChangeDinoFormDashboard = () => {
     if (isChangedSomething) {
       console.log(`hello`);
       const getData = async () => {
-        const dinoById = await getDinoById(dinoToChange?.id || 0);
+        const dinoById = await getDinoById(dinoToChange?._id || "random");
 
         setName(dinoById.name);
         setLatinName(dinoById.latinName);
@@ -363,8 +363,8 @@ const ChangeDinoFormDashboard = () => {
             <div className="flex flex-col gap-2">
               {finalDinos.map((dino: IDino) => (
                 <button
-                  key={dino.id}
-                  onClick={(e) => onHandleChooseDino(e, dino.id)}
+                  key={dino._id}
+                  onClick={(e) => onHandleChooseDino(e, dino._id)}
                   className="text-white w-full bg-darkGray text-left py-2 px-5 hover:opacity-90 duration-300"
                 >
                   {dino.latinName} ({dino.name})
@@ -576,7 +576,7 @@ const ChangeDinoFormDashboard = () => {
                   </button>
                 </div>
 
-                {dinoToChange && dinoToChange?.images.length === 0 ? (
+                {dinoToChange?.images && dinoToChange?.images.length === 0 ? (
                   <span>Немає картинок</span>
                 ) : (
                   <div className="embla">
@@ -585,34 +585,37 @@ const ChangeDinoFormDashboard = () => {
                       ref={emblaRef}
                     >
                       <div className="embla__container-dino-images-dashboard gap-4">
-                        {dinoToChange?.images.map((image) => (
-                          <div
-                            key={image.id}
-                            className="embla__slide-dino-images-dashboard group relative flex flex-col text-center"
-                          >
-                            <Image
-                              src={
-                                image.image
-                                  ? `data:image/jpg;base64,${image.image}`
-                                  : imageNotFound
-                              }
-                              width={800}
-                              height={800}
-                              alt="dino image"
-                              className="w-auto h-60 object-fit border-2 border-brightOrange"
-                            />
-                            <button
-                              type="button"
-                              className="absolute hidden group-hover:block cursor-pointer w-full h-full bg-fieryRed bg-opacity-80 text-white"
-                              onClick={(e) => onHandleDeleteImage(e, image.id)}
+                        {dinoToChange?.images &&
+                          dinoToChange?.images.map((image) => (
+                            <div
+                              key={image.id}
+                              className="embla__slide-dino-images-dashboard group relative flex flex-col text-center"
                             >
-                              Видалити
-                            </button>
-                            <span className="bg-brightOrange text-white">
-                              {image.fileName || "Без назви"}
-                            </span>
-                          </div>
-                        ))}
+                              <Image
+                                src={
+                                  image.image
+                                    ? `data:image/jpg;base64,${image.image}`
+                                    : imageNotFound
+                                }
+                                width={800}
+                                height={800}
+                                alt="dino image"
+                                className="w-auto h-60 object-fit border-2 border-brightOrange"
+                              />
+                              <button
+                                type="button"
+                                className="absolute hidden group-hover:block cursor-pointer w-full h-full bg-fieryRed bg-opacity-80 text-white"
+                                onClick={(e) =>
+                                  onHandleDeleteImage(e, image.id)
+                                }
+                              >
+                                Видалити
+                              </button>
+                              <span className="bg-brightOrange text-white">
+                                {image.fileName || "Без назви"}
+                              </span>
+                            </div>
+                          ))}
                       </div>
                     </div>
 
@@ -683,7 +686,8 @@ const ChangeDinoFormDashboard = () => {
                   </button>
                 </div>
 
-                {dinoToChange && dinoToChange?.foundLocations.length === 0 ? (
+                {dinoToChange?.foundLocations &&
+                dinoToChange?.foundLocations.length === 0 ? (
                   <span>Немає місць</span>
                 ) : (
                   <div className="embla">
@@ -692,29 +696,30 @@ const ChangeDinoFormDashboard = () => {
                       ref={emblaRef2}
                     >
                       <div className="embla__container-dino-found-location-dashboard gap-4">
-                        {dinoToChange?.foundLocations.map((loc) => (
-                          <div
-                            key={loc.id}
-                            className="embla__slide-dino-found-location-dashboard group relative flex flex-col gap-1 bg-slateGray text-white py-2 px-5"
-                          >
-                            <button
-                              type="button"
-                              className="absolute hidden group-hover:block cursor-pointer w-full h-full bg-fieryRed bg-opacity-80 text-white top-0 left-0"
-                              onClick={(e) =>
-                                onHandleDeleteFoundLocation(e, loc.id)
-                              }
+                        {dinoToChange?.foundLocations &&
+                          dinoToChange?.foundLocations.map((loc) => (
+                            <div
+                              key={loc.id}
+                              className="embla__slide-dino-found-location-dashboard group relative flex flex-col gap-1 bg-slateGray text-white py-2 px-5"
                             >
-                              Видалити
-                            </button>
-                            <span>
-                              Широта: {Number(loc.latitude).toFixed(1)}
-                            </span>
-                            <span>
-                              Довгота: {Number(loc.longitude).toFixed(1)}
-                            </span>
-                            <span>Місце: {loc.place}</span>
-                          </div>
-                        ))}
+                              <button
+                                type="button"
+                                className="absolute hidden group-hover:block cursor-pointer w-full h-full bg-fieryRed bg-opacity-80 text-white top-0 left-0"
+                                onClick={(e) =>
+                                  onHandleDeleteFoundLocation(e, loc.id)
+                                }
+                              >
+                                Видалити
+                              </button>
+                              <span>
+                                Широта: {Number(loc.latitude).toFixed(1)}
+                              </span>
+                              <span>
+                                Довгота: {Number(loc.longitude).toFixed(1)}
+                              </span>
+                              <span>Місце: {loc.place}</span>
+                            </div>
+                          ))}
                       </div>
                     </div>
                     <div className="flex justify-between mt-2">

@@ -1,6 +1,10 @@
 import axios from "axios";
 
-import { BASE_URL_SECURITY, BASE_URL_DINO } from "@/config/config";
+import {
+  BASE_URL_SECURITY,
+  BASE_URL_DINO,
+  BASE_DEV_API_URL,
+} from "@/config/config";
 
 // auth
 export const registerUser = async (
@@ -13,7 +17,7 @@ export const registerUser = async (
 ) => {
   try {
     const response = await axios.post(
-      `${BASE_URL_SECURITY}/users-register`,
+      `${BASE_DEV_API_URL}/auth/sign-up`,
       {
         name: name,
         lastname: lastname,
@@ -37,15 +41,16 @@ export const registerUser = async (
 export const loginUser = async (username: string, password: string) => {
   try {
     const response = await axios.post(
-      `${BASE_URL_SECURITY}/users-login`,
+      `${BASE_DEV_API_URL}/auth/sign-in`,
       {
         username: username,
         password: password,
       },
-      { withCredentials: true }
+      {
+        withCredentials: true,
+      }
     );
 
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(`Error with auth user: ${error}`);
@@ -55,7 +60,7 @@ export const loginUser = async (username: string, password: string) => {
 export const logoutUser = async () => {
   try {
     const response = await axios.post(
-      `${BASE_URL_SECURITY}/users-logout`,
+      `${BASE_DEV_API_URL}/auth/sign-out`,
       {},
       {
         withCredentials: true,
@@ -70,36 +75,35 @@ export const logoutUser = async () => {
 
 export const checkStatus = async () => {
   try {
-    const response = await axios.get(`${BASE_URL_SECURITY}/auth-status`, {
+    const response = await axios.get(`${BASE_DEV_API_URL}/auth/check-status`, {
       withCredentials: true,
     });
 
     return response.data;
   } catch (error) {
-    console.error("Error logging out:", error);
+    console.error("Error checking status:", error);
   }
 };
 
-export const getUserByToken = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL_SECURITY}/user-data`, {
-      withCredentials: true,
-    });
+// export const getUserByToken = async () => {
+//   try {
+//     const response = await axios.get(`${BASE_URL_SECURITY}/user-data`, {
+//       withCredentials: true,
+//     });
 
-    return response.data;
-  } catch (error) {
-    console.error(`Error with getting user`);
-  }
-};
+//     return response.data;
+//   } catch (error) {
+//     console.error(`Error with getting user`);
+//   }
+// };
 
 // admin and user
+
 export const getUsers = async () => {
   try {
-    const response = await axios.get(`${BASE_URL_SECURITY}/users`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${BASE_DEV_API_URL}/users`);
 
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error(`Error with getting users: ${error}`);
   }
@@ -107,11 +111,9 @@ export const getUsers = async () => {
 
 export const getUserById = async (id: number) => {
   try {
-    const response = await axios.get(`${BASE_URL_SECURITY}/users/${id}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${BASE_DEV_API_URL}/users/${id}`);
 
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error(`Error with getting user with ${id} id`);
   }

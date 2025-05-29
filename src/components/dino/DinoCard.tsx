@@ -56,7 +56,7 @@ const DinoCard = ({
       >
         <Image
           src={
-            dino.images.length > 0
+            dino?.images && dino.images.length > 0
               ? `data:image/jpg;base64,${dino.images[0].image}`
               : imageNotFound
           }

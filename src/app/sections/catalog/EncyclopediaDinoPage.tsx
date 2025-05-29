@@ -6,7 +6,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import { getFiveRandomDinos, getSimilarDinos } from "@/services/DinoService";
 import {
   addFavoriteDino,
-  getUserByToken,
   isFavoriteDino,
   removeFavoriteDino,
 } from "@/services/SecurityService";
@@ -51,8 +50,8 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
   const onClickAddToFav = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    await addFavoriteDino(user?.id || 0, dino.id);
-    await checkFav();
+    // await addFavoriteDino(user?.id || 0, dino._id);
+    // await checkFav();
   };
 
   const onClickRemoveFromFav = async (
@@ -60,23 +59,22 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
   ) => {
     e.preventDefault();
 
-    await removeFavoriteDino(user?.id || 0, dino.id);
-    await checkFav();
+    // await removeFavoriteDino(user?.id || 0, dino._id);
+    // await checkFav();
   };
 
   const checkFav = async () => {
-    const isFav = await isFavoriteDino(user?.id || 0, dino.id);
-    setIsDinoInFav(isFav);
+    // const isFav = await isFavoriteDino(user?.id || 0, dino.id);
+    // setIsDinoInFav(isFav);
   };
 
   // use effects
   useEffect(() => {
     const getData = async () => {
-      const userData = await getUserByToken();
-      const isFav = await isFavoriteDino(userData.id || 0, dino.id);
-
-      setIsDinoInFav(isFav);
-      setUser(userData);
+      // const userData = await getUserByToken();
+      // const isFav = await isFavoriteDino(userData.id || 0, dino.id);
+      // setIsDinoInFav(isFav);
+      // setUser(userData);
     };
 
     getData();
@@ -84,7 +82,7 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
 
   useEffect(() => {
     const getData = async () => {
-      const dinosData = await getSimilarDinos(dino.id);
+      const dinosData = await getSimilarDinos(dino?._id || "random");
 
       setDinos(dinosData);
     };
@@ -94,13 +92,13 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
 
   return (
     <div className="px-2 sm:px-5 lg:px-20 mb-5">
-      <TopDinoPageComponent title={dino.latinName} />
+      <TopDinoPageComponent title={dino?.latinName} />
 
       <div className="flex flex-col md:flex-row gap-3 md:gap-5 border-b-4 pb-3 mb-3 md:pb-5 md:mb-5">
         <div className="h-fit flex flex-col border-2 border-brightOrange">
           <Image
             src={
-              dino.images.length > 0
+              dino?.images && dino.images.length > 0
                 ? `data:image/jpg;base64,${dino.images[0].image}`
                 : imageNotFound
             }
@@ -131,33 +129,35 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
 
         <div className="flex flex-col md:w-3/5 gap-2">
           <h1 className="text-[22px] md:text-[24px] flex flex-wrap items-center justify-center md:justify-start font-bold text-brightOrange">
-            <p>{dino.name}</p> <p>({dino.latinName})</p>
+            <p>{dino?.name}</p> <p>({dino?.latinName})</p>
           </h1>
 
           <div className="text-center md:text-left">
             <p className="text-[16px] lg:text-[18px]">
               <span className="font-medium">Тип:</span>{" "}
-              {dinoTypeLabels[dino.typeOfDino as EDinoType]}
+              {dinoTypeLabels[dino?.typeOfDino as EDinoType]}
             </p>
             <p className="text-[16px] lg:text-[18px]">
               <span className="font-medium">Вага:</span>{" "}
-              {dino.weight.toFixed(2)}кг
+              {/* {dino?.weight.toFixed(2)}кг */}
+              {dino?.weight}кг
             </p>
             <p className="text-[16px] lg:text-[18px]">
               <span className="font-medium">Розмір:</span>{" "}
-              {dino.length.toFixed(2)}м
+              {/* {dino?.length.toFixed(2)}м */}
+              {dino?.length}м
             </p>
             <p className="text-[16px] lg:text-[18px]">
               <span className="font-medium">Харчування:</span>{" "}
-              {dinoDietLabels[dino.diet as EDinoDiet]}({dino.diet})
+              {dinoDietLabels[dino?.diet as EDinoDiet]}({dino?.diet})
             </p>
           </div>
 
           <p className="text-center md:text-left text-[14px] md:text-[16px] lg:text-[18px]">
-            {dino.description}
+            {dino?.description}
           </p>
           <p className="text-center md:text-left text-[14px] md:text-[16px] lg:text-[18px]">
-            {dino.dietDescription}
+            {dino?.dietDescription}
           </p>
         </div>
       </div>
@@ -167,25 +167,25 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
           <div className="text-center md:text-left">
             <h2 className="text-[18px] lg:text-[20px]">
               <span className="font-medium">Період існування:</span>{" "}
-              {dinoPeriodLabels[dino.period as EDinoPeriod]} ({dino.period})
+              {dinoPeriodLabels[dino?.period as EDinoPeriod]} ({dino?.period})
             </h2>
 
             <p className="text-[16px] lg:text-[18px]">
-              <span className="font-medium">Час:</span> {dino.periodDate}м
+              <span className="font-medium">Час:</span> {dino?.periodDate}м
             </p>
           </div>
 
           <p className="text-center md:text-left text-[14px] md:text-[16px] lg:text-[18px]">
-            {dino.periodDescription}
+            {dino?.periodDescription}
           </p>
         </div>
 
         <div className="flex flex-col-reverse md:flex-col md:w-2/5 items-center justify-center">
           <Image
             src={
-              dino.period === EDinoPeriod.Triassic
+              dino?.period === EDinoPeriod.Triassic
                 ? trsDino
-                : dino.period === EDinoPeriod.Jurassic
+                : dino?.period === EDinoPeriod.Jurassic
                 ? jrsDino
                 : crsDino
             }
@@ -195,9 +195,9 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
             className="w-full h-auto max-h-[300px] md:max-h-[500px]"
           />
           <span className="text-center bg-slateGray w-full bg-opacity-10 text-darkGray font-light py-1 text-[14px]">
-            {dino.period === EDinoPeriod.Triassic
+            {dino?.period === EDinoPeriod.Triassic
               ? "Герреразавр - один із найдавніших відомих хижих динозаврів"
-              : dino.period === EDinoPeriod.Jurassic
+              : dino?.period === EDinoPeriod.Jurassic
               ? "Алозавр - один із найпоширеніших тероподів свого часу"
               : "Тиранозавр рекс - одним із найвідоміших динозаврів"}
           </span>
@@ -205,7 +205,7 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
       </div>
 
       <div className="flex flex-col gap-3 md:gap-5 border-b-4 pb-3 mb-3 md:pb-5 md:mb-5">
-        {dino.images.slice(1).length > 0 ? (
+        {dino?.images && dino.images.slice(1).length > 0 ? (
           <>
             <h2 className="text-[20px] lg:text-[24px] font-semibold text-center">
               Всі картинки
@@ -241,8 +241,10 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
         <div className="mx-auto w-full h-[300px] sm:h-[450px] lg:h-[700px]">
           <Map
             initialViewState={{
-              longitude: +dino.foundLocations[0]?.longitude || 0,
-              latitude: +dino.foundLocations[0]?.latitude || 0,
+              // longitude: +dino?.foundLocations[0]?.longitude || 0,
+              // latitude: +dino?.foundLocations[0]?.latitude || 0,
+              longitude: 0,
+              latitude: 0,
               zoom: 3.5,
             }}
             style={{ width: "100%", height: "100%" }}
@@ -253,14 +255,15 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
             dragRotate={false}
             mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
           >
-            {dino.foundLocations.map((loc) => (
-              <Marker
-                key={loc.id}
-                longitude={loc.longitude}
-                latitude={loc.latitude}
-                color="red"
-              />
-            ))}
+            {dino?.foundLocations &&
+              dino.foundLocations.map((loc) => (
+                <Marker
+                  key={loc.id}
+                  longitude={loc.longitude}
+                  latitude={loc.latitude}
+                  color="red"
+                />
+              ))}
           </Map>
         </div>
       </div>
@@ -269,15 +272,15 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
         <h2 className="text-[20px] lg:text-[24px] font-semibold text-center">
           Схожі динозаври
         </h2>
-        {dinos.length > 0 ? (
+        {dinos && dinos.length > 0 ? (
           <div className="embla">
             <div className="embla__viewport-intro-rec-dino" ref={emblaRef}>
               <div className="embla__container-intro-rec-dino gap-5">
                 {dinos.map((dino) => (
                   <DinoCard
-                    key={dino.id}
+                    key={dino._id}
                     dino={dino}
-                    link={`/encyclopedia/${dino.id}`}
+                    link={`/encyclopedia/${dino._id}`}
                     bgColor="orange"
                     textColor="white"
                     slider

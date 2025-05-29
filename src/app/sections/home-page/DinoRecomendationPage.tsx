@@ -40,23 +40,29 @@ const DinoRecomendationPage = () => {
         subtitleColor="white"
       />
 
-      <div className="embla mt-8">
-        <div className="embla__viewport-intro-rec-dino" ref={emblaRef}>
-          <div className="embla__container-intro-rec-dino gap-5">
-            {dinos.map((dino) => (
-              <DinoCard
-                key={dino.id}
-                dino={dino}
-                link={`/encyclopedia/${dino.id}`}
-                bgColor="orange"
-                textColor="white"
-                slider
-                sliderClassName="embla__slide-intro-rec-dino"
-              />
-            ))}
+      {dinos ? (
+        <div className="embla mt-8">
+          <div className="embla__viewport-intro-rec-dino" ref={emblaRef}>
+            <div className="embla__container-intro-rec-dino gap-5">
+              {dinos.map((dino) => (
+                <DinoCard
+                  key={dino._id}
+                  dino={dino}
+                  link={`/encyclopedia/${dino._id}`}
+                  bgColor="orange"
+                  textColor="white"
+                  slider
+                  sliderClassName="embla__slide-intro-rec-dino"
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <p className="text-center mt-8 text-white text-[14px] md:text-[18px] bg-fieryRed py-5">
+          Виникла помилка на сервері...
+        </p>
+      )}
     </div>
   );
 };

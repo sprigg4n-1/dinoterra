@@ -9,7 +9,6 @@ import { useAuth } from "@/hooks/useAuth";
 import {
   deleteUserProfilePhoto,
   getFavoriteDinos,
-  getUserByToken,
   getUserProfilePhoto,
   logoutUser,
   removeFavoriteDino,
@@ -27,12 +26,11 @@ const AccountPage = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
   });
-
   const router = useRouter();
 
-  const { updateAuthStatus } = useAuth();
+  const { updateAuthStatus, user } = useAuth();
 
-  const [user, setUser] = useState<IUser>();
+  // const [user, setUser] = useState<IUser>();
   const [profilePhoto, setProfilePhoto] = useState<any>(null);
   const [dinos, setDinos] = useState<IDinoFav[]>([]);
 
@@ -55,18 +53,16 @@ const AccountPage = () => {
   ) => {
     e.preventDefault();
 
-    await removeFavoriteDino(user?.id || 0, id);
+    // await removeFavoriteDino(user?.id || 0, id);
   };
 
   const onHandleAddImage = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    await updateUserProfilePhoto(user?.id || 0, imagePath);
-
-    setImagePath("");
-
-    const profilePhotoData = await getUserProfilePhoto(user?.id || 0);
-    setProfilePhoto(profilePhotoData);
+    // await updateUserProfilePhoto(user?.id || 0, imagePath);
+    // setImagePath("");
+    // const profilePhotoData = await getUserProfilePhoto(user?.id || 0);
+    // setProfilePhoto(profilePhotoData);
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,22 +80,21 @@ const AccountPage = () => {
   };
 
   const onClickResetPhoto = async () => {
-    const res = await deleteUserProfilePhoto(user?.id || 0);
-    console.log(res);
-    setProfilePhoto(null);
-    setImagePath("");
+    // const res = await deleteUserProfilePhoto(user?.id || 0);
+    // console.log(res);
+    // setProfilePhoto(null);
+    // setImagePath("");
   };
 
   // use effects
   useEffect(() => {
     const fetchData = async () => {
-      const userData = await getUserByToken();
-      const dinosData = await getFavoriteDinos(userData.id);
-      const profilePhotoData = await getUserProfilePhoto(userData.id);
-
-      setProfilePhoto(profilePhotoData);
-      setDinos(dinosData);
-      setUser(userData);
+      // const userData = await getUserByToken();
+      // const dinosData = await getFavoriteDinos(userData.id);
+      // const profilePhotoData = await getUserProfilePhoto(userData.id);
+      // setProfilePhoto(profilePhotoData);
+      // setDinos(dinosData);
+      // setUser(userData);
     };
 
     fetchData();
@@ -107,8 +102,8 @@ const AccountPage = () => {
 
   useEffect(() => {
     const fetchDinos = async () => {
-      const dinosData = await getFavoriteDinos(user?.id || 0);
-      setDinos(dinosData);
+      // const dinosData = await getFavoriteDinos(user?.id || 0);
+      // setDinos(dinosData);
     };
 
     fetchDinos();

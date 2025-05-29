@@ -49,20 +49,21 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
 
       <div className="lg:hidden embla-dino-page-images" ref={emblaRef}>
         <div className="embla__container-dino-page-images gap-10">
-          {dino.images.map((image) => (
-            <Image
-              className="embla__slide-dino-page-images border-4 border-slateGray w-auto h-[250px] sm:h-[400px] object-fill"
-              key={image.id}
-              src={
-                dino.images.length > 0
-                  ? `data:image/jpg;base64,${image.image}`
-                  : imageNotFound
-              }
-              width={1000}
-              height={500}
-              alt="dino photo"
-            />
-          ))}
+          {dino?.images &&
+            dino.images.map((image) => (
+              <Image
+                className="embla__slide-dino-page-images border-4 border-slateGray w-auto h-[250px] sm:h-[400px] object-fill"
+                key={image.id}
+                src={
+                  dino.images.length > 0
+                    ? `data:image/jpg;base64,${image.image}`
+                    : imageNotFound
+                }
+                width={1000}
+                height={500}
+                alt="dino photo"
+              />
+            ))}
         </div>
       </div>
 
@@ -70,20 +71,21 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
         {showAllImages ? (
           <>
             <div className="flex flex-col gap-5 items-center">
-              {dino.images.map((image) => (
-                <Image
-                  className="border-4 border-slateGray w-auto h-auto max-w-[800px] max-h-[500px]"
-                  key={image.id}
-                  src={
-                    dino.images.length > 0
-                      ? `data:image/jpg;base64,${image.image}`
-                      : imageNotFound
-                  }
-                  width={2000}
-                  height={1000}
-                  alt="dino photo"
-                />
-              ))}
+              {dino?.images &&
+                dino.images.map((image) => (
+                  <Image
+                    className="border-4 border-slateGray w-auto h-auto max-w-[800px] max-h-[500px]"
+                    key={image.id}
+                    src={
+                      dino?.images && dino.images.length > 0
+                        ? `data:image/jpg;base64,${image.image}`
+                        : imageNotFound
+                    }
+                    width={2000}
+                    height={1000}
+                    alt="dino photo"
+                  />
+                ))}
             </div>
 
             <button
@@ -100,9 +102,9 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
           <>
             <Image
               className="border-4 border-slateGray w-auto h-auto max-w-[800px] max-h-[500px]"
-              key={dino.images[0].id}
+              key={dino?.images && dino.images[0].id}
               src={
-                dino.images.length > 0
+                dino?.images && dino.images.length > 0
                   ? `data:image/jpg;base64,${dino.images[0].image}`
                   : imageNotFound
               }
@@ -177,21 +179,24 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
         <div className="h-[250px] sm:h-[500px] w-full">
           <Map
             initialViewState={{
-              longitude: +dino.foundLocations[0].longitude || 0,
-              latitude: +dino.foundLocations[0].latitude || 0,
+              // longitude: +dino.foundLocations[0].longitude || 0,
+              // latitude: +dino.foundLocations[0].latitude || 0,
+              longitude: 0,
+              latitude: 0,
               zoom: 1.5,
             }}
             style={{ width: "100%", height: "100%" }}
             mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
           >
-            {dino.foundLocations.map((loc) => (
-              <Marker
-                key={loc.id}
-                longitude={loc.longitude}
-                latitude={loc.latitude}
-                color="red"
-              />
-            ))}
+            {dino?.foundLocations &&
+              dino.foundLocations.map((loc) => (
+                <Marker
+                  key={loc.id}
+                  longitude={loc.longitude}
+                  latitude={loc.latitude}
+                  color="red"
+                />
+              ))}
           </Map>
         </div>
       </div>

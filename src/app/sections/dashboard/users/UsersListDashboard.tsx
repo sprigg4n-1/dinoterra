@@ -15,7 +15,6 @@ const UsersListDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const users = await getUsers();
-      console.log(users);
 
       setUsers(users);
     };
@@ -29,11 +28,11 @@ const UsersListDashboard = () => {
       <div className="flex flex-col gap-2">
         {users.map((user) => (
           <Link
-            href={`/admin/dashboard/users/${user.id}`}
-            key={user.id}
+            href={`/admin/dashboard/users/${user?._id}`}
+            key={user?._id}
             className="text-white w-full bg-darkGray text-left py-2 px-5 hover:opacity-90 duration-300"
           >
-            {user.id}
+            {user._id}
           </Link>
         ))}
       </div>

@@ -45,21 +45,8 @@ const RegisterPage = () => {
         "USER"
       );
 
-      if (response.token === "username_user_exist") {
-        setErrorMessage("Нікнейм уже існує");
-        setUsername("");
-        return "Username exist";
-      }
-
-      if (response.token === "email_user_exist") {
-        setErrorMessage("Пошта уже існує");
-        setEmail("");
-        return "Email exist";
-      }
-
-      if (response) {
-        router.replace("/auth/login");
-      }
+      console.log(response);
+      router.replace("/auth/login");
     } catch (error) {
       setErrorMessage("Сталася помилка. Спробуйте пізніше.");
     }
