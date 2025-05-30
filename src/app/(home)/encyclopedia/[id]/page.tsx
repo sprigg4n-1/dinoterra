@@ -4,11 +4,15 @@ import EncyclopediaDinoPage from "@/app/sections/catalog/EncyclopediaDinoPage";
 
 const EncyclopediaInfo = async ({ params }: { params: any }) => {
   const { id } = await params;
-  const dino = await getDinoById(id);
+  const { dino, images, foundLocations } = await getDinoById(id);
 
   return (
     <>
-      <EncyclopediaDinoPage dino={dino} />
+      <EncyclopediaDinoPage
+        dino={dino}
+        images={images}
+        foundLocations={foundLocations}
+      />
     </>
   );
 };

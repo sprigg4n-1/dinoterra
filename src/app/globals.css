@@ -4,7 +4,9 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
+
 
 /* admin dashboard */
 .embla__viewport-dino-images-dashboard {

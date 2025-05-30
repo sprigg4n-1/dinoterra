@@ -31,7 +31,6 @@ export type TDinoFoundLocation = {
 export type TDinoImages = {
   id: string;
   imagePath: string;
-  fileName: string;
 };
 
 const CreateDinoFormDashboard = () => {
@@ -55,7 +54,6 @@ const CreateDinoFormDashboard = () => {
   const [placeLoc, setPlaceLoc] = useState<string>("");
 
   const [imagePathDino, setImagePathDino] = useState<string>("");
-  const [fileNameDino, setFileNameDino] = useState<string>("");
 
   const [foundLocations, setFoundLocations] = useState<TDinoFoundLocation[]>(
     []
@@ -95,13 +93,11 @@ const CreateDinoFormDashboard = () => {
     const newDinoImage: TDinoImages = {
       id: v4(),
       imagePath: imagePathDino,
-      fileName: fileNameDino,
     };
 
     setDinoImages((dinoImages) => [...dinoImages, newDinoImage]);
 
     setImagePathDino("");
-    setFileNameDino("");
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -143,7 +139,7 @@ const CreateDinoFormDashboard = () => {
         periodDescription
       );
 
-      setCreatedDino(dino);
+      setCreatedDino(dino.data.dino);
     };
 
     addDino();
@@ -159,13 +155,12 @@ const CreateDinoFormDashboard = () => {
           loc.place,
           loc.latitude,
           loc.longitude,
-          createdDino.id
+          createdDino._id
         );
       });
 
       dinoImages.forEach(async (img) => {
-        console.log(img.imagePath);
-        await addImage(img.imagePath, img.fileName, createdDino.id);
+        await addImage(img.imagePath, createdDino._id);
       });
     };
 
@@ -464,16 +459,6 @@ const CreateDinoFormDashboard = () => {
                   />
                 </label>
               </label>
-              <label className="flex flex-col flex-1">
-                <span>Назва</span>
-                <input
-                  className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
-                  type="text"
-                  placeholder="Вкажіть назву файлу"
-                  value={fileNameDino}
-                  onChange={(e) => setFileNameDino(e.target.value)}
-                />
-              </label>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 items-center sm:items-start">
               <button
@@ -485,12 +470,12 @@ const CreateDinoFormDashboard = () => {
               </button>
               <div className="flex-1 flex gap-4 flex-wrap bg-slateGray p-2 text-white w-full">
                 {dinoImages.length > 0
-                  ? dinoImages.map((image) => (
+                  ? dinoImages.map((image, i) => (
                       <div
                         key={image.id}
                         className="bg-brightOrange text-white flex items-center gap-2 py-1 px-2 rounded-xl"
                       >
-                        <span>{image.fileName}</span>
+                        <span>{i}</span>
                         <button
                           className="hover:rotate-90 duration-300"
                           onClick={(e) => onHandleDeleteImage(e, image.id)}

@@ -25,6 +25,8 @@ import {
   dinoTypeLabels,
   dinoDietLabels,
   dinoPeriodLabels,
+  IDinoImages,
+  IDinoFoundLocation,
 } from "@/config/types";
 
 import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
@@ -61,8 +63,11 @@ const ChangeDinoFormDashboard = () => {
   const [searchDino, setSearchDino] = useState<string>("");
 
   const [dinoToChange, setDinoToChange] = useState<IDino>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [dinoToChangeImages, setDinoToChangeImages] = useState<IDinoImages[]>();
+  const [dinoToChangeLocations, setDinoToChangeLocations] =
+    useState<IDinoFoundLocation[]>();
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
 
   const [name, setName] = useState<string>("");
@@ -82,7 +87,6 @@ const ChangeDinoFormDashboard = () => {
   const [placeLoc, setPlaceLoc] = useState<string>("");
 
   const [imagePathDino, setImagePathDino] = useState<string>("");
-  const [fileNameDino, setFileNameDino] = useState<string>("");
 
   const [isChangedSomething, setIsChangedSomething] = useState<boolean>(false);
 
@@ -96,19 +100,21 @@ const ChangeDinoFormDashboard = () => {
     const getData = async () => {
       const dinoById = await getDinoById(id);
 
-      setName(dinoById.name);
-      setLatinName(dinoById.latinName);
-      setDescription(dinoById.description);
-      setTypeOfDino(dinoById.typeOfDino);
-      setDinoWeight(dinoById.weight);
-      setDinoLength(dinoById.length);
-      setDiet(dinoById.diet);
-      setDietDescription(dinoById.dietDescription);
-      setPeriod(dinoById.period);
-      setPeriodDate(dinoById.periodDate);
-      setPeriodDescription(dinoById.periodDescription);
+      setName(dinoById.dino.name);
+      setLatinName(dinoById.dino.latinName);
+      setDescription(dinoById.dino.description);
+      setTypeOfDino(dinoById.dino.typeOfDino);
+      setDinoWeight(dinoById.dino.weight);
+      setDinoLength(dinoById.dino.length);
+      setDiet(dinoById.dino.diet);
+      setDietDescription(dinoById.dino.dietDescription);
+      setPeriod(dinoById.dino.period);
+      setPeriodDate(dinoById.dino.periodDate);
+      setPeriodDescription(dinoById.dino.periodDescription);
 
-      setDinoToChange(dinoById);
+      setDinoToChange(dinoById.dino);
+      setDinoToChangeImages(dinoById.images);
+      setDinoToChangeLocations(dinoById.foundLocations);
     };
 
     setStep(2);
@@ -149,61 +155,30 @@ const ChangeDinoFormDashboard = () => {
   ) => {
     e.preventDefault();
 
+    await addFoundLocation(
+      placeLoc,
+      latitudeLoc.toString(),
+      longitudeLoc.toString(),
+      dinoToChange?._id || "random"
+    );
+
+    setTimeout;
+
+    setLatitudeLoc(0);
+    setLongitudeLoc(0);
+    setPlaceLoc("");
+
     setIsChangedSomething(true);
-
-    // await addFoundLocation(
-    //   placeLoc,
-    //   latitudeLoc.toString(),
-    //   longitudeLoc.toString(),
-    //   dinoToChange?._id || 0
-    // );
-
-    // setLatitudeLoc(0);
-    // setLongitudeLoc(0);
-    // setPlaceLoc("");
-
-    setIsChangedSomething(false);
   };
 
   const onHandleDeleteFoundLocation = async (
     e: React.MouseEvent<HTMLButtonElement>,
-    id: number
+    id: string
   ) => {
     e.preventDefault();
 
+    await deleteFoundLocation(id);
     setIsChangedSomething(true);
-    // await deleteFoundLocation(_id);
-    setIsChangedSomething(false);
-  };
-
-  const onHandleAddImage = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    setIsChangedSomething(true);
-
-    // await addImage(imagePathDino, fileNameDino, dinoToChange?._id || 0);
-
-    // setImagePathDino("");
-    // setFileNameDino("");
-
-    setIsChangedSomething(false);
-  };
-
-  const onHandleDeleteImage = async (
-    e: React.MouseEvent<HTMLButtonElement>,
-    id: number
-  ) => {
-    e.preventDefault();
-
-    setIsChangedSomething(true);
-    await deleteImage(id);
-    setIsChangedSomething(false);
-  };
-
-  const handleDeleteDino = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    await deleteDino(dinoToChange?._id || "random");
-    setStep(1);
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -218,6 +193,31 @@ const ChangeDinoFormDashboard = () => {
         console.error("Помилка при читанні файлу:", error);
       };
     }
+  };
+
+  const onHandleAddImage = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    await addImage(imagePathDino, dinoToChange?._id || "random");
+    setImagePathDino("");
+
+    setIsChangedSomething(true);
+  };
+
+  const onHandleDeleteImage = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    id: string
+  ) => {
+    e.preventDefault();
+
+    await deleteImage(id);
+    setIsChangedSomething(true);
+  };
+
+  const handleDeleteDino = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    await deleteDino(dinoToChange?._id || "random");
+    setStep(1);
   };
 
   const resetForm = () => {
@@ -281,7 +281,7 @@ const ChangeDinoFormDashboard = () => {
       const getData = async () => {
         const dinosData = await getDinos(1000, 0);
 
-        setDinos(dinosData.content);
+        setDinos(dinosData);
       };
 
       getData();
@@ -290,33 +290,33 @@ const ChangeDinoFormDashboard = () => {
 
   useEffect(() => {
     if (isChangedSomething) {
-      console.log(`hello`);
       const getData = async () => {
         const dinoById = await getDinoById(dinoToChange?._id || "random");
 
-        setName(dinoById.name);
-        setLatinName(dinoById.latinName);
-        setDescription(dinoById.description);
-        setTypeOfDino(dinoById.typeOfDino);
-        setDinoWeight(dinoById.weight);
-        setDinoLength(dinoById.length);
-        setDiet(dinoById.diet);
-        setDietDescription(dinoById.dietDescription);
-        setPeriod(dinoById.period);
-        setPeriodDate(dinoById.periodDate);
-        setPeriodDescription(dinoById.periodDescription);
+        setName(dinoById.dino.name);
+        setLatinName(dinoById.dino.latinName);
+        setDescription(dinoById.dino.description);
+        setTypeOfDino(dinoById.dino.typeOfDino);
+        setDinoWeight(dinoById.dino.weight);
+        setDinoLength(dinoById.dino.length);
+        setDiet(dinoById.dino.diet);
+        setDietDescription(dinoById.dino.dietDescription);
+        setPeriod(dinoById.dino.period);
+        setPeriodDate(dinoById.dino.periodDate);
+        setPeriodDescription(dinoById.dino.periodDescription);
 
-        setDinoToChange(dinoById);
-
-        console.log(dinoById.images);
+        setDinoToChange(dinoById.dino);
+        setDinoToChangeImages(dinoById.images);
+        setDinoToChangeLocations(dinoById.foundLocations);
       };
 
       setIsLoading(true);
 
       setTimeout(() => {
         setIsLoading(false);
+        setIsChangedSomething(false);
         getData();
-      }, 1000);
+      }, 2000);
     }
   }, [isChangedSomething]);
 
@@ -556,16 +556,6 @@ const ChangeDinoFormDashboard = () => {
                       />
                     </label>
                   </label>
-                  <label className="flex flex-col w-full flex-1">
-                    <span>Назва</span>
-                    <input
-                      className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
-                      type="text"
-                      placeholder="Вкажіть назву файлу"
-                      value={fileNameDino}
-                      onChange={(e) => setFileNameDino(e.target.value)}
-                    />
-                  </label>
 
                   <button
                     className="bg-green-300 block hover:bg-green-500 px-10 h-11 w-full md:w-auto"
@@ -576,7 +566,7 @@ const ChangeDinoFormDashboard = () => {
                   </button>
                 </div>
 
-                {dinoToChange?.images && dinoToChange?.images.length === 0 ? (
+                {dinoToChangeImages && dinoToChangeImages.length === 0 ? (
                   <span>Немає картинок</span>
                 ) : (
                   <div className="embla">
@@ -585,18 +575,14 @@ const ChangeDinoFormDashboard = () => {
                       ref={emblaRef}
                     >
                       <div className="embla__container-dino-images-dashboard gap-4">
-                        {dinoToChange?.images &&
-                          dinoToChange?.images.map((image) => (
+                        {dinoToChangeImages &&
+                          dinoToChangeImages.map((image, i) => (
                             <div
-                              key={image.id}
+                              key={image._id}
                               className="embla__slide-dino-images-dashboard group relative flex flex-col text-center"
                             >
                               <Image
-                                src={
-                                  image.image
-                                    ? `data:image/jpg;base64,${image.image}`
-                                    : imageNotFound
-                                }
+                                src={image.file ? image.file : imageNotFound}
                                 width={800}
                                 height={800}
                                 alt="dino image"
@@ -606,13 +592,13 @@ const ChangeDinoFormDashboard = () => {
                                 type="button"
                                 className="absolute hidden group-hover:block cursor-pointer w-full h-full bg-fieryRed bg-opacity-80 text-white"
                                 onClick={(e) =>
-                                  onHandleDeleteImage(e, image.id)
+                                  onHandleDeleteImage(e, image._id)
                                 }
                               >
                                 Видалити
                               </button>
                               <span className="bg-brightOrange text-white">
-                                {image.fileName || "Без назви"}
+                                {i + 1}
                               </span>
                             </div>
                           ))}
@@ -686,8 +672,7 @@ const ChangeDinoFormDashboard = () => {
                   </button>
                 </div>
 
-                {dinoToChange?.foundLocations &&
-                dinoToChange?.foundLocations.length === 0 ? (
+                {dinoToChangeLocations && dinoToChangeLocations.length === 0 ? (
                   <span>Немає місць</span>
                 ) : (
                   <div className="embla">
@@ -696,17 +681,17 @@ const ChangeDinoFormDashboard = () => {
                       ref={emblaRef2}
                     >
                       <div className="embla__container-dino-found-location-dashboard gap-4">
-                        {dinoToChange?.foundLocations &&
-                          dinoToChange?.foundLocations.map((loc) => (
+                        {dinoToChangeLocations &&
+                          dinoToChangeLocations.map((loc) => (
                             <div
-                              key={loc.id}
+                              key={loc._id}
                               className="embla__slide-dino-found-location-dashboard group relative flex flex-col gap-1 bg-slateGray text-white py-2 px-5"
                             >
                               <button
                                 type="button"
                                 className="absolute hidden group-hover:block cursor-pointer w-full h-full bg-fieryRed bg-opacity-80 text-white top-0 left-0"
                                 onClick={(e) =>
-                                  onHandleDeleteFoundLocation(e, loc.id)
+                                  onHandleDeleteFoundLocation(e, loc._id)
                                 }
                               >
                                 Видалити

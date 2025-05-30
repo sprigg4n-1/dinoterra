@@ -29,8 +29,7 @@ export interface IDino {
   periodDescription: string;
   diet: string;
   dietDescription: string;
-  foundLocations: IDinoFoundLocation[];
-  images: IDinoImages[];
+  image?: string;
 }
 
 export interface IDinoFav {
@@ -52,17 +51,16 @@ export interface IDinoFav {
 }
 
 export interface IDinoFoundLocation {
-  id: number;
-  latitude: string;
-  longitude: string;
+  _id: string;
+  latitude: number;
+  longitude: number;
   place: string;
-  dino_id: number;
+  dino: string;
 }
 export interface IDinoImages {
-  id: number;
-  image: string;
-  fileName: string;
-  dino_id: number;
+  _id: string;
+  file: string;
+  dino: string;
 }
 
 // enums

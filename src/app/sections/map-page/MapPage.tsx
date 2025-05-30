@@ -67,13 +67,13 @@ const MapPage = () => {
   }, [isReseted]);
 
   useEffect(() => {
-    // const getLocationDino = async () => {
-    //   if (!hoveredLocation) return;
-    //   const dinoData = await getDinoById(hoveredLocation.dino_id);
-    //   console.log(dinoData);
-    //   setLocationDino(dinoData);
-    // };
-    // getLocationDino();
+    const getLocationDino = async () => {
+      if (!hoveredLocation) return;
+      const dinoData = await getDinoById(hoveredLocation.dino);
+      setLocationDino(dinoData);
+    };
+
+    getLocationDino();
   }, [hoveredLocation]);
 
   return (
@@ -230,7 +230,7 @@ const MapPage = () => {
         {locations &&
           locations.map((loc) => (
             <Marker
-              key={loc.id}
+              key={loc._id}
               longitude={loc.longitude}
               latitude={loc.latitude}
               color={"red"}
@@ -258,8 +258,8 @@ const MapPage = () => {
             <div className="w-full text-center flex flex-col">
               <Image
                 src={
-                  locationDino && locationDino?.images.length > 0
-                    ? `data:image/jpg;base64,${locationDino?.images[0].image}`
+                  locationDino && locationDino.image
+                    ? locationDino.image
                     : imageNotFound
                 }
                 width={4000}
@@ -270,7 +270,7 @@ const MapPage = () => {
               />
 
               <Link
-                href={`/encyclopedia/${hoveredLocation.dino_id}`}
+                href={`/encyclopedia/${hoveredLocation.dino}`}
                 className=" text-white text-[14px] md:text-[18px] text-center w-full hover:bg-brightOrange py-2"
               >
                 {locationDino?.name}

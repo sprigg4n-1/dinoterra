@@ -1,18 +1,16 @@
 import axios from "axios";
 
-import { BASE_URL_DINO } from "@/config/config";
+import { BASE_DEV_API_URL } from "@/config/config";
 
-export const addImage = async (
-  imagePath: string,
-  fileName: string,
-  dino_id: number
-) => {
+export const addImage = async (file: string, dino_id: string) => {
   try {
-    const response = await axios.post(`${BASE_URL_DINO}/images`, {
-      imagePath: imagePath,
-      fileName: fileName,
-      dino_id: dino_id,
-    });
+    const response = await axios.post(
+      `${BASE_DEV_API_URL}/dinos/upload-image`,
+      {
+        file: file,
+        dino: dino_id,
+      }
+    );
 
     console.log(response.data);
     return response.data;
@@ -21,10 +19,25 @@ export const addImage = async (
   }
 };
 
-export const deleteImage = async (id: number) => {
+export const deleteImage = async (id: string) => {
   try {
-    const response = await axios.delete(`${BASE_URL_DINO}/images/${id}`);
+    const response = await axios.delete(
+      `${BASE_DEV_API_URL}/dinos/images/${id}`
+    );
 
+    return response.data;
+  } catch (error) {
+    console.error(`Error with deleting image: ${error}`);
+  }
+};
+
+export const getImagesByDinoId = async (id: string) => {
+  try {
+    const response = await axios.delete(
+      `${BASE_DEV_API_URL}/dinos/${id}/images`
+    );
+
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(`Error with deleting image: ${error}`);

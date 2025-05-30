@@ -24,13 +24,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
       console.log(res);
 
-      // if (res.success) {
-      //   setIsAuthenticated(true);
-      //   setUser(res.data);
-      // } else {
-      //   setIsAuthenticated(false);
-      //   setUser(null);
-      // }
+      if (res.success) {
+        setIsAuthenticated(true);
+        setUser(res.data);
+      } else {
+        setIsAuthenticated(false);
+        setUser(null);
+      }
     };
 
     fetchStatus();

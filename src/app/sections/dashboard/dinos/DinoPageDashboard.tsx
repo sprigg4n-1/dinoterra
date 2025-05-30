@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 
 import Autoplay from "embla-carousel-autoplay";
 
-import { IDino } from "@/config/types";
+import { IDino, IDinoFoundLocation, IDinoImages } from "@/config/types";
 
 import {
   EDinoPeriod,
@@ -22,7 +22,15 @@ import Link from "next/link";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
 
-const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
+const DinoPageDashboard = ({
+  dino,
+  images,
+  foundLocations,
+}: {
+  dino: IDino;
+  images: IDinoImages[];
+  foundLocations: IDinoFoundLocation[];
+}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: false,
@@ -49,16 +57,12 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
 
       <div className="lg:hidden embla-dino-page-images" ref={emblaRef}>
         <div className="embla__container-dino-page-images gap-10">
-          {dino?.images &&
-            dino.images.map((image) => (
+          {images &&
+            images.map((image: any) => (
               <Image
                 className="embla__slide-dino-page-images border-4 border-slateGray w-auto h-[250px] sm:h-[400px] object-fill"
-                key={image.id}
-                src={
-                  dino.images.length > 0
-                    ? `data:image/jpg;base64,${image.image}`
-                    : imageNotFound
-                }
+                key={image._id}
+                src={images.length > 0 ? image.file : imageNotFound}
                 width={1000}
                 height={500}
                 alt="dino photo"
@@ -71,16 +75,12 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
         {showAllImages ? (
           <>
             <div className="flex flex-col gap-5 items-center">
-              {dino?.images &&
-                dino.images.map((image) => (
+              {images &&
+                images.map((image) => (
                   <Image
                     className="border-4 border-slateGray w-auto h-auto max-w-[800px] max-h-[500px]"
-                    key={image.id}
-                    src={
-                      dino?.images && dino.images.length > 0
-                        ? `data:image/jpg;base64,${image.image}`
-                        : imageNotFound
-                    }
+                    key={image._id}
+                    src={images.length > 0 ? image.file : imageNotFound}
                     width={2000}
                     height={1000}
                     alt="dino photo"
@@ -102,12 +102,8 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
           <>
             <Image
               className="border-4 border-slateGray w-auto h-auto max-w-[800px] max-h-[500px]"
-              key={dino?.images && dino.images[0].id}
-              src={
-                dino?.images && dino.images.length > 0
-                  ? `data:image/jpg;base64,${dino.images[0].image}`
-                  : imageNotFound
-              }
+              key={images[0]._id}
+              src={images && images.length > 0 ? images[0].file : imageNotFound}
               width={2000}
               height={1000}
               alt="dino photo"
@@ -179,19 +175,17 @@ const DinoPageDashboard = ({ dino }: { dino: IDino }) => {
         <div className="h-[250px] sm:h-[500px] w-full">
           <Map
             initialViewState={{
-              // longitude: +dino.foundLocations[0].longitude || 0,
-              // latitude: +dino.foundLocations[0].latitude || 0,
-              longitude: 0,
-              latitude: 0,
+              longitude: foundLocations[0]?.longitude,
+              latitude: foundLocations[0]?.latitude,
               zoom: 1.5,
             }}
             style={{ width: "100%", height: "100%" }}
             mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
           >
-            {dino?.foundLocations &&
-              dino.foundLocations.map((loc) => (
+            {foundLocations &&
+              foundLocations.map((loc) => (
                 <Marker
-                  key={loc.id}
+                  key={loc._id}
                   longitude={loc.longitude}
                   latitude={loc.latitude}
                   color="red"

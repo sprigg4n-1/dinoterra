@@ -219,7 +219,7 @@ const AccountPage = () => {
                     <Image
                       src={
                         dino.images.length > 0
-                          ? `data:image/jpg;base64,${dino.images[0].image}`
+                          ? `data:image/jpg;base64,${dino.images[0].file}`
                           : avatar
                       }
                       className="w-auto h-[200px] lg:h-[300px] object-fill"

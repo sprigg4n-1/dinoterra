@@ -18,6 +18,8 @@ import {
   EDinoPeriod,
   EDinoType,
   IDino,
+  IDinoFoundLocation,
+  IDinoImages,
   IUser,
 } from "@/config/types";
 
@@ -31,7 +33,15 @@ import trsDino from "@/images/dino-page/triassic-period-popular-dino.webp";
 import jrsDino from "@/images/dino-page/jurassic-period-popular-dino.jpg";
 import crsDino from "@/images/dino-page/cretaceous-period-popular-dino.webp";
 
-const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
+const EncyclopediaDinoPage = ({
+  dino,
+  images,
+  foundLocations,
+}: {
+  dino: IDino;
+  images: IDinoImages[];
+  foundLocations: IDinoFoundLocation[];
+}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     slidesToScroll: "auto",
@@ -97,11 +107,7 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
       <div className="flex flex-col md:flex-row gap-3 md:gap-5 border-b-4 pb-3 mb-3 md:pb-5 md:mb-5">
         <div className="h-fit flex flex-col border-2 border-brightOrange">
           <Image
-            src={
-              dino?.images && dino.images.length > 0
-                ? `data:image/jpg;base64,${dino.images[0].image}`
-                : imageNotFound
-            }
+            src={images && images.length > 0 ? images[0].file : imageNotFound}
             alt="main image"
             width={4000}
             height={2000}
@@ -139,13 +145,11 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
             </p>
             <p className="text-[16px] lg:text-[18px]">
               <span className="font-medium">Вага:</span>{" "}
-              {/* {dino?.weight.toFixed(2)}кг */}
-              {dino?.weight}кг
+              {dino?.weight.toFixed(2)}кг
             </p>
             <p className="text-[16px] lg:text-[18px]">
               <span className="font-medium">Розмір:</span>{" "}
-              {/* {dino?.length.toFixed(2)}м */}
-              {dino?.length}м
+              {dino?.length.toFixed(2)}м
             </p>
             <p className="text-[16px] lg:text-[18px]">
               <span className="font-medium">Харчування:</span>{" "}
@@ -205,7 +209,7 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
       </div>
 
       <div className="flex flex-col gap-3 md:gap-5 border-b-4 pb-3 mb-3 md:pb-5 md:mb-5">
-        {dino?.images && dino.images.slice(1).length > 0 ? (
+        {images && images.slice(1).length > 0 ? (
           <>
             <h2 className="text-[20px] lg:text-[24px] font-semibold text-center">
               Всі картинки
@@ -213,10 +217,10 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
             <div className="embla">
               <div className="embla__viewport-intro-rec-dino" ref={emblaRef2}>
                 <div className="embla__container-intro-rec-dino gap-5">
-                  {dino.images.slice(1).map((item) => (
+                  {images.slice(1).map((item) => (
                     <Image
-                      key={item.id}
-                      src={`data:image/jpg;base64,${item.image}`}
+                      key={item._id}
+                      src={item.file}
                       alt="image"
                       width={4000}
                       height={2000}
@@ -241,10 +245,8 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
         <div className="mx-auto w-full h-[300px] sm:h-[450px] lg:h-[700px]">
           <Map
             initialViewState={{
-              // longitude: +dino?.foundLocations[0]?.longitude || 0,
-              // latitude: +dino?.foundLocations[0]?.latitude || 0,
-              longitude: 0,
-              latitude: 0,
+              longitude: foundLocations[0]?.longitude || 0,
+              latitude: foundLocations[0]?.latitude || 0,
               zoom: 3.5,
             }}
             style={{ width: "100%", height: "100%" }}
@@ -255,10 +257,10 @@ const EncyclopediaDinoPage = ({ dino }: { dino: IDino }) => {
             dragRotate={false}
             mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
           >
-            {dino?.foundLocations &&
-              dino.foundLocations.map((loc) => (
+            {foundLocations &&
+              foundLocations.map((loc) => (
                 <Marker
-                  key={loc.id}
+                  key={loc._id}
                   longitude={loc.longitude}
                   latitude={loc.latitude}
                   color="red"

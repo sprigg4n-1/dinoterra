@@ -55,11 +55,7 @@ const DinoCard = ({
         } overflow-hidden`}
       >
         <Image
-          src={
-            dino?.images && dino.images.length > 0
-              ? `data:image/jpg;base64,${dino.images[0].image}`
-              : imageNotFound
-          }
+          src={dino.image ? dino.image : imageNotFound}
           width={1600}
           height={1600}
           alt="dino image"
