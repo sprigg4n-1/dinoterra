@@ -15,6 +15,12 @@ export enum EUserRole {
   USER = "USER",
 }
 
+export interface IUserImages {
+  _id: string;
+  file: string;
+  user: string;
+}
+
 // dino types
 export interface IDino {
   _id: string;
@@ -33,21 +39,9 @@ export interface IDino {
 }
 
 export interface IDinoFav {
-  id: number;
-  name: string;
-  latinName: string;
-  description: string;
-  typeOfDino: string;
-  length: number;
-  weight: number;
-  period: string;
-  periodDate: string;
-  periodDescription: string;
-  diet: string;
-  dietDescription: string;
-  foundLocations: IDinoFoundLocation[];
-  images: IDinoImages[];
-  favId: number;
+  _id: string;
+  dino: IDino;
+  image: IDinoImages;
 }
 
 export interface IDinoFoundLocation {

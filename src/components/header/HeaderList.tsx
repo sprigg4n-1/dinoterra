@@ -16,6 +16,7 @@ import close from "@/images/vectors/close.svg";
 import logo from "@/images/logo.svg";
 
 import avatar from "@/images/avatar/avatar.jpg";
+import { IUserImages } from "@/config/types";
 
 type HeaderItem = {
   link: string;
@@ -53,7 +54,7 @@ const HeaderList = () => {
   const [activeItem, setActiveItem] = useState<string>(HEADER_ITEMS[0].label);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const [profilePhoto, setProfilePhoto] = useState<any>(null);
+  const [profilePhoto, setProfilePhoto] = useState<IUserImages | null>(null);
 
   const toggleActiveItem = (newAcitveItem: string) => {
     setActiveItem(newAcitveItem);
@@ -63,9 +64,10 @@ const HeaderList = () => {
   };
 
   const fetchData = async () => {
-    // const userData = await getUserByToken();
-    // const profilePhotoData = await getUserProfilePhoto(userData.id);
-    // if (profilePhotoData) setProfilePhoto(profilePhotoData);
+    if (user) {
+      const { image } = await getUserProfilePhoto(user._id);
+      setProfilePhoto(image);
+    }
   };
 
   // use effects
@@ -79,7 +81,7 @@ const HeaderList = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     fetchData();
@@ -103,11 +105,7 @@ const HeaderList = () => {
             href={"/account"}
           >
             <Image
-              src={
-                profilePhoto && profilePhoto?.image
-                  ? `data:image/jpg;base64,${profilePhoto.image}`
-                  : avatar
-              }
+              src={profilePhoto ? profilePhoto.file : avatar}
               width={1600}
               height={1600}
               className="w-10 h-10 object-cover rounded-full hover:scale-105 duration-300 cursor-pointer"
@@ -187,11 +185,7 @@ const HeaderList = () => {
               onClick={() => setIsOpen(false)}
             >
               <Image
-                src={
-                  profilePhoto && profilePhoto?.image
-                    ? `data:image/jpg;base64,${profilePhoto.image}`
-                    : avatar
-                }
+                src={profilePhoto ? profilePhoto.file : avatar}
                 width={1600}
                 height={1600}
                 className="w-10 h-10 object-cover rounded-full hover:scale-105 duration-300 cursor-pointer"

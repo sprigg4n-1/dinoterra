@@ -234,29 +234,29 @@ const ChangeDinoFormDashboard = () => {
     setPeriodDescription(dinoToChange?.periodDescription || "");
   };
 
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
+  // const scrollPrev = useCallback(() => {
+  //   if (emblaApi) emblaApi.scrollPrev();
+  // }, [emblaApi]);
 
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
+  // const scrollNext = useCallback(() => {
+  //   if (emblaApi) emblaApi.scrollNext();
+  // }, [emblaApi]);
 
-  const scrollPrev2 = useCallback(() => {
-    if (emblaApi2) emblaApi2.scrollPrev();
-  }, [emblaApi2]);
+  // const scrollPrev2 = useCallback(() => {
+  //   if (emblaApi2) emblaApi2.scrollPrev();
+  // }, [emblaApi2]);
 
-  const scrollNext2 = useCallback(() => {
-    if (emblaApi2) emblaApi2.scrollNext();
-  }, [emblaApi2]);
+  // const scrollNext2 = useCallback(() => {
+  //   if (emblaApi2) emblaApi2.scrollNext();
+  // }, [emblaApi2]);
 
   // use effects
   useEffect(() => {
     const getData = async () => {
       const dinosData = await getDinos(1000, 0);
 
-      setDinos(dinosData);
-      setFinalDinos(dinosData);
+      setDinos(dinosData.dinos);
+      setFinalDinos(dinosData.dinos);
     };
 
     getData();
@@ -281,7 +281,7 @@ const ChangeDinoFormDashboard = () => {
       const getData = async () => {
         const dinosData = await getDinos(1000, 0);
 
-        setDinos(dinosData);
+        setDinos(dinosData.dinos);
       };
 
       getData();
@@ -316,7 +316,7 @@ const ChangeDinoFormDashboard = () => {
         setIsLoading(false);
         setIsChangedSomething(false);
         getData();
-      }, 2000);
+      }, 1000);
     }
   }, [isChangedSomething]);
 
@@ -604,7 +604,7 @@ const ChangeDinoFormDashboard = () => {
                           ))}
                       </div>
                     </div>
-
+                    {/* 
                     <div className="flex justify-between mt-2">
                       <button
                         className="border-2 border-darkGray rounded-full px-5 hover:bg-darkGray hover:bg-opacity-20 text-[14px] sm:text-[16px]"
@@ -618,7 +618,7 @@ const ChangeDinoFormDashboard = () => {
                       >
                         Наступний
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 )}
               </div>
@@ -707,7 +707,7 @@ const ChangeDinoFormDashboard = () => {
                           ))}
                       </div>
                     </div>
-                    <div className="flex justify-between mt-2">
+                    {/* <div className="flex justify-between mt-2">
                       <button
                         className="border-2 border-darkGray rounded-full px-5 hover:bg-darkGray hover:bg-opacity-20 text-[14px] sm:text-[16px]"
                         onClick={scrollPrev2}
@@ -720,7 +720,7 @@ const ChangeDinoFormDashboard = () => {
                       >
                         Наступний
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 )}
               </div>

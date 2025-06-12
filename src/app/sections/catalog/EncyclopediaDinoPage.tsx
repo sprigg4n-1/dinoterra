@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
-import { getFiveRandomDinos, getSimilarDinos } from "@/services/DinoService";
+import { getSimilarDinos } from "@/services/DinoService";
 import {
   addFavoriteDino,
   isFavoriteDino,
@@ -32,6 +32,7 @@ import imageNotFound from "@/images/not-found/image-not-found.webp";
 import trsDino from "@/images/dino-page/triassic-period-popular-dino.webp";
 import jrsDino from "@/images/dino-page/jurassic-period-popular-dino.jpg";
 import crsDino from "@/images/dino-page/cretaceous-period-popular-dino.webp";
+import { useAuth } from "@/hooks/useAuth";
 
 const EncyclopediaDinoPage = ({
   dino,
@@ -52,7 +53,8 @@ const EncyclopediaDinoPage = ({
     slidesToScroll: "auto",
   });
 
-  const [user, setUser] = useState<IUser>();
+  const { user } = useAuth();
+
   const [dinos, setDinos] = useState<IDino[]>([]);
   const [isDinoInFav, setIsDinoInFav] = useState<boolean>(false);
 
@@ -60,8 +62,8 @@ const EncyclopediaDinoPage = ({
   const onClickAddToFav = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    // await addFavoriteDino(user?.id || 0, dino._id);
-    // await checkFav();
+    await addFavoriteDino(user?._id || "random", dino._id);
+    await checkFav();
   };
 
   const onClickRemoveFromFav = async (
@@ -69,26 +71,26 @@ const EncyclopediaDinoPage = ({
   ) => {
     e.preventDefault();
 
-    // await removeFavoriteDino(user?.id || 0, dino._id);
-    // await checkFav();
+    await removeFavoriteDino(user?._id || "random", dino._id);
+    await checkFav();
   };
 
   const checkFav = async () => {
-    // const isFav = await isFavoriteDino(user?.id || 0, dino.id);
-    // setIsDinoInFav(isFav);
+    const isFav = await isFavoriteDino(user?._id || "random", dino._id);
+    setIsDinoInFav(isFav);
   };
 
   // use effects
   useEffect(() => {
-    const getData = async () => {
-      // const userData = await getUserByToken();
-      // const isFav = await isFavoriteDino(userData.id || 0, dino.id);
-      // setIsDinoInFav(isFav);
-      // setUser(userData);
-    };
+    if (user) {
+      const isFav = async () => {
+        const isFav = await isFavoriteDino(user._id, dino._id);
+        setIsDinoInFav(isFav);
+      };
 
-    getData();
-  }, []);
+      isFav();
+    }
+  }, [user]);
 
   useEffect(() => {
     const getData = async () => {

@@ -11,7 +11,7 @@ import EncyclopediaFilter from "./EncyclopediaFilter";
 import DinoCard from "@/components/dino/DinoCard";
 import LoaderComponent from "@/components/LoaderComponent";
 
-const SHOW_LIMIT = 18;
+const SHOW_LIMIT = 6;
 
 const EncyclopediaPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -90,8 +90,8 @@ const EncyclopediaPage = () => {
       pagination.setPage(1);
     }
 
-    setDinos(dinosData);
-    setTotalPages(Math.ceil(dinosData.length / SHOW_LIMIT));
+    setDinos(dinosData.dinos);
+    setTotalPages(Math.ceil(dinosData.count / SHOW_LIMIT));
     setIsLoading(false);
   };
 

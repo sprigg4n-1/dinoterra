@@ -19,7 +19,7 @@ const MapPage = () => {
   const [locations, setLocations] = useState<IDinoFoundLocation[]>([]);
   const [hoveredLocation, setHoveredLocation] =
     useState<IDinoFoundLocation | null>(null);
-  const [locationDino, setLocationDino] = useState<IDino | null>(null);
+  const [locationDino, setLocationDino] = useState<any>(null);
 
   const [searchLocation, setSearchLocation] = useState<string>("");
   const [period, setPeriod] = useState<string>("");
@@ -70,6 +70,7 @@ const MapPage = () => {
     const getLocationDino = async () => {
       if (!hoveredLocation) return;
       const dinoData = await getDinoById(hoveredLocation.dino);
+      console.log(dinoData);
       setLocationDino(dinoData);
     };
 
@@ -258,8 +259,8 @@ const MapPage = () => {
             <div className="w-full text-center flex flex-col">
               <Image
                 src={
-                  locationDino && locationDino.image
-                    ? locationDino.image
+                  locationDino?.images && locationDino.images.length > 0
+                    ? locationDino.images[0].file
                     : imageNotFound
                 }
                 width={4000}
@@ -273,7 +274,7 @@ const MapPage = () => {
                 href={`/encyclopedia/${hoveredLocation.dino}`}
                 className=" text-white text-[14px] md:text-[18px] text-center w-full hover:bg-brightOrange py-2"
               >
-                {locationDino?.name}
+                {locationDino?.dino.name}
               </Link>
             </div>
           </div>

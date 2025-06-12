@@ -1,10 +1,6 @@
 import axios from "axios";
 
-import {
-  BASE_URL_SECURITY,
-  BASE_URL_DINO,
-  BASE_DEV_API_URL,
-} from "@/config/config";
+import { BASE_DEV_API_URL } from "@/config/config";
 
 // auth
 export const registerUser = async (
@@ -85,19 +81,7 @@ export const checkStatus = async () => {
   }
 };
 
-// export const getUserByToken = async () => {
-//   try {
-//     const response = await axios.get(`${BASE_URL_SECURITY}/user-data`, {
-//       withCredentials: true,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error(`Error with getting user`);
-//   }
-// };
-
-// admin and user
+// user
 
 export const getUsers = async () => {
   try {
@@ -119,76 +103,35 @@ export const getUserById = async (id: number) => {
   }
 };
 
-export const changeUser = async (
-  id: number,
-  name: string,
-  lastname: string,
-  username: string,
-  password: string,
-  role: string
-) => {
-  try {
-    const response = await axios.put(
-      `${BASE_URL_SECURITY}/users/${id}`,
-      {
-        name: name,
-        lastname: lastname,
-        username: username,
-        password: password,
-        role: role,
-      },
-      {
-        withCredentials: true,
-      }
-    );
-
-    return response.data;
-  } catch (error) {
-    console.error(`Error with changing user: ${error}`);
-  }
-};
-
-export const updateUserProfilePhoto = async (
-  userId: number,
-  imagePath: string
-) => {
-  try {
-    const response = await axios.post(
-      `${BASE_URL_SECURITY}/users/update-profile-photo/${userId}`,
-      { imagePath },
-      {
-        withCredentials: true,
-      }
-    );
-
-    return response.data;
-  } catch (error) {
-    console.error(`Error with adding profile photo: ${error}`);
-  }
-};
-
-export const getUserProfilePhoto = async (userId: number) => {
+export const getUserProfilePhoto = async (userId: string) => {
   try {
     const response = await axios.get(
-      `${BASE_URL_SECURITY}/users/profile-photo/${userId}`,
-      {
-        withCredentials: true,
-      }
+      `${BASE_DEV_API_URL}/users/images/${userId}`
     );
 
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error(`Error with getting profile photo: ${error}`);
   }
 };
 
-export const deleteUserProfilePhoto = async (userId: number) => {
+export const uploadUserProfilePhoto = async (user: string, file: string) => {
+  try {
+    const response = await axios.post(
+      `${BASE_DEV_API_URL}/users/upload-image`,
+      { file: file, user: user }
+    );
+
+    return response.data.data;
+  } catch (error) {
+    console.error(`Error with adding profile photo: ${error}`);
+  }
+};
+
+export const deleteUserProfilePhoto = async (id: string) => {
   try {
     const response = await axios.delete(
-      `${BASE_URL_SECURITY}/users/profile-photo/${userId}`,
-      {
-        withCredentials: true,
-      }
+      `${BASE_DEV_API_URL}/users/images/${id}`
     );
 
     return response.data;
@@ -197,28 +140,13 @@ export const deleteUserProfilePhoto = async (userId: number) => {
   }
 };
 
-export const deleteUser = async (id: number) => {
-  try {
-    const response = await axios.delete(`${BASE_URL_SECURITY}/users/${id}`, {
-      withCredentials: true,
-    });
-
-    return response.data;
-  } catch (error) {
-    console.error(`Error with deleting user: ${error}`);
-  }
-};
-
 // favorite
-export const addFavoriteDino = async (userId: number, dinosaurId: number) => {
+export const addFavoriteDino = async (userId: string, dinosaurId: string) => {
   try {
-    const response = await axios.post(
-      `${BASE_URL_SECURITY}/fav-add?userId=${userId}&dinosaurId=${dinosaurId}`,
-      {},
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.post(`${BASE_DEV_API_URL}/users/favorites`, {
+      user: userId,
+      dino: dinosaurId,
+    });
     return response.data;
   } catch (error) {
     console.error(`Error adding dinosaur to favorites: ${error}`);
@@ -227,16 +155,14 @@ export const addFavoriteDino = async (userId: number, dinosaurId: number) => {
 };
 
 export const removeFavoriteDino = async (
-  userId: number,
-  dinosaurId: number
+  userId: string,
+  dinosaurId: string
 ) => {
   try {
     const response = await axios.delete(
-      `${BASE_URL_SECURITY}/fav-remove?userId=${userId}&dinosaurId=${dinosaurId}`,
-      {
-        withCredentials: true,
-      }
+      `${BASE_DEV_API_URL}/users/${userId}/favorites/${dinosaurId}`
     );
+
     return response.data;
   } catch (error) {
     console.error(`Error removing dinosaur from favorites: ${error}`);
@@ -244,35 +170,27 @@ export const removeFavoriteDino = async (
   }
 };
 
-export const getFavoriteDinos = async (userId: number) => {
+export const getFavoriteDinos = async (userId: string) => {
   try {
     const response = await axios.get(
-      `${BASE_URL_DINO}/dinos/fav-list/${userId}`,
-      {
-        withCredentials: true,
-      }
+      `${BASE_DEV_API_URL}/users/${userId}/favorites`
     );
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error(`Error getting favorite dinos: ${error}`);
     return null;
   }
 };
 
-export const isFavoriteDino = async (userId: number, dinoId: number) => {
+export const isFavoriteDino = async (userId: string, dinoId: string) => {
   try {
-    const params = new URLSearchParams();
+    const response = await axios.get(
+      `${BASE_DEV_API_URL}/users/${userId}/favorites/check/${dinoId}`
+    );
 
-    params.append("userId", userId.toString());
-    params.append("dinoId", dinoId.toString());
-
-    const response = await axios.get(`${BASE_URL_DINO}/isFavoriteDino`, {
-      params,
-      withCredentials: true,
-    });
-    return response.data;
+    return response.data.data.isFavorite;
   } catch (error) {
-    console.error(`Error getting favorite dinos: ${error}`);
+    console.error(`Error with check favorite dinos: ${error}`);
     return null;
   }
 };

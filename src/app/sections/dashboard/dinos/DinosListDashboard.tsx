@@ -19,9 +19,8 @@ const DinosListDashboard = () => {
     const getData = async () => {
       const dinosData = await getDinos(1000, 0);
 
-      console.log(dinosData);
-      setDinos(dinosData);
-      setFinalDinos(dinosData);
+      setDinos(dinosData.dinos);
+      setFinalDinos(dinosData.dinos);
     };
 
     getData();

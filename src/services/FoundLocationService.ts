@@ -4,14 +4,14 @@ import { BASE_DEV_API_URL } from "@/config/config";
 
 export const getFoundLocations = async (place?: string, period?: string) => {
   try {
-    // const params = new URLSearchParams();
+    const params = new URLSearchParams();
 
-    // if (place?.trim()) params.append("place", place.trim());
-    // if (period?.trim()) params.append("period", period.trim());
+    if (place?.trim()) params.append("place", place.trim());
+    if (period?.trim()) params.append("period", period.trim());
 
-    // const response = await axios.get(`${BASE_URL_DINO}/locations`, { params });
     const response = await axios.get(
-      `${BASE_DEV_API_URL}/dinos/found-locations`
+      `${BASE_DEV_API_URL}/dinos/found-locations`,
+      { params }
     );
 
     console.log(response.data);
