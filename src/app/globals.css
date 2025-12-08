@@ -6,7 +6,6 @@ html {
   scroll-behavior: smooth;
 }
 
-
 /* admin dashboard */
 .embla__viewport-dino-images-dashboard {
   overflow: hidden;
@@ -15,7 +14,7 @@ html {
   display: flex;
 }
 .embla__slide-dino-images-dashboard {
-  flex: 0 0 224px;
+  flex: 0 0 auto;
   min-width: 0;
 }
 

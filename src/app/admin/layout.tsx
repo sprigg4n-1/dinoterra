@@ -6,8 +6,13 @@ import { Tektur } from "next/font/google";
 import AsideDashboard from "@/app/sections/dashboard/AsideDashboard";
 import { MantineProvider } from "@mantine/core";
 import { AuthProvider } from "@/hooks/useAuth";
+import { Metadata } from "next";
 
 const tektur = Tektur({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "DinoTerra | Admin",
+};
 
 export default function DashboardLayout({
   children,

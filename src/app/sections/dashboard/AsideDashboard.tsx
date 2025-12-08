@@ -22,6 +22,8 @@ const AsideDashboard = () => {
       setActivePage("dinos");
     } else if (pathname === "/admin/dashboard/users") {
       setActivePage("users");
+    } else if (pathname === "/admin/dashboard/photos") {
+      setActivePage("photos");
     }
   }, [pathname]);
 
@@ -111,6 +113,22 @@ const AsideDashboard = () => {
               Користувачі
             </Link>
           </li>
+          <li>
+            <Link
+              href={"/admin/dashboard/photos"}
+              onClick={() => {
+                setActivePage("photos");
+                setIsOpen(false);
+              }}
+              className={`block w-full p-2 text-[16px] ${
+                activePage === "photos"
+                  ? " bg-brightOrange font-semibold text-white"
+                  : "text-black bg-softGray "
+              }`}
+            >
+              Перевірка фото
+            </Link>
+          </li>
 
           <li>
             <Link
@@ -150,6 +168,19 @@ const AsideDashboard = () => {
             }`}
           >
             Користувачі
+          </Link>
+        </li>
+        <li>
+          <Link
+            href={"/admin/dashboard/photos"}
+            onClick={() => setActivePage("photos")}
+            className={`block w-full p-2 text-[18px] ${
+              activePage === "photos"
+                ? " text-right bg-brightOrange font-semibold text-white"
+                : "text-black bg-softGray text-left"
+            }`}
+          >
+            Перевірка фото
           </Link>
         </li>
       </ul>
