@@ -28,9 +28,12 @@ export const registerUser = async (
     return response.data;
   } catch (error: any) {
     if (error.response && error.response.data) {
-      throw new Error(error.response.data);
+      console.error(error.response.data);
+    } else {
+      console.error("Network error");
     }
-    throw new Error("Network error");
+
+    return error?.response?.data;
   }
 };
 
@@ -48,8 +51,9 @@ export const loginUser = async (username: string, password: string) => {
     );
 
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Error with auth user: ${error}`);
+    return error?.response?.data;
   }
 };
 

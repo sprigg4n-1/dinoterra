@@ -29,15 +29,21 @@ const LoginPage = () => {
     e.preventDefault();
     setError("");
 
-    try {
-      const response = await loginUser(username, password);
+    const response = await loginUser(username, password);
 
-      console.log(response);
+    if (!response.success) {
+      if (response.message === "User not found") {
+        setError("Такого користувача не найдено");
+      }
 
-      if (response) router.replace("/");
-    } catch (error) {
-      console.error(`Error with login user: ${error}`);
+      if (response.message === "Invalid password") {
+        setError("Не правильний пароль");
+      }
+
+      return;
     }
+
+    router.replace("/");
   };
 
   // use effects

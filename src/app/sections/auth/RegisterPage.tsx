@@ -29,27 +29,37 @@ const RegisterPage = () => {
   // functions
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
 
-    if (password !== confirmPassword) {
-      alert("Паролі не співпадають");
+    const response = await registerUser(
+      name,
+      lastname,
+      username,
+      password,
+      email,
+      "USER"
+    );
+
+    console.log(response.success);
+
+    if (!response.success) {
+      if (response.message === "User with this username already exists") {
+        setErrorMessage("Нікнейм уже зайнятий");
+      }
+
+      if (response.message === "User with this email already exists") {
+        setErrorMessage("Пошта вже існує, спробуйте іншу");
+      }
+
       return;
     }
 
-    try {
-      const response = await registerUser(
-        name,
-        lastname,
-        username,
-        password,
-        email,
-        "USER"
-      );
-
-      console.log(response);
-      router.replace("/auth/login");
-    } catch (error) {
-      setErrorMessage("Сталася помилка. Спробуйте пізніше.");
+    if (password !== confirmPassword) {
+      setErrorMessage("Паролі не співпадають");
+      return;
     }
+
+    router.replace("/auth/login");
   };
 
   return (
@@ -116,7 +126,7 @@ const RegisterPage = () => {
             Пошта
           </span>
           <input
-            type="text"
+            type="email"
             required
             placeholder="Уведіть пошту"
             className="py-3 px-2 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
