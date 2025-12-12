@@ -2,36 +2,22 @@
 
 import "@mantine/carousel/styles.css";
 
-import React, { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
-import {
-  changeDino,
-  deleteDino,
-  getDinoById,
-  getDinos,
-} from "@/services/DinoService";
+import { deleteDino, getDinoById, getDinos } from "@/services/DinoService";
 import {
   addFoundLocation,
   deleteFoundLocation,
 } from "@/services/FoundLocationService";
 import { addImage, deleteImage } from "@/services/ImageService";
 
-import {
-  IDino,
-  EDinoPeriod,
-  EDinoDiet,
-  EDinoType,
-  dinoTypeLabels,
-  dinoDietLabels,
-  dinoPeriodLabels,
-  IDinoImages,
-  IDinoFoundLocation,
-} from "@/config/types";
+import { IDino, IDinoImages, IDinoFoundLocation } from "@/config/types";
 
 import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
 import LoaderComponent from "@/components/LoaderComponent";
 import Image from "next/image";
+import DinoForm from "./DinoForm";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
 
@@ -63,24 +49,13 @@ const ChangeDinoFormDashboard = () => {
   const [searchDino, setSearchDino] = useState<string>("");
 
   const [dinoToChange, setDinoToChange] = useState<IDino>();
+
   const [dinoToChangeImages, setDinoToChangeImages] = useState<IDinoImages[]>();
   const [dinoToChangeLocations, setDinoToChangeLocations] =
     useState<IDinoFoundLocation[]>();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
-
-  const [name, setName] = useState<string>("");
-  const [latinName, setLatinName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [typeOfDino, setTypeOfDino] = useState<string>(EDinoType.Unknown);
-  const [dinoLength, setDinoLength] = useState<number>(0);
-  const [dinoWeight, setDinoWeight] = useState<number>(0);
-  const [diet, setDiet] = useState<string>(EDinoDiet.Herbivores);
-  const [dietDescription, setDietDescription] = useState<string>("");
-  const [period, setPeriod] = useState<string>(EDinoPeriod.Cretaceous);
-  const [periodDate, setPeriodDate] = useState<string>("");
-  const [periodDescription, setPeriodDescription] = useState<string>("");
 
   const [latitudeLoc, setLatitudeLoc] = useState<number>(0);
   const [longitudeLoc, setLongitudeLoc] = useState<number>(0);
@@ -100,54 +75,13 @@ const ChangeDinoFormDashboard = () => {
     const getData = async () => {
       const dinoById = await getDinoById(id);
 
-      setName(dinoById.dino.name);
-      setLatinName(dinoById.dino.latinName);
-      setDescription(dinoById.dino.description);
-      setTypeOfDino(dinoById.dino.typeOfDino);
-      setDinoWeight(dinoById.dino.weight);
-      setDinoLength(dinoById.dino.length);
-      setDiet(dinoById.dino.diet);
-      setDietDescription(dinoById.dino.dietDescription);
-      setPeriod(dinoById.dino.period);
-      setPeriodDate(dinoById.dino.periodDate);
-      setPeriodDescription(dinoById.dino.periodDescription);
-
       setDinoToChange(dinoById.dino);
       setDinoToChangeImages(dinoById.images);
       setDinoToChangeLocations(dinoById.foundLocations);
     };
 
     setStep(2);
-
     getData();
-  };
-
-  const onHandleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    setIsLoading(true);
-
-    const changeDinoById = async () => {
-      await changeDino(
-        dinoToChange?._id || "random",
-        name,
-        latinName,
-        description,
-        typeOfDino,
-        dinoLength,
-        dinoWeight,
-        diet,
-        dietDescription,
-        period,
-        periodDate,
-        periodDescription
-      );
-    };
-
-    setTimeout(() => {
-      changeDinoById();
-      setIsLoading(false);
-    }, 1000);
   };
 
   const onHandleAddFoundLocation = async (
@@ -217,38 +151,9 @@ const ChangeDinoFormDashboard = () => {
   const handleDeleteDino = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     await deleteDino(dinoToChange?._id || "random");
+    setSearchDino("");
     setStep(1);
   };
-
-  const resetForm = () => {
-    setName(dinoToChange?.name || "");
-    setLatinName(dinoToChange?.latinName || "");
-    setDescription(dinoToChange?.description || "");
-    setTypeOfDino(dinoToChange?.typeOfDino || EDinoType.Unknown);
-    setDinoWeight(dinoToChange?.weight || 0);
-    setDinoLength(dinoToChange?.length || 0);
-    setDiet(dinoToChange?.diet || EDinoDiet.Herbivores);
-    setDietDescription(dinoToChange?.dietDescription || "");
-    setPeriod(dinoToChange?.period || EDinoPeriod.Cretaceous);
-    setPeriodDate(dinoToChange?.periodDate || "");
-    setPeriodDescription(dinoToChange?.periodDescription || "");
-  };
-
-  // const scrollPrev = useCallback(() => {
-  //   if (emblaApi) emblaApi.scrollPrev();
-  // }, [emblaApi]);
-
-  // const scrollNext = useCallback(() => {
-  //   if (emblaApi) emblaApi.scrollNext();
-  // }, [emblaApi]);
-
-  // const scrollPrev2 = useCallback(() => {
-  //   if (emblaApi2) emblaApi2.scrollPrev();
-  // }, [emblaApi2]);
-
-  // const scrollNext2 = useCallback(() => {
-  //   if (emblaApi2) emblaApi2.scrollNext();
-  // }, [emblaApi2]);
 
   // use effects
   useEffect(() => {
@@ -260,7 +165,7 @@ const ChangeDinoFormDashboard = () => {
     };
 
     getData();
-  }, []);
+  }, [dinoToChange]);
 
   useEffect(() => {
     let searchedDinos = dinos.filter((dino) =>
@@ -292,18 +197,6 @@ const ChangeDinoFormDashboard = () => {
     if (isChangedSomething) {
       const getData = async () => {
         const dinoById = await getDinoById(dinoToChange?._id || "random");
-
-        setName(dinoById.dino.name);
-        setLatinName(dinoById.dino.latinName);
-        setDescription(dinoById.dino.description);
-        setTypeOfDino(dinoById.dino.typeOfDino);
-        setDinoWeight(dinoById.dino.weight);
-        setDinoLength(dinoById.dino.length);
-        setDiet(dinoById.dino.diet);
-        setDietDescription(dinoById.dino.dietDescription);
-        setPeriod(dinoById.dino.period);
-        setPeriodDate(dinoById.dino.periodDate);
-        setPeriodDescription(dinoById.dino.periodDescription);
 
         setDinoToChange(dinoById.dino);
         setDinoToChangeImages(dinoById.images);
@@ -373,160 +266,12 @@ const ChangeDinoFormDashboard = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-5">
-              <form
-                onSubmit={(e) => onHandleSubmitForm(e)}
-                className="flex flex-col gap-2 text-[14px] sm:text-[16px]"
-              >
-                {/* name */}
-                <label className="flex flex-col gap-2 sm:flex-row">
-                  <div className="flex flex-col sm:w-1/2">
-                    <span>Ім'я</span>
-                    <input
-                      required
-                      className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
-                      type="text"
-                      value={name}
-                      placeholder="Напишіть ім'я динозавра"
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex flex-col sm:w-1/2">
-                    <span>Ім'я латиною</span>
-                    <input
-                      required
-                      className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
-                      type="text"
-                      value={latinName}
-                      placeholder="Напишіть ім'я динозавра латиною"
-                      onChange={(e) => setLatinName(e.target.value)}
-                    />
-                  </div>
-                </label>
-
-                {/* sizes */}
-                <label className="flex flex-col gap-2 sm:flex-row">
-                  <div className="flex flex-col sm:w-1/2">
-                    <span>Вага динозавра</span>
-                    <input
-                      required
-                      className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
-                      type="number"
-                      value={dinoWeight}
-                      placeholder=""
-                      onChange={(e) => setDinoWeight(+e.target.value)}
-                    />
-                  </div>
-                  <div className="flex flex-col sm:w-1/2">
-                    <span>Довжина динозавра</span>
-                    <input
-                      required
-                      className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
-                      type="number"
-                      value={dinoLength}
-                      onChange={(e) => setDinoLength(+e.target.value)}
-                    />
-                  </div>
-                </label>
-
-                {/* description */}
-                <label className="flex flex-col">
-                  <span>Опис</span>
-                  <textarea
-                    required
-                    className="bg-darkGray text-white resize-none py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange h-[150px]"
-                    value={description}
-                    placeholder="Опишіть динозавра"
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                </label>
-
-                {/* type of dino */}
-                <label className="flex flex-col gap-1">
-                  <span>Тип динозавра</span>
-                  <select
-                    value={typeOfDino}
-                    onChange={(e) => setTypeOfDino(e.target.value as EDinoType)}
-                    className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
-                  >
-                    {Object.entries(dinoTypeLabels).map(([key, value]) => (
-                      <option key={key} value={key}>
-                        {value}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-
-                {/* diet */}
-                <label className="flex flex-col gap-1">
-                  <span>Опис харчування</span>
-                  <select
-                    value={diet}
-                    onChange={(e) => setDiet(e.target.value as EDinoDiet)}
-                    className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
-                  >
-                    {Object.entries(dinoDietLabels).map(([key, value]) => (
-                      <option key={key} value={key}>
-                        {value}
-                      </option>
-                    ))}
-                  </select>
-                  <textarea
-                    required
-                    className="bg-darkGray text-white py-2 px-1 resize-none border-2 border-transparent focus:outline-none focus:border-brightOrange h-[100px]"
-                    value={dietDescription}
-                    placeholder="Опишіть харчування"
-                    onChange={(e) => setDietDescription(e.target.value)}
-                  />
-                </label>
-
-                {/* period */}
-                <label className="flex flex-col gap-1">
-                  <span>Опис періоду</span>
-                  <select
-                    value={period}
-                    onChange={(e) => setPeriod(e.target.value as EDinoPeriod)}
-                    className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
-                  >
-                    {Object.entries(dinoPeriodLabels).map(([key, value]) => (
-                      <option key={key} value={key}>
-                        {value}
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    required
-                    type="text"
-                    value={periodDate}
-                    placeholder="Напишіть дату інснування(68-66 мільйонів років тому)"
-                    className="bg-darkGray text-white py-2 px-1 resize-none border-2 border-transparent focus:outline-none focus:border-brightOrange"
-                    onChange={(e) => setPeriodDate(e.target.value)}
-                  />
-                  <textarea
-                    required
-                    className="bg-darkGray text-white py-2 px-1 resize-none border-2 border-transparent focus:outline-none focus:border-brightOrange h-[100px]"
-                    value={periodDescription}
-                    placeholder="Опишіть період існування"
-                    onChange={(e) => setPeriodDescription(e.target.value)}
-                  />
-                </label>
-
-                {/* buttons */}
-                <div className="flex justify-between gap-2">
-                  <button
-                    type="submit"
-                    className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300"
-                  >
-                    Змінити
-                  </button>
-                  <button
-                    type="button"
-                    onClick={resetForm}
-                    className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300"
-                  >
-                    Скидання
-                  </button>
-                </div>
-              </form>
+              <DinoForm
+                dinoToChange={dinoToChange}
+                isChangeForm
+                onChangeLoading={setIsLoading}
+                onChangeDino={setDinoToChange}
+              />
 
               <div className="flex flex-col gap-2">
                 <h3 className="text-[16px] font-medium sm:text-[20px]">
@@ -604,21 +349,6 @@ const ChangeDinoFormDashboard = () => {
                           ))}
                       </div>
                     </div>
-                    {/* 
-                    <div className="flex justify-between mt-2">
-                      <button
-                        className="border-2 border-darkGray rounded-full px-5 hover:bg-darkGray hover:bg-opacity-20 text-[14px] sm:text-[16px]"
-                        onClick={scrollPrev}
-                      >
-                        Попередній
-                      </button>
-                      <button
-                        className="border-2 border-darkGray rounded-full px-5 hover:bg-darkGray hover:bg-opacity-20 text-[14px] sm:text-[16px]"
-                        onClick={scrollNext}
-                      >
-                        Наступний
-                      </button>
-                    </div> */}
                   </div>
                 )}
               </div>
@@ -707,20 +437,6 @@ const ChangeDinoFormDashboard = () => {
                           ))}
                       </div>
                     </div>
-                    {/* <div className="flex justify-between mt-2">
-                      <button
-                        className="border-2 border-darkGray rounded-full px-5 hover:bg-darkGray hover:bg-opacity-20 text-[14px] sm:text-[16px]"
-                        onClick={scrollPrev2}
-                      >
-                        Попередній
-                      </button>
-                      <button
-                        className="border-2 border-darkGray rounded-full px-5 hover:bg-darkGray hover:bg-opacity-20 text-[14px] sm:text-[16px]"
-                        onClick={scrollNext2}
-                      >
-                        Наступний
-                      </button>
-                    </div> */}
                   </div>
                 )}
               </div>

@@ -3,24 +3,16 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { useAuth } from "@/hooks/useAuth";
-
 import { loginUser } from "@/services/SecurityService";
 
 import Link from "next/link";
-import Image from "next/image";
-
-import eyeOff from "@/images/vectors/eye-off.svg";
-import eyeShow from "@/images/vectors/eye-show.svg";
+import InputComponent from "@/components/form/InputComponent";
 
 const LoginPage = () => {
   const router = useRouter();
 
-  const { updateAuthStatus, user } = useAuth();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
 
   const [error, setError] = useState("");
 
@@ -70,41 +62,22 @@ const LoginPage = () => {
             *{error}
           </p>
         )}
-        <label className="flex flex-col">
-          <span className="text-[16px] md:text-[18px]">Нікнейм</span>
-          <input
-            type="text"
-            required
-            placeholder="Уведіть нікнейм"
-            className="py-3 px-2 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label className="relative flex flex-col">
-          <span className="text-[16px] md:text-[18px]">Пароль</span>
-          <input
-            type={`${isShowPassword ? "text" : "password"}`}
-            required
-            placeholder="Уведіть пароль"
-            className="py-3 pl-2 pr-12 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button
-            className="absolute right-3 top-1/2 h-3 w-6"
-            type="button"
-            onClick={() =>
-              setIsShowPassword((isShowPassword) => !isShowPassword)
-            }
-          >
-            {isShowPassword ? (
-              <Image src={eyeShow} alt="show password" />
-            ) : (
-              <Image src={eyeOff} alt="not show password" />
-            )}
-          </button>
-        </label>
+        <InputComponent
+          text="Нікнейм"
+          value={username}
+          valueOnChange={(e) => setUsername(e.target.value)}
+          isRequired
+          placeholder="Уведіть нікнейм"
+        />
+        <InputComponent
+          text="Пароль"
+          value={password}
+          valueOnChange={(e) => setPassword(e.target.value)}
+          isRequired
+          placeholder="Уведіть пароль"
+          type="password"
+          showPasswordButton
+        />
         <div className="flex flex-col md:flex-row justify-between gap-3">
           <button
             type="submit"

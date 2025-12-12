@@ -5,11 +5,8 @@ import { useRouter } from "next/navigation";
 
 import { registerUser } from "@/services/SecurityService";
 
-import Image from "next/image";
 import Link from "next/link";
-
-import eyeOff from "@/images/vectors/eye-off.svg";
-import eyeShow from "@/images/vectors/eye-show.svg";
+import InputComponent from "@/components/form/InputComponent";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -22,14 +19,15 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
-  const [isShowConfirmPassword, setIsShowConfirmPassword] =
-    useState<boolean>(false);
-
   // functions
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage("");
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Паролі не співпадають");
+      return;
+    }
 
     const response = await registerUser(
       name,
@@ -54,11 +52,6 @@ const RegisterPage = () => {
       return;
     }
 
-    if (password !== confirmPassword) {
-      setErrorMessage("Паролі не співпадають");
-      return;
-    }
-
     router.replace("/auth/login");
   };
 
@@ -79,115 +72,59 @@ const RegisterPage = () => {
             *{errorMessage}
           </p>
         )}
-        <div className="flex flex-row justify-between gap-3 md:gap-0">
-          <label className="flex flex-col w-[48%]">
-            <span className="text-[16px] md:text-[18px] font-semibold">
-              Ім'я
-            </span>
-            <input
-              type="text"
-              required
-              placeholder="Уведіть ім'я"
-              className="py-3 px-2 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <label className="flex flex-col w-[48%]">
-            <span className="text-[16px] md:text-[18px] font-semibold">
-              Прізвище
-            </span>
-            <input
-              type="text"
-              required
-              placeholder="Уведіть прізвище"
-              className="py-3 px-2 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
-              value={lastname}
-              onChange={(e) => setLastname(e.target.value)}
-            />
-          </label>
+        <div className="flex flex-row justify-between gap-3">
+          <InputComponent
+            text="Ім'я"
+            placeholder="Уведіть ім'я"
+            isRequired
+            value={name}
+            valueOnChange={(e) => setName(e.target.value)}
+            customLabelStyles="flex-1"
+          />
+          <InputComponent
+            text="Прізвище"
+            placeholder="Уведіть прізвище"
+            isRequired
+            value={lastname}
+            valueOnChange={(e) => setLastname(e.target.value)}
+            customLabelStyles="flex-1"
+          />
         </div>
 
-        <label className="flex flex-col">
-          <span className="text-[16px] md:text-[18px] font-semibold">
-            Нікнейм
-          </span>
-          <input
-            type="text"
-            required
-            placeholder="Уведіть нікнейм"
-            className="py-3 px-2 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label className="flex flex-col">
-          <span className="text-[16px] md:text-[18px] font-semibold">
-            Пошта
-          </span>
-          <input
-            type="email"
-            required
-            placeholder="Уведіть пошту"
-            className="py-3 px-2 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label className="relative flex flex-col">
-          <span className="text-[16px] md:text-[18px] font-semibold">
-            Пароль
-          </span>
-          <input
-            type={`${isShowPassword ? "text" : "password"}`}
-            required
-            placeholder="Уведіть пароль"
-            className="py-3 pl-2 pr-12 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button
-            className="absolute right-3 top-1/2 h-3 w-6"
-            type="button"
-            onClick={() =>
-              setIsShowPassword((isShowPassword) => !isShowPassword)
-            }
-          >
-            {isShowPassword ? (
-              <Image src={eyeShow} alt="show password" />
-            ) : (
-              <Image src={eyeOff} alt="not show password" />
-            )}
-          </button>
-        </label>
-        <label className="relative flex flex-col">
-          <span className="text-[16px] md:text-[18px] font-semibold">
-            Пароль
-          </span>
-          <input
-            type={`${isShowConfirmPassword ? "text" : "password"}`}
-            required
-            placeholder="Уведіть пароль"
-            className="py-3 pl-2 pr-12 text-[16px] md:text-[18px] border-2 border-softGray focus:outline-none focus:border-darkGray text-darkGray"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <button
-            className="absolute right-3 top-1/2 h-3 w-6"
-            type="button"
-            onClick={() =>
-              setIsShowConfirmPassword(
-                (isShowConfirmPassword) => !isShowConfirmPassword
-              )
-            }
-          >
-            {isShowConfirmPassword ? (
-              <Image src={eyeShow} alt="show password" />
-            ) : (
-              <Image src={eyeOff} alt="not show password" />
-            )}
-          </button>
-        </label>
+        <InputComponent
+          text="Нікнейм"
+          placeholder="Уведіть нікнейм"
+          isRequired
+          value={username}
+          valueOnChange={(e) => setUsername(e.target.value)}
+        />
+        <InputComponent
+          text="Пошта"
+          placeholder="Уведіть пошту"
+          isRequired
+          value={email}
+          type="email"
+          valueOnChange={(e) => setEmail(e.target.value)}
+        />
+
+        <InputComponent
+          text="Пароль"
+          placeholder="Уведіть пароль"
+          isRequired
+          value={password}
+          type="password"
+          valueOnChange={(e) => setPassword(e.target.value)}
+          showPasswordButton
+        />
+        <InputComponent
+          text="Пароль"
+          placeholder="Уведіть пароль"
+          isRequired
+          value={confirmPassword}
+          type="password"
+          valueOnChange={(e) => setConfirmPassword(e.target.value)}
+          showPasswordButton
+        />
         <button
           type="submit"
           className=" text-white text-[16px] md:text-[18px] py-2 bg-fieryRed bg-opacity-50 hover:bg-opacity-100 duration-300"

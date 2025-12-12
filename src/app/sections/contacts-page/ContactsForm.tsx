@@ -9,6 +9,7 @@ import LoaderComponent from "@/components/LoaderComponent";
 import Link from "next/link";
 
 import closeImage from "@/images/vectors/close.svg";
+import InputComponent from "@/components/form/InputComponent";
 
 const ContactsForm = () => {
   const [name, setName] = useState<string>("");
@@ -63,27 +64,24 @@ const ContactsForm = () => {
         className="w-full flex flex-col gap-2 p-5 lg:w-2/3 lg:mx-auto lg:bg-slateGray lg:bg-opacity-50"
         onSubmit={(e) => onClickSubmitForm(e)}
       >
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          type="text"
+        <InputComponent
           placeholder="Ім'я"
-          className="p-2 border-2 border-brightOrange text-[14px] md:text-[16px] focus:outline-none focus:border-darkGray"
-          required
+          value={name}
+          valueOnChange={(e) => setName(e.target.value)}
+          borderColor="orange"
         />
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
+        <InputComponent
           placeholder="Пошта"
-          className="p-2 border-2 border-brightOrange text-[14px] md:text-[16px] focus:outline-none focus:border-darkGray"
-          required
+          value={email}
+          type="email"
+          valueOnChange={(e) => setEmail(e.target.value)}
+          borderColor="orange"
         />
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="resize-none h-[200px] p-2 border-2 border-brightOrange text-[14px] md:text-[16px] focus:outline-none focus:border-darkGray"
-          placeholder="Текст що ви хочете відправити"
+          className="resize-none h-[200px] p-2 border-2 border-brightOrange text-[16px] md:text-[18px] focus:outline-none focus:border-darkGray"
+          placeholder="Пишіть ваші питання і не тільки"
           required
         />
         <button
