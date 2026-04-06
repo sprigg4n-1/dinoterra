@@ -48,7 +48,7 @@ const AccountPage = () => {
 
   const onClickDeleteFavDino = async (
     e: React.MouseEvent<HTMLButtonElement>,
-    dinoId: string
+    dinoId: string,
   ) => {
     e.preventDefault();
 
@@ -206,12 +206,21 @@ const AccountPage = () => {
             <div className="embla__viewport-fav-dino" ref={emblaRef}>
               <div className="embla__container-fav-dino gap-5">
                 {favoriteDinosData.map((favDino) => (
-                  <div key={favDino.dino._id} className="embla__slide-fav-dino">
+                  <div
+                    key={favDino.dino._id}
+                    className="embla__slide-fav-dino "
+                  >
                     <Link
                       href={`/encyclopedia/${favDino.dino._id}`}
                       className="bg-darkGray text-white text-center py-1 font-medium text-[14px] lg:text-[18px] block hover:bg-slateGray duration-300"
                     >
                       {favDino.dino.name}
+                    </Link>
+                    <Link
+                      href={"https://dinosaurpictures.org/"}
+                      className="bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center block"
+                    >
+                      Взято з DinosaurPictures
                     </Link>
                     <Image
                       src={favDino.image ? favDino.image.file : avatar}
@@ -220,6 +229,7 @@ const AccountPage = () => {
                       height={1600}
                       alt="dino image"
                     />
+
                     <button
                       type="button"
                       onClick={(e) => onClickDeleteFavDino(e, favDino.dino._id)}

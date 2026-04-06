@@ -256,7 +256,7 @@ const MapPage = () => {
               </button>
             </div>
 
-            <div className="w-full text-center flex flex-col">
+            <div className="w-full text-center flex flex-col relative">
               <Image
                 src={
                   locationDino?.images && locationDino.images.length > 0
@@ -269,7 +269,12 @@ const MapPage = () => {
                 onClick={() => setHoveredLocation(null)}
                 className="object-fit"
               />
-
+              <Link
+                href={"https://dinosaurpictures.org/"}
+                className="absolute top-0 left-0 bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center"
+              >
+                Взято з DinosaurPictures
+              </Link>
               <Link
                 href={`/encyclopedia/${hoveredLocation.dino}`}
                 className=" text-white text-[14px] md:text-[18px] text-center w-full hover:bg-brightOrange py-2"

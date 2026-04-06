@@ -33,6 +33,7 @@ import trsDino from "@/images/dino-page/triassic-period-popular-dino.webp";
 import jrsDino from "@/images/dino-page/jurassic-period-popular-dino.jpg";
 import crsDino from "@/images/dino-page/cretaceous-period-popular-dino.webp";
 import { useAuth } from "@/hooks/useAuth";
+import Link from "next/link";
 
 const EncyclopediaDinoPage = ({
   dino,
@@ -67,7 +68,7 @@ const EncyclopediaDinoPage = ({
   };
 
   const onClickRemoveFromFav = async (
-    e: React.MouseEvent<HTMLButtonElement>
+    e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
 
@@ -108,6 +109,12 @@ const EncyclopediaDinoPage = ({
 
       <div className="flex flex-col md:flex-row gap-3 md:gap-5 border-b-4 pb-3 mb-3 md:pb-5 md:mb-5">
         <div className="h-fit flex flex-col border-2 border-brightOrange">
+          <Link
+            href={"https://dinosaurpictures.org/"}
+            className="bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center block"
+          >
+            Взято з DinosaurPictures
+          </Link>
           <Image
             src={images && images.length > 0 ? images[0].file : imageNotFound}
             alt="main image"
@@ -192,8 +199,8 @@ const EncyclopediaDinoPage = ({
               dino?.period === EDinoPeriod.Triassic
                 ? trsDino
                 : dino?.period === EDinoPeriod.Jurassic
-                ? jrsDino
-                : crsDino
+                  ? jrsDino
+                  : crsDino
             }
             alt="main image"
             width={4000}
@@ -204,8 +211,8 @@ const EncyclopediaDinoPage = ({
             {dino?.period === EDinoPeriod.Triassic
               ? "Герреразавр - один із найдавніших відомих хижих динозаврів"
               : dino?.period === EDinoPeriod.Jurassic
-              ? "Алозавр - один із найпоширеніших тероподів свого часу"
-              : "Тиранозавр рекс - одним із найвідоміших динозаврів"}
+                ? "Алозавр - один із найпоширеніших тероподів свого часу"
+                : "Тиранозавр рекс - одним із найвідоміших динозаврів"}
           </span>
         </div>
       </div>
@@ -220,14 +227,22 @@ const EncyclopediaDinoPage = ({
               <div className="embla__viewport-intro-rec-dino" ref={emblaRef2}>
                 <div className="embla__container-intro-rec-dino gap-5">
                   {images.slice(1).map((item) => (
-                    <Image
-                      key={item._id}
-                      src={item.file}
-                      alt="image"
-                      width={4000}
-                      height={2000}
-                      className="w-auto h-auto max-h-[200px] lg:max-h-[350px]"
-                    />
+                    <div className="embla__slide-intro-rec-dino relative">
+                      <Image
+                        key={item._id}
+                        src={item.file}
+                        alt="image"
+                        width={4000}
+                        height={2000}
+                        className="w-auto h-auto max-h-[200px] lg:max-h-[350px] object-fill"
+                      />
+                      <Link
+                        href={"https://dinosaurpictures.org/"}
+                        className="absolute top-0 left-0 bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center block"
+                      >
+                        Взято з DinosaurPictures
+                      </Link>
+                    </div>
                   ))}
                 </div>
               </div>

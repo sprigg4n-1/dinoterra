@@ -26,21 +26,25 @@ const DinoCard = ({
     textColor === "white"
       ? "text-white"
       : textColor === "orange"
-      ? "text-brightOrange"
-      : "text-black";
+        ? "text-brightOrange"
+        : "text-black";
   const finalBgColor =
     bgColor === "black"
       ? "bg-darkGray"
       : bgColor === "orange"
-      ? "bg-brightOrange"
-      : "bg-white";
+        ? "bg-brightOrange"
+        : "bg-white";
 
   const finalBorderColor =
     bgColor === "black"
       ? "border-darkGray"
       : bgColor === "orange"
-      ? "border-brightOrange"
-      : "border-white";
+        ? "border-brightOrange"
+        : "border-white";
+
+  const redirectToPage = () => {
+    window.open("https://dinosaurpictures.org/");
+  };
 
   return (
     <Link
@@ -52,7 +56,7 @@ const DinoCard = ({
       <div
         className={`border-4 ${
           border ? finalBorderColor : "border-none"
-        } overflow-hidden`}
+        } overflow-hidden relative`}
       >
         <Image
           src={dino.image ? dino.image : imageNotFound}
@@ -65,6 +69,12 @@ const DinoCard = ({
               : "w-56 h-60 object-fit"
           } duration-300`}
         />
+        <button
+          onClick={redirectToPage}
+          className="absolute top-0 right-0 bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center"
+        >
+          Взято з DinosaurPictures
+        </button>
       </div>
 
       <p className={`text-center pb-1 text-[18px] font-semibold ${finalColor}`}>
