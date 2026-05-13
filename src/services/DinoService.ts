@@ -9,7 +9,7 @@ export const getDinos = async (
   type?: string,
   diet?: string,
   period?: string,
-  placeLocation?: string
+  placeLocation?: string,
 ) => {
   try {
     const params = new URLSearchParams();
@@ -29,6 +29,17 @@ export const getDinos = async (
     return response.data.data;
   } catch (error) {
     console.error(`Error with getting dinos: ${error}`);
+  }
+};
+
+export const getDinoByLatinName = async (latinName: string) => {
+  try {
+    const response = await axios.get(`${BASE_DEV_API_URL}/dinos`, {
+      params: { latinName },
+    });
+    return response.data.data.dinos;
+  } catch (error) {
+    console.error(`Error with get dino by name: ${error}`);
   }
 };
 
@@ -73,7 +84,7 @@ export const createDino = async (
   dietDescription: string,
   period: string,
   periodDate: string,
-  periodDescription: string
+  periodDescription: string,
 ) => {
   try {
     const response = await axios.post(`${BASE_DEV_API_URL}/dinos`, {
@@ -108,7 +119,7 @@ export const changeDino = async (
   dietDescription: string,
   period: string,
   periodDate: string,
-  periodDescription: string
+  periodDescription: string,
 ) => {
   try {
     const response = await axios.put(`${BASE_DEV_API_URL}/dinos/${id}`, {

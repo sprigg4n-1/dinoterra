@@ -147,3 +147,34 @@ export const dinoTypeLabels: Record<EDinoType, string> = {
   [EDinoType.Rugose]: "Ругозавр",
   [EDinoType.Unknown]: "Невідомий",
 };
+
+// image prediction
+export type TTop3Item = {
+  rank: number;
+  species: string;
+  confidence: number;
+};
+
+export type TPrediction = {
+  _id: string;
+  predictionId: string;
+  user: string | null;
+  isDinosaur: boolean;
+  stage1Probability: number;
+  top3: TTop3Item[];
+  feedback: null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type TFeedbackBody = {
+  isCorrect: boolean;
+  errorType?:
+    | "WRONG_SPECIES"
+    | "FALSE_NEGATIVE"
+    | "FALSE_POSITIVE"
+    | "NEW_SPECIES";
+  correctRank?: 1 | 2 | 3;
+  correctClass?: string | null;
+  givenBy?: "USER" | "ADMIN";
+};
