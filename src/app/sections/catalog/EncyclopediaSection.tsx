@@ -1,19 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePagination } from "@mantine/hooks";
 
 import { getDinos } from "@/services/DinoService";
 
 import { IDino } from "@/config/types";
 
-import EncyclopediaFilter from "./EncyclopediaFilter";
+import EncyclopediaFilter from "@/components/encyclopedia/EncyclopediaFilter";
 import DinoCard from "@/components/dino/DinoCard";
 import LoaderComponent from "@/components/LoaderComponent";
+import BaseContainer from "@/components/BaseContainer";
 
 const SHOW_LIMIT = 6;
 
-const EncyclopediaPage = () => {
+const EncyclopediaSection = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [dinos, setDinos] = useState<IDino[]>([]);
@@ -83,7 +84,7 @@ const EncyclopediaPage = () => {
       typeOfDino,
       diet,
       period,
-      placeLocation
+      placeLocation,
     );
 
     if (isFiltered) {
@@ -112,66 +113,73 @@ const EncyclopediaPage = () => {
   }, [isResetedFilter]);
 
   return (
-    <div className="px-2 sm:px-5 lg:px-20 flex flex-col items-center">
-      <EncyclopediaFilter
-        diet={diet}
-        period={period}
-        typeOfDino={typeOfDino}
-        searchDino={searchDino}
-        placeLocaion={placeLocation}
-        setDiet={onChangeDiet}
-        setPeriod={onChangePeriod}
-        setTypeOfDino={onChangeType}
-        setSearchDino={onChangeSearchText}
-        setPlaceLocation={onChangPlaceLocation}
-        onClickReset={onClickReset}
-        onClickFilterData={onClickFilterData}
-      />
+    <section>
+      <BaseContainer>
+        <div className="flex flex-col items-center">
+          <EncyclopediaFilter
+            diet={diet}
+            period={period}
+            typeOfDino={typeOfDino}
+            searchDino={searchDino}
+            placeLocaion={placeLocation}
+            setDiet={onChangeDiet}
+            setPeriod={onChangePeriod}
+            setTypeOfDino={onChangeType}
+            setSearchDino={onChangeSearchText}
+            setPlaceLocation={onChangPlaceLocation}
+            onClickReset={onClickReset}
+            onClickFilterData={onClickFilterData}
+          />
 
-      <div className="flex flex-wrap gap-5 items-center justify-center py-5 lg:py-10">
-        {isLoading ? (
-          <LoaderComponent />
-        ) : dinos && dinos.length > 0 ? (
-          dinos.map((dino) => (
-            <DinoCard
-              key={dino._id}
-              dino={dino}
-              link={`/encyclopedia/${dino._id}`}
-              bgColor="orange"
-              border
-              textColor="white"
-            />
-          ))
-        ) : (
-          <span className="text-center text-[14px] md:text-[16px]">
-            Не найдено динозаврів за параметрами...
-          </span>
-        )}
-      </div>
+          <div className="flex flex-wrap gap-5 items-center justify-center py-5 lg:py-10">
+            {isLoading ? (
+              <LoaderComponent />
+            ) : dinos && dinos.length > 0 ? (
+              dinos.map((dino) => (
+                <DinoCard
+                  key={dino._id}
+                  dino={dino}
+                  link={`/encyclopedia/${dino._id}`}
+                  bgColor="orange"
+                  border
+                  textColor="white"
+                />
+              ))
+            ) : (
+              <span className="text-center text-[14px] md:text-[16px]">
+                Не найдено динозаврів за параметрами...
+              </span>
+            )}
+          </div>
 
-      <div className="flex gap-2 mb-5 lg:mb-10 px-2">
-        {pagination.range.map((page, index) =>
-          page === "dots" ? (
-            <button key={index} className={`bg-darkPurple text-white h-8 w-8`}>
-              ...
-            </button>
-          ) : (
-            <button
-              key={index}
-              className={`${
-                pagination.active === page
-                  ? "bg-brightOrange"
-                  : "bg-darkPurple hover:bg-opacity-70 duration-200"
-              } text-white h-8 w-8 р `}
-              onClick={() => onUpdatePage(+page)}
-            >
-              {page}
-            </button>
-          )
-        )}
-      </div>
-    </div>
+          <div className="flex gap-2 mb-5 lg:mb-10 px-2">
+            {pagination.range.map((page, index) =>
+              page === "dots" ? (
+                <button
+                  key={index}
+                  className={`bg-darkPurple text-white h-8 w-8`}
+                >
+                  ...
+                </button>
+              ) : (
+                <button
+                  key={index}
+                  className={`${
+                    pagination.active === page
+                      ? "bg-brightOrange"
+                      : "bg-darkPurple hover:bg-opacity-70 duration-200"
+                  } text-white h-8 w-8 р `}
+                  onClick={() => onUpdatePage(+page)}
+                >
+                  {page}
+                </button>
+              ),
+            )}
+          </div>
+        </div>
+      </BaseContainer>
+    </section>
   );
 };
 
-export default EncyclopediaPage;
+export default EncyclopediaSection;

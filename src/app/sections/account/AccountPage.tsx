@@ -21,8 +21,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import avatar from "@/images/avatar/avatar.jpg";
+import { useFileUpload } from "@/hooks/useFileUpload";
 
 const AccountPage = () => {
+  const { imagePath, handleFileUpload, resetImagePath } = useFileUpload();
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
   });
@@ -32,8 +35,6 @@ const AccountPage = () => {
 
   const [profilePhoto, setProfilePhoto] = useState<IUserImages | null>(null);
   const [favoriteDinosData, setFavoriteDinosData] = useState<IDinoFav[]>([]);
-
-  const [imagePath, setImagePath] = useState<string>("");
 
   // functions
   const onClickLogout = async () => {
@@ -61,21 +62,7 @@ const AccountPage = () => {
     if (user) {
       const { image } = await uploadUserProfilePhoto(user._id, imagePath);
       setProfilePhoto(image);
-      setImagePath("");
-    }
-  };
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setImagePath(reader.result as string);
-      };
-      reader.onerror = (error) => {
-        console.error("Помилка при читанні файлу:", error);
-      };
+      resetImagePath();
     }
   };
 

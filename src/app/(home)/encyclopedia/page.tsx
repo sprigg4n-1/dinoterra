@@ -1,9 +1,9 @@
-import EncyclopediaPage from "@/app/sections/catalog/EncyclopediaPage";
+import EncyclopediaSection from "@/app/sections/catalog/EncyclopediaSection";
 
 const Encyclopedia = () => {
   return (
     <>
-      <EncyclopediaPage />
+      <EncyclopediaSection />
     </>
   );
 };

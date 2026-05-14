@@ -9,6 +9,7 @@ import DinosaurExtinction from "./DinosaurExtinction";
 import DinosaursDiscovery from "./DinosaursDiscovery";
 import DinosaursInCulture from "./DinosaursInCulture";
 import Link from "next/link";
+import BaseContainer from "@/components/BaseContainer";
 
 const sections = [
   { id: "origin", label: "Походження динозаврів" },
@@ -25,8 +26,8 @@ const HistoryPage = () => {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "0px",
-      threshold: 0.1,
+      rootMargin: "-10% 0px -80% 0px",
+      threshold: 0,
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -47,37 +48,39 @@ const HistoryPage = () => {
   }, []);
 
   return (
-    <div className="px-2 sm:px-5 lg:px-20 py-3 lg:py-5">
-      <SectionMainTitleComponent
-        title="Історія динозаврів"
-        firstTextPosition="left"
-        titleColor="orange"
-      />
-      <div className="relative py-2 lg:py-5 flex gap-10">
-        <nav className="hidden sticky h-fit -left-10 top-[10%] lg:flex flex-col w-[220px]">
-          {sections.map(({ id, label }) => (
-            <Link
-              key={id}
-              href={`#${id}`}
-              className={`text-center px-5 py-10 transition text-[14px] ${
-                activeSection === id
-                  ? "text-brightOrange border-r-4 border-brightOrange font-semibold"
-                  : "text-darkGray border-r-4 font-normal"
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex-1 flex flex-col gap-5 text-[14px] md:text-[16px] lg:text-[18px]">
-          <DinosaursOrigin tabId="origin" label={sections[0].label} />
-          <EvolutionaryPeriods tabId="evolution" label={sections[1].label} />
-          <DinosaurExtinction tabId="extinction" label={sections[2].label} />
-          <DinosaursDiscovery tabId="discovery" label={sections[3].label} />
-          {/* <DinosaursInCulture tabId="culture" label={sections[4].label} /> */}
+    <section className="py-5 lg:py-10">
+      <BaseContainer>
+        <SectionMainTitleComponent
+          title="Історія динозаврів"
+          firstTextPosition="left"
+          titleColor="orange"
+        />
+        <div className="relative py-2 lg:py-5 flex gap-10">
+          <nav className="hidden sticky h-fit -left-10 top-[10%] lg:flex flex-col w-[220px]">
+            {sections.map(({ id, label }) => (
+              <Link
+                key={id}
+                href={`#${id}`}
+                className={`text-center px-5 py-10 transition text-[14px] ${
+                  activeSection === id
+                    ? "text-brightOrange border-r-4 border-brightOrange font-semibold"
+                    : "text-darkGray border-r-4 font-normal"
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+          <div className="flex-1 flex flex-col gap-5 text-[14px] md:text-[16px] lg:text-[18px]">
+            <DinosaursOrigin tabId="origin" label={sections[0].label} />
+            <EvolutionaryPeriods tabId="evolution" label={sections[1].label} />
+            <DinosaurExtinction tabId="extinction" label={sections[2].label} />
+            <DinosaursDiscovery tabId="discovery" label={sections[3].label} />
+            {/* <DinosaursInCulture tabId="culture" label={sections[4].label} /> */}
+          </div>
         </div>
-      </div>
-    </div>
+      </BaseContainer>
+    </section>
   );
 };
 

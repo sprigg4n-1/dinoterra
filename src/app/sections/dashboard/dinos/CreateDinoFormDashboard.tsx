@@ -12,6 +12,7 @@ import DashboardTitleComponent from "@/components/dashboard/DashboardTitleCompon
 import close from "@/images/vectors/close.svg";
 import InputComponent from "@/components/form/InputComponent";
 import DinoForm from "./DinoForm";
+import { useFileUpload } from "@/hooks/useFileUpload";
 
 export type TDinoFoundLocation = {
   id: string;
@@ -26,6 +27,8 @@ export type TDinoImages = {
 };
 
 const CreateDinoFormDashboard = () => {
+  const { imagePath, handleFileUpload, resetImagePath } = useFileUpload();
+
   const [createdDino, setCreatedDino] = useState<any>();
   const [step, setStep] = useState<number>(1);
 
@@ -33,10 +36,8 @@ const CreateDinoFormDashboard = () => {
   const [longitudeLoc, setLongitudeLoc] = useState<number>(0);
   const [placeLoc, setPlaceLoc] = useState<string>("");
 
-  const [imagePathDino, setImagePathDino] = useState<string>("");
-
   const [foundLocations, setFoundLocations] = useState<TDinoFoundLocation[]>(
-    []
+    [],
   );
   const [dinoImages, setDinoImages] = useState<TDinoImages[]>([]);
 
@@ -59,7 +60,7 @@ const CreateDinoFormDashboard = () => {
 
   const onHandleDeleteLocation = (
     e: React.MouseEvent<HTMLButtonElement>,
-    id: string
+    id: string,
   ) => {
     e.preventDefault();
     setFoundLocations((foundLocations) => [
@@ -72,31 +73,17 @@ const CreateDinoFormDashboard = () => {
 
     const newDinoImage: TDinoImages = {
       id: v4(),
-      imagePath: imagePathDino,
+      imagePath: imagePath,
     };
 
     setDinoImages((dinoImages) => [...dinoImages, newDinoImage]);
 
-    setImagePathDino("");
-  };
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setImagePathDino(reader.result as string);
-      };
-      reader.onerror = (error) => {
-        console.error("Помилка при читанні файлу:", error);
-      };
-    }
+    resetImagePath();
   };
 
   const onHandleDeleteImage = (
     e: React.MouseEvent<HTMLButtonElement>,
-    id: string
+    id: string,
   ) => {
     e.preventDefault();
     setDinoImages((dinoImage) => [...dinoImage.filter((img) => img.id !== id)]);
@@ -111,7 +98,7 @@ const CreateDinoFormDashboard = () => {
           loc.place,
           loc.latitude,
           loc.longitude,
-          createdDino._id
+          createdDino._id,
         );
       });
 
@@ -133,8 +120,8 @@ const CreateDinoFormDashboard = () => {
           step === 1
             ? "Створення динозавра"
             : step === 2
-            ? "Додавання картинок і локацій"
-            : "Кінець"
+              ? "Додавання картинок і локацій"
+              : "Кінець"
         }
       />
       {step === 1 ? (
@@ -147,13 +134,13 @@ const CreateDinoFormDashboard = () => {
                 <label
                   htmlFor="fileUploadForDinoImage"
                   className={`${
-                    imagePathDino !== ""
+                    imagePath !== ""
                       ? "bg-brightOrange hover:border-darkGray"
                       : "bg-darkGray hover:border-brightOrange"
                   }  text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center duration-300`}
                 >
                   <span>
-                    {imagePathDino === "" ? "Оберіть файл" : "Змінити файл"}
+                    {imagePath === "" ? "Оберіть файл" : "Змінити файл"}
                   </span>
                   <input
                     id="fileUploadForDinoImage"
@@ -294,13 +281,13 @@ const CreateDinoFormDashboard = () => {
                 <label
                   htmlFor="fileUploadForDinoImage"
                   className={`${
-                    imagePathDino !== ""
+                    imagePath !== ""
                       ? "bg-brightOrange hover:border-darkGray"
                       : "bg-darkGray hover:border-brightOrange"
                   }  text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center duration-300`}
                 >
                   <span>
-                    {imagePathDino === "" ? "Оберіть файл" : "Змінити файл"}
+                    {imagePath === "" ? "Оберіть файл" : "Змінити файл"}
                   </span>
                   <input
                     id="fileUploadForDinoImage"

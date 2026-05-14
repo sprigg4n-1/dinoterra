@@ -78,7 +78,7 @@ const MapPage = () => {
   }, [hoveredLocation]);
 
   return (
-    <div className="relative h-full min-h-[calc(100vh-56px)] lg:min-h-[calc(100vh-72px)] flex">
+    <div className="relative h-[calc(100vh-56px)] lg:h-[calc(100vh-72px)] flex">
       <form
         onSubmit={(e) => onSubmitForm(e)}
         className="hidden md:flex md:flex-col h-full w-[400px] bg-slateGray bg-opacity-50 py-2 px-5 gap-5"
