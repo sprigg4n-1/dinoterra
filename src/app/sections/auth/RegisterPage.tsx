@@ -35,7 +35,7 @@ const RegisterPage = () => {
       username,
       password,
       email,
-      "USER"
+      "USER",
     );
 
     console.log(response.success);
@@ -56,7 +56,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center bg-auth-bg bg-bottom bg-cover bg-no-repeat relative after:absolute after:w-full after:h-full after:bg-black after:bg-opacity-65 after:backdrop-blur-[2px]">
+    <section className="h-screen flex justify-center items-center bg-auth-bg bg-bottom bg-cover bg-no-repeat relative after:absolute after:w-full after:h-full after:bg-black after:bg-opacity-65 after:backdrop-blur-[2px]">
       <form
         onSubmit={handleSubmit}
         className="bg-brightOrange pb-3 pt-12 px-5 text-white flex flex-col w-full h-fit justify-center md:w-1/2 gap-3 relative z-10"
@@ -141,7 +141,7 @@ const RegisterPage = () => {
           </Link>
         </div>
       </form>
-    </div>
+    </section>
   );
 };
 
