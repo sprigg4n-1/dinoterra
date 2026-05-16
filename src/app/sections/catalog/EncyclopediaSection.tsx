@@ -87,6 +87,8 @@ const EncyclopediaSection = () => {
       placeLocation,
     );
 
+    console.log(dinosData);
+
     if (isFiltered) {
       pagination.setPage(1);
     }
