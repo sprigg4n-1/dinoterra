@@ -1,8 +1,9 @@
+@import "swiper/css";
+@import "swiper/css/effect-coverflow";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "swiper/css";
-@import "swiper/css/effect-coverflow";
 
 html {
   scroll-behavior: smooth;
