@@ -15,6 +15,8 @@ import {
 } from "@/config/types";
 
 import InputComponent from "@/components/form/InputComponent";
+import { addFoundLocation } from "@/services/FoundLocationService";
+import { addImage } from "@/services/ImageService";
 
 export type TDinoFoundLocation = {
   id: string;
@@ -29,8 +31,11 @@ export type TDinoImages = {
 };
 
 interface Props {
-  onChangeStep?: (value: number) => void;
   onChangeCreatedDino?: (value: any) => void;
+  additionalFunctionForCreation?: () => void;
+
+  images?: TDinoImages[];
+  locations?: TDinoFoundLocation[];
 
   dinoToChange?: IDino;
   onChangeDino?: (value: IDino) => void;
@@ -40,8 +45,11 @@ interface Props {
 }
 
 const DinoForm = ({
-  onChangeStep,
   onChangeCreatedDino,
+  additionalFunctionForCreation,
+
+  images,
+  locations,
 
   dinoToChange,
   onChangeLoading,
@@ -93,14 +101,36 @@ const DinoForm = ({
           dietDescription,
           period,
           periodDate,
-          periodDescription
+          periodDescription,
         );
 
+        if (images) {
+          console.log(images);
+          await Promise.all(
+            images.map((img) => addImage(img.imagePath, dino.data.dino._id)),
+          );
+        }
+
+        if (locations) {
+          console.log(locations);
+          await Promise.all(
+            locations.map((loc) =>
+              addFoundLocation(
+                loc.place,
+                loc.latitude,
+                loc.longitude,
+                dino.data.dino._id,
+              ),
+            ),
+          );
+        }
+
+        additionalFunctionForCreation?.();
         onChangeCreatedDino?.(dino.data.dino);
       };
 
       addDino();
-      onChangeStep?.(2);
+      resetForm();
     } else {
       onChangeLoading?.(true);
 
@@ -117,7 +147,7 @@ const DinoForm = ({
           dietDescription,
           period,
           periodDate,
-          periodDescription
+          periodDescription,
         );
 
         onChangeDino?.(changedDino?.data.dino);
@@ -303,17 +333,18 @@ const DinoForm = ({
       {/* buttons */}
       <div className="flex justify-between gap-2">
         <button
-          type="submit"
-          className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300"
-        >
-          {isChangeForm ? "Редагувати" : " Створити"}
-        </button>
-        <button
           type="button"
           onClick={resetForm}
           className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300"
         >
           Скидання
+        </button>
+
+        <button
+          type="submit"
+          className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300"
+        >
+          {isChangeForm ? "Редагувати" : " Створити"}
         </button>
       </div>
     </form>

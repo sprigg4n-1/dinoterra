@@ -28,12 +28,12 @@ const DinosListDashboard = () => {
 
   useEffect(() => {
     let searchedDinos = dinos.filter((dino) =>
-      dino.latinName.toLowerCase().includes(searchDino.toLowerCase())
+      dino.latinName.toLowerCase().includes(searchDino.toLowerCase()),
     );
 
     if (searchedDinos.length == 0) {
       searchedDinos = dinos.filter((dino) =>
-        dino.name.toLowerCase().includes(searchDino.toLowerCase())
+        dino.name.toLowerCase().includes(searchDino.toLowerCase()),
       );
     }
 
@@ -55,7 +55,7 @@ const DinosListDashboard = () => {
         {finalDinos && finalDinos.length > 0 ? (
           finalDinos
             .sort((a, b) =>
-              a.latinName.toLowerCase() < b.latinName.toLowerCase() ? -1 : 1
+              a.latinName.toLowerCase() < b.latinName.toLowerCase() ? -1 : 1,
             )
             .map((dino: IDino) => (
               <DinoCard

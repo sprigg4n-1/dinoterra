@@ -173,7 +173,8 @@ export type TFeedbackBody = {
     | "WRONG_SPECIES"
     | "FALSE_NEGATIVE"
     | "FALSE_POSITIVE"
-    | "NEW_SPECIES";
+    | "NEW_SPECIES"
+    | null;
   correctRank?: 1 | 2 | 3;
   correctClass?: string | null;
   givenBy?: "USER" | "ADMIN";

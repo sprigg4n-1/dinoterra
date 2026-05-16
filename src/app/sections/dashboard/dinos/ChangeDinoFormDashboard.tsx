@@ -17,7 +17,7 @@ import { IDino, IDinoImages, IDinoFoundLocation } from "@/config/types";
 import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
 import LoaderComponent from "@/components/LoaderComponent";
 import Image from "next/image";
-import DinoForm from "./DinoForm";
+import DinoForm from "../../../../components/dashboard/dino/DinoForm";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
 
@@ -68,7 +68,7 @@ const ChangeDinoFormDashboard = () => {
   // functions
   const onHandleChooseDino = (
     e: React.MouseEvent<HTMLButtonElement>,
-    id: string
+    id: string,
   ) => {
     e.preventDefault();
 
@@ -85,7 +85,7 @@ const ChangeDinoFormDashboard = () => {
   };
 
   const onHandleAddFoundLocation = async (
-    e: React.MouseEvent<HTMLButtonElement>
+    e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
 
@@ -93,7 +93,7 @@ const ChangeDinoFormDashboard = () => {
       placeLoc,
       latitudeLoc.toString(),
       longitudeLoc.toString(),
-      dinoToChange?._id || "random"
+      dinoToChange?._id || "random",
     );
 
     setTimeout;
@@ -107,7 +107,7 @@ const ChangeDinoFormDashboard = () => {
 
   const onHandleDeleteFoundLocation = async (
     e: React.MouseEvent<HTMLButtonElement>,
-    id: string
+    id: string,
   ) => {
     e.preventDefault();
 
@@ -140,7 +140,7 @@ const ChangeDinoFormDashboard = () => {
 
   const onHandleDeleteImage = async (
     e: React.MouseEvent<HTMLButtonElement>,
-    id: string
+    id: string,
   ) => {
     e.preventDefault();
 
@@ -169,12 +169,12 @@ const ChangeDinoFormDashboard = () => {
 
   useEffect(() => {
     let searchedDinos = dinos.filter((dino) =>
-      dino.latinName.toLowerCase().includes(searchDino.toLowerCase())
+      dino.latinName.toLowerCase().includes(searchDino.toLowerCase()),
     );
 
     if (searchedDinos.length == 0) {
       searchedDinos = dinos.filter((dino) =>
-        dino.name.toLowerCase().includes(searchDino.toLowerCase())
+        dino.name.toLowerCase().includes(searchDino.toLowerCase()),
       );
     }
 

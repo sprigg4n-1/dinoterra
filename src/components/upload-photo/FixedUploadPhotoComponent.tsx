@@ -10,14 +10,14 @@ import { useFileUpload } from "@/hooks/useFileUpload";
 
 const FixedUploadPhotoComponent = () => {
   const { imagePath, handleFileUpload, resetImagePath } = useFileUpload({
-    onUpload: () => setIsOpenModel(true),
+    onUpload: () => setIsOpenModal(true),
   });
 
-  const [isOpenModal, setIsOpenModel] = useState<boolean>(false);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
   const closeModal = () => {
     resetImagePath();
-    setIsOpenModel(false);
+    setIsOpenModal(false);
   };
 
   return (

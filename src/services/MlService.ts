@@ -17,6 +17,18 @@ export const classifyImage = async (
   }
 };
 
+export const classifyAdmin = async (file: string) => {
+  try {
+    const response = await axios.post(`${BASE_DEV_API_URL}/ml/admin/classify`, {
+      file,
+    });
+    return response.data.data;
+  } catch (error) {
+    console.error(`Error with admin classify: ${error}`);
+    return null;
+  }
+};
+
 export const giveFeedback = async (id: string, body: TFeedbackBody) => {
   try {
     const response = await axios.post(
