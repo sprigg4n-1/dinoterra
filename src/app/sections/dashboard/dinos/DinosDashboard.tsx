@@ -5,47 +5,24 @@ import React, { useState } from "react";
 import DinosListDashboard from "./DinosListDashboard";
 import ChangeDinoFormDashboard from "./ChangeDinoFormDashboard";
 import CreateDinoFormDashboard from "./CreateDinoFormDashboard";
+import DashboardTabsTopNavigation from "@/components/dashboard/DashboardTabsTopNavigation";
+
+import { DINO_TOP_TABS } from "@/constants/admin";
 
 const DinosDashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("all");
 
+  const onChangeActiveTab = (value: string) => {
+    setActiveTab(value);
+  };
+
   return (
     <div className="flex flex-col gap-2 relative">
-      <div className="flex flex-col gap-1 w-full text-white sm:flex-row lg:sticky top-0 left-0 z-10 lg:bg-white lg:py-2 lg:px-1">
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            setActiveTab("all");
-          }}
-          className={`py-2 px-1 text-[16px] xl:text-[18px] sm:w-1/3 ${
-            activeTab === "all" ? "bg-brightOrange" : "bg-darkPurple"
-          }`}
-        >
-          Список динозаврів
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            setActiveTab("create");
-          }}
-          className={`py-2 px-1 text-[16px] xl:text-[18px] sm:w-1/3 ${
-            activeTab === "create" ? "bg-brightOrange" : "bg-darkPurple"
-          }`}
-        >
-          Додавання динозавра
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            setActiveTab("change");
-          }}
-          className={`py-2 px-1 text-[16px] xl:text-[18px] sm:w-1/3 ${
-            activeTab === "change" ? "bg-brightOrange" : "bg-darkPurple"
-          }`}
-        >
-          Редагування динозавра
-        </button>
-      </div>
+      <DashboardTabsTopNavigation
+        items={DINO_TOP_TABS}
+        activeItemId={activeTab}
+        setActive={onChangeActiveTab}
+      />
       <div className="h-full">
         {activeTab === "all" ? (
           <DinosListDashboard />

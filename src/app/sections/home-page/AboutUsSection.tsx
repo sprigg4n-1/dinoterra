@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
-import { ABOUT_TABS } from "@/app/constants/about";
+import { ABOUT_TABS } from "@/constants/about";
 import BaseContainer from "@/components/BaseContainer";
 
 const AboutUsSection = () => {
