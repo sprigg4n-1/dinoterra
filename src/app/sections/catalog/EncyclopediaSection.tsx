@@ -12,12 +12,13 @@ import DinoCard from "@/components/dino/DinoCard";
 import LoaderComponent from "@/components/LoaderComponent";
 import BaseContainer from "@/components/BaseContainer";
 
-const SHOW_LIMIT = 6;
+const SHOW_LIMIT = 14;
 
 const EncyclopediaSection = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [dinos, setDinos] = useState<IDino[]>([]);
+  const [countOfDino, setCountOfDino] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1);
 
   const [typeOfDino, setTypeOfDino] = useState<string>("");
@@ -94,6 +95,7 @@ const EncyclopediaSection = () => {
     }
 
     setDinos(dinosData.dinos);
+    setCountOfDino(dinosData.count);
     setTotalPages(Math.ceil(dinosData.count / SHOW_LIMIT));
     setIsLoading(false);
   };
@@ -117,7 +119,7 @@ const EncyclopediaSection = () => {
   return (
     <section>
       <BaseContainer>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center pb-5 md:pb-10">
           <EncyclopediaFilter
             diet={diet}
             period={period}
@@ -133,7 +135,11 @@ const EncyclopediaSection = () => {
             onClickFilterData={onClickFilterData}
           />
 
-          <div className="flex flex-wrap gap-5 items-center justify-center py-5 lg:py-10">
+          <p className="text-lg mt-3 md:mt-5 text-darkGray">
+            Всього видів: {countOfDino}
+          </p>
+
+          <div className="flex flex-wrap gap-5 items-center justify-center my-2 md:my-5">
             {isLoading ? (
               <LoaderComponent />
             ) : dinos && dinos.length > 0 ? (
@@ -154,7 +160,7 @@ const EncyclopediaSection = () => {
             )}
           </div>
 
-          <div className="flex gap-2 mb-5 lg:mb-10 px-2">
+          <div className="flex gap-2 px-2">
             {pagination.range.map((page, index) =>
               page === "dots" ? (
                 <button

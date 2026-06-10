@@ -1,22 +1,19 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
-
 import { getUserProfilePhoto } from "@/services/SecurityService";
-
 import { motion } from "framer-motion";
-
-import Link from "next/link";
+import { useMessages, useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import HeaderItem from "./HeaderItem";
 import Image from "next/image";
 
 import close from "@/images/vectors/close.svg";
 import logo from "@/images/logo.svg";
-
 import avatar from "@/images/avatar/avatar.jpg";
 import { IUserImages } from "@/config/types";
+import LocaleSwitcher from "../LocaleSwitcher";
 
 type HeaderItem = {
   link: string;
@@ -24,43 +21,30 @@ type HeaderItem = {
   label: string;
 };
 
-const HEADER_ITEMS: HeaderItem[] = [
-  {
-    link: "/",
-    text: "Домашня",
-    label: "home",
-  },
-  {
-    link: "/encyclopedia",
-    text: "Енциклопедія",
-    label: "ency",
-  },
-  {
-    link: "/chronologie",
-    text: "Історія",
-    label: "hist",
-  },
-  {
-    link: "/interactive-map",
-    text: "Карта",
-    label: "imap",
-  },
-];
-
 const HeaderList = () => {
   const { isAuthenticated, user } = useAuth();
   const pathname = usePathname();
 
+  const messages = useMessages();
+
+  console.log(messages);
+
+  const t = useTranslations("navigation");
+
+  const HEADER_ITEMS: HeaderItem[] = [
+    { link: "/", text: t("home"), label: "home" },
+    { link: "/encyclopedia", text: t("encyclopedia"), label: "ency" },
+    { link: "/chronologie", text: t("chronologie"), label: "hist" },
+    { link: "/interactive-map", text: t("map"), label: "imap" },
+  ];
+
   const [activeItem, setActiveItem] = useState<string>(HEADER_ITEMS[0].label);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
   const [profilePhoto, setProfilePhoto] = useState<IUserImages | null>(null);
 
-  const toggleActiveItem = (newAcitveItem: string) => {
-    setActiveItem(newAcitveItem);
-    if (isOpen) {
-      setIsOpen(false);
-    }
+  const toggleActiveItem = (newActiveItem: string) => {
+    setActiveItem(newActiveItem);
+    if (isOpen) setIsOpen(false);
   };
 
   const fetchData = async () => {
@@ -70,12 +54,9 @@ const HeaderList = () => {
     }
   };
 
-  // use effects
   useEffect(() => {
-    const correctPathhname = pathname.split("/").slice(0, 2).join("/");
-
-    const item = HEADER_ITEMS.find((item) => item.link === correctPathhname);
-
+    const correctPathname = pathname.split("/").slice(0, 2).join("/");
+    const item = HEADER_ITEMS.find((item) => item.link === correctPathname);
     setActiveItem(item?.label || "non-active");
   }, [pathname]);
 
@@ -90,7 +71,7 @@ const HeaderList = () => {
   return (
     <>
       {/* pc navigation */}
-      <nav className="hidden lg:flex items-center gap-[50px]">
+      <nav className="hidden lg:flex items-center gap-[20px] xl:gap-[50px]">
         {HEADER_ITEMS.map((item) => (
           <HeaderItem
             key={item.label}
@@ -99,10 +80,11 @@ const HeaderList = () => {
             toggleActiveItem={toggleActiveItem}
           />
         ))}
+        <LocaleSwitcher />
         {isAuthenticated ? (
           <Link
             className="hidden lg:block w-10 h-10 rounded-full bg-white hover:bg-brightOrange duration-300"
-            href={"/account"}
+            href="/account"
           >
             <Image
               src={profilePhoto ? profilePhoto.file : avatar}
@@ -115,9 +97,9 @@ const HeaderList = () => {
         ) : (
           <Link
             className="hidden lg:block text-[20px] p-1 text-white hover:text-brightOrange duration-300"
-            href={"/auth"}
+            href="/auth"
           >
-            Вхід
+            {t("login")}
           </Link>
         )}
       </nav>
@@ -136,12 +118,8 @@ const HeaderList = () => {
       </button>
 
       <motion.div
-        initial={{
-          translateX: "-100%",
-        }}
-        animate={{
-          translateX: isOpen ? "0" : "-100%",
-        }}
+        initial={{ translateX: "-100%" }}
+        animate={{ translateX: isOpen ? "0" : "-100%" }}
         transition={{ duration: 0.3 }}
         className="absolute top-0 left-0 w-full h-screen lg:hidden px-2 py-3 flex flex-col gap-10 bg-slateGray z-50"
       >
@@ -164,7 +142,7 @@ const HeaderList = () => {
               src={close}
               width={100}
               height={100}
-              alt="logo"
+              alt="close"
               className="w-[30px] h-[30px]"
             />
           </button>
@@ -178,10 +156,11 @@ const HeaderList = () => {
               toggleActiveItem={toggleActiveItem}
             />
           ))}
+          <LocaleSwitcher />
           {isAuthenticated ? (
             <Link
               className="w-10 h-10 rounded-full bg-white hover:bg-brightOrange duration-300"
-              href={"/account"}
+              href="/account"
               onClick={() => setIsOpen(false)}
             >
               <Image
@@ -195,9 +174,9 @@ const HeaderList = () => {
           ) : (
             <Link
               className="text-[20px] p-1 text-white hover:text-brightOrange duration-300"
-              href={"/auth"}
+              href="/auth"
             >
-              Вхід
+              {t("login")}
             </Link>
           )}
         </nav>

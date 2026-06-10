@@ -6,13 +6,16 @@ import { Map } from "@vis.gl/react-maplibre";
 import Link from "next/link";
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import BaseContainer from "@/components/BaseContainer";
+import { useTranslations } from "next-intl";
 
 const MapNavigatorSection = () => {
+  const t = useTranslations();
+
   return (
     <section className="py-5 lg:py-10">
       <BaseContainer>
         <SectionMainTitleComponent
-          title="Перегляд інтерактивної карти"
+          title={t("home.map.title")}
           firstTextPosition="left"
           titleColor="white"
           subtitleColor="white"
@@ -39,7 +42,7 @@ const MapNavigatorSection = () => {
             href={"/interactive-map"}
             className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden lg:group-hover:block w-[120px] py-1 text-center text-[18px] bg-black bg-opacity-50 text-brightOrange hover:bg-opacity-100"
           >
-            до карти
+            {t("buttonText.toMap")}
           </Link>
 
           {/* mobile */}
@@ -47,7 +50,7 @@ const MapNavigatorSection = () => {
             href={"/interactive-map"}
             className="block lg:hidden text-[18px] mx-auto w-[200px] text-center mt-5 text-slateGray border-b-2 border-b-slateGray hover:text-brightOrange hover:border-b-brightOrange"
           >
-            Перейти до карти
+            {t("buttonText.toMapMobile")}
           </Link>
         </div>
       </BaseContainer>

@@ -10,8 +10,11 @@ import { IDino } from "@/config/types";
 import DinoCard from "@/components/dino/DinoCard";
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import BaseContainer from "@/components/BaseContainer";
+import { useTranslations } from "next-intl";
 
 const DinoRecomendationSection = () => {
+  const t = useTranslations();
+
   const [dinos, setDinos] = useState<IDino[]>([]);
 
   useEffect(() => {
@@ -28,9 +31,8 @@ const DinoRecomendationSection = () => {
     <section className="py-5 lg:py-10">
       <BaseContainer>
         <SectionMainTitleComponent
-          title="Рекомендовані динозаври"
-          subtitle="Відкрийте для себе деякі з найбільш знакових і захоплюючих динозаврів
-          у нашій колекції."
+          title={t("home.recs.title")}
+          subtitle={t("home.recs.subtitle")}
           firstTextPosition="right"
           titleColor="white"
           subtitleColor="white"
@@ -52,7 +54,7 @@ const DinoRecomendationSection = () => {
           </Swiper>
         ) : (
           <p className="text-center mt-8 text-white text-[14px] md:text-[18px] bg-fieryRed py-5">
-            Виникла помилка на сервері...
+            {t("errors.proplemsWithServer")}
           </p>
         )}
       </BaseContainer>

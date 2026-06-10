@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 const SOCIAL_LINKS = [
@@ -7,40 +8,45 @@ const SOCIAL_LINKS = [
 ];
 
 const PAGE_LINKS = [
-  { link: "/", title: "Про нас" },
-  { link: "/contacts", title: "Контакти" },
-  { link: "/legal", title: "Політика конфіденційності" },
+  { link: "/", key: "about" },
+  { link: "/contacts", key: "contacts" },
+  { link: "/legal", key: "privacyPolicy" },
 ];
 
 const Footer = () => {
+  const t = useTranslations("footer");
+
   return (
     <footer className="w-full bg-softGray text-darkGray mt-auto text-center py-5 px-2 sm:px-5 lg:px-20 flex flex-col gap-5 xl:flex-row xl:justify-between items-center">
-      <div className="flex flex-col gap-2 xl:gap-5 xl:flex-row text-[14px] xl:text-[18px] ">
-        {PAGE_LINKS.map((link) => (
+      {/* PAGE LINKS */}
+      <div className="flex flex-col gap-2 xl:gap-5 xl:flex-row text-[14px] xl:text-[18px]">
+        {PAGE_LINKS.map((item) => (
           <Link
-            key={link.title}
-            href={link.link}
+            key={item.key}
+            href={item.link}
             className="hover:underline duration-300"
           >
-            {link.title}
+            {t(item.key)}
           </Link>
         ))}
       </div>
+
+      {/* SOCIAL LINKS (можеш лишити як є, вони не перекладаються) */}
       <div className="flex flex-col gap-2 xl:gap-5 xl:flex-row text-[14px] xl:text-[18px]">
-        {SOCIAL_LINKS.map((link) => (
+        {SOCIAL_LINKS.map((item) => (
           <Link
-            key={link.title}
-            href={link.link}
+            key={item.title}
+            href={item.link}
             target="_blank"
             className="hover:underline duration-300"
           >
-            {link.title}
+            {item.title}
           </Link>
         ))}
       </div>
-      <span className="text-[14px] xl:text-[18px]">
-        © 2025 DinoTerra. Всі права захищені.
-      </span>
+
+      {/* COPYRIGHT */}
+      <span className="text-[14px] xl:text-[18px]">{t("copyright")}</span>
     </footer>
   );
 };

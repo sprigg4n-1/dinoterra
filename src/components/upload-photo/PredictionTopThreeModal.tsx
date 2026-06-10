@@ -66,7 +66,7 @@ const PredictionTopThreeModal = ({ onClose, file }: Props) => {
   }, [prediction]);
 
   return (
-    <div className="fixed h-screen w-screen bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="fixed h-screen w-screen bg-black bg-opacity-50 flex items-center justify-center z-10">
       <div className="h-fit w-[90%] md:w-fit bg-slateGray rounded-2xl relative pt-9 md:pt-13 p-4">
         <button className="hover:rotate-90 duration-300 absolute top-2 right-2 w-5 h-5 md:w-6 md:h-6">
           <Image

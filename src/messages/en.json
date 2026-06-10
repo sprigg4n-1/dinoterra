@@ -1,0 +1,60 @@
+{
+  "buttonText": {
+    "start": "Start",
+    "startExploring": "Start exploring",
+    "toMap": "to map",
+    "toMapMobile": "Go to the map",
+    "login": "Login",
+    "register": "Register",
+    "loginWithoutSignUp": "Login without registration"
+  },
+  "errors": {
+    "proplemsWithServer": "A server error has occurred..."
+  },
+  "navigation": {
+    "home": "Home",
+    "encyclopedia": "Encyclopedia",
+    "chronologie": "Chronology",
+    "map": "Interactive Map",
+    "login": "Log in"
+  },
+  "footer": {
+    "about": "About us",
+    "contacts": "Contacts",
+    "privacyPolicy": "Privacy Policy",
+    "copyright": "© 2025 DinoTerra. All rights reserved."
+  },
+  "home": {
+    "intro": {
+      "title": "Explore the world of dinosaurs",
+      "subtitle": "Discover ancient creatures through interactive maps, 3D models and fascinating facts."
+    },
+    "aboutUs": {
+      "title": "About Us",
+      "subtitle": "DinoTerra is your main resource for learning about dinosaurs. Dive into our interactive encyclopedia, explore the ancient world through detailed maps, and discover the fascinating history of each species. Whether you are a student, teacher, or dinosaur enthusiast, our platform offers a unique immersive experience.",
+      "mission": {
+        "title": "Our Mission",
+        "text": "At DinoTerra, we aim to spark curiosity and deepen the understanding of the prehistoric world. By combining scientific accuracy with cutting-edge technology, we create an educational space for everyone."
+      },
+      "why": {
+        "title": "Why Us?",
+        "text": "Engage with interactive maps, 3D models, and dynamic timelines.\nAccess detailed species profiles and discover fascinating historical contexts.\nContent designed for students, educators, and enthusiasts."
+      },
+      "features": {
+        "title": "Features",
+        "text": "Learn about dinosaurs like never before with detailed species profiles and immersive visualizations.\nTravel across the map to explore dinosaur discovery sites in different regions.\nFollow the timeline of dinosaurs from their emergence to extinction."
+      },
+      "history": {
+        "title": "Our History",
+        "text": "DinoTerra was born from a love of dinosaurs and a desire to share this passion with the world. What started as a simple idea has grown into a platform designed to make learning about dinosaurs accessible, interactive, and engaging for everyone."
+      }
+    },
+    "map": {
+      "title": "Interactive Map View"
+    },
+    "recs": {
+      "title": "Recommended Dinosaurs",
+      "subtitle": "Discover some of the most iconic and fascinating dinosaurs in our collection."
+    }
+  }
+}

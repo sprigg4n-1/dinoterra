@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 type Item = {
   link: string;
@@ -18,14 +18,12 @@ const HeaderItem = ({
   return (
     <Link
       href={item.link}
-      className={`text-[20px] border-b-2 p-1 hover:text-white duration-300 ${
+      className={`text-[18px] xl:text-[20px] border-b-2 p-1 hover:text-white duration-300 ${
         activeItem === item.label
           ? "text-white border-brightOrange"
           : "text-softGray border-transparent"
       }`}
-      onClick={() => {
-        toggleActiveItem(item.label);
-      }}
+      onClick={() => toggleActiveItem(item.label)}
     >
       {item.text}
     </Link>

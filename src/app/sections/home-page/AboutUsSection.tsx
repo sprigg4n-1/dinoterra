@@ -5,9 +5,12 @@ import { useState } from "react";
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import { ABOUT_TABS } from "@/constants/about";
 import BaseContainer from "@/components/BaseContainer";
+import { useTranslations } from "next-intl";
 
 const AboutUsSection = () => {
   const [activeTab, setActiveTab] = useState(0);
+
+  const t = useTranslations();
 
   // function
   const onHandleClickChangeTab = (
@@ -22,12 +25,8 @@ const AboutUsSection = () => {
     <section className="bg-white py-5 lg:py-10">
       <BaseContainer>
         <SectionMainTitleComponent
-          title="Про Нас"
-          subtitle="DinoTerra — це ваш головний ресурс для вивчення динозаврів. Пориньте в
-        нашу інтерактивну енциклопедію, досліджуйте стародавній світ за
-        допомогою детальних карт і дізнайтесь про захоплюючу історію кожного
-        виду. Незалежно від того, чи ви студент, викладач чи ентузіаст
-        динозаврів, наша платформа пропонує унікальний досвід занурення."
+          title={t("home.aboutUs.title")}
+          subtitle={t("home.aboutUs.subtitle")}
           firstTextPosition="center"
           titleColor="orange"
           subtitleColor="purple"
@@ -42,10 +41,10 @@ const AboutUsSection = () => {
               className="flex flex-col items-center text-center gap-2"
             >
               <h3 className="text-[18px] font-semibold text-brightOrange sm:text-[20px]">
-                {item.title}
+                {t(item.title)}
               </h3>
               <p className="text-darkPurple text-[14px] sm:text-[16px]">
-                {item.text}
+                {t(item.text)}
               </p>
             </div>
           ))}
@@ -64,7 +63,7 @@ const AboutUsSection = () => {
                     : "bg-transparent text-brightOrange"
                 } w-1/4 text-[24px] font-semibold py-1`}
               >
-                {item.title}
+                {t(item.title)}
               </button>
             ))}
           </div>
@@ -75,7 +74,7 @@ const AboutUsSection = () => {
                 i === activeTab ? "flex" : "hidden"
               } flex-col items-center text-center gap-2 py-20 px-24 text-[20px]`}
             >
-              {item.text}
+              {t(item.text)}
             </div>
           ))}
         </div>
