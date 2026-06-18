@@ -6,11 +6,12 @@ import { EffectCoverflow } from "swiper/modules";
 import { Swiper as SwiperType } from "swiper";
 
 import { classifyImage, giveFeedback } from "@/services/MlService";
-import { IDino, TFeedbackBody, TPrediction } from "@/config/types";
-import { getDinoByLatinName } from "@/services/DinoService";
+import { IDinoV2, TFeedbackBody, TPrediction } from "@/config/types";
+import { getDinoV2ByLatinName } from "@/services/DinoV2Service";
 
 import LoaderComponent from "../LoaderComponent";
 import DinoCard from "../dino/DinoCard";
+import { IDino } from "@/config/types";
 import Image from "next/image";
 
 import close from "@/images/vectors/close.svg";
@@ -30,7 +31,7 @@ const PredictionTopThreeModal = ({ onClose, file }: Props) => {
   const swiperRef = useRef<SwiperType | null>(null);
 
   const [prediction, setPrediction] = useState<TPrediction | null>(null);
-  const [dinoData, setDinoData] = useState<(IDino | null)[]>([]);
+  const [dinoData, setDinoData] = useState<(IDinoV2 | null)[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const [isOpenFeedbackForm, setIsOpenFeedbackForm] = useState<boolean>(false);
@@ -60,10 +61,10 @@ const PredictionTopThreeModal = ({ onClose, file }: Props) => {
     if (prediction && prediction.isDinosaur) {
       const fetchDinos = async () => {
         const dinoRequests = prediction.top3.map((item) =>
-          getDinoByLatinName(item.species),
+          getDinoV2ByLatinName(item.species),
         );
         const dinoResults = await Promise.all(dinoRequests);
-        setDinoData(dinoResults.map((r) => r?.[0] || null));
+        setDinoData(dinoResults.map((r) => r?.[0] ?? null));
       };
 
       fetchDinos();
@@ -123,7 +124,7 @@ const PredictionTopThreeModal = ({ onClose, file }: Props) => {
                         {dinoData[i] ? (
                           <DinoCard
                             link={`/encyclopedia/${dinoData[i]!._id}`}
-                            dino={dinoData[i]!}
+                            dino={{ ...dinoData[i]!, image: dinoData[i]!.mainImage ?? undefined } as unknown as IDino}
                             textColor="white"
                             bgColor="black"
                           />

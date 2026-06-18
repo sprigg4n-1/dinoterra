@@ -25,10 +25,6 @@ const HeaderList = () => {
   const { isAuthenticated, user } = useAuth();
   const pathname = usePathname();
 
-  const messages = useMessages();
-
-  console.log(messages);
-
   const t = useTranslations("navigation");
 
   const HEADER_ITEMS: HeaderItem[] = [

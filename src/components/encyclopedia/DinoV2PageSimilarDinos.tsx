@@ -1,41 +1,32 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useTranslations } from "next-intl";
 
-import { IDino } from "@/config/types";
-import { getSimilarDinos } from "@/services/DinoService";
-
-import DinoCard from "../dino/DinoCard";
+import { IDino, IDinoV2 } from "@/config/types";
+import DinoCard from "@/components/dino/DinoCard";
 
 interface Props {
-  dino: IDino;
+  dinos: IDinoV2[];
 }
 
-const DinoPageSimilarDinos = ({ dino }: Props) => {
-  const [dinos, setDinos] = useState<IDino[]>([]);
+const adaptToDinoCard = (dino: IDinoV2): IDino =>
+  ({ ...dino, image: dino.mainImage ?? undefined } as unknown as IDino);
 
-  useEffect(() => {
-    const getData = async () => {
-      const dinosData = await getSimilarDinos(dino?._id || "random");
-
-      setDinos(dinosData);
-    };
-
-    getData();
-  }, [dino]);
+const DinoV2PageSimilarDinos = ({ dinos }: Props) => {
+  const tPage = useTranslations("dinoV2.page");
 
   return (
     <div className="flex flex-col gap-3 md:gap-5">
       <h2 className="text-[20px] lg:text-[24px] font-semibold text-center">
-        Схожі динозаври
+        {tPage("similarDinos")}
       </h2>
-      {dinos && dinos.length > 0 ? (
+      {dinos.length > 0 ? (
         <Swiper spaceBetween={20} slidesPerView="auto">
           {dinos.map((dino) => (
             <SwiperSlide key={dino._id} style={{ width: "auto" }}>
               <DinoCard
-                dino={dino}
+                dino={adaptToDinoCard(dino)}
                 link={`/encyclopedia/${dino._id}`}
                 bgColor="orange"
                 textColor="white"
@@ -46,11 +37,11 @@ const DinoPageSimilarDinos = ({ dino }: Props) => {
         </Swiper>
       ) : (
         <p className="text-[14px] md:text-[18px] text-fieryRed text-center">
-          Схожих динозаврів не найдено
+          {tPage("noSimilarDinos")}
         </p>
       )}
     </div>
   );
 };
 
-export default DinoPageSimilarDinos;
+export default DinoV2PageSimilarDinos;

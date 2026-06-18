@@ -3,10 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-import { getFoundLocations } from "@/services/FoundLocationService";
-import { getDinoById } from "@/services/DinoService";
+import { getFoundLocationsV2, getDinoV2ById } from "@/services/DinoV2Service";
 
-import { dinoPeriodLabels, IDino, IDinoFoundLocation } from "@/config/types";
+import { dinoPeriodLabels, IDinoV2FoundLocation } from "@/config/types";
 
 import { Map, Marker } from "@vis.gl/react-maplibre";
 import Image from "next/image";
@@ -14,13 +13,14 @@ import Link from "next/link";
 
 import close from "@/images/vectors/close.svg";
 import imageNotFound from "@/images/not-found/image-not-found.webp";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const MapPage = () => {
   const t = useTranslations();
-  const [locations, setLocations] = useState<IDinoFoundLocation[]>([]);
+  const locale = useLocale();
+  const [locations, setLocations] = useState<IDinoV2FoundLocation[]>([]);
   const [hoveredLocation, setHoveredLocation] =
-    useState<IDinoFoundLocation | null>(null);
+    useState<IDinoV2FoundLocation | null>(null);
   const [locationDino, setLocationDino] = useState<any>(null);
 
   const [searchLocation, setSearchLocation] = useState<string>("");
@@ -51,9 +51,9 @@ const MapPage = () => {
   };
 
   const getLocs = async () => {
-    const locsData = await getFoundLocations(searchLocation, period);
+    const locsData = await getFoundLocationsV2(searchLocation, period);
 
-    setLocations(locsData);
+    setLocations(locsData ?? []);
   };
 
   // use effects
@@ -71,8 +71,7 @@ const MapPage = () => {
   useEffect(() => {
     const getLocationDino = async () => {
       if (!hoveredLocation) return;
-      const dinoData = await getDinoById(hoveredLocation.dino);
-      console.log(dinoData);
+      const dinoData = await getDinoV2ById(hoveredLocation.dino);
       setLocationDino(dinoData);
     };
 
@@ -245,7 +244,7 @@ const MapPage = () => {
           <div className="absolute w-[90%] h-fit max-h-[90%] md:h-fit md:min-h-[100px] md:w-[350px] bg-darkGray top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="flex justify-between gap-1 items-start py-3 px-2">
               <p className="text-white text-[14px] md:text-[16px]">
-                📍 {hoveredLocation.place}
+                📍 {locale === "en" ? hoveredLocation.place.en : hoveredLocation.place.uk}
               </p>
               <button className="hover:rotate-90 duration-300">
                 <Image
@@ -262,7 +261,7 @@ const MapPage = () => {
               <Image
                 src={
                   locationDino?.images && locationDino.images.length > 0
-                    ? locationDino.images[0].file
+                    ? (locationDino.images.find((img: any) => img.isMain)?.file ?? locationDino.images[0].file)
                     : imageNotFound
                 }
                 width={4000}
@@ -278,10 +277,12 @@ const MapPage = () => {
                 {t("map.imageSource")}
               </Link>
               <Link
-                href={`/encyclopedia/${hoveredLocation.dino}`}
+                href={`/${locale}/encyclopedia/${hoveredLocation.dino}`}
                 className=" text-white text-[14px] md:text-[18px] text-center w-full hover:bg-brightOrange py-2"
               >
-                {locationDino?.dino.name}
+                {locationDino?.dino?.name
+                  ? (locale === "en" ? locationDino.dino.name.en : locationDino.dino.name.uk)
+                  : ""}
               </Link>
             </div>
           </div>

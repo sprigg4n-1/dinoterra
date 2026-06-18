@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { usePagination } from "@mantine/hooks";
 
-import { getDinos } from "@/services/DinoService";
-
-import { IDino } from "@/config/types";
+import { getDinosV2 } from "@/services/DinoV2Service";
+import { IDino, IDinoV2 } from "@/config/types";
 
 import EncyclopediaFilter from "@/components/encyclopedia/EncyclopediaFilter";
 import DinoCard from "@/components/dino/DinoCard";
@@ -15,11 +14,14 @@ import { useTranslations } from "next-intl";
 
 const SHOW_LIMIT = 14;
 
+const adaptV2ToCard = (dino: IDinoV2): IDino =>
+  ({ ...dino, image: dino.mainImage ?? undefined } as unknown as IDino);
+
 const EncyclopediaSection = () => {
   const t = useTranslations();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [dinos, setDinos] = useState<IDino[]>([]);
+  const [dinos, setDinos] = useState<IDinoV2[]>([]);
   const [countOfDino, setCountOfDino] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1);
 
@@ -80,25 +82,22 @@ const EncyclopediaSection = () => {
   const getDataDinos = async (isFiltered: boolean) => {
     setIsLoading(true);
 
-    const dinosData = await getDinos(
-      SHOW_LIMIT,
+    const dinosData = await getDinosV2(
       pagination.active > 0 ? pagination.active - 1 : pagination.active,
+      SHOW_LIMIT,
       searchDino,
       typeOfDino,
       diet,
       period,
-      placeLocation,
     );
-
-    console.log(dinosData);
 
     if (isFiltered) {
       pagination.setPage(1);
     }
 
-    setDinos(dinosData.dinos);
-    setCountOfDino(dinosData.count);
-    setTotalPages(Math.ceil(dinosData.count / SHOW_LIMIT));
+    setDinos(dinosData?.dinos ?? []);
+    setCountOfDino(dinosData?.count ?? 0);
+    setTotalPages(Math.ceil((dinosData?.count ?? 0) / SHOW_LIMIT));
     setIsLoading(false);
   };
 
@@ -148,7 +147,7 @@ const EncyclopediaSection = () => {
               dinos.map((dino) => (
                 <DinoCard
                   key={dino._id}
-                  dino={dino}
+                  dino={adaptV2ToCard(dino)}
                   link={`/encyclopedia/${dino._id}`}
                   bgColor="orange"
                   border

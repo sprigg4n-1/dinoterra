@@ -3,25 +3,28 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { getFiveRandomDinos } from "@/services/DinoService";
+import { getFiveRandomDinosV2 } from "@/services/DinoV2Service";
 
-import { IDino } from "@/config/types";
+import { IDino, IDinoV2 } from "@/config/types";
 
 import DinoCard from "@/components/dino/DinoCard";
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import BaseContainer from "@/components/BaseContainer";
 import { useTranslations } from "next-intl";
 
+const adaptV2ToCard = (dino: IDinoV2): IDino =>
+  ({ ...dino, image: dino.mainImage ?? undefined } as unknown as IDino);
+
 const DinoRecomendationSection = () => {
   const t = useTranslations();
 
-  const [dinos, setDinos] = useState<IDino[]>([]);
+  const [dinos, setDinos] = useState<IDinoV2[]>([]);
 
   useEffect(() => {
     const getData = async () => {
-      const dinosData = await getFiveRandomDinos();
+      const dinosData = await getFiveRandomDinosV2();
 
-      setDinos(dinosData);
+      setDinos(dinosData ?? []);
     };
 
     getData();
@@ -43,7 +46,7 @@ const DinoRecomendationSection = () => {
             {dinos.map((dino) => (
               <SwiperSlide key={dino._id} style={{ width: "auto" }}>
                 <DinoCard
-                  dino={dino}
+                  dino={adaptV2ToCard(dino)}
                   link={`/encyclopedia/${dino._id}`}
                   bgColor="orange"
                   textColor="white"

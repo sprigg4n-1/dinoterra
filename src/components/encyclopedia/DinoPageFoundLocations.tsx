@@ -1,11 +1,11 @@
 "use client";
 
-import { IDinoFoundLocation } from "@/config/types";
+import { IDinoV2FoundLocation } from "@/config/types";
 
 import { Map, Marker } from "@vis.gl/react-maplibre";
 
 interface Props {
-  foundLocations: IDinoFoundLocation[];
+  foundLocations: IDinoV2FoundLocation[];
 }
 
 const DinoPageFoundLocations = ({ foundLocations }: Props) => {

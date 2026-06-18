@@ -44,6 +44,12 @@ export interface IDinoFav {
   image: IDinoImages;
 }
 
+export interface IDinoV2Fav {
+  _id: string;
+  dino: IDinoV2;
+  image: IDinoV2Image | null;
+}
+
 export interface IDinoFoundLocation {
   _id: string;
   latitude: number;
@@ -147,6 +153,43 @@ export const dinoTypeLabels: Record<EDinoType, string> = {
   [EDinoType.Rugose]: "Ругозавр",
   [EDinoType.Unknown]: "Невідомий",
 };
+
+// dino v2 types
+export interface IDinoV2 {
+  _id: string;
+  name: { uk: string; en: string };
+  latinName: string;
+  typeOfDino: string;
+  period: string;
+  periodDate: string;
+  diet: string;
+  length: number;
+  weight: number;
+  article?: { uk: object | null; en: object | null };
+  mainImage?: string | null;
+}
+
+export interface IDinoV2Image {
+  _id: string;
+  file: string;
+  isMain: boolean;
+  dino: string;
+}
+
+export interface IDinoV2ArticleImage {
+  _id: string;
+  file: string;
+  caption: { uk: string; en: string };
+  dino: string;
+}
+
+export interface IDinoV2FoundLocation {
+  _id: string;
+  place: { uk: string; en: string };
+  latitude: number;
+  longitude: number;
+  dino: string;
+}
 
 // image prediction
 export type TTop3Item = {

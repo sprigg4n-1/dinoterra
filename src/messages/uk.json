@@ -328,6 +328,27 @@
       }
     }
   },
+  "dinoV2": {
+    "page": {
+      "type": "Тип",
+      "weight": "Вага",
+      "length": "Розмір",
+      "diet": "Харчування",
+      "period": "Геологічний період",
+      "periodDate": "Час існування",
+      "addToFav": "Додати до улюблених",
+      "removeFromFav": "Видалити з улюблених",
+      "similarDinos": "Схожі динозаври",
+      "noSimilarDinos": "Схожих динозаврів не знайдено",
+      "allImages": "Всі картинки",
+      "noMoreImages": "Більше картинок немає",
+      "periodDateSuffix": "млн р.т.",
+      "weightUnit": "кг",
+      "lengthUnit": "м",
+      "foundLocations": "Місця знахідок",
+      "article": "Стаття"
+    }
+  },
   "encyclopedia": {
     "totalSpecies": "Всього видів: {count}",
     "notFound": "Не найдено динозаврів за параметрами...",

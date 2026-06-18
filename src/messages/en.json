@@ -328,6 +328,27 @@
       }
     }
   },
+  "dinoV2": {
+    "page": {
+      "type": "Type",
+      "weight": "Weight",
+      "length": "Length",
+      "diet": "Diet",
+      "period": "Geological Period",
+      "periodDate": "Time Period",
+      "addToFav": "Add to favorites",
+      "removeFromFav": "Remove from favorites",
+      "similarDinos": "Similar dinosaurs",
+      "noSimilarDinos": "No similar dinosaurs found",
+      "allImages": "All images",
+      "noMoreImages": "No more images",
+      "periodDateSuffix": "mya",
+      "weightUnit": "kg",
+      "lengthUnit": "m",
+      "foundLocations": "Found locations",
+      "article": "Article"
+    }
+  },
   "encyclopedia": {
     "totalSpecies": "Total species: {count}",
     "notFound": "No dinosaurs found with these parameters...",

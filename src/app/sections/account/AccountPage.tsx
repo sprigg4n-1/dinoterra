@@ -8,37 +8,35 @@ import { useAuth } from "@/hooks/useAuth";
 
 import {
   deleteUserProfilePhoto,
-  getFavoriteDinos,
+  getFavoriteDinosV2,
   getUserProfilePhoto,
   logoutUser,
-  removeFavoriteDino,
+  removeFavoriteDinoV2,
   uploadUserProfilePhoto,
 } from "@/services/SecurityService";
 
-import { IDinoFav, IUser, IUserImages } from "@/config/types";
+import { IDinoV2Fav, IUserImages } from "@/config/types";
 
 import Image from "next/image";
 import Link from "next/link";
 
 import avatar from "@/images/avatar/avatar.jpg";
 import { useFileUpload } from "@/hooks/useFileUpload";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const AccountPage = () => {
   const t = useTranslations();
+  const locale = useLocale();
   const { imagePath, handleFileUpload, resetImagePath } = useFileUpload();
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
-  });
+  const [emblaRef] = useEmblaCarousel({ loop: false });
   const router = useRouter();
 
   const { updateAuthStatus, user } = useAuth();
 
   const [profilePhoto, setProfilePhoto] = useState<IUserImages | null>(null);
-  const [favoriteDinosData, setFavoriteDinosData] = useState<IDinoFav[]>([]);
+  const [favoriteDinosData, setFavoriteDinosData] = useState<IDinoV2Fav[]>([]);
 
-  // functions
   const onClickLogout = async () => {
     try {
       await logoutUser();
@@ -54,8 +52,11 @@ const AccountPage = () => {
     dinoId: string,
   ) => {
     e.preventDefault();
-
-    await removeFavoriteDino(user?._id || "random", dinoId);
+    await removeFavoriteDinoV2(user?._id || "random", dinoId);
+    if (user) {
+      const data = await getFavoriteDinosV2(user._id);
+      setFavoriteDinosData(data ?? []);
+    }
   };
 
   const onHandleAddImage = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -75,31 +76,19 @@ const AccountPage = () => {
     }
   };
 
-  // use effects
   useEffect(() => {
     const fetchData = async () => {
       if (user) {
         const { image } = await getUserProfilePhoto(user._id);
         setProfilePhoto(image);
 
-        const dinosData = await getFavoriteDinos(user._id);
-        setFavoriteDinosData(dinosData);
+        const dinosData = await getFavoriteDinosV2(user._id);
+        setFavoriteDinosData(dinosData ?? []);
       }
     };
 
     fetchData();
   }, [user]);
-
-  useEffect(() => {
-    const fetchDinos = async () => {
-      if (user) {
-        const dinosData = await getFavoriteDinos(user._id);
-        setFavoriteDinosData(dinosData);
-      }
-    };
-
-    fetchDinos();
-  }, [favoriteDinosData]);
 
   return (
     <div className="px-2 md:px-5 lg:px-20 pb-3 lg:pb-5 flex flex-col h-full gap-10 md:gap-14">
@@ -160,7 +149,7 @@ const AccountPage = () => {
         <div className="lg:ml-auto flex flex-col gap-2">
           {user?.role === "ADMIN" && (
             <Link
-              href={`/admin`}
+              href={`/${locale}/admin/new`}
               className="text-[14px] lg:text-[16px] bg-darkPurple py-1 px-5 text-white hover:bg-opacity-80 duration-300 text-center"
             >
               {t("account.adminPanel")}
@@ -197,19 +186,13 @@ const AccountPage = () => {
                 {favoriteDinosData.map((favDino) => (
                   <div
                     key={favDino.dino._id}
-                    className="embla__slide-fav-dino "
+                    className="embla__slide-fav-dino"
                   >
                     <Link
-                      href={`/encyclopedia/${favDino.dino._id}`}
+                      href={`/${locale}/encyclopedia/${favDino.dino._id}`}
                       className="bg-darkGray text-white text-center py-1 font-medium text-[14px] lg:text-[18px] block hover:bg-slateGray duration-300"
                     >
-                      {favDino.dino.name}
-                    </Link>
-                    <Link
-                      href={"https://dinosaurpictures.org/"}
-                      className="bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center block"
-                    >
-                      {t("account.imageSource")}
+                      {locale === "en" ? favDino.dino.name.en : favDino.dino.name.uk}
                     </Link>
                     <Image
                       src={favDino.image ? favDino.image.file : avatar}
@@ -218,7 +201,6 @@ const AccountPage = () => {
                       height={1600}
                       alt="dino image"
                     />
-
                     <button
                       type="button"
                       onClick={(e) => onClickDeleteFavDino(e, favDino.dino._id)}
@@ -240,7 +222,7 @@ const AccountPage = () => {
               {t("account.goTo")}{" "}
               <Link
                 className="text-fieryRed font-medium"
-                href={"/encyclopedia"}
+                href={`/${locale}/encyclopedia`}
               >
                 {t("account.encyclopediaLink")}
               </Link>{" "}

@@ -144,8 +144,8 @@ export const deleteUserProfilePhoto = async (id: string) => {
   }
 };
 
-// favorite
-export const addFavoriteDino = async (userId: string, dinosaurId: string) => {
+// favorites
+export const addFavoriteDinoV2 = async (userId: string, dinosaurId: string) => {
   try {
     const response = await axios.post(`${BASE_DEV_API_URL}/users/favorites`, {
       user: userId,
@@ -158,15 +158,11 @@ export const addFavoriteDino = async (userId: string, dinosaurId: string) => {
   }
 };
 
-export const removeFavoriteDino = async (
-  userId: string,
-  dinosaurId: string
-) => {
+export const removeFavoriteDinoV2 = async (userId: string, dinosaurId: string) => {
   try {
     const response = await axios.delete(
       `${BASE_DEV_API_URL}/users/${userId}/favorites/${dinosaurId}`
     );
-
     return response.data;
   } catch (error) {
     console.error(`Error removing dinosaur from favorites: ${error}`);
@@ -174,7 +170,7 @@ export const removeFavoriteDino = async (
   }
 };
 
-export const getFavoriteDinos = async (userId: string) => {
+export const getFavoriteDinosV2 = async (userId: string) => {
   try {
     const response = await axios.get(
       `${BASE_DEV_API_URL}/users/${userId}/favorites`
@@ -186,12 +182,11 @@ export const getFavoriteDinos = async (userId: string) => {
   }
 };
 
-export const isFavoriteDino = async (userId: string, dinoId: string) => {
+export const isFavoriteDinoV2 = async (userId: string, dinoId: string) => {
   try {
     const response = await axios.get(
       `${BASE_DEV_API_URL}/users/${userId}/favorites/check/${dinoId}`
     );
-
     return response.data.data.isFavorite;
   } catch (error) {
     console.error(`Error with check favorite dinos: ${error}`);
