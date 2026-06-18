@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { createDino, changeDino } from "@/services/DinoService";
 
@@ -57,6 +58,8 @@ const DinoForm = ({
 
   isChangeForm = false,
 }: Props) => {
+  const t = useTranslations("admin.form");
+  const tFilter = useTranslations("encyclopedia.filter");
   const [name, setName] = useState<string>("");
   const [latinName, setLatinName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -196,22 +199,22 @@ const DinoForm = ({
       {/* name */}
       <div className="flex flex-col gap-2 sm:flex-row">
         <InputComponent
-          text="Ім'я"
+          text={t("name")}
           value={name}
           valueOnChange={(e) => setName(e.target.value)}
           textStyle="small"
-          placeholder="Напишіть ім'я динозавра"
+          placeholder={t("namePlaceholder")}
           isRequired
           colorStyle="black"
           borderColor="transparent"
           customLabelStyles="flex-1"
         />
         <InputComponent
-          text="Ім'я латиною"
+          text={t("latinName")}
           value={latinName}
           valueOnChange={(e) => setLatinName(e.target.value)}
           textStyle="small"
-          placeholder="Напишіть ім'я динозавра латиною"
+          placeholder={t("latinNamePlaceholder")}
           isRequired
           colorStyle="black"
           borderColor="transparent"
@@ -222,7 +225,7 @@ const DinoForm = ({
       {/* sizes */}
       <div className="flex flex-col gap-2 sm:flex-row">
         <InputComponent
-          text="Вага динозавра"
+          text={t("weight")}
           value={dinoWeight}
           valueOnChange={(e) => setDinoWeight(+e.target.value)}
           textStyle="small"
@@ -233,7 +236,7 @@ const DinoForm = ({
           customLabelStyles="flex-1"
         />
         <InputComponent
-          text="Довжина динозавра"
+          text={t("length")}
           value={dinoLength}
           valueOnChange={(e) => setDinoLength(+e.target.value)}
           textStyle="small"
@@ -247,27 +250,27 @@ const DinoForm = ({
 
       {/* description */}
       <label className="flex flex-col">
-        <span>Опис</span>
+        <span>{t("description")}</span>
         <textarea
           required
           className="bg-darkGray text-white resize-none py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange h-[150px]"
           value={description}
-          placeholder="Опишіть динозавра"
+          placeholder={t("descriptionPlaceholder")}
           onChange={(e) => setDescription(e.target.value)}
         />
       </label>
 
       {/* type of dino */}
       <label className="flex flex-col gap-1">
-        <span>Тип динозавра</span>
+        <span>{t("type")}</span>
         <select
           value={typeOfDino}
           onChange={(e) => setTypeOfDino(e.target.value as EDinoType)}
           className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
         >
-          {Object.entries(dinoTypeLabels).map(([key, value]) => (
+          {Object.keys(dinoTypeLabels).map((key) => (
             <option key={key} value={key}>
-              {value}
+              {tFilter(`type.${key}`)}
             </option>
           ))}
         </select>
@@ -275,15 +278,15 @@ const DinoForm = ({
 
       {/* diet */}
       <label className="flex flex-col gap-1">
-        <span>Опис харчування</span>
+        <span>{t("dietLabel")}</span>
         <select
           value={diet}
           onChange={(e) => setDiet(e.target.value as EDinoDiet)}
           className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
         >
-          {Object.entries(dinoDietLabels).map(([key, value]) => (
+          {Object.keys(dinoDietLabels).map((key) => (
             <option key={key} value={key}>
-              {value}
+              {tFilter(`diet.${key}`)}
             </option>
           ))}
         </select>
@@ -291,22 +294,22 @@ const DinoForm = ({
           required
           className="bg-darkGray text-white py-2 px-1 resize-none border-2 border-transparent focus:outline-none focus:border-brightOrange h-[100px]"
           value={dietDescription}
-          placeholder="Опишіть харчування"
+          placeholder={t("dietPlaceholder")}
           onChange={(e) => setDietDescription(e.target.value)}
         />
       </label>
 
       {/* period */}
       <label className="flex flex-col gap-1">
-        <span>Опис періоду</span>
+        <span>{t("periodLabel")}</span>
         <select
           value={period}
           onChange={(e) => setPeriod(e.target.value as EDinoPeriod)}
           className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
         >
-          {Object.entries(dinoPeriodLabels).map(([key, value]) => (
+          {Object.keys(dinoPeriodLabels).map((key) => (
             <option key={key} value={key}>
-              {value}
+              {tFilter(`period.${key}`)}
             </option>
           ))}
         </select>
@@ -317,7 +320,7 @@ const DinoForm = ({
           textStyle="small"
           type="text"
           isRequired
-          placeholder="Напишіть дату інснування(68-66 мільйонів років тому)"
+          placeholder={t("periodDatePlaceholder")}
           colorStyle="black"
           borderColor="transparent"
         />
@@ -325,7 +328,7 @@ const DinoForm = ({
           required
           className="bg-darkGray text-white py-2 px-1 resize-none border-2 border-transparent focus:outline-none focus:border-brightOrange h-[100px]"
           value={periodDescription}
-          placeholder="Опишіть період існування"
+          placeholder={t("periodDescPlaceholder")}
           onChange={(e) => setPeriodDescription(e.target.value)}
         />
       </label>
@@ -337,14 +340,14 @@ const DinoForm = ({
           onClick={resetForm}
           className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-fieryRed text-white text-[16px] sm:text-[18px] hover:border-fieryRed hover:bg-white hover:text-fieryRed duration-300"
         >
-          Скидання
+          {t("reset")}
         </button>
 
         <button
           type="submit"
           className="w-[150px] sm:w-[200px] py-2 border-2 border-transparent bg-brightOrange text-white text-[16px] sm:text-[18px] hover:border-brightOrange hover:bg-white hover:text-brightOrange duration-300"
         >
-          {isChangeForm ? "Редагувати" : " Створити"}
+          {isChangeForm ? t("edit") : t("create")}
         </button>
       </div>
     </form>

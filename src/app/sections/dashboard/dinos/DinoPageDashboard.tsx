@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { useTranslations } from "next-intl";
 
 import Autoplay from "embla-carousel-autoplay";
 
@@ -39,6 +40,7 @@ const DinoPageDashboard = ({
     [Autoplay({ delay: 3000 })]
   );
 
+  const t = useTranslations("admin.dinoPage");
   const [showAllImages, setShowAllImages] = useState<boolean>(false);
 
   return (
@@ -48,7 +50,7 @@ const DinoPageDashboard = ({
           className="bg-slateGray text-white w-full text-center py-1 font-semibold hover:opacity-90 sm:w-auto sm:px-10"
           href={"/admin/dashboard/dinos"}
         >
-          Назад
+          {t("back")}
         </Link>
         <h2 className="flex-1 text-center text-[18px] font-bold sm:text-[20px]">
           {dino.name} ({dino.latinName})
@@ -95,7 +97,7 @@ const DinoPageDashboard = ({
                 setShowAllImages(false);
               }}
             >
-              Приховати
+              {t("hide")}
             </button>
           </>
         ) : (
@@ -115,24 +117,24 @@ const DinoPageDashboard = ({
                 setShowAllImages(true);
               }}
             >
-              Показати всі фото
+              {t("showAllPhotos")}
             </button>
           </>
         )}
       </div>
 
       <div className="w-full flex flex-col gap-1 text-center sm:text-left">
-        <h3 className="text-[18px] sm:text-[20px] font-semibold">Опис</h3>
+        <h3 className="text-[18px] sm:text-[20px] font-semibold">{t("descriptionTitle")}</h3>
         <div>
-          <span className="text-[14px] sm:text-[16px]">Довжина:</span>{" "}
-          <span className="text-[14px] sm:text-[16px]">{dino.length}м</span>
+          <span className="text-[14px] sm:text-[16px]">{t("length")}</span>{" "}
+          <span className="text-[14px] sm:text-[16px]">{dino.length}m</span>
         </div>
         <div>
-          <span className="text-[14px] sm:text-[16px]">Вага:</span>{" "}
-          <span className="text-[14px] sm:text-[16px]">{dino.weight}кг</span>
+          <span className="text-[14px] sm:text-[16px]">{t("weight")}</span>{" "}
+          <span className="text-[14px] sm:text-[16px]">{dino.weight}kg</span>
         </div>
         <div>
-          <span className="text-[14px] sm:text-[16px]">Тип динозвара:</span>{" "}
+          <span className="text-[14px] sm:text-[16px]">{t("dinoType")}</span>{" "}
           <span className="text-[14px] sm:text-[16px]">
             {dinoTypeLabels[dino.typeOfDino as EDinoType]}({dino.typeOfDino})
           </span>
@@ -141,9 +143,9 @@ const DinoPageDashboard = ({
       </div>
 
       <div className="w-full flex flex-col gap-1 text-center sm:text-left">
-        <h3 className="text-[18px] sm:text-[20px] font-semibold">Харчування</h3>
+        <h3 className="text-[18px] sm:text-[20px] font-semibold">{t("dietTitle")}</h3>
         <div>
-          <span className="text-[14px] sm:text-[16px]">Тип:</span>{" "}
+          <span className="text-[14px] sm:text-[16px]">{t("dietType")}</span>{" "}
           <span className="text-[14px] sm:text-[16px]">
             {dinoDietLabels[dino.diet as EDinoDiet]}({dino.diet})
           </span>
@@ -154,15 +156,15 @@ const DinoPageDashboard = ({
       </div>
 
       <div className="w-full flex flex-col gap-1 text-center sm:text-left">
-        <h3 className="text-[18px] sm:text-[20px] font-semibold">Період</h3>
+        <h3 className="text-[18px] sm:text-[20px] font-semibold">{t("periodTitle")}</h3>
         <div>
-          <span className="text-[14px] sm:text-[16px]">Тип:</span>{" "}
+          <span className="text-[14px] sm:text-[16px]">{t("dietType")}</span>{" "}
           <span className="text-[14px] sm:text-[16px]">
             {dinoPeriodLabels[dino.period as EDinoPeriod]}({dino.period})
           </span>
         </div>
         <div>
-          <span className="text-[14px] sm:text-[16px]">Часовий період:</span>{" "}
+          <span className="text-[14px] sm:text-[16px]">{t("timePeriod")}</span>{" "}
           <span className="text-[14px] sm:text-[16px]">{dino.periodDate}</span>
         </div>
         <p className="text-[14px] sm:text-[16px] text-center sm:text-left">
@@ -171,7 +173,7 @@ const DinoPageDashboard = ({
       </div>
 
       <div className="w-full flex flex-col gap-1 text-center sm:text-left">
-        <h3 className="text-[18px] sm:text-[20px] font-semibold">Карта</h3>
+        <h3 className="text-[18px] sm:text-[20px] font-semibold">{t("mapTitle")}</h3>
         <div className="h-[250px] sm:h-[500px] w-full">
           <Map
             initialViewState={{

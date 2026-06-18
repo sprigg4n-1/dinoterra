@@ -10,6 +10,7 @@ import {
 } from "@/config/types";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import close from "@/images/vectors/close.svg";
 
@@ -40,6 +41,7 @@ const EncyclopediaFilter = ({
   onClickReset: () => void;
   onClickFilterData: () => void;
 }) => {
+  const t = useTranslations();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -47,20 +49,20 @@ const EncyclopediaFilter = ({
       <div className="hidden lg:flex flex-col justify-between w-full p-5 gap-3 items-end bg-slateGray bg-opacity-50">
         <div className="flex w-full gap-5">
           <label className="flex flex-col gap-1 w-1/2">
-            <span>Ім'я динозавра</span>
+            <span>{t("encyclopedia.filter.nameLabel")}</span>
             <input
               className="bg-darkGray text-white block px-1 py-2 h-[43px] border-2 border-transparent focus:outline-none focus:border-brightOrange w-full"
-              placeholder="Напишіть ім'я динозавра"
+              placeholder={t("encyclopedia.filter.namePlaceholder")}
               value={searchDino}
               onChange={(e) => setSearchDino(e.target.value)}
             />
           </label>
 
           <label className="flex flex-col gap-1 w-1/2">
-            <span>Місце розкопок</span>
+            <span>{t("encyclopedia.filter.siteLabel")}</span>
             <input
               className="bg-darkGray text-white block px-1 py-2 h-[43px] border-2 border-transparent focus:outline-none focus:border-brightOrange w-full"
-              placeholder="Напишіть місце розкопок"
+              placeholder={t("encyclopedia.filter.sitePlaceholder")}
               value={placeLocaion}
               onChange={(e) => setPlaceLocation(e.target.value)}
             />
@@ -69,48 +71,48 @@ const EncyclopediaFilter = ({
 
         <div className="flex w-full justify-between gap-5">
           <label className="flex flex-col gap-1 w-1/3">
-            <span>Тип динозавра</span>
+            <span>{t("encyclopedia.filter.typeLabel")}</span>
             <select
               value={typeOfDino}
               onChange={(e) => setTypeOfDino(e.target.value)}
               className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
             >
-              <option value="">Виберіть тип</option>
-              {Object.entries(dinoTypeLabels).map(([key, value]) => (
+              <option value="">{t("encyclopedia.filter.selectType")}</option>
+              {Object.keys(dinoTypeLabels).map((key) => (
                 <option key={key} value={key}>
-                  {value}
+                  {t(`encyclopedia.filter.type.${key}`)}
                 </option>
               ))}
             </select>
           </label>
 
           <label className="flex flex-col gap-1 w-1/3">
-            <span>Харчування:</span>
+            <span>{t("encyclopedia.filter.dietLabel")}</span>
             <select
               value={diet}
               onChange={(e) => setDiet(e.target.value)}
               className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
             >
-              <option value="">Виберіть харчування</option>
-              {Object.entries(dinoDietLabels).map(([key, value]) => (
+              <option value="">{t("encyclopedia.filter.selectDiet")}</option>
+              {Object.keys(dinoDietLabels).map((key) => (
                 <option key={key} value={key}>
-                  {value}
+                  {t(`encyclopedia.filter.diet.${key}`)}
                 </option>
               ))}
             </select>
           </label>
 
           <label className="flex flex-col gap-1 w-1/3">
-            <span>Період:</span>
+            <span>{t("encyclopedia.filter.periodLabel")}</span>
             <select
               value={period}
               onChange={(e) => setPeriod(e.target.value)}
               className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
             >
-              <option value="">Виберіть період</option>
-              {Object.entries(dinoPeriodLabels).map(([key, value]) => (
+              <option value="">{t("encyclopedia.filter.selectPeriod")}</option>
+              {Object.keys(dinoPeriodLabels).map((key) => (
                 <option key={key} value={key}>
-                  {value}
+                  {t(`encyclopedia.filter.period.${key}`)}
                 </option>
               ))}
             </select>
@@ -123,14 +125,14 @@ const EncyclopediaFilter = ({
             onClick={onClickReset}
             className="py-2 w-[200px] bg-darkPurple bg-opacity-50 text-white hover:bg-opacity-100 duration-300"
           >
-            Скинути
+            {t("buttonText.clear")}
           </button>
           <button
             type="button"
             onClick={onClickFilterData}
             className="py-2 w-[200px] bg-brightOrange bg-opacity-50 text-white hover:bg-opacity-100 duration-300"
           >
-            Знайти
+            {t("buttonText.find")}
           </button>
         </div>
       </div>
@@ -144,7 +146,7 @@ const EncyclopediaFilter = ({
             setIsOpen(true);
           }}
         >
-          Фільтри
+          {t("map.filters")}
         </button>
       </div>
 
@@ -189,69 +191,68 @@ const EncyclopediaFilter = ({
           </button>
 
           <label className="flex flex-col gap-1">
-            <span>Ім'я динозавра</span>
-
+            <span>{t("encyclopedia.filter.nameLabel")}</span>
             <input
               className="bg-darkGray text-white block px-1 py-2 h-[43px] border-2 border-transparent focus:outline-none focus:border-brightOrange"
-              placeholder="Напишіть ім'я динозавра"
+              placeholder={t("encyclopedia.filter.namePlaceholder")}
               value={searchDino}
               onChange={(e) => setSearchDino(e.target.value)}
             />
           </label>
 
           <label className="flex flex-col gap-1">
-            <span>Місце розкопок</span>
+            <span>{t("encyclopedia.filter.siteLabel")}</span>
             <input
               className="bg-darkGray text-white block px-1 py-2 h-[43px] border-2 border-transparent focus:outline-none focus:border-brightOrange"
-              placeholder="Напишіть місце розкопок"
+              placeholder={t("encyclopedia.filter.sitePlaceholder")}
               value={placeLocaion}
               onChange={(e) => setPlaceLocation(e.target.value)}
             />
           </label>
 
           <label className="flex flex-col gap-1">
-            <span>Тип динозавра</span>
+            <span>{t("encyclopedia.filter.typeLabel")}</span>
             <select
               value={typeOfDino}
               onChange={(e) => setTypeOfDino(e.target.value)}
               className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
             >
-              <option value="">Виберіть тип</option>
-              {Object.entries(dinoTypeLabels).map(([key, value]) => (
+              <option value="">{t("encyclopedia.filter.selectType")}</option>
+              {Object.keys(dinoTypeLabels).map((key) => (
                 <option key={key} value={key}>
-                  {value}
+                  {t(`encyclopedia.filter.type.${key}`)}
                 </option>
               ))}
             </select>
           </label>
 
           <label className="flex flex-col gap-1">
-            <span>Харчування:</span>
+            <span>{t("encyclopedia.filter.dietLabel")}</span>
             <select
               value={diet}
               onChange={(e) => setDiet(e.target.value)}
               className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
             >
-              <option value="">Виберіть харчування</option>
-              {Object.entries(dinoDietLabels).map(([key, value]) => (
+              <option value="">{t("encyclopedia.filter.selectDiet")}</option>
+              {Object.keys(dinoDietLabels).map((key) => (
                 <option key={key} value={key}>
-                  {value}
+                  {t(`encyclopedia.filter.diet.${key}`)}
                 </option>
               ))}
             </select>
           </label>
 
           <label className="flex flex-col gap-1">
-            <span>Період:</span>
+            <span>{t("encyclopedia.filter.periodLabel")}</span>
             <select
               value={period}
               onChange={(e) => setPeriod(e.target.value)}
               className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
             >
-              <option value="">Виберіть період</option>
-              {Object.entries(dinoPeriodLabels).map(([key, value]) => (
+              <option value="">{t("encyclopedia.filter.selectPeriod")}</option>
+              {Object.keys(dinoPeriodLabels).map((key) => (
                 <option key={key} value={key}>
-                  {value}
+                  {t(`encyclopedia.filter.period.${key}`)}
                 </option>
               ))}
             </select>
@@ -263,14 +264,14 @@ const EncyclopediaFilter = ({
               onClick={onClickReset}
               className="py-2 bg-fieryRed bg-opacity-50 text-white hover:bg-opacity-100 duration-300 w-full"
             >
-              Скинути
+              {t("buttonText.clear")}
             </button>
             <button
               type="button"
               onClick={onClickFilterData}
               className="py-2 bg-brightOrange bg-opacity-50 text-white hover:bg-opacity-100 duration-300 w-full"
             >
-              Знайти
+              {t("buttonText.find")}
             </button>
           </div>
         </motion.div>

@@ -11,10 +11,12 @@ import EncyclopediaFilter from "@/components/encyclopedia/EncyclopediaFilter";
 import DinoCard from "@/components/dino/DinoCard";
 import LoaderComponent from "@/components/LoaderComponent";
 import BaseContainer from "@/components/BaseContainer";
+import { useTranslations } from "next-intl";
 
 const SHOW_LIMIT = 14;
 
 const EncyclopediaSection = () => {
+  const t = useTranslations();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [dinos, setDinos] = useState<IDino[]>([]);
@@ -136,7 +138,7 @@ const EncyclopediaSection = () => {
           />
 
           <p className="text-lg mt-3 md:mt-5 text-darkGray">
-            Всього видів: {countOfDino}
+            {t("encyclopedia.totalSpecies", { count: countOfDino })}
           </p>
 
           <div className="flex flex-wrap gap-5 items-center justify-center my-2 md:my-5">
@@ -155,7 +157,7 @@ const EncyclopediaSection = () => {
               ))
             ) : (
               <span className="text-center text-[14px] md:text-[16px]">
-                Не найдено динозаврів за параметрами...
+                {t("encyclopedia.notFound")}
               </span>
             )}
           </div>

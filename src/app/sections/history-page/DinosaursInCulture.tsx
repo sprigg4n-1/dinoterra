@@ -1,4 +1,5 @@
 import TitleComponent from "@/components/TitleComponent";
+import { useTranslations } from "next-intl";
 
 const DinosaursInCulture = ({
   tabId,
@@ -7,6 +8,7 @@ const DinosaursInCulture = ({
   tabId: string;
   label: string;
 }) => {
+  const t = useTranslations();
   return (
     <div id={tabId}>
       <TitleComponent
@@ -18,7 +20,7 @@ const DinosaursInCulture = ({
       <div className="flex flex-col gap-10">
         <div>
           <TitleComponent
-            text="Література"
+            text={t("history.culture.literature")}
             size="sm"
             textColor="fieryRed"
             additionalClasses="text-center"
@@ -26,7 +28,7 @@ const DinosaursInCulture = ({
         </div>
         <div>
           <TitleComponent
-            text="Кінематограф"
+            text={t("history.culture.cinema")}
             size="sm"
             textColor="fieryRed"
             additionalClasses="text-center"
@@ -34,7 +36,7 @@ const DinosaursInCulture = ({
         </div>
         <div>
           <TitleComponent
-            text="Музеї та виставки"
+            text={t("history.culture.museums")}
             size="sm"
             textColor="fieryRed"
             additionalClasses="text-center"
@@ -42,7 +44,7 @@ const DinosaursInCulture = ({
         </div>
         <div>
           <TitleComponent
-            text="Вплив на масову свідомість"
+            text={t("history.culture.massConsciousness")}
             size="sm"
             textColor="fieryRed"
             additionalClasses="text-center"

@@ -7,11 +7,13 @@ import { WEB3_FORM_API } from "@/config/config";
 import Image from "next/image";
 import LoaderComponent from "@/components/LoaderComponent";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import closeImage from "@/images/vectors/close.svg";
 import InputComponent from "@/components/form/InputComponent";
 
 const ContactsForm = () => {
+  const t = useTranslations();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -65,13 +67,13 @@ const ContactsForm = () => {
         onSubmit={(e) => onClickSubmitForm(e)}
       >
         <InputComponent
-          placeholder="Ім'я"
+          placeholder={t("contacts.form.namePlaceholder")}
           value={name}
           valueOnChange={(e) => setName(e.target.value)}
           borderColor="orange"
         />
         <InputComponent
-          placeholder="Пошта"
+          placeholder={t("contacts.form.emailPlaceholder")}
           value={email}
           type="email"
           valueOnChange={(e) => setEmail(e.target.value)}
@@ -81,14 +83,14 @@ const ContactsForm = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className="resize-none h-[200px] p-2 border-2 border-brightOrange text-[16px] md:text-[18px] focus:outline-none focus:border-darkGray"
-          placeholder="Пишіть ваші питання і не тільки"
+          placeholder={t("contacts.form.messagePlaceholder")}
           required
         />
         <button
           type="submit"
           className="text-[16px] md:text-[18px] sm:w-1/2 sm:mx-auto lg:mx-0 lg:w-[200px] text-center bg-slateGray text-white rounded-lg py-3 hover:bg-darkGray duration-300"
         >
-          Відправити
+          {t("buttonText.send")}
         </button>
       </form>
 
@@ -111,12 +113,12 @@ const ContactsForm = () => {
             <div>
               <h2 className="text-center text-white uppercase font-semibold text-[18px] sm:text-[22px]">
                 {sending === "sending"
-                  ? "Отримано, чекаємо..."
+                  ? t("contacts.form.modal.titleSending")
                   : sending === "success"
-                  ? "Дякуємо за повідомлення!"
+                  ? t("contacts.form.modal.titleSuccess")
                   : sending === "error"
-                  ? "Помилка!"
-                  : "Чекаємо..."}
+                  ? t("contacts.form.modal.titleError")
+                  : ""}
               </h2>
               <p
                 className={`text-center ${
@@ -124,9 +126,9 @@ const ContactsForm = () => {
                 }  text-[14px] sm:text-[16px]`}
               >
                 {sending === "success"
-                  ? "Ваше повідомлення успішно доставлене, очікуйте відповідь"
+                  ? t("contacts.form.modal.descSuccess")
                   : sending === "error"
-                  ? "Сталась помилка на сервері..."
+                  ? t("contacts.form.modal.descError")
                   : ""}
               </p>
             </div>
@@ -144,7 +146,7 @@ const ContactsForm = () => {
                   onClick={onClickCloseModal}
                   className="py-2 px-10 bg-darkGray text-white rounded-md text-center text-[14px] sm:text-[18px]"
                 >
-                  Повернутися на головну
+                  {t("buttonText.returnHome")}
                 </Link>
               </div>
             ) : (

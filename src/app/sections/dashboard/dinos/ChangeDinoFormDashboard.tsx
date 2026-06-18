@@ -18,6 +18,7 @@ import DashboardTitleComponent from "@/components/dashboard/DashboardTitleCompon
 import LoaderComponent from "@/components/LoaderComponent";
 import Image from "next/image";
 import DinoForm from "../../../../components/dashboard/dino/DinoForm";
+import { useTranslations } from "next-intl";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
 
@@ -35,6 +36,7 @@ export type TDinoImages = {
 };
 
 const ChangeDinoFormDashboard = () => {
+  const t = useTranslations("admin");
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     slidesToScroll: "auto",
@@ -219,7 +221,7 @@ const ChangeDinoFormDashboard = () => {
         <div className="flex flex-col gap-4 items-center justify-center">
           <LoaderComponent />
           <span className="text-[14px] sm:text-[18px] text-brightOrange font-semibold">
-            Робимо зміни
+            {t("form.saving")}
           </span>
         </div>
       ) : (
@@ -227,16 +229,16 @@ const ChangeDinoFormDashboard = () => {
           <div className="flex flex-col sm:flex-row sm:justify-between items-center mb-2 sm:mb-0">
             {step === 1 ? (
               <div className="flex flex-col sm:flex-row items-center justify-between mb-5 w-full">
-                <DashboardTitleComponent text="Редагування динозавра" />
+                <DashboardTitleComponent text={t("form.editDino")} />
                 <input
                   className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange w-3/4 sm:w-1/2"
-                  placeholder="Напишіть ім'я динозавра"
+                  placeholder={t("list.searchPlaceholder")}
                   value={searchDino}
                   onChange={(e) => setSearchDino(e.target.value)}
                 />
               </div>
             ) : (
-              <DashboardTitleComponent text="Редагування динозавра" />
+              <DashboardTitleComponent text={t("form.editDino")} />
             )}
 
             {step === 2 && (
@@ -248,7 +250,7 @@ const ChangeDinoFormDashboard = () => {
                   setStep(1);
                 }}
               >
-                Назад
+                {t("form.back")}
               </button>
             )}
           </div>
@@ -275,12 +277,12 @@ const ChangeDinoFormDashboard = () => {
 
               <div className="flex flex-col gap-2">
                 <h3 className="text-[16px] font-medium sm:text-[20px]">
-                  Фото:
+                  {t("photos.sectionLabel")}
                 </h3>
 
                 <div className="flex flex-col md:flex-row gap-2 items-end text-[14px] sm:text-[16px]">
                   <label className="flex flex-col w-full md:w-1/4">
-                    <span>Обрати картинку</span>
+                    <span>{t("photos.selectImage")}</span>
                     <label
                       htmlFor="fileUploadForDinoImage"
                       className={`${
@@ -290,7 +292,7 @@ const ChangeDinoFormDashboard = () => {
                       } text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center  duration-300`}
                     >
                       <span>
-                        {imagePathDino === "" ? "Оберіть файл" : "Змінити файл"}
+                        {imagePathDino === "" ? t("photos.chooseFile") : t("photos.changeFile")}
                       </span>
                       <input
                         id="fileUploadForDinoImage"
@@ -307,12 +309,12 @@ const ChangeDinoFormDashboard = () => {
                     type="button"
                     onClick={(e) => onHandleAddImage(e)}
                   >
-                    Додати
+                    {t("photos.add")}
                   </button>
                 </div>
 
                 {dinoToChangeImages && dinoToChangeImages.length === 0 ? (
-                  <span>Немає картинок</span>
+                  <span>{t("photos.noPhotos")}</span>
                 ) : (
                   <div className="embla">
                     <div
@@ -340,7 +342,7 @@ const ChangeDinoFormDashboard = () => {
                                   onHandleDeleteImage(e, image._id)
                                 }
                               >
-                                Видалити
+                                {t("photos.delete")}
                               </button>
                               <span className="bg-brightOrange text-white">
                                 {i + 1}
@@ -355,13 +357,13 @@ const ChangeDinoFormDashboard = () => {
 
               <div className="flex flex-col gap-2">
                 <h3 className="text-[16px] font-medium sm:text-[20px]">
-                  Місця знахідок:
+                  {t("locations.sectionLabel")}
                 </h3>
 
                 <div className="flex flex-col sm:flex-row gap-2 items-end text-[14px] sm:text-[16px]">
                   <div className="flex w-full sm:w-fit justify-between sm:gap-2">
                     <label className="flex flex-col w-[49%] sm:w-[120px]">
-                      <span>Широта</span>
+                      <span>{t("locations.latitude")}</span>
                       <input
                         required
                         className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange text-center"
@@ -371,7 +373,7 @@ const ChangeDinoFormDashboard = () => {
                       />
                     </label>
                     <label className="flex flex-col w-[49%] sm:w-[120px]">
-                      <span>Довгота</span>
+                      <span>{t("locations.longitude")}</span>
                       <input
                         required
                         className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange text-center"
@@ -383,11 +385,11 @@ const ChangeDinoFormDashboard = () => {
                   </div>
 
                   <label className="flex flex-col flex-1 w-full">
-                    <span>Місце</span>
+                    <span>{t("locations.place")}</span>
                     <input
                       className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
                       type="text"
-                      placeholder="Вкажіть місце розташування"
+                      placeholder={t("locations.placePlaceholder")}
                       value={placeLoc}
                       onChange={(e) => setPlaceLoc(e.target.value)}
                     />
@@ -398,12 +400,12 @@ const ChangeDinoFormDashboard = () => {
                     type="button"
                     onClick={(e) => onHandleAddFoundLocation(e)}
                   >
-                    Додати
+                    {t("locations.add")}
                   </button>
                 </div>
 
                 {dinoToChangeLocations && dinoToChangeLocations.length === 0 ? (
-                  <span>Немає місць</span>
+                  <span>{t("locations.noLocations")}</span>
                 ) : (
                   <div className="embla">
                     <div
@@ -424,15 +426,15 @@ const ChangeDinoFormDashboard = () => {
                                   onHandleDeleteFoundLocation(e, loc._id)
                                 }
                               >
-                                Видалити
+                                {t("locations.delete")}
                               </button>
                               <span>
-                                Широта: {Number(loc.latitude).toFixed(1)}
+                                {t("locations.latitudeShort")} {Number(loc.latitude).toFixed(1)}
                               </span>
                               <span>
-                                Довгота: {Number(loc.longitude).toFixed(1)}
+                                {t("locations.longitudeShort")} {Number(loc.longitude).toFixed(1)}
                               </span>
-                              <span>Місце: {loc.place}</span>
+                              <span>{t("locations.placeShort")} {loc.place}</span>
                             </div>
                           ))}
                       </div>
@@ -446,7 +448,7 @@ const ChangeDinoFormDashboard = () => {
                 onClick={(e) => handleDeleteDino(e)}
                 className="py-2 px-5 bg-red-400 text-white hover:bg-fieryRed duration-300"
               >
-                Видалити динозавра
+                {t("form.deleteDino")}
               </button>
             </div>
           )}

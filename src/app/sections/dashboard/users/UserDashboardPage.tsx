@@ -6,8 +6,10 @@ import { getUserById } from "@/services/SecurityService";
 import { IUser } from "@/config/types";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const UserDashboardPage = ({ id }: { id: number }) => {
+  const t = useTranslations("admin.users");
   const [user, setUser] = useState<IUser>();
 
   // use effects
@@ -27,7 +29,7 @@ const UserDashboardPage = ({ id }: { id: number }) => {
           className="bg-slateGray text-white w-full text-center py-1 font-semibold hover:opacity-90 sm:w-auto sm:px-10"
           href={"/admin/dashboard/users"}
         >
-          Назад
+          {t("back")}
         </Link>
         <h2 className="flex-1 text-center text-[18px] font-bold sm:text-[20px]">
           {user?.name} ({user?._id})

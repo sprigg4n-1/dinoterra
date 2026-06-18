@@ -1,16 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import DinosListDashboard from "./DinosListDashboard";
 import ChangeDinoFormDashboard from "./ChangeDinoFormDashboard";
 import CreateDinoFormDashboard from "./CreateDinoFormDashboard";
 import DashboardTabsTopNavigation from "@/components/dashboard/DashboardTabsTopNavigation";
-
-import { DINO_TOP_TABS } from "@/constants/admin";
+import { useTranslations } from "next-intl";
 
 const DinosDashboard = () => {
+  const t = useTranslations("admin.tabs");
   const [activeTab, setActiveTab] = useState<string>("all");
+
+  const dinoTabs = useMemo(
+    () => [
+      { id: "all", text: t("dinosList") },
+      { id: "create", text: t("dinoCreate") },
+      { id: "change", text: t("dinoChange") },
+    ],
+    [t],
+  );
 
   const onChangeActiveTab = (value: string) => {
     setActiveTab(value);
@@ -19,7 +28,7 @@ const DinosDashboard = () => {
   return (
     <div className="flex flex-col gap-2 relative">
       <DashboardTabsTopNavigation
-        items={DINO_TOP_TABS}
+        items={dinoTabs}
         activeItemId={activeTab}
         setActive={onChangeActiveTab}
       />

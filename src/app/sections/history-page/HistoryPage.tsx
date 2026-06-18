@@ -10,16 +10,19 @@ import DinosaursDiscovery from "./DinosaursDiscovery";
 import DinosaursInCulture from "./DinosaursInCulture";
 import Link from "next/link";
 import BaseContainer from "@/components/BaseContainer";
-
-const sections = [
-  { id: "origin", label: "Походження динозаврів" },
-  { id: "evolution", label: "Переломні періоди" },
-  { id: "extinction", label: "Вимирання динозаврів" },
-  { id: "discovery", label: "Відкриття динозаврів" },
-  // { id: "culture", label: "Динозаври в культурі" },
-];
+import { useTranslations } from "next-intl";
 
 const HistoryPage = () => {
+  const t = useTranslations();
+
+  const sections = [
+    { id: "origin", label: t("history.nav.origin") },
+    { id: "evolution", label: t("history.nav.evolution") },
+    { id: "extinction", label: t("history.nav.extinction") },
+    { id: "discovery", label: t("history.nav.discovery") },
+    // { id: "culture", label: t("history.nav.culture") },
+  ];
+
   const [activeSection, setActiveSection] = useState<string>(sections[0].id);
 
   // use effects
@@ -51,7 +54,7 @@ const HistoryPage = () => {
     <section className="py-5 lg:py-10">
       <BaseContainer>
         <SectionMainTitleComponent
-          title="Історія динозаврів"
+          title={t("history.pageTitle")}
           firstTextPosition="left"
           titleColor="orange"
         />

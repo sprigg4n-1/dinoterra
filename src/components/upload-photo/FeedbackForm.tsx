@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { TFeedbackBody } from "@/config/types";
+import { useTranslations } from "next-intl";
 
 interface Props {
   predictionId: string;
@@ -16,6 +17,7 @@ const FeedbackForm = ({
   onSubmit,
   onCancel,
 }: Props) => {
+  const t = useTranslations("classify.feedback");
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [correctRank, setCorrectRank] = useState<1 | 2 | 3 | null>(null);
   const [errorType, setErrorType] = useState<TFeedbackBody["errorType"] | null>(
@@ -45,7 +47,7 @@ const FeedbackForm = ({
   return (
     <div className="flex flex-col gap-4 bg-darkPurple p-4 rounded-xl text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
       {/* Крок 1 — правильно чи ні */}
-      <p className="font-semibold text-center">Модель визначила правильно?</p>
+      <p className="font-semibold text-center">{t("wasCorrect")}</p>
       <div className="flex gap-3 justify-center">
         <button
           onClick={() => {
@@ -54,7 +56,7 @@ const FeedbackForm = ({
           }}
           className={`px-6 py-2 rounded-md ${isCorrect === true ? "bg-green-500" : "bg-slate-600"}`}
         >
-          ✅ Так
+          {t("yes")}
         </button>
         <button
           onClick={() => {
@@ -63,14 +65,14 @@ const FeedbackForm = ({
           }}
           className={`px-6 py-2 rounded-md ${isCorrect === false ? "bg-red-500" : "bg-slate-600"}`}
         >
-          ❌ Ні
+          {t("no")}
         </button>
       </div>
 
       {/* Крок 2А — якщо правильно і динозавр — який rank */}
       {isCorrect === true && isDinosaur && (
         <div className="flex flex-col gap-2">
-          <p className="text-center text-sm">Який варіант був правильним?</p>
+          <p className="text-center text-sm">{t("whichWasCorrect")}</p>
           <div className="flex gap-2 justify-center">
             {[1, 2, 3].map((rank) => (
               <button
@@ -88,14 +90,14 @@ const FeedbackForm = ({
       {/* Крок 2Б — якщо неправильно — який тип помилки */}
       {isCorrect === false && (
         <div className="flex flex-col gap-2">
-          <p className="text-center text-sm">Що саме неправильно?</p>
+          <p className="text-center text-sm">{t("whatIsWrong")}</p>
           <div className="flex flex-col gap-2">
             {isDinosaur && (
               <button
                 onClick={() => setErrorType("WRONG_SPECIES")}
                 className={`py-2 px-4 rounded-md text-sm ${errorType === "WRONG_SPECIES" ? "bg-orange-500" : "bg-slate-600"}`}
               >
-                🦕 Динозавр правильно, але вид неправильний
+                {t("wrongSpecies")}
               </button>
             )}
 
@@ -104,7 +106,7 @@ const FeedbackForm = ({
                 onClick={() => setErrorType("FALSE_POSITIVE")}
                 className={`py-2 px-4 rounded-md text-sm ${errorType === "FALSE_POSITIVE" ? "bg-orange-500" : "bg-slate-600"}`}
               >
-                ❌ Це не динозавр взагалі
+                {t("notDinoAtAll")}
               </button>
             )}
 
@@ -113,7 +115,7 @@ const FeedbackForm = ({
                 onClick={() => setErrorType("FALSE_NEGATIVE")}
                 className={`py-2 px-4 rounded-md text-sm ${errorType === "FALSE_NEGATIVE" ? "bg-orange-500" : "bg-slate-600"}`}
               >
-                🦕 Це динозавр, але модель не визначила
+                {t("itIsDino")}
               </button>
             )}
 
@@ -121,7 +123,7 @@ const FeedbackForm = ({
               onClick={() => setErrorType("NEW_SPECIES")}
               className={`py-2 px-4 rounded-md text-sm ${errorType === "NEW_SPECIES" ? "bg-orange-500" : "bg-slate-600"}`}
             >
-              🆕 Це новий вид якого немає в моделі
+              {t("newSpecies")}
             </button>
           </div>
         </div>
@@ -134,13 +136,13 @@ const FeedbackForm = ({
           errorType === "NEW_SPECIES") && (
           <div className="flex flex-col gap-2">
             <p className="text-sm text-center">
-              Знаєш правильний вид? (необов'язково)
+              {t("knowCorrectSpecies")}
             </p>
             <input
               type="text"
               value={correctClass}
               onChange={(e) => setCorrectClass(e.target.value)}
-              placeholder="Наприклад: Velociraptor"
+              placeholder={t("placeholder")}
               className="bg-slate-600 text-white px-3 py-2 rounded-md text-sm outline-none"
             />
           </div>
@@ -152,7 +154,7 @@ const FeedbackForm = ({
           onClick={onCancel}
           className="px-5 py-2 bg-slate-600 rounded-md text-sm"
         >
-          Скасувати
+          {t("cancel")}
         </button>
         <button
           onClick={handleSubmit}
@@ -163,7 +165,7 @@ const FeedbackForm = ({
           }
           className="px-5 py-2 bg-fieryRed rounded-md text-sm disabled:opacity-50"
         >
-          Надіслати
+          {t("send")}
         </button>
       </div>
     </div>

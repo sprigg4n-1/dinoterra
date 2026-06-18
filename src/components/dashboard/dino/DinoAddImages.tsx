@@ -1,3 +1,5 @@
+"use client";
+
 import { v4 } from "uuid";
 import { createPortal } from "react-dom";
 
@@ -10,6 +12,7 @@ import Image from "next/image";
 import close from "@/images/vectors/close.svg";
 import { useState } from "react";
 import DinoMlPredictionModal from "./DinoMlPredictionModal";
+import { useTranslations } from "next-intl";
 
 interface Props {
   dinoImages: TDinoImages[];
@@ -17,6 +20,7 @@ interface Props {
 }
 
 const DinoAddImages = ({ dinoImages, setDinoImages }: Props) => {
+  const t = useTranslations("admin.photos");
   const { imagePath, handleFileUpload, resetImagePath } = useFileUpload({
     onUpload: () => setIsOpenModal(true),
   });
@@ -54,7 +58,7 @@ const DinoAddImages = ({ dinoImages, setDinoImages }: Props) => {
       <div className="flex flex-col gap-2">
         <div className="flex flex-col md:flex-row gap-2">
           <label className="flex flex-col w-full md:w-1/4">
-            <span>Обрати картинку</span>
+            <span>{t("selectImage")}</span>
             <label
               htmlFor="fileUploadForDinoImage"
               className={`${
@@ -63,7 +67,7 @@ const DinoAddImages = ({ dinoImages, setDinoImages }: Props) => {
                   : "bg-darkGray hover:border-brightOrange"
               }  text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center duration-300`}
             >
-              <span>{imagePath === "" ? "Оберіть файл" : "Змінити файл"}</span>
+              <span>{imagePath === "" ? t("chooseFile") : t("changeFile")}</span>
               <input
                 id="fileUploadForDinoImage"
                 className="hidden"
@@ -97,7 +101,7 @@ const DinoAddImages = ({ dinoImages, setDinoImages }: Props) => {
                     </button>
                   </div>
                 ))
-              : "Ще не додано картинок"}
+              : t("notAdded")}
           </div>
         </div>
       </div>

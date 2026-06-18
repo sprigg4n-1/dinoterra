@@ -22,8 +22,10 @@ import Link from "next/link";
 
 import avatar from "@/images/avatar/avatar.jpg";
 import { useFileUpload } from "@/hooks/useFileUpload";
+import { useTranslations } from "next-intl";
 
 const AccountPage = () => {
+  const t = useTranslations();
   const { imagePath, handleFileUpload, resetImagePath } = useFileUpload();
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -115,7 +117,7 @@ const AccountPage = () => {
               alt="dino image"
             />
             <div className="absolute top-0 left-0 flex justify-center items-center text-center opacity-0 bg-white bg-opacity-60 w-full h-full group-hover:opacity-100 duration-300">
-              Вибрати картинку
+              {t("account.selectPhoto")}
             </div>
             <input
               id="fileUploadForDinoImage"
@@ -131,27 +133,27 @@ const AccountPage = () => {
               className="text-[14px] lg:text-[16px] text-brightOrange hover:text-black"
               onClick={onHandleAddImage}
             >
-              Підтвердити зміну
+              {t("account.confirmChange")}
             </button>
           )}
         </div>
 
         <div className="flex flex-col gap-1 lg:text-[18px] items-center lg:items-start text-darkGray">
           <p className="text-[16px] lg:text-[20px] font-semibold text-black">
-            <span className="hidden lg:inline-block">Ім'я користувача:</span>{" "}
+            <span className="hidden lg:inline-block">{t("account.usernameLabel")}</span>{" "}
             {user?.username}
           </p>
           <div className="flex flex-row lg:flex-col gap-1">
             <p>
-              <span className="hidden lg:inline-block">Ім'я:</span> {user?.name}
+              <span className="hidden lg:inline-block">{t("account.nameLabel")}</span> {user?.name}
             </p>
             <p>
-              <span className="hidden lg:inline-block">Прізвище:</span>{" "}
+              <span className="hidden lg:inline-block">{t("account.surnameLabel")}</span>{" "}
               {user?.lastname}
             </p>
           </div>
           <p>
-            <span className="hidden lg:inline-block">Пошта:</span> {user?.email}
+            <span className="hidden lg:inline-block">{t("account.emailLabel")}</span> {user?.email}
           </p>
         </div>
 
@@ -161,7 +163,7 @@ const AccountPage = () => {
               href={`/admin`}
               className="text-[14px] lg:text-[16px] bg-darkPurple py-1 px-5 text-white hover:bg-opacity-80 duration-300 text-center"
             >
-              Адмін панель
+              {t("account.adminPanel")}
             </Link>
           )}
           {profilePhoto && (
@@ -170,7 +172,7 @@ const AccountPage = () => {
               type="button"
               onClick={onClickResetPhoto}
             >
-              Cкинути картинку
+              {t("account.resetPhoto")}
             </button>
           )}
           <button
@@ -178,14 +180,14 @@ const AccountPage = () => {
             type="button"
             onClick={onClickLogout}
           >
-            Вийти
+            {t("buttonText.logout")}
           </button>
         </div>
       </div>
 
       <div className="flex flex-col gap-3">
         <h3 className="text-[20px] lg:text-[24px] font-bold text-brightOrange text-center">
-          Улюблені динозаври
+          {t("account.favoriteDinos")}
         </h3>
 
         {favoriteDinosData.length > 0 ? (
@@ -207,7 +209,7 @@ const AccountPage = () => {
                       href={"https://dinosaurpictures.org/"}
                       className="bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center block"
                     >
-                      Взято з DinosaurPictures
+                      {t("account.imageSource")}
                     </Link>
                     <Image
                       src={favDino.image ? favDino.image.file : avatar}
@@ -222,7 +224,7 @@ const AccountPage = () => {
                       onClick={(e) => onClickDeleteFavDino(e, favDino.dino._id)}
                       className="bg-fieryRed text-white w-full py-1 font-semibold hover:opacity-80 duration-300"
                     >
-                      Видалити
+                      {t("buttonText.delete")}
                     </button>
                   </div>
                 ))}
@@ -232,17 +234,17 @@ const AccountPage = () => {
         ) : (
           <div className="w-full text-center">
             <p className="text-[16px] lg:text-[20px] text-darkGray">
-              У вас немає улюбленіх динозаврів
+              {t("account.noFavDinos")}
             </p>
             <p className="text-[16px] md:text-[20px] text-darkGray">
-              Перейдіть до{" "}
+              {t("account.goTo")}{" "}
               <Link
                 className="text-fieryRed font-medium"
                 href={"/encyclopedia"}
               >
-                енциклопедії
+                {t("account.encyclopediaLink")}
               </Link>{" "}
-              щоб додати динозавра
+              {t("account.toAddDino")}
             </p>
           </div>
         )}

@@ -7,8 +7,11 @@ import { loginUser } from "@/services/SecurityService";
 
 import Link from "next/link";
 import InputComponent from "@/components/form/InputComponent";
+import { useTranslations } from "next-intl";
 
 const LoginPage = () => {
+  const t = useTranslations();
+
   const router = useRouter();
 
   const [username, setUsername] = useState("");
@@ -25,11 +28,11 @@ const LoginPage = () => {
 
     if (!response.success) {
       if (response.message === "User not found") {
-        setError("Такого користувача не найдено");
+        setError(t("authForms.userNotFound"));
       }
 
       if (response.message === "Invalid password") {
-        setError("Не правильний пароль");
+        setError(t("authForms.invalidPassword"));
       }
 
       return;
@@ -55,7 +58,7 @@ const LoginPage = () => {
           href={"/auth"}
           className="absolute top-2 left-3 md:-left-3 bg-fieryRed py-1 px-5 shadow-md hover:scale-110 duration-300 cursor-pointer"
         >
-          до початку
+          {t("buttonText.toStart")}
         </Link>
         {error && (
           <p className="text-[14px] md:text-[16px] text-fieryRed font-bold text-center">
@@ -63,18 +66,18 @@ const LoginPage = () => {
           </p>
         )}
         <InputComponent
-          text="Нікнейм"
+          text={t("authForms.nickname")}
           value={username}
           valueOnChange={(e) => setUsername(e.target.value)}
           isRequired
-          placeholder="Уведіть нікнейм"
+          placeholder={t("authForms.writeNickname")}
         />
         <InputComponent
-          text="Пароль"
+          text={t("authForms.password")}
           value={password}
           valueOnChange={(e) => setPassword(e.target.value)}
           isRequired
-          placeholder="Уведіть пароль"
+          placeholder={t("authForms.writePassword")}
           type="password"
           showPasswordButton
         />
@@ -83,23 +86,23 @@ const LoginPage = () => {
             type="submit"
             className=" text-white hover:underline text-[16px] md:text-[18px]"
           >
-            Увійти
+            {t("buttonText.authFormLogin")}
           </button>
 
           <button
             type="button"
             className=" text-white hover:underline text-[16px] md:text-[18px]"
           >
-            Забули пароль?
+            {t("buttonText.forgotPassword")}
           </button>
         </div>
         <div className="flex flex-col md:flex-row gap-2 items-center justify-center text-[14px] md:text-[16px] border-t-2 border-opacity-30 border-white pt-2">
-          <p className="text-white opacity-80">Не маєте ще акаунта?</p>
+          <p className="text-white opacity-80">{t("authForms.noAccount")}</p>
           <Link
             href="/auth/registration"
             className="text-white hover:underline font-semibold"
           >
-            Зареєструватись
+            {t("buttonText.authRegister")}
           </Link>
         </div>
       </form>

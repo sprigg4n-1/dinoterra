@@ -9,8 +9,10 @@ import Link from "next/link";
 
 import close from "@/images/vectors/close.svg";
 import logo from "@/images/logo.svg";
+import { useTranslations } from "next-intl";
 
 const AsideDashboard = () => {
+  const t = useTranslations("admin.aside");
   const [activePage, setActivePage] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -29,7 +31,7 @@ const AsideDashboard = () => {
 
   return (
     <div className="bg-darkPurple py-3 px-2 text-white flex justify-between items-center gap-10 lg:w-[350px] lg:h-screen lg:flex-col lg:justify-normal sticky top-0 left-0 z-30">
-      <h2 className="font-bold text-[22px] text-center">Адмін панель</h2>
+      <h2 className="font-bold text-[22px] text-center">{t("title")}</h2>
 
       {/* burger */}
       <button
@@ -94,7 +96,7 @@ const AsideDashboard = () => {
                   : "text-black bg-softGray"
               }`}
             >
-              Динозаври
+              {t("dinos")}
             </Link>
           </li>
           <li>
@@ -110,7 +112,7 @@ const AsideDashboard = () => {
                   : "text-black bg-softGray "
               }`}
             >
-              Користувачі
+              {t("users")}
             </Link>
           </li>
           <li>
@@ -126,7 +128,7 @@ const AsideDashboard = () => {
                   : "text-black bg-softGray "
               }`}
             >
-              Перевірка фото
+              {t("photos")}
             </Link>
           </li>
 
@@ -136,7 +138,7 @@ const AsideDashboard = () => {
               onClick={() => setActivePage("users")}
               className={`block mt-auto w-full p-2 text-[18px] text-center bg-red-400 hover:bg-fieryRed duration-300`}
             >
-              Вийти
+              {t("logout")}
             </Link>
           </li>
         </ul>
@@ -154,7 +156,7 @@ const AsideDashboard = () => {
                 : "text-black bg-softGray text-left"
             }`}
           >
-            Динозаври
+            {t("dinos")}
           </Link>
         </li>
         <li>
@@ -167,7 +169,7 @@ const AsideDashboard = () => {
                 : "text-black bg-softGray text-left"
             }`}
           >
-            Користувачі
+            {t("users")}
           </Link>
         </li>
         <li>
@@ -180,7 +182,7 @@ const AsideDashboard = () => {
                 : "text-black bg-softGray text-left"
             }`}
           >
-            Перевірка фото
+            {t("photos")}
           </Link>
         </li>
       </ul>
@@ -189,7 +191,7 @@ const AsideDashboard = () => {
         onClick={() => setActivePage("users")}
         className={`hidden lg:block mt-auto w-full p-2 text-[18px] text-center bg-red-400 hover:bg-fieryRed duration-300`}
       >
-        Вийти
+        {t("logout")}
       </Link>
     </div>
   );

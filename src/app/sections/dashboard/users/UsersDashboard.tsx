@@ -1,15 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import UsersListDashboard from "./UsersListDashboard";
 import CreateUserFormDashboard from "./CreateUserFormDashboard";
 
-import { USER_TOP_TABS } from "@/constants/admin";
 import DashboardTabsTopNavigation from "@/components/dashboard/DashboardTabsTopNavigation";
+import { useTranslations } from "next-intl";
 
 const UsersDashboard = () => {
+  const t = useTranslations("admin.tabs");
   const [activeTab, setActiveTab] = useState<string>("all");
+
+  const userTabs = useMemo(
+    () => [
+      { id: "all", text: t("usersList") },
+      { id: "create", text: t("userCreate") },
+    ],
+    [t],
+  );
 
   const onChangeActiveTab = (value: string) => {
     setActiveTab(value);
@@ -18,7 +27,7 @@ const UsersDashboard = () => {
   return (
     <div className="flex flex-col gap-2 relative">
       <DashboardTabsTopNavigation
-        items={USER_TOP_TABS}
+        items={userTabs}
         activeItemId={activeTab}
         setActive={onChangeActiveTab}
       />

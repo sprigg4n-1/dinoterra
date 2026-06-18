@@ -15,6 +15,8 @@ import Image from "next/image";
 
 import close from "@/images/vectors/close.svg";
 import FeedbackForm from "./FeedbackForm";
+import { useTranslations } from "next-intl";
+import { useAuth } from "@/hooks/useAuth";
 
 interface Props {
   onClose: () => void;
@@ -22,6 +24,9 @@ interface Props {
 }
 
 const PredictionTopThreeModal = ({ onClose, file }: Props) => {
+  const t = useTranslations("classify");
+  const { user } = useAuth();
+  const isAdmin = user?.role === "ADMIN";
   const swiperRef = useRef<SwiperType | null>(null);
 
   const [prediction, setPrediction] = useState<TPrediction | null>(null);
@@ -85,8 +90,8 @@ const PredictionTopThreeModal = ({ onClose, file }: Props) => {
         ) : prediction ? (
           <div className="flex flex-col gap-4">
             <p className="text-white text-sm md:text-lg font-semibold text-center">
-              Модель визначила що це -{" "}
-              {prediction.isDinosaur ? "Динозавр" : "Не динозавр"}
+              {t("modelResult")}{" "}
+              {prediction.isDinosaur ? t("isDino") : t("notDino")}
             </p>
 
             {prediction.isDinosaur ? (
@@ -151,7 +156,7 @@ const PredictionTopThreeModal = ({ onClose, file }: Props) => {
               </>
             ) : (
               <div className="flex flex-col gap-2">
-                <p className="text-white">Схоже на:</p>
+                <p className="text-white">{t("looksLike")}</p>
                 {prediction.top3.map((item) => (
                   <div key={item.rank} className="text-white">
                     {item.rank}. {item.species} —{" "}
@@ -161,28 +166,30 @@ const PredictionTopThreeModal = ({ onClose, file }: Props) => {
               </div>
             )}
 
-            <div className="flex flex-col items-center justify-center">
-              {feedbackSent ? (
-                <p className="text-brightOrange text-sm">Дякуємо за фідбек!</p>
-              ) : isOpenFeedbackForm ? (
-                <FeedbackForm
-                  predictionId={prediction._id}
-                  isDinosaur={prediction.isDinosaur}
-                  onSubmit={handleFeedbackSubmit}
-                  onCancel={() => setIsOpenFeedbackForm(false)}
-                />
-              ) : (
-                <button
-                  onClick={() => setIsOpenFeedbackForm(true)}
-                  className="py-1 md:py-2 px-5 bg-fieryRed rounded-md text-sm md:text-md text-white"
-                >
-                  Надати фідбек
-                </button>
-              )}
-            </div>
+            {isAdmin && (
+              <div className="flex flex-col items-center justify-center">
+                {feedbackSent ? (
+                  <p className="text-brightOrange text-sm">{t("feedbackThanks")}</p>
+                ) : isOpenFeedbackForm ? (
+                  <FeedbackForm
+                    predictionId={prediction._id}
+                    isDinosaur={prediction.isDinosaur}
+                    onSubmit={handleFeedbackSubmit}
+                    onCancel={() => setIsOpenFeedbackForm(false)}
+                  />
+                ) : (
+                  <button
+                    onClick={() => setIsOpenFeedbackForm(true)}
+                    className="py-1 md:py-2 px-5 bg-fieryRed rounded-md text-sm md:text-md text-white"
+                  >
+                    {t("giveFeedback")}
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         ) : (
-          <p className="text-white">Помилка класифікації</p>
+          <p className="text-white">{t("classifyError")}</p>
         )}
       </div>
     </div>

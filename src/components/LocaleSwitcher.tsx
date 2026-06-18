@@ -25,7 +25,7 @@ const LocaleSwitcher = () => {
         {locale}
       </button>
       <div
-        className={`flex-col items-center justify-center absolute gap-1 top-[calc(100%+2px)] bg-softGray rounded-[12px] border-brightOrange border-[3px] w-full  py-1 ${isOpen ? "flex" : "hidden"}`}
+        className={`flex-col items-center justify-center absolute z-10 gap-1 top-[calc(100%+2px)] bg-softGray rounded-[12px] border-brightOrange border-[3px] w-full  py-1 ${isOpen ? "flex" : "hidden"}`}
       >
         {routing.locales.map((loc) => (
           <button

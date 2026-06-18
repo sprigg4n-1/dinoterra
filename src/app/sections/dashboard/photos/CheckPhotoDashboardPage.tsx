@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const CheckPhotoDashboardPage = () => {
+  const t = useTranslations("admin");
   const [imagePreview, setImagePreview] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<null | {
@@ -66,7 +68,7 @@ const CheckPhotoDashboardPage = () => {
 
       const data = await response.json();
       console.log("Донавчання:", data);
-      alert("Модель перенавчена на цьому зображенні!");
+      alert(t("ml.retrainSuccess"));
     } catch (err) {
       console.error("Помилка при донавчанні:", err);
     }
@@ -78,7 +80,7 @@ const CheckPhotoDashboardPage = () => {
     <div className="p-4 flex flex-col gap-6">
       <div className="flex flex-col md:flex-row gap-2">
         <label className="flex flex-col w-full md:w-1/4">
-          <span>Обрати картинку</span>
+          <span>{t("photos.selectImage")}</span>
           <label
             htmlFor="fileUploadForDinoImage"
             className={`${
@@ -87,7 +89,7 @@ const CheckPhotoDashboardPage = () => {
                 : "bg-darkGray hover:border-brightOrange"
             } text-white h-full border-2 py-2 border-transparent cursor-pointer flex items-center justify-center duration-300`}
           >
-            <span>{imagePreview ? "Змінити файл" : "Оберіть файл"}</span>
+            <span>{imagePreview ? t("photos.changeFile") : t("photos.chooseFile")}</span>
             <input
               id="fileUploadForDinoImage"
               className="hidden"
@@ -114,34 +116,34 @@ const CheckPhotoDashboardPage = () => {
           onClick={checkImage}
           className="bg-green-600 text-white px-4 py-2 rounded w-fit hover:bg-green-700 duration-200"
         >
-          Перевірити зображення
+          {t("ml.checkImage")}
         </button>
       )}
 
-      {loading && <p>Обробка...</p>}
+      {loading && <p>{t("ml.processing")}</p>}
 
       {result && (
         <div className="p-4 border rounded bg-gray-100 w-fit flex flex-col gap-2">
           <p>
-            <b>Передбачений клас:</b> {result.class}
+            <b>{t("ml.predictedClass")}</b> {result.class}
           </p>
           <p>
-            <b>Ймовірність:</b> {(result.probability * 100).toFixed(2)}%
+            <b>{t("ml.probability")}</b> {(result.probability * 100).toFixed(2)}%
           </p>
 
           <div className="flex gap-2">
-            <span>Якщо модель помилилась:</span>
+            <span>{t("ml.modelWrong")}</span>
             <button
               className="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700"
               onClick={() => trainImage(1)}
             >
-              Це динозавр
+              {t("ml.itIsDino")}
             </button>
             <button
               className="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
               onClick={() => trainImage(0)}
             >
-              Це не динозавр
+              {t("ml.itIsNotDino")}
             </button>
           </div>
         </div>

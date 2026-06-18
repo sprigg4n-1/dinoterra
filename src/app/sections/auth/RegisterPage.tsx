@@ -7,8 +7,10 @@ import { registerUser } from "@/services/SecurityService";
 
 import Link from "next/link";
 import InputComponent from "@/components/form/InputComponent";
+import { useTranslations } from "next-intl";
 
 const RegisterPage = () => {
+  const t = useTranslations();
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -25,7 +27,7 @@ const RegisterPage = () => {
     setErrorMessage("");
 
     if (password !== confirmPassword) {
-      setErrorMessage("Паролі не співпадають");
+      setErrorMessage(t("authForms.notEqualPasswords"));
       return;
     }
 
@@ -42,11 +44,11 @@ const RegisterPage = () => {
 
     if (!response.success) {
       if (response.message === "User with this username already exists") {
-        setErrorMessage("Нікнейм уже зайнятий");
+        setErrorMessage(t("authForms.userNicknameExists"));
       }
 
       if (response.message === "User with this email already exists") {
-        setErrorMessage("Пошта вже існує, спробуйте іншу");
+        setErrorMessage(t("authForms.userEmailExists"));
       }
 
       return;
@@ -65,7 +67,7 @@ const RegisterPage = () => {
           href={"/auth"}
           className="absolute top-2 left-3 md:-left-3 bg-fieryRed py-1 px-5 shadow-md hover:scale-110 duration-300 cursor-pointer"
         >
-          до початку
+          {t("buttonText.toStart")}
         </Link>
         {errorMessage && (
           <p className="text-[14px] md:text-[16px] text-fieryRed font-bold text-center">
@@ -74,16 +76,16 @@ const RegisterPage = () => {
         )}
         <div className="flex flex-row justify-between gap-3">
           <InputComponent
-            text="Ім'я"
-            placeholder="Уведіть ім'я"
+            text={t("authForms.name")}
+            placeholder={t("authForms.writeName")}
             isRequired
             value={name}
             valueOnChange={(e) => setName(e.target.value)}
             customLabelStyles="flex-1"
           />
           <InputComponent
-            text="Прізвище"
-            placeholder="Уведіть прізвище"
+            text={t("authForms.surname")}
+            placeholder={t("authForms.writeSurname")}
             isRequired
             value={lastname}
             valueOnChange={(e) => setLastname(e.target.value)}
@@ -92,15 +94,15 @@ const RegisterPage = () => {
         </div>
 
         <InputComponent
-          text="Нікнейм"
-          placeholder="Уведіть нікнейм"
+          text={t("authForms.nickname")}
+          placeholder={t("authForms.writeNickname")}
           isRequired
           value={username}
           valueOnChange={(e) => setUsername(e.target.value)}
         />
         <InputComponent
-          text="Пошта"
-          placeholder="Уведіть пошту"
+          text={t("authForms.email")}
+          placeholder={t("authForms.writeEmail")}
           isRequired
           value={email}
           type="email"
@@ -108,8 +110,8 @@ const RegisterPage = () => {
         />
 
         <InputComponent
-          text="Пароль"
-          placeholder="Уведіть пароль"
+          text={t("authForms.password")}
+          placeholder={t("authForms.writePassword")}
           isRequired
           value={password}
           type="password"
@@ -117,8 +119,8 @@ const RegisterPage = () => {
           showPasswordButton
         />
         <InputComponent
-          text="Пароль"
-          placeholder="Уведіть пароль"
+          text={t("authForms.rePassword")}
+          placeholder={t("authForms.writeRePassword")}
           isRequired
           value={confirmPassword}
           type="password"
@@ -129,15 +131,15 @@ const RegisterPage = () => {
           type="submit"
           className=" text-white text-[16px] md:text-[18px] py-2 bg-fieryRed bg-opacity-50 hover:bg-opacity-100 duration-300"
         >
-          Зареєструватись
+          {t("buttonText.authRegister")}
         </button>
         <div className="flex flex-col md:flex-row gap-2 items-center justify-center text-[14px] md:text-[16px] border-t-2 border-opacity-30 border-white pt-2">
-          <p className="text-white opacity-80">Уже зареєстровані?</p>
+          <p className="text-white opacity-80">{t("authForms.haveAccount")}</p>
           <Link
             href="/auth/login"
             className="text-white hover:underline font-semibold"
           >
-            Увійти
+            {t("buttonText.authFormLogin")}
           </Link>
         </div>
       </form>

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 
 import PredictionTopThreeModal from "./PredictionTopThreeModal";
 import uploadIcon from "@/images/vectors/upload.svg";
@@ -14,6 +15,17 @@ const FixedUploadPhotoComponent = () => {
   });
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+
+  const pathname = usePathname();
+
+  // прибираємо локальний префікс (/en, /uk тощо) і нормалізуємо
+  const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}(?=\/|$)/, "");
+  const normalizedPath = pathWithoutLocale === "" ? "/" : pathWithoutLocale;
+
+  const isAccountRoute =
+    normalizedPath === "/account" || normalizedPath.startsWith("/account/");
+
+  if (isAccountRoute) return null;
 
   const closeModal = () => {
     resetImagePath();

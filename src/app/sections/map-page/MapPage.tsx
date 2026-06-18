@@ -14,8 +14,10 @@ import Link from "next/link";
 
 import close from "@/images/vectors/close.svg";
 import imageNotFound from "@/images/not-found/image-not-found.webp";
+import { useTranslations } from "next-intl";
 
 const MapPage = () => {
+  const t = useTranslations();
   const [locations, setLocations] = useState<IDinoFoundLocation[]>([]);
   const [hoveredLocation, setHoveredLocation] =
     useState<IDinoFoundLocation | null>(null);
@@ -84,26 +86,26 @@ const MapPage = () => {
         className="hidden md:flex md:flex-col h-full w-[400px] bg-slateGray bg-opacity-50 py-2 px-5 gap-5"
       >
         <label className="flex flex-col gap-1">
-          <span>Місце знахідки</span>
+          <span>{t("map.findLocation")}</span>
           <input
             className="bg-darkGray text-white block px-1 py-2 h-[43px] border-2 border-transparent focus:outline-none focus:border-brightOrange w-full"
-            placeholder="Місце знахідки"
+            placeholder={t("map.findLocation")}
             value={searchLocation}
             onChange={(e) => onChangeSearchLocation(e.target.value)}
           />
         </label>
 
         <label className="flex flex-col gap-1">
-          <span>Період:</span>
+          <span>{t("map.period")}</span>
           <select
             value={period}
             onChange={(e) => onChangePeriod(e.target.value)}
             className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
           >
-            <option value="">Виберіть період</option>
-            {Object.entries(dinoPeriodLabels).map(([key, value]) => (
+            <option value="">{t("map.selectPeriod")}</option>
+            {Object.keys(dinoPeriodLabels).map((key) => (
               <option key={key} value={key}>
-                {value}
+                {t(`encyclopedia.filter.period.${key}`)}
               </option>
             ))}
           </select>
@@ -113,14 +115,14 @@ const MapPage = () => {
           type="submit"
           className="py-2 bg-brightOrange bg-opacity-50 text-white hover:bg-opacity-100 duration-300 mt-auto"
         >
-          Знайти
+          {t("buttonText.find")}
         </button>
         <button
           type="button"
           onClick={(e) => onClickResetForm(e)}
           className="py-2 bg-fieryRed bg-opacity-50 text-white hover:bg-opacity-100 duration-300"
         >
-          Очистити
+          {t("buttonText.clear")}
         </button>
       </form>
 
@@ -132,7 +134,7 @@ const MapPage = () => {
         }}
         className="absolute md:hidden z-20 bg-darkPurple text-white font-semibold py-2 px-10 text-[16px] top-3 left-1/2 -translate-x-1/2"
       >
-        Фільтри
+        {t("map.filters")}
       </button>
 
       <motion.div
@@ -177,23 +179,23 @@ const MapPage = () => {
           </button>
 
           <label className="flex flex-col gap-1">
-            <span>Місце знахідки</span>
+            <span>{t("map.findLocation")}</span>
             <input
               className="bg-darkGray text-white block px-1 py-2 h-[43px] border-2 border-transparent focus:outline-none focus:border-brightOrange w-full"
-              placeholder="Місце знахідки"
+              placeholder={t("map.findLocation")}
               value={searchLocation}
               onChange={(e) => onChangeSearchLocation(e.target.value)}
             />
           </label>
 
           <label className="flex flex-col gap-1">
-            <span>Період:</span>
+            <span>{t("map.period")}</span>
             <select
               value={period}
               onChange={(e) => onChangePeriod(e.target.value)}
               className="text-white bg-darkGray py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange"
             >
-              <option value="">Виберіть період</option>
+              <option value="">{t("map.selectPeriod")}</option>
               {Object.entries(dinoPeriodLabels).map(([key, value]) => (
                 <option key={key} value={key}>
                   {value}
@@ -206,14 +208,14 @@ const MapPage = () => {
             type="submit"
             className="py-2 bg-brightOrange bg-opacity-50 text-white hover:bg-opacity-100 duration-300 mt-auto"
           >
-            Знайти
+            {t("buttonText.find")}
           </button>
           <button
             type="button"
             onClick={(e) => onClickResetForm(e)}
             className="py-2 bg-fieryRed bg-opacity-50 text-white hover:bg-opacity-100 duration-300"
           >
-            Очистити
+            {t("buttonText.clear")}
           </button>
         </motion.form>
       </motion.div>
@@ -273,7 +275,7 @@ const MapPage = () => {
                 href={"https://dinosaurpictures.org/"}
                 className="absolute top-0 left-0 bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center"
               >
-                Взято з DinosaurPictures
+                {t("map.imageSource")}
               </Link>
               <Link
                 href={`/encyclopedia/${hoveredLocation.dino}`}

@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import imageNotFound from "@/images/not-found/image-not-found.webp";
+import { useTransform } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const DinoCard = ({
   link,
@@ -22,6 +24,8 @@ const DinoCard = ({
   slider?: boolean;
   sliderClassName?: string;
 }) => {
+  const t = useTranslations();
+
   const finalColor =
     textColor === "white"
       ? "text-white"
@@ -73,7 +77,7 @@ const DinoCard = ({
           onClick={redirectToPage}
           className="absolute top-0 right-0 bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center"
         >
-          Взято з DinosaurPictures
+          {t("account.imageSource")}
         </button>
       </div>
 

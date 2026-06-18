@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { TDinoFoundLocation } from "./DinoForm";
 
@@ -5,6 +7,7 @@ import InputComponent from "@/components/form/InputComponent";
 
 import close from "@/images/vectors/close.svg";
 import { v4 } from "uuid";
+import { useTranslations } from "next-intl";
 
 interface Props {
   latitudeLoc: number;
@@ -27,6 +30,7 @@ const DinoAddLocations = ({
   setPlaceLoc,
   setFoundLocations,
 }: Props) => {
+  const t = useTranslations("admin.locations");
   const onHandleAddLocation = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const newFoundLoc: TDinoFoundLocation = {
@@ -55,11 +59,11 @@ const DinoAddLocations = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="text-[16px] font-medium sm:text-[20px]">Місця:</h3>
+      <h3 className="text-[16px] font-medium sm:text-[20px]">{t("locationsSectionLabel")}</h3>
       <div className="flex flex-col sm:flex-row gap-2">
         <div className="flex w-full sm:w-fit justify-between gap-2">
           <InputComponent
-            text="Широта"
+            text={t("latitude")}
             value={latitudeLoc}
             valueOnChange={(e) => setLatitudeLoc(+e.target.value)}
             textStyle="small"
@@ -71,7 +75,7 @@ const DinoAddLocations = ({
           />
 
           <InputComponent
-            text="Довгота"
+            text={t("longitude")}
             value={longitudeLoc}
             valueOnChange={(e) => setLongitudeLoc(+e.target.value)}
             textStyle="small"
@@ -84,13 +88,13 @@ const DinoAddLocations = ({
         </div>
 
         <InputComponent
-          text="Місце"
+          text={t("place")}
           value={placeLoc}
           valueOnChange={(e) => setPlaceLoc(e.target.value)}
           textStyle="small"
           type="text"
           isRequired
-          placeholder="Вкажіть місце розташування"
+          placeholder={t("placePlaceholder")}
           colorStyle="black"
           borderColor="transparent"
           customLabelStyles="flex-1"
@@ -103,7 +107,7 @@ const DinoAddLocations = ({
           type="button"
           onClick={(e) => onHandleAddLocation(e)}
         >
-          Додати
+          {t("add")}
         </button>
         <div className="flex-1 flex gap-4 flex-wrap bg-slateGray w-full p-2 text-white">
           {foundLocations.length > 0
@@ -127,7 +131,7 @@ const DinoAddLocations = ({
                   </button>
                 </div>
               ))
-            : "Ще не додано локації"}
+            : t("notAdded")}
         </div>
       </div>
     </div>

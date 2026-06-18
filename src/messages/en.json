@@ -6,7 +6,17 @@
     "toMapMobile": "Go to the map",
     "login": "Login",
     "register": "Register",
-    "loginWithoutSignUp": "Login without registration"
+    "loginWithoutSignUp": "Login without registration",
+    "toStart": "to start",
+    "authFormLogin": "Log in",
+    "forgotPassword": "Forgot password?",
+    "authRegister": "Sign up",
+    "logout": "Logout",
+    "returnHome": "Return to home",
+    "send": "Send",
+    "find": "Find",
+    "clear": "Clear",
+    "delete": "Delete"
   },
   "errors": {
     "proplemsWithServer": "A server error has occurred..."
@@ -55,6 +65,523 @@
     "recs": {
       "title": "Recommended Dinosaurs",
       "subtitle": "Discover some of the most iconic and fascinating dinosaurs in our collection."
+    }
+  },
+  "authForms": {
+    "userNotFound": "User not found",
+    "invalidPassword": "Invalid password",
+    "userNicknameExists": "Nickname is already taken",
+    "userEmailExists": "Email already exists, please try another",
+    "notEqualPasswords": "Passwords do not match",
+
+    "name": "First name",
+    "writeName": "Enter first name",
+    "surname": "Last name",
+    "writeSurname": "Enter last name",
+    "nickname": "Nickname",
+    "writeNickname": "Enter nickname",
+    "email": "Email",
+    "writeEmail": "Enter email",
+    "password": "Password",
+    "writePassword": "Enter password",
+    "rePassword": "Confirm password",
+    "writeRePassword": "Re-enter password",
+
+    "noAccount": "Don't have an account yet?",
+    "haveAccount": "Already registered?"
+  },
+  "history": {
+    "pageTitle": "History of Dinosaurs",
+    "takenFrom": "From",
+    "nav": {
+      "origin": "Origin of Dinosaurs",
+      "evolution": "Transitional Periods",
+      "extinction": "Extinction of Dinosaurs",
+      "discovery": "Discovery of Dinosaurs"
+    },
+    "origin": {
+      "timeOfAppearance": {
+        "title": "Time of Appearance",
+        "p1": ["One thing is certain: dinosaurs appeared during the Triassic period, between 252 and 201 million years ago. Almost everything else remains unclear. For example, exactly when did they appear — in the early or late Triassic? What was the world like when they came on the scene? Did they carve their path to dominance in the global ecosystem through desperate struggle with other animals, or did they simply get lucky in securing their place?"],
+        "p2": ["Dinosaurs arose from small dinosauromorph ancestors in the Triassic period, when the climate was harsh and dry. They competed with crocodile-line archosaurs for tens of millions of years, but ultimately prevailed when Pangaea began to break apart, according to Brusatte. At that time, volcanoes erupted along the rifts of the supercontinent, causing global warming and mass extinctions, he said."]
+      },
+      "evolutionaryRoots": {
+        "title": "Evolutionary Roots",
+        "p": [
+          "For a long time, dinosaurs dominated the land, creating diverse forms: from herbivorous giants like Argentinosaurus to carnivorous predators like Tyrannosaurus, and unusual creatures like Therizinosaurus with its Freddy Krueger-like claws. But the origin of dinosaurs — when and where they first appeared — remains partly a mystery.",
+          "Researchers now propose a surprising location for the dinosaur homeland, based on the locations of the oldest known dinosaur fossils, evolutionary relationships between these early forms, and the geography of Earth during the Triassic period. This location encompasses what is now the Sahara and Amazon jungles, currently separated by thousands of miles and an ocean due to plate tectonics.",
+          "\"When dinosaurs first appear in the fossil record, all of Earth's continents were part of the giant supercontinent Pangaea. Dinosaurs arose in the southern part of this land mass, known as Gondwana,\" said Joel Heath, a paleontology PhD student at University College London and the London Natural History Museum.",
+          "\"Our research indicates that they likely originated at low latitudes of Gondwana near the equator, in the area that today encompasses northern South America and northern Africa,\" Heath added.",
+          "The oldest known dinosaur fossils date back approximately 230 million years, among them Eoraptor and Herrerasaurus from Argentina, Saturnalia from southern Brazil, and Mbiresaurus from Zimbabwe. Although they had certain features defining them as dinosaurs, sufficient differences suggest they evolved over millions of years.",
+          "\"Although earlier studies focused on southwestern South America and southern Africa as places of dinosaur origin, we suggest that significant gaps in the fossil record, especially in areas that today include the Sahara and Amazon, may hold potential for uncovering where the earliest dinosaurs lived,\" Heath noted.",
+          "Dinosaurs likely appeared about 245–230 million years ago, when these equatorial regions were extremely hot and dry. This likely included deserts, savanna-like areas, and possibly wooded territories prone to seasonal wildfires.",
+          "Dinosaurs evolved from more primitive reptiles after the largest mass extinction on Earth, caused by extreme volcanism at the end of the Permian period about 252 million years ago.",
+          "Dinosaurs are unique due to certain features of their skeleton. They stood upright, with legs beneath their bodies like columns, which helped them move and run efficiently. They also had distinctive hips that differentiated them from other reptiles, which had widely splayed legs.",
+          "These specialized features did not appear instantly — they evolved gradually over millions of years from older, more primitive reptiles. However, we have not yet found transitional fossils showing how these changes occurred, leaving part of their evolutionary history unknown."
+        ]
+      },
+      "firstAncestors": {
+        "title": "First Ancestors",
+        "p": [
+          "Dinosaurs are one of the most successful groups of animals that ever inhabited our planet.",
+          "For more than 170 million years they dominated the land — from small creatures just a few feet long to some of the largest animals that ever walked the Earth.",
+          "However, despite their long evolutionary history, the origin of dinosaurs remains a mystery. When did they appear, and what did the first members of this group look like?",
+          "The earliest known dinosaur is not a single animal but an entire ecosystem containing several different species. There is no universally recognized species of dinosaur that is the oldest.",
+          "Deposits of the Ischigualasto Formation in Argentina, dated to approximately 230 million years ago (late Triassic period), contain remains of various animals, including early reptiles known as rhynchosaurs and cynodonts closely related to mammal ancestors.",
+          "But most importantly, this ecosystem also contains several species of early dinosaurs, including small bipedal creatures such as Eodromaeus and Eoraptor, as well as larger predators such as Herrerasaurus.",
+          "Professor Paul Barrett is a dinosaur researcher at the Museum who studies the early evolution of dinosaurs in the late Triassic and early Jurassic periods.",
+          "\"There are several locations in Argentina and Brazil that compete for the title of homeland of the oldest definitively known dinosaurs,\" says Paul. \"But when they appeared, they were already recognizable dinosaurs. This suggests that dinosaurs must have had a longer evolutionary history that we don't yet know.\"",
+          "Dinosaurs belong to a group of animals known as archosaurs.",
+          "Today this group is represented by birds and crocodiles. In the past it was much more diverse, including all extinct dinosaurs, pterosaurs, and many strange crocodilian ancestors.",
+          "\"There are several different features that define a dinosaur, but perhaps the most obvious are changes in their hips and legs,\" explains Paul.",
+          "\"Specifically, they create a much stronger connection between the hips and spine, modifying some vertebrae into a specialized structure called the sacrum, which creates additional connections with the hips.\"",
+          "Reptiles have up to two fused vertebrae in the sacrum, but to be a dinosaur, an animal must have at least three. Modern birds can have up to 12 sacral vertebrae.",
+          "This feature is so characteristic that Sir Richard Owen used it when first defining Dinosauria in 1842, noting that Iguanodon and Megalosaurus had a sacrum composed of five fused vertebrae.",
+          "These changes likely resulted from early dinosaurs beginning to walk on their hind legs — that is, being bipedal.",
+          "\"Bipedality is really important in defining early dinosaurs,\" says Paul. \"To do this, they also needed to modify their hind legs.\"",
+          "While crocodiles and lizards have legs projecting from the body at an angle, dinosaurs had to press them straight beneath the body to become bipedal. This meant they had to change the hip-spine connection, upper thigh bone joints, and the joints in the knees and ankles.",
+          "All these features together help define a dinosaur.",
+          "If the dinosaurs found at Ischigualasto are already recognizable dinosaurs, this suggests their origin is even more ancient.",
+          "The closest relatives of dinosaurs are silesaurids — medium-sized quadrupedal animals that looked like tall, slender lizards, positioned on the boundary with Dinosauria.",
+          "\"But there is this 10–15 million year gap that separates the common ancestor of silesaurids and dinosaurs from the first true dinosaurs,\" says Paul.",
+          "What fills this gap is still unknown, but it may include the partial fossil of Nyasasaurus parringtoni, found in Tanzania near Lake Nyasa in the 1930s.",
+          "Due to the fragmentary nature of this fossil, it is difficult to say precisely whether it was a true dinosaur. In any case, it is considered a very close relative of dinosaurs.",
+          "\"Nyasasaurus is the only animal tentatively placed in this gap, as it is the same age as the first silesaurids,\" Paul explains. \"So it may be the earliest dinosaur, or the closest known relative of dinosaurs.\"",
+          "Regardless of the status of Nyasasaurus, a fairly clear picture of what the first dinosaurs looked like can be assembled from the oldest true dinosaur data.",
+          "They were likely small, active predators — bipedal with small grasping forelimbs.",
+          "\"They were probably carnivores or omnivores, but certainly not herbivores,\" says Paul. \"They were relatively rare, because even when the first defined dinosaurs appeared around 230 million years ago, they were still rare members of the fauna.\"",
+          "Only after the great extinction at the end of the Triassic period, 201 million years ago, did dinosaurs finally get their chance.",
+          "This mass extinction destroyed almost all other competing archosaurs, leaving an environment wide open for dinosaurs to fill. During the Jurassic and Cretaceous periods, dinosaurs took advantage of this, evolving into an incredible diversity of creatures."
+        ]
+      },
+      "basicAdaptations": {
+        "title": "Development of Basic Adaptations",
+        "p": [
+          "The physical adaptations of dinosaurs were diverse and often related to their size, feeding habits, and habitat. The impressive horns and frills of Triceratops were likely used for defense and attracting mates. The massive jaws and serrated teeth of Tyrannosaurus rex were adaptations for biting and consuming large prey.",
+          "Another striking example of physical adaptation is the development of feathers in some theropod dinosaurs — a characteristic preserved in their modern descendants, birds. Feathers may have initially evolved for insulation or display, and only later became an adaptation for flight.",
+          "Behavioral adaptations are actions dinosaurs took to survive in their environment. Evidence suggests that some dinosaurs, such as Velociraptor, may have hunted in packs. Nesting and brooding behaviors, as seen in fossilized remains of Maiasaura, suggest that some dinosaurs provided parental care for their young.",
+          "Social behavior is another aspect of behavioral adaptations. Dinosaurs such as Stegosaurus may have lived in herds for protection from predators.",
+          "Dietary adaptations of dinosaurs are closely related to the availability of food sources. Herbivorous dinosaurs developed specialized teeth for stripping leaves and processing plant material. Carnivorous dinosaurs had sharp teeth for tearing flesh. Some dinosaurs, like Oviraptor, may have had a varied diet.",
+          "Reproductive adaptations are perhaps the most important for the continuation of a species. Dinosaurs displayed a wide range of reproductive strategies, from laying large clutches of eggs to building elaborate nests.",
+          "Some theropods, such as Troodon, likely had particularly complex reproductive behaviors, including incubating eggs in carefully constructed nests. These behaviors helped ensure optimal temperature for egg development."
+        ]
+      },
+      "firstTrueDinos": {
+        "title": "First True Dinosaurs",
+        "p": [
+          "For the past twenty years, Eoraptor has been considered the beginning of the dinosaur era. This controversial little creature, found in roughly 231-million-year-old rock in Argentina, was often cited as the oldest known dinosaur. But a newly studied fossil found decades ago in Tanzania pushes the beginning of the dinosaur era back by more than 10 million years.",
+          "Named Nyasasaurus parringtoni, fossils approximately 243 million years old represent either the oldest known dinosaurs or the closest known relative of the first dinosaurs. The discovery was announced by University of Washington paleontologist Sterling Nesbitt and colleagues in the journal Biology Letters.",
+          "In March 2010, Nesbitt and his team named another creature from the same Triassic layer in Tanzania: Asilisaurus kongwe. This dinosauromorph indicates that the dinosaur lineage may have split from a common ancestor as early as 243 million years ago.",
+          "Nyasasaurus is yet another step toward the first true dinosaurs and is as old as Asilisaurus. Finding an animal with such distinct dinosaur-like features in the middle Triassic suggests that dinosaurs already existed, or that their ancestors were established. This dinosauromorph marks an additional 12 million years of dinosaur history that paleontologists are only beginning to explore.",
+          "Despite the incomplete nature of the Nyasasaurus fossils, this organism is an important step toward understanding what the first dinosaurs were like. According to paleontologists, dinosaurs at that time had not yet come to dominate their ecosystems — they were small, humble animals living in a world ruled by archosaurs more closely related to crocodiles."
+        ]
+      }
+    },
+    "discovery": {
+      "firstFinds": {
+        "title": "First Finds",
+        "p": [
+          "Large fossilized bones that appeared from slate quarries in Oxfordshire (England) in the late 1600s immediately caused wonder.",
+          "In a world where evolution and extinction were unknown concepts, scientists of the time sought explanations. Perhaps, they thought, these bones belonged to a Roman war elephant or a giant human.",
+          "Only in 1824 did William Buckland, the first professor of geology at Oxford University, describe and name the first known dinosaur, based on a lower jaw, vertebrae, and limb bones found in these local quarries. The largest thigh bone was 2 feet 9 inches long and nearly 10 inches in circumference.",
+          "Buckland named the creature Megalosaurus, or 'great lizard,' in a scientific paper presented to the Geological Society of London on February 20, 1824. Based on the shape of its teeth, he believed it was a predator over 40 feet long with the 'bulk of an elephant.' Buckland thought it was probably amphibious, living partly on land and partly in water.",
+          "\"In a sense, he got a lot of things right. It was a group of extinct giant reptilian creatures. That was a radical idea,\" said Steve Brusatte, a paleontologist at the University of Edinburgh.",
+          "\"We all grew up watching dinosaur cartoons and Jurassic Park, with dinosaurs on our lunchboxes and toys. But imagine a world where the word 'dinosaur' doesn't exist, and you were among the first people to realize it from just a few large bones in the ground.\""
+        ]
+      },
+      "richardOwen": {
+        "title": "Richard Owen",
+        "p": [
+          "Sir Richard Owen was the leading comparative anatomist and paleontologist of his time. A controversial figure, he is perhaps best known for coining the word 'dinosaur.' Owen's collection dates from 1681 to 1892 and spans his career development, scientific research, professional communications, and campaigns for a natural history museum.",
+          "Owen's first professional position was as assistant to William Clift, whom he later replaced as conservator at the Hunterian Museum at the Royal College of Surgeons in London. He campaigned for the creation of a natural history museum and was the first director of the British Museum (Natural History), which later became the Natural History Museum London.",
+          "Throughout a career spanning more than 60 years, Owen played an important role in many significant discoveries in his field. He was a contemporary of Charles Darwin and is known for his staunch opposition to Darwin's theory of natural selection.",
+          "Owen's collection also contains materials related to Clift through Owen's long connection with the Clift family, including his professional association with Clift and his marriage to Clift's daughter Caroline.",
+          "Most manuscripts in the collection were donated to the Museum Library by Charles Davies Sherborn (1861–1942) in 1908, and annotated books by Owen's granddaughter Emily Owen in 1915. In December 2002, another collection belonging to Ronald A. Cohen was purchased at auction, consisting of 19 letters from Owen and several other volumes.",
+          "The collection includes orders and medals awarded to Owen from around the world, including the Order of the Bath and awards from the Royal Society, the Geological Society, and the Linnean Society of London. There are also notebooks, diaries, albums, annotated books, documents, and corrected drafts.",
+          "Highlights include 27 volumes of professional correspondence and a significant collection of 3,500 drawings, 110 of which depict type specimens used for Owen's scientific publications. Many drawings were made by Owen himself, but there are also works by Joseph Dinkel (1806–1891), George Scharf (1788–1860), and Franz Bauer (1758–1840)."
+        ]
+      },
+      "boneWars": {
+        "title": "Bone Wars",
+        "p": [
+          "In the last third of the 19th century, two renowned paleontologists — Edward Cope from the Academy of Natural Sciences in Philadelphia, and Othniel Marsh from Yale University — specialized in the study of dinosaur remains.",
+          "At first the scientists were friends. Cope even named an animal discovered in 1867 after his colleague (Ptyonius marshii).",
+          "The relationship deteriorated over a plesiosaur skeleton: Cope incorrectly assembled its vertebrae and placed the skull at the end of the short tail rather than on the long neck. An illustration with this error was published in a scientific journal. Marsh pointed out the mistake, and Cope tried to destroy all copies of the journal. However, Marsh refused to give him his copy. 'From then on, he became my sworn enemy,' Marsh later claimed.",
+          "However, Marsh did not avoid serious mistakes either. His most serious blunder was the 'discovery' of a fictitious dinosaur species. He attached the skull of a different species to an Apatosaurus spine, then found a complete Apatosaurus skeleton and proclaimed the discovery of a 'new' species — the Brontosaurus. Modern science does not recognize Brontosaurus, but the myth has survived to this day.",
+          "Over the years, the rivalry intensified. In the race to discover as many species as possible, they spied on each other, stole fossils, poached specialists, offered bribes, and smeared each other's reputations in newspapers.",
+          "Becoming the winner was not easy. The honor of naming a new extinct species belonged to whoever published first. However, in the 19th century, it was very difficult to track who had announced a discovery first. Therefore, Cope and Marsh each proposed their own names for a number of the same animals.",
+          "The peak of the 'bone wars' came in 1877, when dinosaur remains were discovered in Colorado and Wyoming. Both sent their assistants to obstruct their rival. It is known that Marsh once brought bones unrelated to Cope's excavation site to throw his opponent off track.",
+          "The struggle even led to the destruction of fossils. Competitors are said to have buried unfinished excavation sites and even dynamited them to prevent their rival from obtaining important remains.",
+          "The ruthless Bone Wars hindered the development of paleontology, and the researchers themselves paid a heavy price. Cope and Marsh spent their entire savings on the rivalry, lost their property, and died as poor, bitter old men.",
+          "At the same time, during the rivalry, over 130 new species of North American dinosaurs were discovered. Marsh pulled ahead with 80 new species and named two of the most famous — Allosaurus and Stegosaurus. Cope managed to describe only 56 species."
+        ]
+      },
+      "modernMethods": {
+        "title": "Modern Search Methods",
+        "p": [
+          "Scientists have spent decades digging up dinosaur bones and studying prehistoric reptiles. Technologies such as computed tomography, 3D modeling, and artificial intelligence have significantly transformed paleontology.",
+          "Although fossilized bones give us an idea of the basic structure of dinosaurs, they do not provide the complete picture. Digital tools allow us to go further.",
+          "Using techniques such as computed tomography (CT), researchers can create 3D models of dinosaurs. Through 3D modeling and reconstruction, scientists can also conduct virtual tests to determine how specific species may have moved.",
+          "Another way modern tools revive ancient dinosaur worlds is through digital restoration of fossils. Scientists can restore damaged or incomplete remains by using technology to create virtual models, helping conduct deeper research.",
+          "For example, a group of paleontologists may discover skull fragments of a dinosaur. With technology, they can work around the damage, find symmetrical parts, and recreate what the creature may have looked like when alive.",
+          "With the development of artificial intelligence (AI), scientists can further revolutionize their research. AI is much better at tracking patterns in the shape and structure of remains than the human eye.",
+          "Reliance on physical files carries significant risks — damage or loss of data means starting research from scratch. Cloud storage reduces concerns about losing years of accumulated work.",
+          "Technological advances also facilitate collaboration between researchers, as sharing and accessing data from anywhere in the world becomes simpler, increasing the chances of new discoveries."
+        ]
+      },
+      "famousFinds": {
+        "title": "Most Famous Finds",
+        "p": [
+          "Although some fossils are easily recognized, many belong to species that have gone extinct. Dinosaur fossils provide fascinating information about prehistoric life on Earth. Over the years, several incredible fossils have been found.",
+          "Battle of Dinosaurs (2006): In June 2006, Montana farmer Clayton Phipps found two skeletons preserved in a fighting pose — Tyrannosaurus rex and Triceratops. Both are well-preserved, with skin impressions and what appear to be mummified internal organs.",
+          "Maiasaura / 'Good Mother Lizard' (1978): First discovered in the late 1970s, the Maiasaura fossil provides incredibly detailed information about how dinosaurs lived — from growth rates to physical maturity and family care of young.",
+          "Plesiosaur (1994): In 1994, in Alberta, a complete fossil of a plesiosaur of the species Nichollsia borealis was found — one of the oldest complete fossils ever found.",
+          "The Monster (2006): In 2006, on the Arctic island of Spitsbergen (Norway), a 33-foot-long pliosaur fossil was found, nicknamed 'The Monster' — the best-preserved pliosaur fossil.",
+          "Giving Birth Dinosaur (2011): In 2011, in southern China, a fossil of a female ichthyosaur giving birth to three offspring was found — a 248-million-year-old contribution to research on live birth in reptiles.",
+          "Nest of Hatchlings (2011): In 2011, in Mongolia, a nest was found containing fifteen Protoceratops andrewsi hatchlings — the first evidence that young dinosaurs remained in nesting environments for extended periods.",
+          "Mosasaur (2015): A mosasaur fossil found in Japan in 2015 became the first link between the Eastern Pacific and the Middle East. The fossil revealed this dinosaur had binocular vision and good depth perception.",
+          "Diplodocus (1878): One of the best fossils ever found is the 33-meter-long Diplodocus hallorum, discovered in 1878 by Wyoming scientists Benjamin Mudge and Samuel Wendell Williston.",
+          "Iguanodon (1822): Iguanodon teeth found in Sussex in 1822 were the first evidence of a massive prehistoric herbivorous reptile.",
+          "Megalosaurus Femur (1676): The Megalosaurus femur was found in 1676 by an Oxford professor, but the genus name was only assigned 150 years later by William Buckland.",
+          "All these famous fossils provide a glimpse into what our world was like millions of years ago, and how life on Earth has changed since then."
+        ]
+      }
+    },
+    "extinction": {
+      "kpgExtinction": {
+        "title": "Cretaceous-Paleogene Extinction",
+        "p": [
+          "Almost all large vertebrates on Earth — on land, in the sea, and in the air (all dinosaurs, plesiosaurs, mosasaurs, and pterosaurs) — suddenly went extinct approximately 65 million years ago, at the end of the Cretaceous period. At the same time, most plankton and many tropical invertebrates also disappeared. This event marks the K-T boundary (Cretaceous-Tertiary) and the end of the Mesozoic era.",
+          "The K-T extinction was global, encompassing all major continents and oceans. On a geological timescale, it happened very suddenly and could have been catastrophic by any measure.",
+          "Despite the scale of the extinction, the K-T boundary should not be viewed as a complete catastrophe for all living things. Most groups of organisms survived. Insects, mammals, birds, and flowering plants on land, as well as fish, corals, and mollusks in the ocean, continued to exist and rapidly evolved after the Cretaceous period.",
+          "Among the victims were not only the large animals of the time, but also some of the smallest organisms, including plankton, which provided primary production in the oceans."
+        ]
+      },
+      "asteroidTheory": {
+        "title": "Asteroid Theory",
+        "p1": [
+          "The Cretaceous-Paleogene extinction is the most recent mass extinction and the only one unambiguously linked to the impact of a large asteroid. About 76% of all species on the planet, including all non-avian dinosaurs, disappeared.",
+          "Approximately 66 million years ago, an asteroid about 12 kilometers in diameter struck the waters near what is now the Yucatan Peninsula in Mexico at 72,000 km/h. The impact left a crater over 180 kilometers wide, ejected enormous volumes of dust and sulfur into the atmosphere, caused global cooling, wildfires, and a giant tsunami. Within one night, the ecosystems that supported dinosaurs began to collapse.",
+          "Global warming caused by volcanic eruptions in the Deccan Traps in India may have further worsened the situation. Some scientists suggest that part of the Deccan Traps eruptions may have been triggered by the asteroid impact itself."
+        ],
+        "p2": [
+          "A meteorite large enough to be called a small asteroid struck Earth precisely at the K-T extinction. Evidence was first discovered by Walter Alvarez and colleagues, who found that rocks at the K-T boundary contain an extraordinarily large amount of iridium — true for rocks formed on land and underwater alike. The iridium layer has been identified in more than 100 locations worldwide.",
+          "Iridium is present only in rocks at the K-T boundary, deposited as a single large spike: a very short event. In normal marine sedimentary rocks, iridium occurs in microscopic quantities, yet its concentration in the K-T layer is very high. Such high concentration is characteristic of meteorites. The Alvarez group proposed that iridium was spread worldwide in a cloud of debris from an asteroid impact.",
+          "An asteroid large enough to explain the global iridium distribution could have been about 10 km in diameter. Computer models show it would have drilled a crater about 100 km in diameter, spreading iridium worldwide by the shockwave.",
+          "Impact craters often contain shocked quartz fragments and spherules (small glass spheres). Glass forms when target rock melts during impact. Shocked quartz forms when quartz crystals experience a sudden high-pressure impulse.",
+          "Throughout North America, glass spherules are found in the K-T clay layer, directly above which is a thinner layer containing iridium and shocked quartz. The shocked quartz zone extends westward to the Pacific Ocean floor, suggesting the impact occurred on or near North America.",
+          "The K-T impact crater has been found: Chicxulub, deeply buried under sediments of Mexico's Yucatan Peninsula, about 180 km in diameter.",
+          "A borehole at Chicxulub revealed 380 meters of igneous rocks with unusual chemistry. These rocks contain high levels of iridium and are dated to 65 million years, exactly matching the K-T boundary.",
+          "Haiti was approximately 800 km from Chicxulub at the end of the Cretaceous. The K-T boundary there is marked by a 30-cm clay layer of glass spherules, overlain by turbidites containing tektites — larger glass spheres with unusual shapes formed when rocks melt and cool while spinning in the air.",
+          "The Chicxulub impact triggered a tsunami, ejecting dust and iridium that settled worldwide. The impact angle (~20–30°) favored northwestward debris dispersal, explaining the particularly severe destruction in North America.",
+          "Thus, the Chicxulub impact not only caused mass extinction, but produced global catastrophic consequences that changed the history of Earth forever."
+        ]
+      }
+    },
+    "culture": {
+      "literature": "Literature",
+      "cinema": "Cinema",
+      "museums": "Museums and Exhibitions",
+      "massConsciousness": "Impact on Mass Consciousness"
+    },
+    "periods": {
+      "triassic": {
+        "title": "Triassic Period",
+        "p": [
+          "The beginning of the Triassic period (and the Mesozoic era) was a bleak time in Earth's history. Something — a series of powerful volcanic eruptions, climate change, or perhaps a comet or asteroid impact — caused the extinction of more than 90 percent of living species.",
+          "However, it was also a period of enormous change and rebirth. Life that survived the so-called 'Great Dying' spread again across the planet, adapted to new ecological niches, and gave rise to new creatures, including rodent-like mammals and the first dinosaurs.",
+          "At the beginning of the Triassic, all of Earth's continents merged into a single supercontinent Pangaea — a vast 'C'-shaped landmass stretching across the equator and to the poles. But almost immediately, Pangaea began to break apart. By the end of the period, about 199 million years ago, tectonic forces began dividing the supercontinent into Laurasia in the north and Gondwana in the south.",
+          "The vast Panthalassa Ocean surrounded Pangaea. Coastal areas experienced seasonal monsoons, but ocean currents maintained warm and arid conditions in the interior. The Tethys Sea filled the 'C'-shaped bend of Pangaea. Earlier failed rifting created rift valleys in North America and Africa, filled with red sediments that today contain some of the best-preserved Triassic fossils.",
+          "The seas were filled with ammonites, mollusks, and sea urchins that survived the Permian extinction and rapidly evolved. The first corals appeared, although reef-forming organisms already existed.",
+          "Giant reptiles, such as ichthyosaurs (with dolphin-like bodies) and long-necked plesiosaurs, hunted fish and ancient cephalopods. Frogs, salamanders, crocodiles, turtles, and snakes crawled along the shores. Pterosaurs took to the air.",
+          "On land, mosses, liverworts, and ferns covered forests of conifers, ginkgos, and cycads. Spiders, scorpions, centipedes, and crickets flourished.",
+          "But perhaps the greatest changes occurred with the appearance of dinosaurs and the first mammals at the end of the Triassic, about 230 million years ago.",
+          "One of the first true mammals was Eozostrodon. This creature resembled a shrew, laid eggs, but fed its young milk.",
+          "Among the first dinosaurs was the bipedal predator Coelophysis, which grew up to 2.7 meters, weighed up to 45 kilograms, and appeared about 225 million years ago. A few million years later came the herbivorous Plateosaurus, reaching 8 meters.",
+          "The Triassic ended just as it began. Something — possibly volcanic activity or an asteroid impact — caused another mass extinction. However, dinosaurs survived and continued their dominance in the Jurassic period."
+        ]
+      },
+      "jurassic": {
+        "title": "Jurassic Period",
+        "p": [
+          "Dinosaurs, birds, and rodents. Breaking up of continents and inland seas. Sea monsters, sharks, and blood-red plankton. Forests of ferns, cycads, and conifers. Warm, humid, tropical breezes. This was the Jurassic era, which lasted from 199 to 145 million years ago.",
+          "At the beginning of the Jurassic period, the breakup of Pangaea continued and accelerated. Laurasia broke apart into North America and Eurasia. Gondwana began to split in the middle of the Jurassic, with Antarctica, Madagascar, India, and Australia separating from Africa and South America. New oceans flooded the spaces between them.",
+          "All this water gave the formerly hot and dry climate a humid, subtropical character. Arid deserts gradually turned green. Cycads, conifers such as araucaria and pines, and ginkgos were widely distributed. Forest ferns were also widespread.",
+          "The oceans teemed with diverse life. At the top of the food chain were long-necked plesiosaurs, giant marine crocodiles, sharks, and rays. Fish-like ichthyosaurs, squid-like cephalopods, and spirally-shelled ammonites were numerous. Coral reefs grew in warm waters.",
+          "On land, dinosaurs conquered the world. The herbivorous sauropod Brachiosaurus reached 16 meters in height, approximately 26 meters in length, and weighed over 80 tons. Diplodocus reached 27 meters. Their gigantic size may have deterred predators such as Allosaurus.",
+          "The oldest known bird, Archaeopteryx, took to the skies at the end of the Jurassic, most likely having evolved from early coelurosaurian dinosaurs. Archaeopteryx shared the airspace with pterosaurs — flying reptiles that had ruled the skies since the late Triassic. The first mammals scurried beneath the feet of dinosaurs."
+        ]
+      },
+      "cretaceous": {
+        "title": "Cretaceous Period",
+        "p": [
+          "During this period, oceans formed as continents shifted and broke apart from one large supercontinent into smaller ones.",
+          "During the Cretaceous period, continents actively reshaped Earth and life on it. At the beginning of the period, dinosaurs dominated on the fragments of the breaking-up Pangaea. By the end, about 80 million years later, oceans filled the wide rifts between isolated continents, which took on their modern outlines. Flowering plants spread across the landscape, and mammals were preparing to fill the role that would soon be vacated.",
+          "Whether it was precisely the Chicxulub asteroid that caused the extinction of more than half of all species at the end of the Cretaceous is still subject to scientific debate. However, the shifting of continents, expansion of coastlines, and expansion of oceans cooled and moistened the climate, launching large-scale changes in fauna and flora.",
+          "Long before this, the Cretaceous began with the same conditions as the Jurassic: giant sauropods roamed forests, plains, and coasts, while marine reptiles hunted fish, ammonites, and mollusks. But as continents shifted, ocean currents became increasingly powerful. After peak temperatures in the middle of the period, the climate began to cool.",
+          "Although dinosaurs dominated throughout the Cretaceous, dominant groups changed and new species appeared. Sauropods remained predominant on the southern continents but nearly disappeared in the north. Ornithischian dinosaurs such as Iguanodon spread everywhere except Antarctica. Vast herds of horned dinosaurs such as Triceratops grazed on the northern continents.",
+          "Tyrannosaurus rex dominated among northern predators, while the giant Spinosaurus hunted in southern rivers. On coasts and in rivers, frogs, salamanders, turtles, crocodiles, and snakes thrived. Small shrew-like mammals ran through the forests.",
+          "In the warm shallow seas, long-necked plesiosaurs gave way to vast snake-like mosasaurs. Rays and modern sharks became common. Diatoms first spread widely in the oceans.",
+          "The real event was the rapid expansion of flowering plants, which spread with the help of pollinating insects — bees, wasps, ants, and beetles. Plants such as magnolia, fig, and sassafras began to predominate over conifers, ginkgos, and cycads.",
+          "But much of this diverse life, including all dinosaurs, pterosaurs, plesiosaurs, and ammonites, disappeared as a result of the catastrophic extinction 65 million years ago. After this event, neither land, nor oceans, nor sky would ever be the same again. A new era began — the Cenozoic, in which dominance passed to mammals."
+        ]
+      }
+    }
+  },
+  "encyclopedia": {
+    "totalSpecies": "Total species: {count}",
+    "notFound": "No dinosaurs found with these parameters...",
+    "filter": {
+      "nameLabel": "Dinosaur Name",
+      "namePlaceholder": "Write dinosaur name",
+      "siteLabel": "Excavation Site",
+      "sitePlaceholder": "Write excavation site",
+      "typeLabel": "Dinosaur Type",
+      "selectType": "Select type",
+      "dietLabel": "Diet:",
+      "selectDiet": "Select diet",
+      "periodLabel": "Period:",
+      "selectPeriod": "Select period",
+      "diet": {
+        "Herbivores": "Herbivores",
+        "Carnivores": "Carnivores",
+        "Omnivores": "Omnivores",
+        "Piscivores": "Piscivores",
+        "Insectivores": "Insectivores",
+        "FilterFeeders": "Filter Feeders"
+      },
+      "type": {
+        "Theropod": "Theropod",
+        "Sauropod": "Sauropod",
+        "Ceratopsian": "Ceratopsian",
+        "Stegosaur": "Stegosaur",
+        "Ankylosaur": "Ankylosaur",
+        "Pachycephalosaur": "Pachycephalosaur",
+        "Ornithopod": "Ornithopod",
+        "Pterosaur": "Pterosaur",
+        "Marine": "Marine Reptile",
+        "Prosauropod": "Prosauropod",
+        "Titanosaur": "Titanosaur",
+        "Therizinosaur": "Therizinosaur",
+        "Dromaeosaur": "Dromaeosaur",
+        "Spinosaur": "Spinosaur",
+        "Ornithomimosaur": "Ornithomimosaur",
+        "Oviraptorosaur": "Oviraptorosaur",
+        "Troodontid": "Troodontid",
+        "Alvarezsaur": "Alvarezsaur",
+        "Heterodontosaur": "Heterodontosaur",
+        "Hadrosaur": "Hadrosaur",
+        "Carcharodontosaurid": "Carcharodontosaurid",
+        "Noasaurid": "Noasaurid",
+        "Megaraptoran": "Megaraptoran",
+        "Marginocephalian": "Marginocephalian",
+        "Rugose": "Rugose",
+        "Sauropodomorph": "Sauropodomorph",
+        "Unknown": "Unknown"
+      },
+      "period": {
+        "Triassic": "Triassic Period",
+        "Jurassic": "Jurassic Period",
+        "Cretaceous": "Cretaceous Period"
+      }
+    }
+  },
+  "map": {
+    "findLocation": "Location of find",
+    "period": "Period:",
+    "selectPeriod": "Select period",
+    "filters": "Filters",
+    "imageSource": "From DinosaurPictures"
+  },
+  "contacts": {
+    "title": "Questions?",
+    "subtitle": "fill out the form and get an answer",
+    "form": {
+      "namePlaceholder": "Name",
+      "emailPlaceholder": "Email",
+      "messagePlaceholder": "Write your questions and more",
+      "modal": {
+        "titleSending": "Received, waiting...",
+        "titleSuccess": "Thank you for your message!",
+        "titleError": "Error!",
+        "descSuccess": "Your message was successfully delivered, await a response",
+        "descError": "An error occurred on the server..."
+      }
+    }
+  },
+  "account": {
+    "selectPhoto": "Select picture",
+    "confirmChange": "Confirm change",
+    "usernameLabel": "Username:",
+    "nameLabel": "Name:",
+    "surnameLabel": "Surname:",
+    "emailLabel": "Email:",
+    "adminPanel": "Admin Panel",
+    "resetPhoto": "Reset picture",
+    "favoriteDinos": "Favorite Dinosaurs",
+    "noFavDinos": "You have no favorite dinosaurs",
+    "goTo": "Go to",
+    "encyclopediaLink": "encyclopedia",
+    "toAddDino": "to add a dinosaur",
+    "imageSource": "From DinosaurPictures"
+  },
+  "legal": {
+    "title": "Privacy Policy"
+  },
+  "admin": {
+    "aside": {
+      "title": "Admin Panel",
+      "dinos": "Dinosaurs",
+      "users": "Users",
+      "photos": "Photo Check",
+      "logout": "Logout"
+    },
+    "tabs": {
+      "dinosList": "Dinosaur List",
+      "dinoCreate": "Add Dinosaur",
+      "dinoChange": "Edit Dinosaur",
+      "usersList": "User List",
+      "userCreate": "Add Admin"
+    },
+    "list": {
+      "allDinos": "All Dinosaurs",
+      "searchPlaceholder": "Write dinosaur name",
+      "noDinos": "No dinosaurs yet"
+    },
+    "form": {
+      "createDino": "Create Dinosaur",
+      "editDino": "Edit Dinosaur",
+      "createSuccess": "Dinosaur successfully added",
+      "saving": "Saving changes",
+      "back": "Back",
+      "name": "Name",
+      "namePlaceholder": "Write dinosaur name",
+      "latinName": "Latin Name",
+      "latinNamePlaceholder": "Write dinosaur name in Latin",
+      "weight": "Dinosaur Weight",
+      "length": "Dinosaur Length",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the dinosaur",
+      "type": "Dinosaur Type",
+      "dietLabel": "Diet Description",
+      "dietPlaceholder": "Describe the diet",
+      "periodLabel": "Period Description",
+      "periodDatePlaceholder": "Write existence date (e.g. 68-66 million years ago)",
+      "periodDescPlaceholder": "Describe the existence period",
+      "reset": "Reset",
+      "edit": "Edit",
+      "create": "Create",
+      "deleteDino": "Delete Dinosaur"
+    },
+    "photos": {
+      "sectionLabel": "Photos:",
+      "selectImage": "Select image",
+      "chooseFile": "Choose file",
+      "changeFile": "Change file",
+      "add": "Add",
+      "noPhotos": "No photos",
+      "delete": "Delete",
+      "notAdded": "No images added yet"
+    },
+    "locations": {
+      "sectionLabel": "Found Locations:",
+      "locationsSectionLabel": "Locations:",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "place": "Place",
+      "placePlaceholder": "Specify location",
+      "add": "Add",
+      "noLocations": "No locations",
+      "latitudeShort": "Latitude:",
+      "longitudeShort": "Longitude:",
+      "placeShort": "Place:",
+      "delete": "Delete",
+      "notAdded": "No locations added yet"
+    },
+    "users": {
+      "listTitle": "User List",
+      "createTitle": "Admin Registration",
+      "back": "Back",
+      "nameLabel": "Name",
+      "namePlaceholder": "Enter name",
+      "lastnameLabel": "Last Name",
+      "lastnamePlaceholder": "Enter last name",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "Enter username",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter password",
+      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordPlaceholder": "Enter password again",
+      "passwordsMismatch": "Passwords do not match",
+      "usernameTaken": "Username already taken",
+      "emailExists": "Email already exists, try another",
+      "registerSuccess": "Successfully registered!",
+      "register": "Register"
+    },
+    "ml": {
+      "checkPhoto": "Photo Check",
+      "analyzing": "Analyzing photo...",
+      "isDino": "This is a dinosaur!",
+      "notDino": "This is not a dinosaur",
+      "confidence": "Confidence:",
+      "addPhoto": "Add photo",
+      "feedback": "Feedback",
+      "hideFeedback": "Hide",
+      "feedbackQuestion": "What do you think about the result?",
+      "modelCorrect": "Model is correct",
+      "notDinoAtAll": "This is not a dinosaur at all",
+      "actuallyDino": "This is actually a dinosaur",
+      "correctSpecies": "Correct species (optional)",
+      "sendFeedback": "Send feedback",
+      "feedbackSent": "Feedback sent, thank you!",
+      "checkImage": "Check image",
+      "processing": "Processing...",
+      "predictedClass": "Predicted class:",
+      "probability": "Probability:",
+      "modelWrong": "If the model was wrong:",
+      "itIsDino": "It is a dinosaur",
+      "itIsNotDino": "It is not a dinosaur",
+      "retrainSuccess": "Model retrained on this image!"
+    },
+    "dinoPage": {
+      "back": "Back",
+      "hide": "Hide",
+      "showAllPhotos": "Show all photos",
+      "descriptionTitle": "Description",
+      "length": "Length:",
+      "weight": "Weight:",
+      "dinoType": "Dinosaur type:",
+      "dietTitle": "Diet",
+      "dietType": "Type:",
+      "periodTitle": "Period",
+      "timePeriod": "Time period:",
+      "mapTitle": "Map"
+    }
+  },
+  "classify": {
+    "modelResult": "The model determined this is —",
+    "isDino": "A Dinosaur",
+    "notDino": "Not a Dinosaur",
+    "looksLike": "Looks like:",
+    "feedbackThanks": "Thanks for the feedback!",
+    "giveFeedback": "Give feedback",
+    "classifyError": "Classification error",
+    "feedback": {
+      "wasCorrect": "Did the model determine correctly?",
+      "yes": "✅ Yes",
+      "no": "❌ No",
+      "whichWasCorrect": "Which option was correct?",
+      "whatIsWrong": "What exactly is wrong?",
+      "wrongSpecies": "🦕 Dinosaur is correct, but wrong species",
+      "notDinoAtAll": "❌ This is not a dinosaur at all",
+      "itIsDino": "🦕 This is a dinosaur, but the model didn't identify it",
+      "newSpecies": "🆕 This is a new species not in the model",
+      "knowCorrectSpecies": "Do you know the correct species? (optional)",
+      "placeholder": "e.g.: Velociraptor",
+      "cancel": "Cancel",
+      "send": "Send"
     }
   }
 }

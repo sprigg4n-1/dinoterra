@@ -8,8 +8,10 @@ import { IUser } from "@/config/types";
 
 import Link from "next/link";
 import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
+import { useTranslations } from "next-intl";
 
 const UsersListDashboard = () => {
+  const t = useTranslations("admin.users");
   const [users, setUsers] = useState<IUser[]>([]);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const UsersListDashboard = () => {
   }, []);
   return (
     <>
-      <DashboardTitleComponent text={"Список користувачів"} />
+      <DashboardTitleComponent text={t("listTitle")} />
 
       <div className="flex flex-col gap-2">
         {users.map((user) => (

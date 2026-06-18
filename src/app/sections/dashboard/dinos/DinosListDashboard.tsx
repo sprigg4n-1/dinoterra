@@ -8,8 +8,10 @@ import { IDino } from "@/config/types";
 
 import DinoCard from "@/components/dino/DinoCard";
 import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
+import { useTranslations } from "next-intl";
 
 const DinosListDashboard = () => {
+  const t = useTranslations("admin.list");
   const [dinos, setDinos] = useState<IDino[]>([]);
   const [finalDinos, setFinalDinos] = useState<IDino[]>([]);
   const [searchDino, setSearchDino] = useState<string>("");
@@ -43,10 +45,10 @@ const DinosListDashboard = () => {
   return (
     <>
       <div className="flex items-center justify-between mb-5">
-        <DashboardTitleComponent text="Всі динозаври" />
+        <DashboardTitleComponent text={t("allDinos")} />
         <input
           className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange w-1/2"
-          placeholder="Напишіть ім'я динозавра"
+          placeholder={t("searchPlaceholder")}
           value={searchDino}
           onChange={(e) => setSearchDino(e.target.value)}
         />
@@ -68,7 +70,7 @@ const DinosListDashboard = () => {
               />
             ))
         ) : (
-          <span className="text-center">ні одного динозавра ще немає</span>
+          <span className="text-center">{t("noDinos")}</span>
         )}
       </div>
     </>

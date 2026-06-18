@@ -7,6 +7,7 @@ import DashboardTitleComponent from "@/components/dashboard/DashboardTitleCompon
 import DinoForm from "@/components/dashboard/dino/DinoForm";
 import DinoAddImages from "@/components/dashboard/dino/DinoAddImages";
 import DinoAddLocations from "@/components/dashboard/dino/DinoAddLocations";
+import { useTranslations } from "next-intl";
 
 export type TDinoFoundLocation = {
   id: string;
@@ -21,6 +22,7 @@ export type TDinoImages = {
 };
 
 const CreateDinoFormDashboard = () => {
+  const t = useTranslations("admin.form");
   const [isCreatedSuccessful, setIsCreatedSuccessful] =
     useState<boolean>(false);
 
@@ -44,7 +46,7 @@ const CreateDinoFormDashboard = () => {
 
   return (
     <>
-      <DashboardTitleComponent text={"Створення динозавра"} />
+      <DashboardTitleComponent text={t("createDino")} />
       {!isCreatedSuccessful ? (
         <div className="flex flex-col gap-5">
           <DinoAddImages
@@ -70,7 +72,7 @@ const CreateDinoFormDashboard = () => {
           />
         </div>
       ) : (
-        <span>Ви успішно додали динозавра</span>
+        <span>{t("createSuccess")}</span>
       )}
     </>
   );
