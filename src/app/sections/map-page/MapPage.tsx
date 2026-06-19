@@ -52,6 +52,7 @@ const MapPage = () => {
 
   const getLocs = async () => {
     const locsData = await getFoundLocationsV2(searchLocation, period);
+    console.log(locsData);
 
     setLocations(locsData ?? []);
   };
@@ -244,7 +245,10 @@ const MapPage = () => {
           <div className="absolute w-[90%] h-fit max-h-[90%] md:h-fit md:min-h-[100px] md:w-[350px] bg-darkGray top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="flex justify-between gap-1 items-start py-3 px-2">
               <p className="text-white text-[14px] md:text-[16px]">
-                📍 {locale === "en" ? hoveredLocation.place.en : hoveredLocation.place.uk}
+                📍{" "}
+                {locale === "en"
+                  ? hoveredLocation.place.en
+                  : hoveredLocation.place.uk}
               </p>
               <button className="hover:rotate-90 duration-300">
                 <Image
@@ -261,7 +265,8 @@ const MapPage = () => {
               <Image
                 src={
                   locationDino?.images && locationDino.images.length > 0
-                    ? (locationDino.images.find((img: any) => img.isMain)?.file ?? locationDino.images[0].file)
+                    ? (locationDino.images.find((img: any) => img.isMain)
+                        ?.file ?? locationDino.images[0].file)
                     : imageNotFound
                 }
                 width={4000}
@@ -281,7 +286,9 @@ const MapPage = () => {
                 className=" text-white text-[14px] md:text-[18px] text-center w-full hover:bg-brightOrange py-2"
               >
                 {locationDino?.dino?.name
-                  ? (locale === "en" ? locationDino.dino.name.en : locationDino.dino.name.uk)
+                  ? locale === "en"
+                    ? locationDino.dino.name.en
+                    : locationDino.dino.name.uk
                   : ""}
               </Link>
             </div>

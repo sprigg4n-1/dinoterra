@@ -59,7 +59,6 @@ const EncyclopediaDinoPageV2 = ({
         {foundLocations && foundLocations.length > 0 && (
           <DinoPageFoundLocations
             foundLocations={foundLocations}
-            locale={locale}
           />
         )}
 

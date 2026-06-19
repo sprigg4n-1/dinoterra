@@ -93,7 +93,7 @@ const CreateDinoV2FormDashboard = () => {
 
   // location handlers
   const addLocation = () => {
-    if (!locPlaceUk.trim() && !locPlaceEn.trim()) return;
+    if (!locPlaceUk.trim() || !locPlaceEn.trim()) return;
     setLocations((prev) => [
       ...prev,
       { id: v4(), place: { uk: locPlaceUk, en: locPlaceEn }, latitude: locLat, longitude: locLng },
