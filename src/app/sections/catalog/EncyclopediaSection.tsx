@@ -15,7 +15,7 @@ import { useTranslations } from "next-intl";
 const SHOW_LIMIT = 14;
 
 const adaptV2ToCard = (dino: IDinoV2): IDino =>
-  ({ ...dino, image: dino.mainImage ?? undefined } as unknown as IDino);
+  ({ ...dino, image: dino.mainImage ?? undefined }) as unknown as IDino;
 
 const EncyclopediaSection = () => {
   const t = useTranslations();

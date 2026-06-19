@@ -70,15 +70,15 @@ const DinoCard = ({
           className={`group-hover:scale-105 ${
             slider
               ? "w-auto h-[200px] sm:h-[350px] object-fill"
-              : "w-56 h-60 object-fit"
+              : "w-60 h-60 object-fill"
           } duration-300`}
         />
-        <button
+        {/* <button
           onClick={redirectToPage}
           className="absolute top-0 right-0 bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center"
         >
           {t("account.imageSource")}
-        </button>
+        </button> */}
       </div>
 
       <p className={`text-center pb-1 text-[18px] font-semibold ${finalColor}`}>
