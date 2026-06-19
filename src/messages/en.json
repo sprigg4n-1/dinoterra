@@ -1,4 +1,7 @@
 {
+  "common": {
+    "enterData": "Enter data"
+  },
   "buttonText": {
     "start": "Start",
     "startExploring": "Start exploring",
@@ -579,6 +582,66 @@
       "periodTitle": "Period",
       "timePeriod": "Time period:",
       "mapTitle": "Map"
+    },
+    "v2": {
+      "aside": {
+        "dinos": "Dinosaurs V2",
+        "users": "Users",
+        "logout": "Logout"
+      },
+      "list": {
+        "title": "All Dinosaurs V2",
+        "searchPlaceholder": "Search by name...",
+        "loading": "Loading...",
+        "notFound": "No dinosaurs found"
+      },
+      "tabs": {
+        "all": "All Dinosaurs",
+        "create": "Add"
+      },
+      "editor": {
+        "bulletList": "• List",
+        "orderedList": "1. List",
+        "blockquote": "❝ Quote",
+        "photo": "🖼 Photo"
+      },
+      "form": {
+        "newDino": "New Dinosaur V2",
+        "basicData": "Basic Data",
+        "nameUk": "Name (UKR)",
+        "nameEn": "Name (ENG)",
+        "latinName": "Latin Name",
+        "lengthM": "Length (m)",
+        "weightKg": "Weight (kg)",
+        "type": "Type",
+        "diet": "Diet",
+        "geoperiod": "Geological Period",
+        "periodDate": "Period Date (e.g. 65–145 mya)",
+        "article": "Article",
+        "images": "Images",
+        "imagesHint": "The first image automatically becomes the cover. Click on an image to change the cover.",
+        "imagesHintEdit": "Orange border = cover. Hover over a photo to manage it.",
+        "addPhoto": "+ Add Photo",
+        "coverBadge": "Cover",
+        "setCover": "Cover",
+        "deleteImage": "Delete",
+        "locations": "Excavation Sites",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "locPlaceholderUk": "e.g. Mongolia (UK)",
+        "locPlaceholderEn": "e.g. Mongolia",
+        "addLocation": "Add",
+        "noLocations": "No locations",
+        "creating": "Creating...",
+        "createDino": "Create Dinosaur",
+        "createdSuccess": "Dinosaur created successfully!",
+        "addMore": "Add another",
+        "saving": "Saving...",
+        "saveChanges": "Save changes",
+        "saved": "Saved!",
+        "deleteDino": "Delete Dinosaur",
+        "back": "← Back"
+      }
     }
   },
   "classify": {

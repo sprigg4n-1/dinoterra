@@ -1,20 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
 import DashboardTabsTopNavigation from "@/components/dashboard/DashboardTabsTopNavigation";
 import DinosV2ListDashboard from "./DinosV2ListDashboard";
 import CreateDinoV2FormDashboard from "./CreateDinoV2FormDashboard";
 
 const DinosV2Dashboard = () => {
+  const t = useTranslations("admin.v2.tabs");
   const [activeTab, setActiveTab] = useState("all");
 
-  const tabs = useMemo(
-    () => [
-      { id: "all", text: "Всі динозаври" },
-      { id: "create", text: "Додати" },
-    ],
-    [],
-  );
+  const tabs = [
+    { id: "all", text: t("all") },
+    { id: "create", text: t("create") },
+  ];
 
   return (
     <div className="flex flex-col gap-2">

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import Image from "next/image";
 
@@ -27,7 +28,7 @@ const InputComponent = ({
   value,
   valueOnChange,
   type = "text",
-  placeholder = "Уведіть дані",
+  placeholder,
   isRequired = false,
   text = "",
   showPasswordButton = false,
@@ -36,6 +37,8 @@ const InputComponent = ({
   textStyle = "normal",
   colorStyle = "light",
 }: Props) => {
+  const t = useTranslations("common");
+  const resolvedPlaceholder = placeholder ?? t("enterData");
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const isPassword = type === "password";
   const inputType = isPassword && isShowPassword ? "text" : type;
@@ -72,7 +75,7 @@ const InputComponent = ({
           className={`w-full border-2 focus:outline-none ${finalStyles} `}
           type={inputType}
           required={isRequired}
-          placeholder={placeholder}
+          placeholder={resolvedPlaceholder}
           value={value}
           onChange={valueOnChange}
         />

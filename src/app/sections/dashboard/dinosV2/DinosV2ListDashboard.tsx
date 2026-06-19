@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { getDinosV2 } from "@/services/DinoV2Service";
 import { IDino, IDinoV2 } from "@/config/types";
@@ -13,6 +14,7 @@ const adaptV2ToCard = (dino: IDinoV2): IDino =>
   ({ ...dino, image: dino.mainImage ?? undefined } as unknown as IDino);
 
 const DinosV2ListDashboard = () => {
+  const t = useTranslations("admin.v2.list");
   const router = useRouter();
   const [dinos, setDinos] = useState<IDinoV2[]>([]);
   const [filtered, setFiltered] = useState<IDinoV2[]>([]);
@@ -44,19 +46,19 @@ const DinosV2ListDashboard = () => {
   return (
     <>
       <div className="flex items-center justify-between mb-5">
-        <DashboardTitleComponent text="Усі динозаври V2" />
+        <DashboardTitleComponent text={t("title")} />
         <input
           className="bg-darkGray text-white py-2 px-1 border-2 border-transparent focus:outline-none focus:border-brightOrange w-1/2"
-          placeholder="Пошук за назвою..."
+          placeholder={t("searchPlaceholder")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
       {loading ? (
-        <p className="text-slateGray">Завантаження...</p>
+        <p className="text-slateGray">{t("loading")}</p>
       ) : filtered.length === 0 ? (
-        <span className="text-center">Динозаврів не знайдено</span>
+        <span className="text-center">{t("notFound")}</span>
       ) : (
         <div className="flex flex-wrap items-center justify-around gap-5">
           {filtered

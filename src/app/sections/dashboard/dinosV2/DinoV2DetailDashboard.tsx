@@ -7,6 +7,8 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { Map, Marker } from "@vis.gl/react-maplibre";
 
+import { useTranslations } from "next-intl";
+
 import {
   EDinoDiet,
   EDinoPeriod,
@@ -14,9 +16,6 @@ import {
   IDinoV2,
   IDinoV2FoundLocation,
   IDinoV2Image,
-  dinoDietLabels,
-  dinoPeriodLabels,
-  dinoTypeLabels,
 } from "@/config/types";
 
 import {
@@ -44,6 +43,8 @@ interface Props {
 }
 
 const DinoV2DetailDashboard = ({ id }: Props) => {
+  const t = useTranslations("admin.v2.form");
+  const tf = useTranslations("encyclopedia.filter");
   const router = useRouter();
   const articleRef = useRef<DinoV2ArticleEditorRef>(null);
   const imgFileRef = useRef<HTMLInputElement>(null);
@@ -129,7 +130,7 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
       article: article ?? { uk: null, en: null },
     });
     setSaving(false);
-    showSaved();
+    showSaved(t("saved"));
   };
 
   // Images — open ML modal on select
@@ -191,7 +192,7 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
     <div className="flex flex-col gap-6 text-[14px] sm:text-[16px]">
       <div className="flex items-center justify-between">
         <DashboardTitleComponent text={dino.latinName} />
-        <button type="button" onClick={() => router.back()} className="text-slateGray hover:text-white duration-200 text-[14px]">← Назад</button>
+        <button type="button" onClick={() => router.back()} className="text-slateGray hover:text-white duration-200 text-[14px]">{t("back")}</button>
       </div>
 
       {savedMsg && (
@@ -201,46 +202,46 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
       {/* ── Основні поля + стаття ── */}
       <form onSubmit={handleSaveFields} className="flex flex-col gap-6">
         <section className="flex flex-col gap-3">
-          <h3 className="text-[16px] sm:text-[18px] font-semibold border-b-2 border-brightOrange pb-1">Основні дані</h3>
+          <h3 className="text-[16px] sm:text-[18px] font-semibold border-b-2 border-brightOrange pb-1">{t("basicData")}</h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <InputComponent text="Назва (УКР)" value={nameUk} valueOnChange={(e) => setNameUk(e.target.value)} isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
-            <InputComponent text="Назва (ENG)" value={nameEn} valueOnChange={(e) => setNameEn(e.target.value)} isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
+            <InputComponent text={t("nameUk")} value={nameUk} valueOnChange={(e) => setNameUk(e.target.value)} isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
+            <InputComponent text={t("nameEn")} value={nameEn} valueOnChange={(e) => setNameEn(e.target.value)} isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
           </div>
 
-          <InputComponent text="Латинська назва" value={latinName} valueOnChange={(e) => setLatinName(e.target.value)} isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
+          <InputComponent text={t("latinName")} value={latinName} valueOnChange={(e) => setLatinName(e.target.value)} isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <InputComponent text="Довжина (м)" value={length} valueOnChange={(e) => setLength(+e.target.value)} type="number" isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
-            <InputComponent text="Вага (кг)" value={weight} valueOnChange={(e) => setWeight(+e.target.value)} type="number" isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
+            <InputComponent text={t("lengthM")} value={length} valueOnChange={(e) => setLength(+e.target.value)} type="number" isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
+            <InputComponent text={t("weightKg")} value={weight} valueOnChange={(e) => setWeight(+e.target.value)} type="number" isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
           </div>
 
           <label className="flex flex-col gap-1">
-            <span>Тип</span>
+            <span>{t("type")}</span>
             <select value={typeOfDino} onChange={(e) => setTypeOfDino(e.target.value)} className="bg-darkGray text-white py-2 px-2 border-2 border-transparent focus:outline-none focus:border-brightOrange">
-              {Object.entries(dinoTypeLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+              {Object.values(EDinoType).map((k) => <option key={k} value={k}>{tf(`type.${k}`)}</option>)}
             </select>
           </label>
 
           <label className="flex flex-col gap-1">
-            <span>Харчування</span>
+            <span>{t("diet")}</span>
             <select value={diet} onChange={(e) => setDiet(e.target.value)} className="bg-darkGray text-white py-2 px-2 border-2 border-transparent focus:outline-none focus:border-brightOrange">
-              {Object.entries(dinoDietLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+              {Object.values(EDinoDiet).map((k) => <option key={k} value={k}>{tf(`diet.${k}`)}</option>)}
             </select>
           </label>
 
           <label className="flex flex-col gap-1">
-            <span>Геологічний період</span>
+            <span>{t("geoperiod")}</span>
             <select value={period} onChange={(e) => setPeriod(e.target.value)} className="bg-darkGray text-white py-2 px-2 border-2 border-transparent focus:outline-none focus:border-brightOrange">
-              {Object.entries(dinoPeriodLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+              {Object.values(EDinoPeriod).map((k) => <option key={k} value={k}>{tf(`period.${k}`)}</option>)}
             </select>
           </label>
 
-          <InputComponent text="Дата періоду" value={periodDate} valueOnChange={(e) => setPeriodDate(e.target.value)} isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
+          <InputComponent text={t("periodDate")} value={periodDate} valueOnChange={(e) => setPeriodDate(e.target.value)} isRequired colorStyle="black" borderColor="transparent" textStyle="small" />
         </section>
 
         <section className="flex flex-col gap-3">
-          <h3 className="text-[16px] sm:text-[18px] font-semibold border-b-2 border-brightOrange pb-1">Стаття</h3>
+          <h3 className="text-[16px] sm:text-[18px] font-semibold border-b-2 border-brightOrange pb-1">{t("article")}</h3>
           <DinoV2ArticleEditor
             ref={articleRef}
             initialUk={dino.article?.uk}
@@ -253,14 +254,14 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
           disabled={saving}
           className="w-full sm:w-56 py-3 bg-brightOrange text-white font-semibold hover:bg-opacity-90 duration-200 disabled:opacity-50"
         >
-          {saving ? "Збереження..." : "Зберегти зміни"}
+          {saving ? t("saving") : t("saveChanges")}
         </button>
       </form>
 
       {/* ── Зображення ── */}
       <section className="flex flex-col gap-3">
-        <h3 className="text-[16px] sm:text-[18px] font-semibold border-b-2 border-brightOrange pb-1">Зображення</h3>
-        <p className="text-[12px] text-slateGray">Помаранчева рамка — обкладинка. Наведіть на фото щоб керувати.</p>
+        <h3 className="text-[16px] sm:text-[18px] font-semibold border-b-2 border-brightOrange pb-1">{t("images")}</h3>
+        <p className="text-[12px] text-slateGray">{t("imagesHintEdit")}</p>
 
         {refreshing ? (
           <LoaderComponent />
@@ -283,7 +284,7 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
                   <div className={`border-4 ${img.isMain ? "border-brightOrange" : "border-slateGray"}`}>
                     {img.isMain && (
                       <span className="absolute top-0 left-0 bg-brightOrange text-white text-[10px] px-1 z-10">
-                        Обкладинка
+                        {t("coverBadge")}
                       </span>
                     )}
                     <Image
@@ -300,7 +301,7 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
                           onClick={() => handleSetMain(img._id)}
                           className="bg-brightOrange text-white text-[12px] px-3 py-1 hover:bg-opacity-90 w-full text-center"
                         >
-                          Обкладинка
+                          {t("setCover")}
                         </button>
                       )}
                       <button
@@ -308,7 +309,7 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
                         onClick={() => handleDeleteImage(img._id)}
                         className="bg-fieryRed text-white text-[12px] px-3 py-1 hover:bg-opacity-90 w-full text-center"
                       >
-                        Видалити
+                        {t("deleteImage")}
                       </button>
                     </div>
                   </div>
@@ -323,7 +324,7 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
 
       {/* ── Місця розкопок ── */}
       <section className="flex flex-col gap-3">
-        <h3 className="text-[16px] sm:text-[18px] font-semibold border-b-2 border-brightOrange pb-1">Місця розкопок</h3>
+        <h3 className="text-[16px] sm:text-[18px] font-semibold border-b-2 border-brightOrange pb-1">{t("locations")}</h3>
 
         {/* Map */}
         {locations.length > 0 && (
@@ -351,18 +352,18 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
 
         {/* Add location form */}
         <div className="flex flex-col sm:flex-row gap-2 items-end flex-wrap">
-          <InputComponent text="Широта" value={locLat} valueOnChange={(e) => setLocLat(+e.target.value)} type="number" colorStyle="black" borderColor="transparent" textStyle="small" customLabelStyles="w-full sm:w-32" />
-          <InputComponent text="Довгота" value={locLng} valueOnChange={(e) => setLocLng(+e.target.value)} type="number" colorStyle="black" borderColor="transparent" textStyle="small" customLabelStyles="w-full sm:w-32" />
-          <InputComponent text="Місце (УКР)" value={locPlaceUk} valueOnChange={(e) => setLocPlaceUk(e.target.value)} placeholder="напр. Монголія" colorStyle="black" borderColor="transparent" textStyle="small" customLabelStyles="flex-1 w-full" />
-          <InputComponent text="Місце (ENG)" value={locPlaceEn} valueOnChange={(e) => setLocPlaceEn(e.target.value)} placeholder="e.g. Mongolia" colorStyle="black" borderColor="transparent" textStyle="small" customLabelStyles="flex-1 w-full" />
+          <InputComponent text={t("latitude")} value={locLat} valueOnChange={(e) => setLocLat(+e.target.value)} type="number" colorStyle="black" borderColor="transparent" textStyle="small" customLabelStyles="w-full sm:w-32" />
+          <InputComponent text={t("longitude")} value={locLng} valueOnChange={(e) => setLocLng(+e.target.value)} type="number" colorStyle="black" borderColor="transparent" textStyle="small" customLabelStyles="w-full sm:w-32" />
+          <InputComponent text={t("nameUk")} value={locPlaceUk} valueOnChange={(e) => setLocPlaceUk(e.target.value)} placeholder={t("locPlaceholderUk")} colorStyle="black" borderColor="transparent" textStyle="small" customLabelStyles="flex-1 w-full" />
+          <InputComponent text={t("nameEn")} value={locPlaceEn} valueOnChange={(e) => setLocPlaceEn(e.target.value)} placeholder={t("locPlaceholderEn")} colorStyle="black" borderColor="transparent" textStyle="small" customLabelStyles="flex-1 w-full" />
           <button type="button" onClick={handleAddLocation} className="py-2 px-6 bg-green-600 text-white hover:bg-green-700 duration-200 h-10">
-            Додати
+            {t("addLocation")}
           </button>
         </div>
 
         {/* Locations list */}
         {locations.length === 0 ? (
-          <p className="text-slateGray text-[13px]">Локацій немає</p>
+          <p className="text-slateGray text-[13px]">{t("noLocations")}</p>
         ) : (
           <div className="flex flex-col gap-1">
             {locations.map((loc) => (
@@ -386,7 +387,7 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
           onClick={handleDelete}
           className="py-2 px-8 bg-fieryRed text-white font-semibold hover:bg-opacity-80 duration-200"
         >
-          Видалити динозавра
+          {t("deleteDino")}
         </button>
       </section>
 

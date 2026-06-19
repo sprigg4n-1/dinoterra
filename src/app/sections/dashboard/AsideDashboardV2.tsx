@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useRouter as useIntlRouter, usePathname as useIntlPathname } from "@/i18n/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,16 +11,20 @@ import Link from "next/link";
 import logo from "@/images/logo.svg";
 import close from "@/images/vectors/close.svg";
 
-const NAV = [
-  { id: "dinos", label: "Динозаври V2", href: "/admin/new/dashboard/dinos" },
-  { id: "users", label: "Користувачі", href: "/admin/new/dashboard/users" },
-];
-
 const AsideDashboardV2 = () => {
+  const t = useTranslations("admin.v2.aside");
+  const locale = useLocale();
   const pathname = usePathname();
+  const intlPathname = useIntlPathname();
+  const intlRouter = useIntlRouter();
   const [isOpen, setIsOpen] = useState(false);
 
-  const active = (href: string) => pathname.startsWith(href);
+  const NAV = [
+    { id: "dinos", label: t("dinos"), href: "/admin/new/dashboard/dinos" },
+    { id: "users", label: t("users"), href: "/admin/new/dashboard/users" },
+  ];
+
+  const active = (href: string) => pathname.includes(href);
 
   const linkClass = (href: string) =>
     `block w-full p-3 text-[16px] lg:text-[17px] duration-200 ${
@@ -26,6 +32,28 @@ const AsideDashboardV2 = () => {
         ? "bg-brightOrange text-white font-semibold lg:text-right"
         : "bg-softGray text-black hover:bg-brightOrange hover:text-white"
     }`;
+
+  const switchLocale = (next: string) => {
+    intlRouter.replace(intlPathname, { locale: next });
+  };
+
+  const LangSwitcher = () => (
+    <div className="flex gap-1 w-full">
+      {(["uk", "en"] as const).map((l) => (
+        <button
+          key={l}
+          onClick={() => switchLocale(l)}
+          className={`flex-1 py-1.5 text-[13px] font-bold uppercase tracking-wide duration-200 ${
+            locale === l
+              ? "bg-brightOrange text-white"
+              : "bg-softGray text-black hover:bg-slateGray hover:text-white"
+          }`}
+        >
+          {l === "uk" ? "УКР" : "ENG"}
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <div className="bg-darkPurple py-3 px-2 text-white flex justify-between items-center gap-10 lg:w-[350px] lg:h-screen lg:flex-col lg:justify-normal sticky top-0 left-0 z-30">
@@ -82,24 +110,17 @@ const AsideDashboardV2 = () => {
               </Link>
             </li>
           ))}
-          <li>
-            <Link
-              href="/admin"
-              onClick={() => setIsOpen(false)}
-              className="block w-full p-3 text-[14px] bg-slateGray text-white hover:bg-darkGray duration-200"
-            >
-              ← Стара адмінка
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/account"
-              className="block w-full p-3 text-[16px] text-center bg-red-400 hover:bg-fieryRed duration-200 mt-auto"
-            >
-              Вийти
-            </Link>
-          </li>
         </ul>
+
+        <div className="mt-auto flex flex-col gap-2 w-full sm:w-1/2 mx-auto">
+          <LangSwitcher />
+          <Link
+            href="/account"
+            className="block w-full p-3 text-[16px] text-center bg-red-400 hover:bg-fieryRed duration-200"
+          >
+            {t("logout")}
+          </Link>
+        </div>
       </motion.div>
 
       {/* desktop nav */}
@@ -111,22 +132,17 @@ const AsideDashboardV2 = () => {
             </Link>
           </li>
         ))}
-        <li>
-          <Link
-            href="/admin"
-            className="block w-full p-3 text-[14px] bg-[#2a2a3e] text-slateGray hover:text-white duration-200"
-          >
-            ← Стара адмінка
-          </Link>
-        </li>
       </ul>
 
-      <Link
-        href="/account"
-        className="hidden lg:block mt-auto w-full p-3 text-[16px] text-center bg-red-400 hover:bg-fieryRed duration-200"
-      >
-        Вийти
-      </Link>
+      <div className="hidden lg:flex flex-col gap-2 mt-auto w-full">
+        <LangSwitcher />
+        <Link
+          href="/account"
+          className="w-full p-3 text-[16px] text-center bg-red-400 hover:bg-fieryRed duration-200"
+        >
+          {t("logout")}
+        </Link>
+      </div>
     </div>
   );
 };

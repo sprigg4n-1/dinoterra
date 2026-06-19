@@ -1,4 +1,7 @@
 {
+  "common": {
+    "enterData": "Уведіть дані"
+  },
   "buttonText": {
     "start": "Почати",
     "startExploring": "Почніть дослідження",
@@ -579,6 +582,66 @@
       "periodTitle": "Період",
       "timePeriod": "Часовий період:",
       "mapTitle": "Карта"
+    },
+    "v2": {
+      "aside": {
+        "dinos": "Динозаври V2",
+        "users": "Користувачі",
+        "logout": "Вийти"
+      },
+      "list": {
+        "title": "Усі динозаври V2",
+        "searchPlaceholder": "Пошук за назвою...",
+        "loading": "Завантаження...",
+        "notFound": "Динозаврів не знайдено"
+      },
+      "tabs": {
+        "all": "Всі динозаври",
+        "create": "Додати"
+      },
+      "editor": {
+        "bulletList": "• Список",
+        "orderedList": "1. Список",
+        "blockquote": "❝ Цитата",
+        "photo": "🖼 Фото"
+      },
+      "form": {
+        "newDino": "Новий динозавр V2",
+        "basicData": "Основні дані",
+        "nameUk": "Назва (УКР)",
+        "nameEn": "Назва (ENG)",
+        "latinName": "Латинська назва",
+        "lengthM": "Довжина (м)",
+        "weightKg": "Вага (кг)",
+        "type": "Тип",
+        "diet": "Харчування",
+        "geoperiod": "Геологічний період",
+        "periodDate": "Дата періоду (напр. 65–145 млн р.т.)",
+        "article": "Стаття",
+        "images": "Зображення",
+        "imagesHint": "Перше зображення автоматично стає обкладинкою. Клікніть на картинку щоб змінити обкладинку.",
+        "imagesHintEdit": "Помаранчева рамка — обкладинка. Наведіть на фото щоб керувати.",
+        "addPhoto": "+ Додати фото",
+        "coverBadge": "Обкладинка",
+        "setCover": "Обкладинка",
+        "deleteImage": "Видалити",
+        "locations": "Місця розкопок",
+        "latitude": "Широта",
+        "longitude": "Довгота",
+        "locPlaceholderUk": "напр. Монголія",
+        "locPlaceholderEn": "напр. Mongolia",
+        "addLocation": "Додати",
+        "noLocations": "Локацій немає",
+        "creating": "Створення...",
+        "createDino": "Створити динозавра",
+        "createdSuccess": "Динозавр успішно створений!",
+        "addMore": "Додати ще",
+        "saving": "Збереження...",
+        "saveChanges": "Зберегти зміни",
+        "saved": "Збережено!",
+        "deleteDino": "Видалити динозавра",
+        "back": "← Назад"
+      }
     }
   },
   "classify": {

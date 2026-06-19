@@ -10,6 +10,7 @@ import {
   forwardRef,
   useImperativeHandle,
 } from "react";
+import { useTranslations } from "next-intl";
 
 type Lang = "uk" | "en";
 
@@ -23,13 +24,15 @@ const btn = (active: boolean) =>
 function Toolbar({
   editor,
   onImageClick,
+  t,
 }: {
   editor: ReturnType<typeof useEditor>;
   onImageClick: () => void;
+  t: ReturnType<typeof useTranslations>;
 }) {
   if (!editor) return null;
   return (
-    <div className="flex flex-wrap gap-1 p-2 bg-darkPurple border-b-2 border-brightOrange">
+    <div className="sticky top-0 z-10 flex flex-wrap gap-1 p-2 bg-darkPurple border-b-2 border-brightOrange">
       <button type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={btn(editor.isActive("bold"))}>B</button>
       <button type="button" onClick={() => editor.chain().focus().toggleItalic().run()} className={btn(editor.isActive("italic"))}>I</button>
       <button type="button" onClick={() => editor.chain().focus().toggleStrike().run()} className={btn(editor.isActive("strike"))}>S</button>
@@ -38,11 +41,11 @@ function Toolbar({
       <button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} className={btn(editor.isActive("heading", { level: 3 }))}>H3</button>
       <button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()} className={btn(editor.isActive("heading", { level: 4 }))}>H4</button>
       <span className="w-px bg-slateGray mx-1" />
-      <button type="button" onClick={() => editor.chain().focus().toggleBulletList().run()} className={btn(editor.isActive("bulletList"))}>• Список</button>
-      <button type="button" onClick={() => editor.chain().focus().toggleOrderedList().run()} className={btn(editor.isActive("orderedList"))}>1. Список</button>
-      <button type="button" onClick={() => editor.chain().focus().toggleBlockquote().run()} className={btn(editor.isActive("blockquote"))}>❝ Цитата</button>
+      <button type="button" onClick={() => editor.chain().focus().toggleBulletList().run()} className={btn(editor.isActive("bulletList"))}>{t("bulletList")}</button>
+      <button type="button" onClick={() => editor.chain().focus().toggleOrderedList().run()} className={btn(editor.isActive("orderedList"))}>{t("orderedList")}</button>
+      <button type="button" onClick={() => editor.chain().focus().toggleBlockquote().run()} className={btn(editor.isActive("blockquote"))}>{t("blockquote")}</button>
       <span className="w-px bg-slateGray mx-1" />
-      <button type="button" onClick={onImageClick} className={btn(false)}>🖼 Фото</button>
+      <button type="button" onClick={onImageClick} className={btn(false)}>{t("photo")}</button>
     </div>
   );
 }
@@ -84,6 +87,7 @@ const editorStyles = [
 
 const DinoV2ArticleEditor = forwardRef<DinoV2ArticleEditorRef, Props>(
   ({ initialUk, initialEn }, ref) => {
+    const t = useTranslations("admin.v2.editor");
     const [activeLang, setActiveLang] = useState<Lang>("uk");
     const fileUkRef = useRef<HTMLInputElement>(null);
     const fileEnRef = useRef<HTMLInputElement>(null);
@@ -162,7 +166,7 @@ const DinoV2ArticleEditor = forwardRef<DinoV2ArticleEditorRef, Props>(
 
         {/* UK editor */}
         <div className={activeLang === "uk" ? "flex flex-col" : "hidden"}>
-          <Toolbar editor={editorUk} onImageClick={() => fileUkRef.current?.click()} />
+          <Toolbar editor={editorUk} onImageClick={() => fileUkRef.current?.click()} t={t} />
           <EditorContent
             editor={editorUk}
             className={editorStyles}
@@ -172,7 +176,7 @@ const DinoV2ArticleEditor = forwardRef<DinoV2ArticleEditorRef, Props>(
 
         {/* EN editor */}
         <div className={activeLang === "en" ? "flex flex-col" : "hidden"}>
-          <Toolbar editor={editorEn} onImageClick={() => fileEnRef.current?.click()} />
+          <Toolbar editor={editorEn} onImageClick={() => fileEnRef.current?.click()} t={t} />
           <EditorContent
             editor={editorEn}
             className={editorStyles}
