@@ -1,6 +1,7 @@
 "use client";
 
 import { useEditor, EditorContent } from "@tiptap/react";
+import type { Editor } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import TiptapImage from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -26,7 +27,7 @@ function Toolbar({
   onImageClick,
   t,
 }: {
-  editor: ReturnType<typeof useEditor>;
+  editor: Editor | null;
   onImageClick: () => void;
   t: ReturnType<typeof useTranslations>;
 }) {
@@ -120,7 +121,7 @@ const DinoV2ArticleEditor = forwardRef<DinoV2ArticleEditorRef, Props>(
     }));
 
     const handleImageFile =
-      (editor: ReturnType<typeof useEditor>) =>
+      (editor: Editor | null) =>
       (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file || !editor) return;
