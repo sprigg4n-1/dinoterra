@@ -275,12 +275,12 @@ const MapPage = () => {
                 onClick={() => setHoveredLocation(null)}
                 className="object-fit"
               />
-              <Link
+              {/* <Link
                 href={"https://dinosaurpictures.org/"}
                 className="absolute top-0 left-0 bg-[rgba(0,0,0,0.7)] text-white text-[12px] w-full py-px text-center"
               >
                 {t("map.imageSource")}
-              </Link>
+              </Link> */}
               <Link
                 href={`/${locale}/encyclopedia/${hoveredLocation.dino}`}
                 className=" text-white text-[14px] md:text-[18px] text-center w-full hover:bg-brightOrange py-2"

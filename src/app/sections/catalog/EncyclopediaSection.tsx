@@ -12,7 +12,7 @@ import LoaderComponent from "@/components/LoaderComponent";
 import BaseContainer from "@/components/BaseContainer";
 import { useTranslations } from "next-intl";
 
-const SHOW_LIMIT = 14;
+const SHOW_LIMIT = 12;
 
 const adaptV2ToCard = (dino: IDinoV2): IDino =>
   ({ ...dino, image: dino.mainImage ?? undefined }) as unknown as IDino;
@@ -140,7 +140,7 @@ const EncyclopediaSection = () => {
             {t("encyclopedia.totalSpecies", { count: countOfDino })}
           </p>
 
-          <div className="flex flex-wrap gap-5 items-center justify-center my-2 md:my-5">
+          <div className="flex flex-wrap gap-5 items-stretch justify-center my-2 md:my-5">
             {isLoading ? (
               <LoaderComponent />
             ) : dinos && dinos.length > 0 ? (

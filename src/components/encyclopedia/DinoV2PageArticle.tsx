@@ -146,9 +146,9 @@ const DinoV2PageArticle = ({ article, locale }: Props) => {
 
   return (
     <div className="border-b-4 pb-3 mb-3 md:pb-5 md:mb-5">
-      <h2 className="text-[20px] lg:text-[24px] font-semibold mb-3 text-center">
+      {/* <h2 className="text-[20px] lg:text-[24px] font-semibold mb-3 text-center">
         {tPage("article")}
-      </h2>
+      </h2> */}
       {renderNode(content, 0)}
     </div>
   );

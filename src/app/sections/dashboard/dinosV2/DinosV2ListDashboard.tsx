@@ -11,7 +11,7 @@ import DinoCard from "@/components/dino/DinoCard";
 import DashboardTitleComponent from "@/components/dashboard/DashboardTitleComponent";
 
 const adaptV2ToCard = (dino: IDinoV2): IDino =>
-  ({ ...dino, image: dino.mainImage ?? undefined } as unknown as IDino);
+  ({ ...dino, image: dino.mainImage ?? undefined }) as unknown as IDino;
 
 const DinosV2ListDashboard = () => {
   const t = useTranslations("admin.v2.list");
@@ -38,8 +38,8 @@ const DinosV2ListDashboard = () => {
         (d) =>
           d.latinName.toLowerCase().includes(q) ||
           d.name.uk.toLowerCase().includes(q) ||
-          d.name.en.toLowerCase().includes(q)
-      )
+          d.name.en.toLowerCase().includes(q),
+      ),
     );
   }, [search, dinos]);
 
@@ -60,7 +60,7 @@ const DinosV2ListDashboard = () => {
       ) : filtered.length === 0 ? (
         <span className="text-center">{t("notFound")}</span>
       ) : (
-        <div className="flex flex-wrap items-center justify-around gap-5">
+        <div className="flex flex-wrap items-stretch justify-around gap-5">
           {filtered
             .sort((a, b) => (a.latinName < b.latinName ? -1 : 1))
             .map((dino) => (

@@ -81,7 +81,11 @@ const DinoCard = ({
         </button> */}
       </div>
 
-      <p className={`text-center pb-1 text-[18px] font-semibold ${finalColor}`}>
+      <p
+        className={`text-center pb-1 px-4 text-[18px] font-semibold   ${
+          slider ? "w-auto" : "w-60 break-words"
+        } ${finalColor}`}
+      >
         {dino.latinName}
       </p>
     </Link>
