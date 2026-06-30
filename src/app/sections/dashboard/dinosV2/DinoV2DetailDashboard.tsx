@@ -35,6 +35,7 @@ import DinoV2ArticleEditor, {
 } from "@/components/dashboard/dinoV2/DinoV2ArticleEditor";
 import DinoMlPredictionModal from "@/components/dashboard/dino/DinoMlPredictionModal";
 import LoaderComponent from "@/components/LoaderComponent";
+import { useMlAvailable } from "@/hooks/useMlAvailable";
 import imageNotFound from "@/images/not-found/image-not-found.webp";
 import close from "@/images/vectors/close.svg";
 
@@ -48,6 +49,7 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
   const router = useRouter();
   const articleRef = useRef<DinoV2ArticleEditorRef>(null);
   const imgFileRef = useRef<HTMLInputElement>(null);
+  const mlAvailable = useMlAvailable();
 
   const [dino, setDino] = useState<IDinoV2 | null>(null);
   const [images, setImages] = useState<IDinoV2Image[]>([]);
@@ -133,12 +135,20 @@ const DinoV2DetailDashboard = ({ id }: Props) => {
     showSaved(t("saved"));
   };
 
-  // Images — open ML modal on select
+  // Images — open ML modal on select, or upload directly if ML is unavailable
   const handleImageFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = () => setMlPendingFile(reader.result as string);
+    reader.onload = async () => {
+      const dataUrl = reader.result as string;
+      if (mlAvailable === false) {
+        await uploadDinoImageV2(id, dataUrl, false);
+        await refresh();
+      } else {
+        setMlPendingFile(dataUrl);
+      }
+    };
     reader.readAsDataURL(file);
     e.target.value = "";
   };

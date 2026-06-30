@@ -8,6 +8,7 @@ import uploadIcon from "@/images/vectors/upload.svg";
 
 import Image from "next/image";
 import { useFileUpload } from "@/hooks/useFileUpload";
+import { useMlAvailable } from "@/hooks/useMlAvailable";
 
 const FixedUploadPhotoComponent = () => {
   const { imagePath, handleFileUpload, resetImagePath } = useFileUpload({
@@ -17,6 +18,7 @@ const FixedUploadPhotoComponent = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
   const pathname = usePathname();
+  const mlAvailable = useMlAvailable();
 
   // прибираємо локальний префікс (/en, /uk тощо) і нормалізуємо
   const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}(?=\/|$)/, "");
@@ -25,7 +27,7 @@ const FixedUploadPhotoComponent = () => {
   const isAccountRoute =
     normalizedPath === "/account" || normalizedPath.startsWith("/account/");
 
-  if (isAccountRoute) return null;
+  if (isAccountRoute || mlAvailable === false) return null;
 
   const closeModal = () => {
     resetImagePath();

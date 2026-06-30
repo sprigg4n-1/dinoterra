@@ -3,6 +3,15 @@ import axios from "axios";
 import { BASE_DEV_API_URL } from "@/config/config";
 import { TFeedbackBody, TPrediction } from "@/config/types";
 
+export const checkMlHealth = async (): Promise<boolean> => {
+  try {
+    await axios.get(`${BASE_DEV_API_URL}/ml/health`, { timeout: 3000 });
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export const classifyImage = async (
   file: string,
 ): Promise<TPrediction | undefined> => {

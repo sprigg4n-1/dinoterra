@@ -11,20 +11,24 @@ import DinoCard from "@/components/dino/DinoCard";
 import SectionMainTitleComponent from "@/components/SectionMainTitleComponent";
 import BaseContainer from "@/components/BaseContainer";
 import { useTranslations } from "next-intl";
+import LoaderComponent from "@/components/LoaderComponent";
 
 const adaptV2ToCard = (dino: IDinoV2): IDino =>
-  ({ ...dino, image: dino.mainImage ?? undefined } as unknown as IDino);
+  ({ ...dino, image: dino.mainImage ?? undefined }) as unknown as IDino;
 
 const DinoRecomendationSection = () => {
   const t = useTranslations();
 
   const [dinos, setDinos] = useState<IDinoV2[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const getData = async () => {
       const dinosData = await getFiveRandomDinosV2();
 
       setDinos(dinosData ?? []);
+      setIsLoading(false);
     };
 
     getData();
@@ -41,7 +45,11 @@ const DinoRecomendationSection = () => {
           subtitleColor="white"
         />
 
-        {dinos && dinos.length > 0 ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center py-5">
+            <LoaderComponent />
+          </div>
+        ) : dinos && dinos.length > 0 ? (
           <Swiper spaceBetween={20} slidesPerView="auto" className="mt-8">
             {dinos.map((dino) => (
               <SwiperSlide key={dino._id} style={{ width: "auto" }}>
